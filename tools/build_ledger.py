@@ -120,7 +120,7 @@ def main():
                 and (r.get("axis") or "").upper() not in ("", "RELIEF")
             ]
     with open(path, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
+        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in new_rows + other_current + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})

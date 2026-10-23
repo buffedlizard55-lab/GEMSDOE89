@@ -96,7 +96,7 @@ def _read_ledger(path):
 def _write_ledger(path, rows, fieldnames):
     tmp = path.with_suffix(".csv.tmp")
     with open(tmp, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction="ignore")
+        writer = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     tmp.replace(path)
