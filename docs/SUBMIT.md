@@ -1,18 +1,19 @@
-# SUBMIT — session GEMSDOE89 (integrated queue, 2026-10-23)
+# SUBMIT — session GEMSDOE89 (CONCENTRATION session queue, 2026-10-23)
 
 The human submits from their own registered account. Nothing here logs in,
 scrapes, or uploads. One file per slot; upload the NaN-outside twin (the
 `-zeros.tif` twin is the fallback and scores identically per ledger history).
 
-## Slot 1 (allocation fork)
+## Slot 1 (allocation fork — CONCENTRATION, this session's build)
 
 | field | value |
 |---|---|
-| **file** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` |
-| **name** | `h33-h33-2-b2-relief-r10-20261023-366c87ca` |
-| **sha256** | `366c87ca620402158cfbbf4911ed8abc8ba2da34f198694c9df7c5ea640ab335` |
-| **form note** (122 chars) | `R0 h33-h33-2-b2 + RELIEF r10: 3765/37654 dots (10%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.003` |
-| **predicted** | +0.003 MODEL (−0.012 … +0.018) |
+| **file** | `releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif` |
+| **name** | `h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377` |
+| **sha256** | `2dc19377e7592f408bf3d3bc67d49bb86b640deedaf2744de12db68f3cc2db52` |
+| **fallback** | `releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377-zeros.tif` (`a42e5d1a160c2429…`) |
+| **form note** (104 chars) | `R0 h33-h33-2-b2; CONC 5km cat-prior t10: 3765/37654 (10%) zero->top25% fault blocks, n37654; pred +0.009` |
+| **predicted** | +0.009 MODEL (−0.010 … +0.038); cards: `ledger/MECHANISM_CARDS.md` Part IV |
 
 ## Slot 2 (placement fork — SNAP session build)
 
@@ -31,12 +32,14 @@ scrapes, or uploads. One file per slot; upload the NaN-outside twin (the
 |---|---|---|
 | slot 1 ≥ **0.2878** | `…-relief-r15-20261023-6aa774ce.tif` (`6aa774ce21fe10b3…`) | +0.004 (−0.017…+0.027) |
 | else slot 2 ≥ **0.2878** | `…-snap1p4px-g0p00-20261023-e1474851.tif` (`e14748519b3fb35c…`) | +0.028 (−0.028…+0.083) |
-| else | `…-spacing-alongstrike-20261023-3b263c7a.tif` (`3b263c7a…`) or **hold** | +0.002 (−0.003…+0.006) |
+| else | `…-MASSm10uniq-20261023-beed130f.tif` (`beed130f…`) or **hold** | +0.002 (−0.010…+0.010; ceiling +0.0105) |
 
 ## The rest of the gated queue (names in `ledger/submissions.csv`, status BUILT)
 
 | axis | value (sha8) | predicted | trigger |
 |---|---|---|---|
+| CONCENTRATION | `cat20` (4d229938) | +0.019 (−0.010…+0.067) | slot 1 ≥ +0.010 (dose), or after a null if a single large probe is wanted |
+| CONCENTRATION | `cat10away` (f7b8aa28) | −0.009 (−0.038…+0.010) | slot 1 ≤ −0.010 (prior inverted) — the sign control |
 | SNAP | `1p0px-g0p00` (1add5aa6) | +0.027 (−0.027…+0.081) | only if two gate-0 receipts both fire and a 3rd window point is wanted (it saturates — prefer hold) |
 | RELIEF | `r15s` (5f0ae851) | +0.001 (−0.007…+0.011) | alternate definition if r10 null and the axis still needs closing |
 | MASS | `m10uniq` (beed130f) | +0.002 (−0.010…+0.010) | orthogonal axis when a fork is null |
@@ -49,11 +52,11 @@ scrapes, or uploads. One file per slot; upload the NaN-outside twin (the
 
 | gate | result |
 |---|---|
-| grid contract vs `sample_submission.tif` (3730×3292, 100 m, EPSG:32611, float32, 1 band) | pass ×24 files |
+| grid contract vs `sample_submission.tif` (3730×3292, 100 m, EPSG:32611, float32, 1 band) | pass ×30 files |
 | values in [0,1]; dots exactly 1.0; no NaN inside footprint; NaN/zeros outside per twin | pass |
 | dot count 37,654 per file; twins carry identical masks | pass |
-| zero catalogue mass; moved-target clearance ≥ 3.00 px (inherited 2.236-px parent collar unchanged-or-shrinking) | pass |
-| sha256 not already in the ledger; no duplicate (parent, axis, value) triples | pass (127 rows) |
+| zero catalogue mass; moved-target clearance ≥ 3.00 px (inherited 2.236-px parent collar unchanged-or-shrinking) | pass (new CONCENTRATION dots: minimum 3.00 px) |
+| sha256 not already in the ledger; no duplicate (parent, axis, value) triples | pass (130 rows) |
 | R0 parent rebuild (recipe + mask paths) byte-exact vs both pins | pass (`python tools/rebuild_r0.py`) |
 
 ## Before you upload (2 minutes)
@@ -65,7 +68,7 @@ python -m pytest tests -q
 python tools/validate_raster.py                   # every release, every gate
 python tools/check_ledger.py                      # ledger <-> disk, no dup triples
 python tools/rebuild_r0.py                        # must print "[ok] R0 rebuilt byte-identical"
-sha256sum releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif   # must start 69db3aae
+sha256sum releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif   # must start 2dc19377
 ```
 
 Then fill `receipt_score` and `receipt_date` in `ledger/submissions.csv` from the

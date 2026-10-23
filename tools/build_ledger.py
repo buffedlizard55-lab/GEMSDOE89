@@ -44,6 +44,22 @@ SPACING_RECOMMEND = {
     "lattice": "Isometric 3.5px hex lattice in d<=2.0px corridor (nn<3px 11415->7667; SGMC cov 0.0888->0.0893); periodic cover control.",
 }
 
+CONCENTRATION_PREDICTIONS = {
+    "cat10": "+0.009 (MODEL; band -0.010..+0.038). At the no-evidence line: reads out only if the block prior is real.",
+    "cat20": "+0.019 (MODEL; band -0.010..+0.067). 2x dose of cat10.",
+    "cat10away": "-0.009 (MODEL; band -0.038..+0.010). Sign control: if the prior is real, this arm must lose.",
+}
+CONCENTRATION_FORM_NOTES = {
+    "cat10": "R0 h33-h33-2-b2; CONC 5km cat-prior t10: 3765/37654 (10%) zero->top25% fault blocks, n37654; pred +0.009",
+    "cat20": "R0 h33-h33-2-b2; CONC 5km cat-prior t20: 7531/37654 (20%) zero->top25% fault blocks, n37654; pred +0.019",
+    "cat10away": "R0 h33-h33-2-b2; CONC 5km cat-prior t10 AWAY: 3765 (10%) top25%->zero fault blocks; pred -0.009",
+}
+CONCENTRATION_RECOMMEND = {
+    "cat10": "PRIMARY: block prior is catalogued-fault density (r=0.04 with R0 block density); 37.9% of R0 mass sits in zero-fault blocks.",
+    "cat20": "DOSE: same rule at 2x. Submit only after cat10 shows a change, or as the single large-effect probe.",
+    "cat10away": "SIGN CONTROL: identical placement rule, reversed strata. A gain here falsifies the known-fault prior.",
+}
+
 RELIEF_PREDICTIONS = {
     "r10": "+0.003 (MODEL; band -0.012..+0.018). No-evidence outcome expected.",
     "r15": "+0.004 (MODEL; band -0.017..+0.027). Dose 1.5x of r10.",
@@ -171,6 +187,101 @@ def _relief_rows() -> list[dict]:
     return rows
 
 
+def _snap_rows() -> list[dict]:
+    """SNAP (gateless) rows. Added 2026-10-23: without this reader a ledger
+    rebuild silently dropped the whole SNAP axis from submissions.csv
+    (IRREGULARITIES item 11)."""
+    p = ROOT / "registry" / "build_reports_snap.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        m = rep["model_prediction"]
+        band = m["band"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["dots_out"],
+                "pct_changed": f"{s['pct_dots_moved']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["nan"]["sha256"],
+                "sha256_zeros": rep["files"]["zeros"]["sha256"],
+                "parent": rep["parent"],
+                "axis": "SNAP",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": (
+                    f"{band[0]:+.4f}..{band[2]:+.4f} "
+                    f"(MODEL central {m['central']:+.4f}; band prices the mimic)"
+                ),
+                "date": "20261023",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"window {round(rep['spec']['window_px'], 2)} px, gate {rep['spec']['margin']:.2f}, "
+                    f"{s['dots_moved']:,} dots moved, mean displacement "
+                    f"{s['mean_displacement_px']:.3f} px, moved-target min dcat "
+                    f"{s['moved_targets_min_dcat_px']:.2f} px, cv1km "
+                    f"{s['block_cv_1km_before']:.3f}->{s['block_cv_1km_after']:.3f}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _concentration_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_concentration_reports.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        value = rep["value"]
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "CONCENTRATION",
+                "value": value,
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": CONCENTRATION_PREDICTIONS[value],
+                "date": "2026-10-23",
+                "form_note": CONCENTRATION_FORM_NOTES[value],
+                "notes": (
+                    f"5km blocks; {s['direction']}: {s['n_moved']} dots moved "
+                    f"(symdiff {s['pct_symmetric_diff']:.2f}%), zero-fault-block mass "
+                    f"{s['dots_in_zero_blocks_before']}->{s['dots_in_zero_blocks_after']}; "
+                    f"CV5km {s['density_cv_5km_before']:.4f}->{s['density_cv_5km_after']:.4f}; "
+                    f"corr(prior,density) {s['prior_vs_r0_density_corr_before']:.3f}->"
+                    f"{s['prior_vs_r0_density_corr_after']:.3f}; new dots dcat>=3px, sep>=2.8px. "
+                    + CONCENTRATION_RECOMMEND[value]
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def _mass_rows() -> list[dict]:
     p = ROOT / "registry" / "build_mass_reports.json"
     if not p.exists():
@@ -255,7 +366,8 @@ def main():
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    new_rows = _spacing_rows() + _relief_rows() + _mass_rows()
+    new_rows = (_spacing_rows() + _relief_rows() + _mass_rows()
+                + _snap_rows() + _concentration_rows())
     path = ROOT / "ledger" / "submissions.csv"
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
