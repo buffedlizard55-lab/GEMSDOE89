@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy scipy tifffile imagecodecs pytest
+      - name: Unit tests (DTI algebra, grid contract, gates)
+        run: python -m pytest tests -q
+      - name: Format validation of every release raster
+        run: python tools/validate_raster.py
+      - name: Ledger consistency
+        run: python tools/check_ledger.py
+      - name: No conflict markers
+        run: |
+          if git grep -nE '^(<<<<<<<|=======|>>>>>>>)' -- . ; then
+            echo "conflict markers found"; exit 1
+          fi
+          echo "clean"
