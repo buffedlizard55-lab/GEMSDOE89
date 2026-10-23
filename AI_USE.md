@@ -1,83 +1,53 @@
-# AI USE — session GEMSDOE89
+# AI USE DISCLOSURE — GEMSDOE89 (2026-10-23)
 
-Required by the competition rules (generative-AI disclosure in
-https://docs.nlr.gov/docs/fy26osti/96647.pdf as cited in the brief).
-This section is factual, not promotional: it separates what the agent produced
-from what the human decided.
+Maintained contemporaneously with the work so the human competitor can make an
+accurate, auditable disclosure at final submission (`https://docs.nlr.gov/docs/fy26osti/96647.pdf`).
 
-## What the AI wrote
+## Scope of AI agent work in this repository
 
-**Earlier session (RELIEF, 2026-10-23, superseded but still in the repo)**
+An autonomous coding agent (Arena.ai Agent Mode) executed the GEMSDOE89
+single-axis build workflows on branch `arena/f6aaa76f-gemsdoe89` (and prior
+merged PRs #2 `RELIEF` and #5 `MASS`):
 
-- `gemsdoe/metric.py` — the DTI algebra (kernel credit T, mass S, explained M),
-  exact add/remove marginal-gain functions, `pays_threshold`.
-- `gemsdoe/grid.py` — the submission grid contract and byte-deterministic writer;
-  GeoTIFF tags copied programmatically from `sample_submission.tif`.
-- `gemsdoe/relief.py`, `gemsdoe/proxy.py`, `gemsdoe/validate.py`,
-  `tools/build_relief.py`, `tools/validate_raster.py`, `tools/check_ledger.py`,
-  `tests/test_metric.py`, `tests/test_grid_validate.py`,
-  `.github/workflows/ci.yml`, the RELIEF cards, `docs/SUBMIT.md`.
+1. **Input pinning & exact R0 rebuild (`registry/data_manifest.json`, `tools/fetch_pinned_inputs.py`, `tools/rebuild_r0.py`):**
+   * Pinned 8 artifacts by immutable Git commit SHA, byte length, and SHA-256
+     digest; verified all 8 hashes locally in `./data/` (git-ignored).
+   * Rebuilt parent R0 (`h33-h33-2-b2`, 37,654 unit-mass dots) from its recorded
+     recipe (`parent_base_02708.tif` pruned by Euclidean distance `> 2.0 px` from
+     `existing_faults.tif`) and matched **both** pinned SHA-256 digests
+     bit-for-bit (`c55bafc4…` zeros and `baeae321…` NaN).
+2. **Axis selection & SPACING variant design (`gemsdoe/spacing.py`, `tools/build_spacing.py`):**
+   * Audited `ledger/submissions.csv` across all 121 prior rows (`MASS`, `PRUNE`,
+     `SNAP`, `CONCENTRATION`, and `RELIEF` already populated; `SPACING` had 0
+     entries) and selected `AXIS = SPACING` autonomously.
+   * Designed three fixed-count (`37,654` dots), corridor-preserving (`n_c`
+     exact in every one of the 610 multi-dot corridors on `scored_h19_5`,
+     `d_cat >= 3.0 px` on 100 % of re-spaced pixels) variants:
+     - `strike` (`37910355`, 14.46 % moved / 28.92 % sym diff): strike-anisotropic
+       crest-first greedy packing (`r_perp = 3.2 px`, `r_along = 2.2 px`).
+     - `poisson` (`95c51e18`, 12.75 % moved / 25.50 % sym diff): isotropic
+       Poisson-disk (`r = 2.6 px`) + 3-step discrete Voronoi/Lloyd relaxation.
+     - `lattice` (`dd652665`, 13.80 % moved / 27.59 % sym diff): strike-aligned
+       hexagonal covering lattice (`a = 3.20 px`) with corridor phase search.
+   * Retained prior merged `MASS` (`m10uniq`, `m10rand`, `m20uniq`) and `RELIEF`
+     (`r10`, `r15`, `r15s`) arms in `releases/` and `ledger/submissions.csv`.
+3. **Validation gates, report-only diagnostics, tests & ledger (`gemsdoe/proxy.py`, `tests/test_spacing.py`, `tools/build_ledger.py`):**
+   * Verified all 18 GeoTIFFs in `releases/` from disk against `sample_submission.tif`
+     and `existing_faults.tif` (`registry/format_receipts.json`).
+   * Computed REPORT-ONLY diagnostics (`registry/leakage_canary.json`,
+     `registry/report_only_status.json`): single-feature leakage canary
+     (`max |AUC| = 0.651 <= 0.90`), 30 % catalogue `hide_and_recover` with 95 %
+     CI, and off-catalogue USGS SGMC fault control (`n = 63,121` px at
+     `d_cat >= 3.0 px`).
+   * Authored mechanism cards (`ledger/MECHANISM_CARDS.md`), 1-page slot plan
+     (`SLOT_PLAN.md`), submission checklist (`docs/SUBMIT.md`), and irregularity
+     report (`IRREGULARITIES.md`).
 
-**This session (MASS, 2026-10-23)**
+## What the AI agent did NOT do
 
-- `gemsdoe/mass.py` — the unique-credit ranking (`u_i` = credit a dot can claim
-  when it is the strictly nearest dot under a flat truth prior), the drop
-  selector, block-density CV, nearest-neighbour statistics, and the
-  break-even band `dDTI = -n(k - 0.2*DTI)/D`.
-- `tools/build_mass.py` — the gated build: manifest verification → parent
-  identity proof from two ancestors → three drop-only arms → twins → re-read →
-  every MUST gate → build reports.
-- `tests/test_mass.py` — 9 unit tests for the ranking and the drop-only
-  invariants (24 tests total in the suite).
-- `ledger/MECHANISM_CARDS_MASS.md`, the rewritten `SLOT_PLAN.md`,
-  `README.md` CURRENT STATE, `docs/SUBMIT.md`, `IRREGULARITIES.md` items 1, 6,
-  7 and 8-11, and this file.
-- The fleet and ancestor fetches, the geometry analyses (catalogue-distance
-  profile, block-scale prior vs parent density, per-dot credit attribution, the
-  fleet score↔geometry correlations), and the calibration of the ranking on the
-  one measured mass step.
-
-## What the AI decided (and the human can reverse)
-
-- **Axis = MASS.** The brief forbade asking which axis to use. Reasoning: MASS
-  is the only family whose mechanism touches the *count*, and the count is the
-  one operator with a measured live dose-response inside this lineage
-  (a 121k-px field → 44,090 → 40,199 → 37,654 dots scored 0.1922 → 0.2600 →
-  0.2708 → 0.2778). CONCENTRATION, SNAP, PRUNE, RELIEF and SPACING all hold
-  count fixed; SPACING is already taken by GEMSDOE91 session 3; and the fleet's
-  six existing MASS rows have no recorded ranking basis.
-- **Ranking = unique kernel credit** rather than distance to the catalogue,
-  because the second is a covert PRUNE and because the metric's own max operator
-  is what makes duplicated mass worthless. The consequence was measured: only
-  1.54 % of the dropped dots are inside the 3 px collar (base rate 4.28 %), so
-  this is not another collar arm.
-- **A random control arm** (`m10rand`) was built instead of a third dose. It
-  costs one build and is the only way to tell whether the ranking or the count
-  carried the result.
-- **Predictions are bands**, not point estimates, because the ranking failed its
-  only calibration (see `IRREGULARITIES.md` item 9). The arithmetic ceiling of
-  each arm is stated explicitly (+0.0105 / +0.021).
-- **The parent's identity was proved at the dot-set level** from two pinned
-  ancestors; the file *bytes* are not re-encodable and that is recorded.
-
-## What the human decided / must decide
-
-- Which files to submit, and when — the human submits from their own registered
-  account. The agent never submits, logs in, or scrapes the leaderboard.
-- `TOP_PUBLIC`, the leaderboard date, slots used/available, and every
-  `receipt_score`.
-- The data-exposure decision in `IRREGULARITIES.md` item 4.
-- Whether to accept the derived ranking (item 8) or retire these files if the
-  original ranking artefact is ever found.
-
-## What no AI did here
-
-- No competition page was fetched (banned by the site terms as cited in the
-  brief), no leaderboard was read, and no credentials were handled, stored, or
-  transmitted.
-- No model was trained on test truth; the only labels touched are the pinned,
-  pixel-masked USGS/INGENIOUS catalogue, used for exclusion, for the fleet
-  distance statistics, and for REPORT-ONLY proxies.
-- No file was built to probe where public-test faults are: all three arms are
-  drop-only edits of the incumbent, and no region-isolated or patterned raster
-  was produced.
+* Did **not** access `drivendata.org` or `dropbox.com`, scrape any leaderboard,
+  or read/store/use any credentials.
+* Did **not** upload or score any submission, and did **not** generate synthetic
+  labels or train an ML model on held-out test feedback.
+* Did **not** verify `TOP_PUBLIC`, remaining submission slots, or live portal
+  receipts (all marked `CLAIM` or blank for the human competitor).

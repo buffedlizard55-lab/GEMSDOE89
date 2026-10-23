@@ -1,44 +1,37 @@
 # CURRENT STATE
 
-- **Parent (verified):** `h33-h33-2-b2` — 37,654 unit dots, sha256 `c55bafc470054e82…`.
-  Its **dot set is now reproduced cell-for-cell** from two independent pinned
-  ancestors (`solo-d2.8` 40,199 and `d2.8` 44,090, each minus every dot within
-  2.0 px of the catalogue → 0 differing cells). The parent's *file bytes* cannot
-  be re-encoded here (original writer settings lost), so it is referenced by
-  hash. Live **0.2778 = CLAIM** (no receipt in this repo).
-- **Best receipt (this repo):** none. No file built here has been scored.
+- **Parent (rebuilt & verified):** `h33-h33-2-b2` — 37,654 unit-mass dots, rebuilt
+  byte-identically from its recorded recipe (`tools/rebuild_r0.py`) to sha256
+  `c55bafc470054e82…` (`-zeros`) and `baeae3219bba6a19…` (`-nan`), with
+  37,654/37,654 dots on `scored_h19_5`. Live **0.2778 = CLAIM** (no submission
+  receipt in `ledger/`).
+- **Best receipt (this repo):** none. No file built here has a logged receipt.
 - **TOP_PUBLIC:** `____` — **not supplied**; the human must fill it from the
   leaderboard with a date. It is the only valid target number.
-- **Slots this week:** `__ / __` — **not supplied**; the brief's quota is
-  3 scored submissions per rolling week per entity, plus one final blind choice.
-- **Axis this session:** **MASS** (the only family whose mechanism
-  touches the dot count, the one operator with a measured live dose-response in
-  this lineage: a 121k-px field → 44,090 → 40,199 → 37,654 dots scored 0.1922 →
-  0.2600 → 0.2708 → 0.2778). Values `m10uniq`, `m10rand`, `m20uniq` were unused.
-  Every earlier MASS row (six across the two fleet ledgers, some repeats) has no
-  ranking recipe in the repo, and `GEMSDOE88` records its own basis as a
-  distance+uniform field because **the parent's own ranking does not exist** —
-  its ancestor `h19-5` is binary (`{0,1}`, 121,131 cells).
-- **Week:** 2026-10-23. Deadline **2026-12-03** (≈6 weeks, 41 days) — *UNVERIFIED*:
-  the competition page may not be fetched under its terms.
+- **Slots left (this week / total):** `__ / __` — **not supplied**; quota is
+  3 scored submissions per rolling week per entity + 1 final blind submission
+  (https://docs.nlr.gov/docs/fy26osti/96647.pdf).
+- **Axis this session:** **SPACING** (`strike`, `poisson`, `lattice` — zero
+  `SPACING` pairs existed in `ledger/submissions.csv`; prior `MASS` and `RELIEF`
+  files in `releases/` are retained on disk and in the ledger).
+- **Date:** 2026-10-23. Deadline **2026-12-03** (≈6 weeks, 41 days) — *UNVERIFIED*:
+  automated access to drivendata.org is prohibited by site terms, so the human
+  must confirm the date on the competition page.
 
 ## Next 3 slots (detail in `SLOT_PLAN.md`)
 
 | # | file | predicted (MODEL) | what the result would change |
 |---|---|---|---|
-| 1 | `releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif` | +0.002 (−0.010…+0.010) | ≥ +0.005 → mass outside the collar is waste, run the dose; \|Δ\| < 0.005 → count is not a lever, close MASS; ≤ −0.005 → only collar mass may be removed |
-| 2 | `releases/h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif` | +0.004 (−0.020…+0.021) | additive → push the dose below 30k; super-linear loss → optimum is between 33.9k and 37.6k |
-| 3 | `releases/h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif` — or hold | −0.002 (−0.016…+0.010) | the count-matched null: tells whether the *ranking* or the *count* carried the result |
+| 1 | `releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif` | +0.006 (−0.004…+0.011) | ≥ +0.010 → run `spacing-poisson` next; inside ±0.010 → close SPACING, pivot to `MASSm10uniq`; ≤ −0.010 → dipping-fault offset dominates |
+| 2 | `…-spacing-poisson-…-95c51e18.tif` *(if #1 ≥ +0.010)* or `…-MASSm10uniq-…-beed130f.tif` *(if #1 null)* | +0.001 / +0.002 | isolates 1-D strike anisotropy vs 2-D Voronoi relaxation, or prices dropping 10 % most-redundant dots |
+| 3 | hold, or `releases/h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif` *(if m10uniq ≥ +0.010)* | +0.004 (−0.020…+0.021) | dose-response check on MASS; otherwise hold slot for `relief-r10` (`366c87ca`) or wk 2 composite |
 
-**Ceiling, stated up front:** at the `D` pinned by the one measured mass step,
-a 10 % drop can gain at most **+0.0105** and a 20 % drop at most **+0.021** even
-if every removed dot carries zero credit. This family cannot reach +0.03.
+**Files built this session:** 3 `SPACING` variants × 2 encodings (NaN-outside
+primary + zeros-outside fallback), all passing every MUST gate (18 release
+GeoTIFFs total across `SPACING`, `MASS`, and `RELIEF`); see `ledger/submissions.csv`
+and `docs/SUBMIT.md`.
 
-**Files built this session:** 3 arms × 2 encodings (NaN-outside and zeros-outside
-twins), all passing every MUST gate on a re-read from disk; see
-`ledger/submissions.csv` and `ledger/MECHANISM_CARDS_MASS.md`.
-
-**What only the human can supply:** TOP_PUBLIC + date; slots used/available; a
-receipt score for each submitted file (`receipt_score`, `receipt_date`); and
-confirmation of the 2026-12-03 deadline. Also outstanding: the data-exposure
-decision in `IRREGULARITIES.md` item 4.
+**What only the human can supply:** `TOP_PUBLIC` + date; weekly/total slots
+remaining; `receipt_score` and `receipt_date` in `ledger/submissions.csv` after
+any upload; confirmation of the 2026-12-03 deadline; and a decision on the
+upstream public-mirror exposure flagged in `IRREGULARITIES.md`.

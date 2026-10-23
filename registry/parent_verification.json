@@ -1,12 +1,18 @@
 {
  "id": "h33-h33-2-b2",
  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "sha256_nan": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
  "sha256_expected_from_upstream_ledger": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "sha256_nan_expected_from_upstream_audit": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
  "match": true,
- "source": {
-  "repo": "buffedlizard55-lab/GEMSDOE86",
-  "ref": "7f37d6ac43043e5b841b3f4e27d054b22ed63396",
-  "path": "data/scored_fleet/GEMSDOE32__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+ "rebuilt_from_recipe": true,
+ "git_sha": "c66116a1c88aa9c695fb69e0b18d278ab7f61080",
+ "recipe": {
+  "base": "parent_base_02708.tif (GEMSDOE28 h27-4-r1-solo-d2-8, sha256 ab0230015224..., 40,199 dots)",
+  "ridge_support": "scored_h19_5.tif (19GEMSDOE h19-5, sha256 ec1f9b56b83c..., 121,131 px; contains 37,654/37,654 R0 dots)",
+  "collar_prune": "mask = base & (distance_transform_edt(~catalogue) > 2.0) & footprint & ~catalogue",
+  "writer": "GTiff float32, deflate/predictor=3/zlevel=9/tiled 256x256",
+  "upstream_source": "buffedlizard55-lab/GEMSDOE32@078f3cea1bc7 src/gems32/hypotheses33.py:307-329"
  },
  "n_dots": 37654,
  "values": {
@@ -16,7 +22,6 @@
   ],
   "dots_are_unit_mass": true
  },
- "encoding": "zeros outside footprint (its NaN twin is not needed: ledger records identical scores)",
  "grid": {
   "shape": [
    3730,
@@ -27,7 +32,8 @@
  "all_dots_inside_footprint": true,
  "catalogue": {
   "min_distance_px": 2.23606797749979,
-  "dots_within_3px": 1611,
+  "dots_below_3px": 1611,
+  "dots_at_or_below_3px": 2171,
   "dots_within_2px": 0,
   "dots_on_catalogue": 0
  },
@@ -36,5 +42,17 @@
   "evidence_class": "CLAIM",
   "receipt": "none in this repo"
  },
- "note": "Restored byte-exact from the owner's mirror and verified against the sha256_zeros recorded for h33-h33-2-b2 upstream. Not rebuilt from a recipe; see IRREGULARITIES.md item 1."
+ "checks": {
+  "manifest_all_8_verified": true,
+  "footprint_px_5167373": true,
+  "base_dots_40199": true,
+  "r0_dots_37654": true,
+  "all_dots_on_h19_5_ridge_support": true,
+  "zero_dots_on_catalogue": true,
+  "zero_dots_within_2px_of_catalogue": true,
+  "rebuilt_zeros_matches_pin": true,
+  "rebuilt_nan_matches_pin": true,
+  "base_sha256_matches_pin": true
+ },
+ "elapsed_s": 6.8
 }

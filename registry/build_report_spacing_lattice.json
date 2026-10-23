@@ -1,0 +1,289 @@
+{
+ "id": "h33-h33-2-b2-spacing-lattice-20261023-dd652665",
+ "axis": "SPACING",
+ "value": "lattice",
+ "spec": {
+  "mode": "lattice",
+  "note": "hexagonal covering-lattice snapping (pitch a=3.20 px) inside R0's 610 widest multi-dot fault corridors, exact per-corridor count preserved",
+  "predicted_change": "0.000 (MODEL; band -0.003..+0.003). Periodic hex-lattice control on H19 manifold.",
+  "form_note": "h33-h33-2-b2; SPACING lattice (5195/37654=13.80% hex-lattice a=3.2px on H19, dcat>=3px); pred 0.000 (-0.003..+0.003)",
+  "recommend": "HOLD / crystallographic covering control (do not spend a weekly slot unless both strike and poisson move)."
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "git_sha": "5875e057e8a2b92e84dab94940c8975743b5dd2a",
+ "seed": 20261023,
+ "stats": {
+  "mode": "lattice",
+  "n_dots": 37654,
+  "n_corridors_repacked": 610,
+  "n_cleared_in_corridors": 8508,
+  "n_moved": 5195,
+  "pct_changed": 13.796674988049078,
+  "pct_symmetric_diff": 27.593349976098157,
+  "mean_displacement_px": 1.3773189612916983,
+  "median_displacement_px": 1.0,
+  "nn_p10_before_px": 2.8284271247461903,
+  "nn_p10_after_px": 2.8284271247461903,
+  "nn_median_before_px": 3.0,
+  "nn_median_after_px": 3.0,
+  "crest_dots_before": 24691,
+  "crest_dots_after": 25095,
+  "t_crest_before": 52607.587097642114,
+  "t_crest_after": 52745.687773528625,
+  "t_crest_delta": 138.10067588651145,
+  "t_manifold_before": 76725.88495626673,
+  "t_manifold_after": 76698.62995863367,
+  "t_manifold_delta": -27.254997633062885,
+  "across_strike_twins_before": 4802,
+  "across_strike_twins_after": 4961,
+  "block_cv_before": 1.8704320876262501,
+  "block_cv_after": 1.8758927702571613,
+  "block_cv_5km_before": 0.8990629317740834,
+  "block_cv_5km_after": 0.8987883606981286
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665.tif",
+  "zeros": "releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665-zeros.tif",
+  "sha256": "dd65266597fc85480445a2bcbea3dd1a3cc6ba00c7d14b3333b0501657eacb93",
+  "sha256_zeros": "5fe27a0e479d4c92eb7e6e85e33f31729635a00bed6999488dde226717df2025",
+  "sha8": "dd652665"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-lattice-20261023-dd652665.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "dd65266597fc8548"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-lattice-20261023-dd652665-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "5fe27a0e479d4c92"
+    }
+   ]
+  },
+  "added_clearance_ge_3px": true,
+  "all_dots_on_h19_5_support": true,
+  "pct_changed_in_1_50": true,
+  "twins_identical_mask": true
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "sgmc_off_catalogue_variant": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.200345368419385,
+   "ci95_halfwidth": 0.006245025339574606,
+   "ci95": [
+    0.1941003430798104,
+    0.2065903937589596
+   ],
+   "surrogate_dti_sgmc_offcat": 0.09561536193224489
+  },
+  "sgmc_off_catalogue_parent": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.20147019217059298,
+   "ci95_halfwidth": 0.006258124563115974,
+   "ci95": [
+    0.195212067607477,
+    0.20772831673370895
+   ],
+   "surrogate_dti_sgmc_offcat": 0.09613245598517174
+  },
+  "sgmc_off_catalogue_random_null": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.17642306047115858,
+   "ci95_halfwidth": 0.005947373365068176,
+   "ci95": [
+    0.1704756871060904,
+    0.18237043383622675
+   ],
+   "surrogate_dti_sgmc_offcat": 0.07411400133345228
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0,
+  "model_inputs": {
+   "added_dots": 5195,
+   "removed_dots": 5195,
+   "added_min_clearance_px": 3.0,
+   "all_dots_on_scored_h19_5": true,
+   "added_frac_within_kernel_of_catalogue": 0.0,
+   "t_crest_delta_units": 138.10067588651145,
+   "t_manifold_delta_units": -27.254997633062885,
+   "crest_dots_delta": 404,
+   "across_strike_twins_delta": 159,
+   "pays_threshold_at_parent_dti": 0.05556,
+   "inherited_dots_below_3px_of_catalogue": 1611,
+   "parent_min_clearance_px": 2.23606797749979
+  }
+ },
+ "seconds": 10.35
+}
