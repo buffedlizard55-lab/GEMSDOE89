@@ -22,7 +22,7 @@ from gemsdoe.grid import sha256_file  # noqa: E402
 
 def main():
     rows = list(csv.DictReader(open(ROOT / "ledger" / "submissions.csv", newline="")))
-    mine = [r for r in rows if r.get("source") == "GEMSDOE89"]
+    mine = [r for r in rows if (r.get("source") or "").startswith("GEMSDOE89")]
     problems = []
 
     known = {(r.get("sha256") or "").strip() for r in rows}

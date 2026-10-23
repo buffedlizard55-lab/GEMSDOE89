@@ -7,8 +7,9 @@ Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
-This session's rows are read from registry/build_reports.json so that the
-ledger can never drift from the files on disk.
+RELIEF rows are read from registry/build_reports.json so that the ledger can
+never drift from the files on disk. Other current-axis rows (including SPACING)
+are preserved rather than silently dropped.
 """
 
 from __future__ import annotations
@@ -110,12 +111,20 @@ def main():
         new_rows.append(row)
 
     path = ROOT / "ledger" / "submissions.csv"
+    other_current = []
+    if path.exists():
+        with open(path, newline="") as fh:
+            other_current = [
+                r for r in csv.DictReader(fh)
+                if (r.get("source") or "").startswith("GEMSDOE89")
+                and (r.get("axis") or "").upper() not in ("", "RELIEF")
+            ]
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
         w.writeheader()
-        for r in new_rows + upstream:
+        for r in new_rows + other_current + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})
-    print(f"wrote {path}: {len(new_rows)} new + {len(upstream)} collapsed upstream rows")
+    print(f"wrote {path}: {len(new_rows)} RELIEF + {len(other_current)} other current + {len(upstream)} collapsed upstream rows")
 
 
 if __name__ == "__main__":
