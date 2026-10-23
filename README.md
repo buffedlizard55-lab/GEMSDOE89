@@ -12,8 +12,8 @@
   3 scored submissions per rolling week per entity + 1 final blind submission
   (https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 - **Axis this session:** **SPACING** (`strike`, `poisson`, `lattice` — zero
-  `SPACING` pairs existed in `ledger/submissions.csv`; prior `RELIEF` files are
-  retained on disk and in the ledger).
+  `SPACING` pairs existed in `ledger/submissions.csv`; prior `MASS` and `RELIEF`
+  files in `releases/` are retained on disk and in the ledger).
 - **Date:** 2026-10-23. Deadline **2026-12-03** (≈6 weeks, 41 days) — *UNVERIFIED*:
   automated access to drivendata.org is prohibited by site terms, so the human
   must confirm the date on the competition page.
@@ -22,13 +22,14 @@
 
 | # | file | predicted (MODEL) | what the result would change |
 |---|---|---|---|
-| 1 | `releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif` | +0.006 (−0.004…+0.011) | ≥ +0.010 → run `spacing-poisson` next; inside ±0.010 → close SPACING, pivot to `relief-r10`; ≤ −0.010 → dipping-fault offset dominates |
-| 2 | `…-spacing-poisson-…-95c51e18.tif` *(if #1 ≥ +0.010)* or `…-relief-r10-…-366c87ca.tif` *(if #1 null)* | +0.001 / +0.003 | isolates 1-D strike anisotropy vs 2-D Voronoi relaxation, or tests range→piedmont class allocation |
-| 3 | hold, or `releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif` *(if r10 ≥ +0.010)* | +0.004 (−0.017…+0.027) | dose-response check on RELIEF; otherwise save slot for wk 2 (`MASS -10pct` / `DEDUPE`) |
+| 1 | `releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif` | +0.006 (−0.004…+0.011) | ≥ +0.010 → run `spacing-poisson` next; inside ±0.010 → close SPACING, pivot to `MASSm10uniq`; ≤ −0.010 → dipping-fault offset dominates |
+| 2 | `…-spacing-poisson-…-95c51e18.tif` *(if #1 ≥ +0.010)* or `…-MASSm10uniq-…-beed130f.tif` *(if #1 null)* | +0.001 / +0.002 | isolates 1-D strike anisotropy vs 2-D Voronoi relaxation, or prices dropping 10 % most-redundant dots |
+| 3 | hold, or `releases/h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif` *(if m10uniq ≥ +0.010)* | +0.004 (−0.020…+0.021) | dose-response check on MASS; otherwise hold slot for `relief-r10` (`366c87ca`) or wk 2 composite |
 
 **Files built this session:** 3 `SPACING` variants × 2 encodings (NaN-outside
-primary + zeros-outside fallback), all passing every MUST gate (plus the 3 prior
-`RELIEF` × 2 twins retained); see `ledger/submissions.csv` and `docs/SUBMIT.md`.
+primary + zeros-outside fallback), all passing every MUST gate (18 release
+GeoTIFFs total across `SPACING`, `MASS`, and `RELIEF`); see `ledger/submissions.csv`
+and `docs/SUBMIT.md`.
 
 **What only the human can supply:** `TOP_PUBLIC` + date; weekly/total slots
 remaining; `receipt_score` and `receipt_date` in `ledger/submissions.csv` after

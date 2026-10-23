@@ -1,93 +1,80 @@
-# SUBMIT — session GEMSDOE89
+# How to submit a file from this repository
 
-The human submits from their own registered account. Nothing here logs in,
-scrapes, or uploads. Upload **one** file per slot: the NaN-outside raster is the
-spec-exact primary file; the `-zeros.tif` twin is the byte-verified fallback
-(identical live scores per ledger history).
+The agent never touches the submission portal, never reads credentials, and
+never contacts `drivendata.org`. Upload is performed manually by the human
+competitor.
 
----
+## 1. Before you upload anything
 
-## Slot 1 (primary — SPACING `strike`)
+1. Read the current top public leaderboard score and write it down with today's
+   date (`TOP_PUBLIC = ____ on YYYY-MM-DD`). Check how many of your 3 weekly
+   scored slots remain (`https://docs.nlr.gov/docs/fy26osti/96647.pdf`).
+2. Verify the local release files match the hashes in `ledger/submissions.csv`:
+   ```bash
+   python tools/validate_raster.py
+   python tools/check_ledger.py
+   ```
+   Every gate must print `PASS` (`all gates pass: True`) and `ledger consistent`.
 
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif` |
-| **name** | `h33-h33-2-b2-spacing-strike-20261023-37910355` |
-| **sha256** | `37910355789dc5a0489aaadf739260d0e0fe057170084ef978d34236ae3c768f` |
-| **fallback** | `releases/h33-h33-2-b2-spacing-strike-20261023-37910355-zeros.tif` (`943199db7410b6c8…`) |
-| **form note** (115 chars) | `h33-h33-2-b2; SPACING strike (5444/37654=14.46% along-strike on H19 crest, dcat>=3px); pred +0.006 (-0.004..+0.011)` |
-| **predicted** | +0.006 MODEL (band −0.004 … +0.011) |
+## 2. Which file to upload (`SPACING` axis — primary session)
 
-Format receipt — all MUST gates pass after re-reading from disk:
+Upload the **NaN-outside** file first (matches `sample_submission.tif` pixel-for-pixel
+in its outside-footprint mask). Only use `-zeros.tif` if the portal's pre-scorer
+rejects NaN outside the footprint — and record which twin was uploaded.
 
-| gate | result |
-|---|---|
-| readable / re-read from disk | pass |
-| grid contract vs `sample_submission.tif` (shape 3730×3292, 100 m scale, tiepoint, EPSG:32611) | pass |
-| dtype float32, single band | pass |
-| values in [0, 1] | pass (37,654 unit-mass dots == 1.0; all else 0.0 or NaN) |
-| no NaN inside footprint; NaN outside (`-zeros` has 0.0 outside) | pass |
-| exact dot count (37,654) & twin mask equivalence | pass |
-| 100 % of dots on `scored_h19_5` ridge support | pass (37,654 / 37,654) |
-| zero catalogue mass (`existing_faults > 0`) | pass (0 dots) |
-| newly placed dots clearance ≥ 3.00 px from catalogue | pass (min 3.00 px) |
-| `% changed` in [1 %, 50 %] | pass (5,444 moved = 14.46 %; sym diff 28.92 %) |
-| sha256 not already in ledger | pass |
+### Slot 1 — Primary (`SPACING = strike`)
 
----
+* **Primary file (NaN outside):** `releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif`
+  * `sha256`: `37910355789dc5a0489aaadf739260d0e0fe057170084ef978d34236ae3c768f`
+  * Dots: `37,654` (`5,444` moved = `14.46 %` of R0; symmetric diff `28.92 %`)
+* **Fallback twin (zeros outside):** `releases/h33-h33-2-b2-spacing-strike-20261023-37910355-zeros.tif`
+  * `sha256`: `943199db7410b6c8f45d154f6380257f2dc86f1e5641f5bf26fbd0812b46a1cb`
+* **Paste-ready form note (115 chars, ≤140 limit):**
+  ```text
+  h33-h33-2-b2; SPACING strike (5444/37654=14.46% along-strike on H19 crest, dcat>=3px); pred +0.006 (-0.004..+0.011)
+  ```
 
-## Slot 2A (conditional on Slot 1 ≥ +0.010 — SPACING `poisson`)
+### Slot 2A — Conditional anisotropy control (`SPACING = poisson`, ONLY if Slot 1 ≥ +0.010 vs R0)
 
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18.tif` |
-| **name** | `h33-h33-2-b2-spacing-poisson-20261023-95c51e18` |
-| **sha256** | `95c51e182563dba79eec1e8b306fa9b673955c6615a687cdc0f8f35af4cd3b15` |
-| **fallback** | `releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18-zeros.tif` (`dc82177c1fa9c962…`) |
-| **form note** (113 chars) | `h33-h33-2-b2; SPACING poisson (4800/37654=12.75% Voronoi/Poisson on H19, dcat>=3px); pred +0.001 (-0.002..+0.004)` |
-| **predicted** | +0.001 MODEL (band −0.002 … +0.004) |
-| **format receipt** | all MUST gates pass (37,654 dots; 4,800 moved = 12.75 %, sym diff 25.50 %; 0 catalogue mass; min added clearance 3.00 px) |
+* **Primary file (NaN outside):** `releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18.tif`
+  * `sha256`: `95c51e182563dba79eec1e8b306fa9b673955c6615a687cdc0f8f35af4cd3b15`
+  * Dots: `37,654` (`4,800` moved = `12.75 %` of R0; symmetric diff `25.50 %`)
+* **Fallback twin (zeros outside):** `releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18-zeros.tif`
+  * `sha256`: `dc82177c1fa9c962464e78c5efa2a416a91c998a7a2e54feef168efefa77ca6e`
+* **Paste-ready form note (113 chars, ≤140 limit):**
+  ```text
+  h33-h33-2-b2; SPACING poisson (4800/37654=12.75% Voronoi/Poisson on H19, dcat>=3px); pred +0.001 (-0.002..+0.004)
+  ```
 
----
+### Hold control (`SPACING = lattice` — do not spend a weekly slot unless both `strike` and `poisson` move ≥ +0.010)
 
-## Crystallographic control (HOLD — SPACING `lattice`)
+* **Primary file (NaN outside):** `releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665.tif`
+  * `sha256`: `dd65266597fc85480445a2bcbea3dd1a3cc6ba00c7d14b3333b0501657eacb93`
+* **Fallback twin (zeros outside):** `releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665-zeros.tif`
+  * `sha256`: `5fe27a0e479d4c92eb7e6e85e33f31729635a00bed6999488dde226717df2025`
+* **Paste-ready form note (116 chars, ≤140 limit):**
+  ```text
+  h33-h33-2-b2; SPACING lattice (5195/37654=13.80% hex-lattice a=3.2px on H19, dcat>=3px); pred 0.000 (-0.003..+0.003)
+  ```
 
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665.tif` |
-| **name** | `h33-h33-2-b2-spacing-lattice-20261023-dd652665` |
-| **sha256** | `dd65266597fc85480445a2bcbea3dd1a3cc6ba00c7d14b3333b0501657eacb93` |
-| **fallback** | `releases/h33-h33-2-b2-spacing-lattice-20261023-dd652665-zeros.tif` (`5fe27a0e479d4c92…`) |
-| **form note** (116 chars) | `h33-h33-2-b2; SPACING lattice (5195/37654=13.80% hex-lattice a=3.2px on H19, dcat>=3px); pred 0.000 (-0.003..+0.003)` |
-| **predicted** | 0.000 MODEL (band −0.003 … +0.003) |
-| **format receipt** | all MUST gates pass (37,654 dots; 5,195 moved = 13.80 %, sym diff 27.59 %; 0 catalogue mass; min added clearance 3.00 px) |
+*(Also retained in `releases/` and `ledger/submissions.csv`: `MASSm10uniq` `beed130f` — Slot 2B if Slot 1 is inside ±0.010 — plus `MASSm20uniq` `87ec6213`, `MASSm10rand` `7a4c49b6`, and `RELIEF` `r10` `366c87ca`, `r15` `6aa774ce`, `r15s` `5f0ae851`.)*
 
----
+## 3. After the portal scores the file
 
-## Slot 2B / Slot 3 alternates (prior RELIEF arms on disk)
-
-- **Slot 2B (if Slot 1 is inside ±0.010):** `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif`
-  (sha256 `366c87ca62040215…`; fallback `-zeros.tif` `e776fc20873321f7…`; note 122 chars:
-  `R0 h33-h33-2-b2 + RELIEF r10: 3765/37654 dots (10%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.003`; all MUST gates pass).
-- **Slot 3 (only if `relief-r10` scores ≥ 0.2878):** `releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif`
-  (sha256 `6aa774ce21fe10b3…`; note 122 chars:
-  `R0 h33-h33-2-b2 + RELIEF r15: 5648/37654 dots (15%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.004`; all MUST gates pass).
-- **Slope alternate (`relief-r15s`):** `releases/h33-h33-2-b2-relief-r15s-20261023-5f0ae851.tif`
-  (sha256 `5f0ae8512e44940b…`; note 111 chars:
-  `R0 h33-h33-2-b2 + RELIEF r15s: 5648/37654 dots (15%) high->mid slope class, count fixed, dcat>=3px; pred +0.001`; all MUST gates pass).
-
----
-
-## Before you upload (2 minutes)
-
-```bash
-export GEMSDOE_DATA=/path/to/verified/inputs      # or run: python tools/fetch_pinned_inputs.py
-python tools/rebuild_r0.py                        # verifies manifest + byte-exact R0 rebuild
-python -m pytest tests -q                         # 18 unit tests
-python tools/validate_raster.py                   # re-runs every MUST gate on all 12 release files
-python tools/check_ledger.py                      # ledger <-> disk, unique triples, note <= 140 chars
-sha256sum releases/h33-h33-2-b2-spacing-strike-20261023-37910355.tif   # starts 37910355
-```
-
-After scoring, record `receipt_score` and `receipt_date` in `ledger/submissions.csv`
-and flip `receipt` to `Y`.
+1. Save a screenshot or copy of the submission confirmation showing the timestamp
+   and the 4-decimal score.
+2. Open `ledger/submissions.csv`, find the row by `sha8`, and fill in:
+   * `score`: the 4-decimal portal number
+   * `evidence_class`: `RECEIPT`
+   * `status`: `SCORED`
+   * `receipt`: `Y`
+   * `receipt_score`: same 4-decimal number
+   * `receipt_date`: UTC date (`YYYY-MM-DD`) from the portal receipt
+3. Re-run `python tools/check_ledger.py` and commit the updated ledger row.
+4. Apply the decision rule in `SLOT_PLAN.md`:
+   * Any delta inside `[-0.010, +0.010]` relative to R0 (`0.2778` CLAIM) is **no
+     evidence** on a 4-decimal public subset — do **not** adopt the child as a
+     new parent and do **not** run its higher-dose/control follow-up.
+   * Only if Slot 1 (`spacing-strike`) reaches `≥ 0.2878` (`+0.010` over R0) run
+     Slot 2A (`spacing-poisson`). If Slot 1 lands inside `±0.010`, pivot Slot 2
+     to `MASSm10uniq` (`beed130f`).

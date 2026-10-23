@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Assemble ledger/submissions.csv from the recovered upstream history + all
-GEMSDOE89 built variants (SPACING + RELIEF).
+GEMSDOE89 built variants (SPACING + MASS + RELIEF).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
 sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
-GEMSDOE89 rows are read from registry/build_reports_spacing.json (this session)
-and registry/build_reports.json (prior RELIEF session on disk) so the ledger
-never drifts from the release rasters in releases/.
+GEMSDOE89 rows are read from registry/build_reports_spacing.json (this session),
+registry/build_mass_reports.json (merged MASS session), and
+registry/build_reports.json (merged RELIEF session) so the ledger never drifts
+from the release rasters in releases/.
 """
 
 from __future__ import annotations
@@ -28,6 +29,24 @@ FIELDS = [
     "date", "form_note", "notes", "source",
 ]
 
+MASS_META = {
+    "m10uniq": (
+        "+0.002 (MODEL; band -0.010..+0.010; ceiling +0.0105 if every dropped dot is zero-credit)",
+        "R0 h33-h33-2-b2; MASS m10uniq: drop 3765/37654 dots (10%), none added; pred +0.002",
+        "SLOT 2B (if SPACING strike inside +-0.010): drop 3765 deepest-redundancy far-field dots, collar preserved.",
+    ),
+    "m10rand": (
+        "-0.002 (MODEL; band -0.016..+0.010; the count-matched null for m10uniq)",
+        "R0 h33-h33-2-b2; MASS m10rand: drop 3765/37654 dots (10%), none added; pred -0.002",
+        "CONTROL: 3765 dots drawn uniformly. Same count, same legality, only selection differs from m10uniq.",
+    ),
+    "m20uniq": (
+        "+0.004 (MODEL; band -0.020..+0.021; ceiling +0.021 if every dropped dot is zero-credit)",
+        "R0 h33-h33-2-b2; MASS m20uniq: drop 7531/37654 dots (20%), none added; pred +0.004",
+        "DOSE: 7531 deepest-redundancy far-field dots; submit only after m10uniq reads >= +0.010.",
+    ),
+}
+
 RELIEF_PREDICTIONS = {
     "r10": "+0.003 (MODEL; band -0.012..+0.018). No-evidence outcome expected.",
     "r15": "+0.004 (MODEL; band -0.017..+0.027). Dose 1.5x of r10.",
@@ -39,7 +58,7 @@ RELIEF_FORM_NOTES = {
     "r15s": "R0 h33-h33-2-b2 + RELIEF r15s: 5648/37654 dots (15%) high->mid slope class, count fixed, dcat>=3px; pred +0.001",
 }
 RELIEF_RECOMMEND = {
-    "r10": "Prior RELIEF arm (hold behind SPACING strike unless relief class test prioritized).",
+    "r10": "Prior RELIEF arm (hold behind SPACING strike and MASS m10uniq).",
     "r15": "Dose 1.5x of RELIEF r10; submit only if r10 >= +0.010.",
     "r15s": "Slope-defined RELIEF alternate.",
 }
@@ -109,6 +128,40 @@ def main():
                     f"dT_crest {s['t_crest_delta']:+.1f}, dT_manif {s['t_manifold_delta']:+.1f}; "
                     f"mean disp {s['mean_displacement_px']:.2f} px. {spec['recommend']}"
                 ),
+                "source": "GEMSDOE89",
+            })
+
+    mass_path = ROOT / "registry" / "build_mass_reports.json"
+    if mass_path.exists():
+        order = {"m10uniq": 0, "m10rand": 1, "m20uniq": 2}
+        reps = sorted(json.loads(mass_path.read_text()), key=lambda r: order.get(r["value"], 99))
+        for rep in reps:
+            value = rep["value"]
+            s = rep["stats"]
+            pred_txt, form_note, note_txt = MASS_META[value]
+            new_rows.append({
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_after"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "MASS",
+                "value": value,
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "receipt_date": "",
+                "predicted_change": pred_txt,
+                "date": "2026-10-23",
+                "form_note": form_note,
+                "notes": note_txt,
                 "source": "GEMSDOE89",
             })
 

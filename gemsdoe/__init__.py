@@ -1,12 +1,5 @@
-"""GEMS Prize (DrivenData #306) candidate-raster toolkit.
+"""GEMSDOE89 — single-axis variants of a pinned GEMS Prize parent raster."""
 
-Modules
-  metric   -- DTI algebra, derived from the brief, unit-tested in tests/
-  grid     -- the submission grid contract and byte-deterministic writing
-  relief   -- the RELIEF axis (class definition, relocation, statistics)
-  spacing  -- the SPACING axis (strike, Poisson-disk, hexagonal lattice)
-  validate -- the hard gates
-  proxy    -- REPORT-ONLY instruments (catalogue proxy, canary, SGMC, surrogate DTI)
-"""
+from . import grid, mass, metric, proxy, relief, spacing, validate
 
-__all__ = ["metric", "grid", "relief", "spacing", "validate", "proxy"]
+__all__ = ["grid", "mass", "metric", "proxy", "relief", "spacing", "validate"]
