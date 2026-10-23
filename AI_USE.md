@@ -56,3 +56,55 @@ from what the human decided.
 - No model was trained on test truth; the only labels touched are the pinned,
   pixel-masked USGS/INGENIOUS catalogue, used for exclusion, for a global class
   prior, and for a REPORT-ONLY proxy.
+
+---
+
+## What the AI wrote (SNAP session, 2026-10-23, branch `arena/7efbb7cc-gemsdoe89`)
+
+- `gemsdoe/snap.py` — the gateless SNAP construction: response recipe
+  (median fill → gaussian σ=1 → robust_unit p99.5 → max fusion of bands
+  3/18), deterministic snap algorithm, displacement/CV statistics.
+- `tools/rebuild_r0.py` — the start gate: rebuilds R0 from its mask with the
+  parent writer profile and requires a byte-exact match to `c55bafc47005…`
+  (it matches).
+- `tools/build_snap_gateless.py` — verifies every manifest hash, rebuilds R0,
+  builds the three variants, writes both encodings, re-reads from disk, runs
+  the MUST gates, appends the ledger rows, writes
+  `registry/build_report_snap_<value>.json`.
+- `tests/test_snap.py` — window/gate invariants, allowed-mask enforcement,
+  count preservation, determinism.
+- SNAP mechanism cards appended to `ledger/MECHANISM_CARDS.md`; updated
+  `SLOT_PLAN.md`, README CURRENT STATE, `docs/SUBMIT.md`, this file, and the
+  reproducibility note in `IRREGULARITIES.md` item 1.
+
+## What the AI decided (and the human can reverse)
+
+- **Axis = SNAP, values = 1p0px/1p4px/2p0px at gate 0.00.** Brief v2 says not
+  to ask. Chosen from the ledger: MASS ±10 % and PRUNE ≤1/≤2/≤3 px were already
+  built upstream, RELIEF was completed on this branch's previous session, and
+  no `g0p00` value existed anywhere — the gateless corner is the brief's
+  literal SNAP definition and turns receipts into a clean gate ablation
+  against upstream's three gated arms.
+- **Response recipe replicated exactly** from the upstream recorded recipe
+  (bands 3 + 18, fill/σ/robust-unit/fusion) so the gate is the only
+  cross-session difference; band identities come from the manifest's
+  `band_identity_source`, not from memory.
+- **Collar handling inherited** from IRREGULARITIES item 2: targets ≥ 3 px
+  enforced; the parent's 1,611 diagonal-collar dots may stay (they never move
+  closer; collar shrank to 575/666/938). Reversal would be a second
+  simultaneous change (PRUNE), already built upstream.
+- **Prediction bands** use the upstream live-anchor inversion
+  (D = 18,734.44) with an explicit −0.05/+0.05/+0.15 scenario on moved dots —
+  the negative side is this session's addition (upstream bands had none).
+  Evidence class MODEL; never a score.
+- The three report-only instruments (hide-and-recover PROXY, catalogue
+  surrogate, leakage canary) were computed and reported; none gated a file,
+  and none set a predicted sign.
+
+## What only the human can supply (unchanged + new)
+
+- All submission decisions and every `receipt_score`; `TOP_PUBLIC` + date;
+  slots used/available; the 2026-12-03 deadline confirmation; the
+  data-exposure decision (IRREGULARITIES item 4).
+- **New:** whether to also queue the upstream gated SNAP / MASS / PRUNE files
+  held in GEMSDOE84's releases (not present in this repo; not fetched here).

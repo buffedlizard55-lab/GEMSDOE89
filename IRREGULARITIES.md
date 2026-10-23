@@ -16,10 +16,15 @@ and its sha256 equals `c55bafc4…`, the `sha256_zeros` recorded for
 `h33-h33-2-b2` in `GEMSDOE84 ledger/submissions.csv`.
 
 **Consequence (matters for the rules' reproducibility clause).** Parent identity
-is exact at the artifact level, but this session did **not** re-derive R0 from a
-script. If a reviewer asks for reproducible code *for the parent*, that code
-still does not exist in this repo; every *variant* here is reproducible from
-`tools/build_relief.py` + `registry/data_manifest.json`.
+is exact at the artifact level. **Updated 2026-10-23 (SNAP session):**
+`tools/rebuild_r0.py` now exists and reproduces R0's *bytes* from its dot mask
+with the parent writer profile — emitted sha256 matches `c55bafc47005…`
+byte-for-byte, so encoder-level rebuild is verified, not assumed. What still
+does **not** exist anywhere in this repo is the recipe that *selected* the
+37,654 pixels (upstream lineage only). If a reviewer asks for reproducible code
+for the parent's dot selection, that code must be requested from upstream;
+every *variant* here is reproducible from `tools/build_relief.py`,
+`tools/build_snap_gateless.py` + `registry/data_manifest.json`.
 
 ## 2. Hard constraint 4 (≥ 3 px from the catalogue) conflicts with the parent's own collar
 

@@ -159,3 +159,150 @@ toward more class work.
 * The catalogue-surrogate DTI (0.0067 → 0.0062 / 0.0060 / 0.0059) is a
   counterfactual measured on pixels that are *masked* in live scoring. It is not
   a score and it was not used to set a predicted sign.
+
+---
+
+# Mechanism cards — SNAP axis (gateless), session GEMSDOE89 (2026-10-23, branch arena/7efbb7cc)
+
+Parent for every card: **R0 = h33-h33-2-b2**, rebuilt byte-exactly this session
+(`tools/rebuild_r0.py` reproduces sha256 `c55bafc4…` from the mask; 37,654 dots).
+All three variants hold count, mass and the parent's exclusion rules fixed; only
+*which pixel each dot sits on* may change, and only toward a strictly stronger
+fused TMI/gravity edge response inside the window. Targets are ≥ 3.0 px off the
+catalogue; the parent's inherited 2.236-px collar dots may stay or move out
+(they never move closer) — collar count 1,611 → 938 / 666 / 575
+(IRREGULARITIES item 2, single-variable control).
+
+**Recipe note (why these are comparable across sessions).** The response is
+replicated exactly from the upstream recorded SNAP recipe: bands 3 `tmi_hg` +
+18 `iso_grav_anom_hg` (identities pinned via the manifest's
+`band_identity_source` → GEMSDOE88 `registry/feature_receipt.json`), median
+fill → gaussian σ = 1 px → `robust_unit` (1.0 = footprint 99.5th pct) →
+pixel-wise max. Upstream built (1.42 px, gate 0.02), (2.0 px, 0.02),
+(2.0 px, 0.01); these cards are **gate 0.00** at windows 1.0 / 1.42 / 2.0 —
+so a receipt-vs-receipt comparison against the upstream arms isolates the
+*gate* and nothing else. Gate 0.00 = the brief's literal “move each dot
+≤ 2 px to the strongest response in its window” (any strictly stronger
+pixel qualifies).
+
+**What actually moved (measured):**
+
+| value | window | dots moved (% of 37,654) | mean displacement | mean response gain | nn median before → after | CV 1 km before → after |
+|---|---|---|---|---|---|---|
+| 1p0px-g0p00 | 1.0 (4-nbr) | 30,434 (80.83 %) | 1.000 px | 0.0054 | 3.0 → 3.0 | 1.883 → 1.889 |
+| 1p4px-g0p00 | 1.42 (8-nbr) | 31,233 (82.95 %) | 1.354 px | 0.0075 | 3.0 → 3.0 | 1.883 → 1.894 |
+| 2p0px-g0p00 | 2.0 (12-nbr) | 31,287 (83.09 %) | 1.864 px | 0.0103 | 3.0 → 3.0 | 1.883 → 1.908 |
+
+Window-dose **saturates**: 1.0 → 2.0 px adds only 853 moves. At gate 0 the
+lever is the *gate*, not the window — which is what the cross-session
+comparison against the gated arms prices.
+
+**Shared prediction arithmetic (MODEL, not a score).** Pure position change ⇒
+ΔDTI ≈ ΔT / D with D = 18,734.44, T = 5,073.29 from the recorded live-anchor
+inversion (upstream `evidence/h33_validation.json`, live pair 0.2600 → 0.2708).
+Scenario on moved dots: −0.05 … +0.15 *net* fraction close (or open) one full
+pixel to their nearest truth pixel, kernel gain ⅓ each; central +0.05. The
+negative side is priced because gateless moves are dominated by micro-gains on
+smooth noise; the upper side inherits the coupling the upstream cards assumed
+(they used +0.10 … +0.25 with no negative side). Everything under |Δ| = 0.01
+is no evidence.
+
+**Shared report-only counter-indicators (never gates, never called scores).**
+Hide-and-recover PROXY recall falls 0.0384 → 0.0254 / 0.0181 / 0.0152
+(n = 18,296 withheld, Wilson 95 % parent [0.033, 0.044] vs 2p0 variant
+[0.012, 0.019]); catalogue-surrogate DTI falls 0.0067 → 0.0049 / 0.0033 /
+0.0027. Reading: gateless snap trades *catalogue-adjacent* placement for
+*crest-aligned* placement. Catalogue pixels are masked pixel-exactly in live
+scoring, but new-fault truth may lie within 300 m of known traces (organizer
+answer, brief §2), so catalogue adjacency partially proxies live truth. This
+is the strongest reason the bands below carry a symmetric negative side. The
+leakage canary PASSES (max single-feature AUC 0.665 vs threshold 0.90); the
+SGMC control is not in the manifest (deferred, report-only).
+
+---
+
+## Card S1 — `1p0px-g0p00` (window dose, low end)
+
+**Hypothesis.** R0's dots are the output of a geometric BFS Poisson-disk walk
+over the H19-5 lineament field; traversal order, not physics, picks the
+surviving pixel, so many dots sit exactly 1 px off the geophysical edge that
+nominated their lineament. A minimum decisive snap (4-neighbour disc) recovers
+that off-by-one without letting any dot wander.
+
+**Mechanism.** Each dot moves to the strictly strongest fused tmi_hg /
+iso_grav_anom_hg pixel at distance ≤ 1 px (mean response gain 0.0054 robust
+units), targets ≥ 3 px off the catalogue, one dot per pixel, deterministic.
+Under the triangular kernel a 1 px correction on the dot nearest a truth pixel
+recovers up to ⅓ of the credit available from that pixel.
+
+**Non-fault mimic.** Fan-head channels, bar-and-swale and lithologic contacts
+produce 1-px-scale horizontal-gradient maxima too; at 80.8 % moved, most moves
+are micro-noise on a smooth surface — the arm can be a 30-thousand-dot random
+walk dressed as a correction. Tie-line seams in the aeromagnetic survey add
+structured false crests.
+
+**Predicted sign and size (MODEL).** Central **+0.027**, band **−0.027 …
++0.081**. The band is the honest consequence of pricing the mimic: at gate 0
+the coupling between EM-crest alignment and new-fault truth is the whole bet.
+
+**Falsifier.** Live ≤ −0.010 falsifies the snap mechanism outright (crests R0
+was pulled onto are non-fault contacts). Inside ±0.010 = no evidence; the
+window-dose question then collapses to the cross-session *gate* comparison.
+≥ +0.010 opens the family: compare against the gated arms' receipts
+(1.42 px-g0p02 moved 6.4 %, 2.0 px-g0p01 moved 26.5 %) to see whether the
+gate adds selection or just removes dose.
+
+## Card S2 — `1p4px-g0p00` (gate ablation at 1.42 px)
+
+**Hypothesis.** Same as S1 with the 8-neighbour disc: the diagonal pixel is
+often the true edge (a lineament at 45° to the grid), so window 1.42 should
+beat window 1.0 *if* the correction mechanism is real. Compared with upstream
+`1p4px-g0p02` (same window, same response, gate 0.02, 6.4 % moved) this arm
+isolates the gate exactly.
+
+**Mechanism.** Identical rule, offsets ≤ 1.42 px (adds the four diagonals);
+31,233 moves, mean displacement 1.354 px, mean gain 0.0075.
+
+**Non-fault mimic.** Identical to S1; the diagonals also double the chance of
+landing on a fan/bedrock contact that runs obliquely through the window.
+
+**Predicted sign and size (MODEL).** Central **+0.028**, band **−0.028 …
++0.083**.
+
+**Falsifier.** Receipt ≈ the 1.42-g0p02 receipt (±0.010) ⇒ the gate does
+nothing at this window and upstream's arms can be read as pure dose. Receipt
+≥ 0.010 *below* the gated arm ⇒ the gate is filtering harmful noise, i.e.
+selection matters more than dose — run windows at a *nonzero* gate next, not
+more gate 0. Below −0.010 ⇒ S1's falsifier fires for the whole family.
+
+## Card S3 — `2p0px-g0p00` (gate ablation at the physical window)
+
+**Hypothesis.** GeoDAWN Area 2 was flown at ~400 m line spacing
+(https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7), so
+lineament positions are uncertain by about the 300 m kernel radius — the
+physical correction scale is 2 px, not 1. This is the full-disc gateless arm
+and the direct ablation of upstream `2p0px-g0p01` (26.5 % moved) and
+`2p0px-g0p02` (11 %).
+
+**Mechanism.** Identical rule, Euclidean disc ≤ 2.0 px (12 offsets); 31,287
+moves (83.09 %), mean displacement 1.864 px, mean gain 0.0103 — the largest
+response harvest of the three. Moved targets never come closer than 3.00 px
+to the catalogue (measured); spacing statistics barely move (nn median 3.0 →
+3.0, CV 1 km 1.883 → 1.908): this axis changes *position*, not *arrangement*.
+
+**Non-fault mimic.** The wider disc reaches further off the mapped lineament
+onto parallel unrelated gradients — buried paleo-topographic steps, Lahontan
+shoreline breaks, pluton margins — and it is the arm with the most cumulative
+micro-noise (83 % of all dots move). The falling catalogue PROXY (0.0384 →
+0.0152) is this arm's own warning label: crest alignment and fault-proximity
+placement are being traded against each other.
+
+**Predicted sign and size (MODEL).** Central **+0.028**, band **−0.028 …
++0.084**.
+
+**Falsifier.** ≥ +0.010 with a *tighter-band* gated receipt also positive ⇒
+snap mechanism confirmed; then choose dose by receipt, not by principle.
+≥ +0.010 while the gated arms' receipts are null ⇒ upstream over-gated (the
+gate, not the snap, was destroying the gain). ≤ −0.010 ⇒ retire SNAP and the
+EM-crest story with it: R0's lineament placement beats EM-crest placement and
+the response surface should be rebuilt from DEM/lineament structure instead.
