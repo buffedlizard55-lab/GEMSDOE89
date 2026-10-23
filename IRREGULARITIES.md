@@ -89,3 +89,37 @@ deltas (0.0384 → 0.0356 / 0.0348 / 0.0341) are an artefact of that blindness.
 **Decision.** The proxy is reported and is **not** used to set the predicted
 sign. Doing so would have flipped the sign of every variant for a reason that
 has nothing to do with the live score.
+
+## 8. SPACING session (2026-10-23): proxy blindness extends, and two alignment
+## statistics disagree by construction
+
+Two measurement quirks change how the SPACING results must be read.
+
+**8a. The proxy is blind to SPACING for the same reason as item 7.** Every new
+pixel is at d_cat ≥ 3 px, so its catalogue kernel credit is exactly zero; the
+hide-and-recover deltas (0.0384 → 0.0326 / 0.0323 / 0.0232) register removals
+only. **Decision:** report in `registry/report_only_status.json`, never use to
+set a predicted sign.
+
+**8b. Global vs local strike alignment move in opposite directions for
+`strike3`.** The global nearest-neighbour statistic falls (0.7666 → 0.6728)
+while the controlled mover–anchor statistic rises (0.7636 → 0.9440). They do
+not contradict: a moved dot's nearest neighbour after the hop is often a
+different dot, so global NN identities re-wire. **Decision:** the arm is
+evaluated on the local statistic it actually controls; the global one is
+reported for completeness. A live result must not be interpreted through the
+global number alone.
+
+## 9. A first SPACING build created 1 px pairs; it was discarded before logging
+
+The first implementation measured nearest-occupied distance on a raster patch
+that ended exactly at the displacement-window edge, so an anchor one pixel
+outside the window was invisible; movers landed 1.0 px from neighbours — far
+inside the parent's 2.828 px suppression floor. Those files were deleted, the
+EDT is now computed on a margin-extended patch with a conservative padded
+border, and every arm enforces the parent's 2.828 px minimum separation as an
+acceptance floor (unit-tested, including a non-vacuous "the arm must move at
+least one dot" guard, because the broken build had passed the original tests
+by moving nothing). **Decision:** only the corrected builds (sha8 `59029fa7`,
+`6b481dc1`, `0dbab41e`) exist in `releases/` and the ledger; no gate-failed
+artifact is retained.

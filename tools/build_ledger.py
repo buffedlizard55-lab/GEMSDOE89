@@ -42,6 +42,11 @@ RECOMMEND = {
     "r15": "SLOT 2 only if r10 lands >= 0.2878 (+0.010); otherwise HOLD.",
     "r15s": "ALTERNATE / fallback twin for the same slot as r10 if the human prefers the slope definition.",
 }
+SPACING_RECOMMEND = {
+    "strike3": "SLOT 1: line-like-truth geometry, mover-anchor strike alignment 0.76->0.94; a result inside +/-0.010 closes SPACING.",
+    "pd3": "SLOT 2 only if strike3 is informative; isotropic control that separates de-clustering from strike orientation.",
+    "lat3-t1p5": "HOLD / structure-agnostic control; submit only to bracket a positive spacing result.",
+}
 
 
 def collapse(rows):
@@ -78,6 +83,38 @@ def main():
     for rep in mine:
         value = rep["value"]
         s = rep["stats"]
+        axis = rep.get("axis", "RELIEF")
+        if axis == "RELIEF":
+            predicted_change = PREDICTIONS[value]
+            form_note = FORM_NOTES[value]
+            notes = (
+                f"source class {s['source_class']} -> target class {s['target_class']}; "
+                f"added dots on structure (mean |grad det_elev| {s['added_mean_gradient']:.1f} vs parent "
+                f"{s['parent_mean_gradient']:.1f}); mean displacement {s['mean_displacement_px']:.0f} px. "
+                + RECOMMEND[value]
+            )
+        elif axis == "SPACING":
+            predicted_change = rep["predicted_change"]
+            form_note = rep["form_note"]
+            clear = (f"new pixels d_cat>=3px (min {s['moved_min_clearance_after_px']:.2f})"
+                     if s.get("moved_min_clearance_after_px") is not None
+                     else "no dots moved")
+            bits = [
+                f"matched count {s['n_dots']}; {s['n_changed']} dots moved "
+                f"({s['pct_changed']:.1f}%), mean hop {s['mean_displacement_px']:.1f} px "
+                f"(max {s['max_displacement_px']:.0f})",
+                f"NN median {s['nn_median_before']:.2f}->{s['nn_median_after']:.2f} px, "
+                f"frac NN<3px {s['frac_nn_below3_before']:.3f}->{s['frac_nn_below3_after']:.3f}",
+                clear + f"; 1km block CV {s['block_cv_before']:.3f}->{s['block_cv_after']:.3f}",
+            ]
+            if "mover_anchor_alignment_after" in s:
+                bits.append(
+                    f"mover-anchor strike alignment "
+                    f"{s['mover_anchor_alignment_before']:.3f}->"
+                    f"{s['mover_anchor_alignment_after']:.3f}")
+            notes = "; ".join(bits) + ". " + SPACING_RECOMMEND[value]
+        else:
+            raise ValueError(f"unknown axis {axis!r} in build report {rep['id']}")
         row = {
             "id": rep["id"],
             "site": "GEMSDOE89",
@@ -91,20 +128,15 @@ def main():
             "sha256": rep["files"]["sha256"],
             "sha256_zeros": rep["files"]["sha256_zeros"],
             "parent": rep["parent"],
-            "axis": "RELIEF",
+            "axis": axis,
             "value": value,
             "status": "BUILT",
             "receipt": "N",
             "receipt_score": "",
-            "predicted_change": PREDICTIONS[value],
+            "predicted_change": predicted_change,
             "date": "2026-10-23",
-            "form_note": FORM_NOTES[value],
-            "notes": (
-                f"source class {s['source_class']} -> target class {s['target_class']}; "
-                f"added dots on structure (mean |grad det_elev| {s['added_mean_gradient']:.1f} vs parent "
-                f"{s['parent_mean_gradient']:.1f}); mean displacement {s['mean_displacement_px']:.0f} px. "
-                + RECOMMEND[value]
-            ),
+            "form_note": form_note,
+            "notes": notes,
             "source": "GEMSDOE89",
         }
         new_rows.append(row)

@@ -2,7 +2,7 @@
  "note": "REPORT ONLY. None of these instruments can pass or fail a release.",
  "catalogue_hide_and_recover": {
   "seed": 20261023,
-  "holdout_fraction": 0.30,
+  "holdout_fraction": 0.3,
   "n_withheld": 18296,
   "parent_recall": 0.0384,
   "r10": 0.0356,
@@ -15,7 +15,7 @@
  "surrogate_dti_catalogue_as_truth": {
   "parent": 0.0067,
   "r10": 0.0062,
-  "r15": 0.0060,
+  "r15": 0.006,
   "r15s": 0.0059,
   "random_null": 0.0,
   "caveat": "The catalogue is masked pixel-exactly in live scoring, so this is a counterfactual coverage measure, not a score estimate."
@@ -33,5 +33,65 @@
   "r15": 1.887,
   "r15s": 1.704,
   "caveat": "Not comparable to the 0.51-0.59 figure quoted in the brief nor to the 0.62-0.76 reported upstream; at ~0.73 dots per block Poisson noise alone gives ~1.2. Reported, never used as a target (IRREGULARITIES.md item 6)."
+ },
+ "spacing_session_2026_10_23": {
+  "note": "REPORT ONLY. Every moved dot lands at d_cat>=3px (kernel credit 0 against the catalogue), so like the RELIEF session the hide-and-recover proxy sees only the removal half; its deltas are structural artefacts, not evidence (IRREGULARITIES item 8).",
+  "catalogue_hide_and_recover": {
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "n_withheld": 18296,
+   "parent_recall": 0.03842369916921731,
+   "pd3": 0.03257542632269349,
+   "strike3": 0.032302142544818536,
+   "lat3-t1p5": 0.023174464363795364,
+   "random_null": 0.0,
+   "wilson95": {
+    "lat3-t1p5": [
+     0.018809978291765807,
+     0.02753895043582492
+    ],
+    "pd3": [
+     0.027427505978338276,
+     0.0377233466670487
+    ],
+    "strike3": [
+     0.027175102455249366,
+     0.03742918263438771
+    ]
+   }
+  },
+  "surrogate_dti_catalogue_as_truth": {
+   "parent": 0.006709118968955279,
+   "pd3": 0.005688247549677636,
+   "strike3": 0.005613384777543623,
+   "lat3-t1p5": 0.003980451379957699,
+   "deltas": {
+    "lat3-t1p5": -0.0027286675889975796,
+    "pd3": -0.0010208714192776426,
+    "strike3": -0.0010957341914116557
+   },
+   "caveat": "Catalogue pixels are masked in live scoring; counterfactual coverage measure, never a score estimate."
+  },
+  "block_density_cv_1km": {
+   "parent": 1.8704320876262501,
+   "pd3": 1.6702022415620355,
+   "strike3": 1.7992256783588503,
+   "lat3-t1p5": 1.8508620380005816,
+   "caveat": "Same definition and non-comparability caveat as the RELIEF session (IRREGULARITIES item 6)."
+  },
+  "strike_alignment_abs_cos_with_local_strike": {
+   "parent_global_nn_pairs": 0.7665810743589506,
+   "pd3_global": 0.7634186442932106,
+   "strike3_global": 0.6728165845370211,
+   "strike3_mover_anchor_before": 0.7636364383373325,
+   "strike3_mover_anchor_after": 0.9440441417238875,
+   "note": "Global and local statistics move in opposite directions for strike3 by construction; the mover-anchor quantity is the one the arm controls (IRREGULARITIES item 8)."
+  },
+  "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature AUC 0.814 (threshold 0.90)",
+  "sgmc_control": {
+   "status": "NOT RUN",
+   "reason": "The SGMC control raster (ext_derived_sgmc_faults_100m_u8, sha256 643cbe99...) was not restored this session. It is report-only and cannot gate a file, so it was deferred rather than fetched; restore it via registry/data_manifest.json if the human wants the control.",
+   "impact_on_decisions": "none - no variant depends on it"
+  }
  }
 }

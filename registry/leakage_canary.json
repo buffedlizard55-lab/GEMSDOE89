@@ -21,6 +21,20 @@
    "flag": false
   }
  },
- "verdict": "PASS: no single feature exceeds the canary threshold",
- "note": "REPORT ONLY. AUC close to 0.5 means the feature carries no catalogue information by itself; a value above 0.90 would mean the feature nearly identifies catalogue pixels and must not be used."
+ "verdict": "PASS: no feature exceeds the 0.90 threshold (strike-orientation features included 2026-10-23)",
+ "note": "REPORT ONLY. AUC close to 0.5 means the feature carries no catalogue information by itself; a value above 0.90 would mean the feature nearly identifies catalogue pixels and must not be used.",
+ "features_strike_session": {
+  "strike_cos2theta": {
+   "auc": 0.185579107665991,
+   "flag": false
+  },
+  "strike_sin2theta": {
+   "auc": 0.4602467800921831,
+   "flag": false
+  },
+  "abs_uy": {
+   "auc": 0.8144208545871134,
+   "flag": false
+  }
+ }
 }

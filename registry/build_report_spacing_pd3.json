@@ -1,0 +1,250 @@
+{
+ "id": "h33-h33-2-b2-spacing-pd3-20261023-6b481dc1",
+ "value": "pd3",
+ "axis": "SPACING",
+ "spec": {
+  "kind": "poisson_disk",
+  "r_min": 3.0,
+  "window": 6.0,
+  "note": "Poisson-disk: greedy <3px violators move to the farthest free pixel within 6px"
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "stats": {
+  "n_dots": 37654,
+  "n_changed": 9215,
+  "pct_changed": 24.47283157167897,
+  "mean_displacement_px": 5.5664595819058915,
+  "median_displacement_px": 5.830951894845301,
+  "max_displacement_px": 6.0,
+  "nn_min_before": 2.8284271247461903,
+  "nn_min_after": 2.8284271247461903,
+  "nn_median_before": 3.0,
+  "nn_median_after": 4.123105625617661,
+  "nn_mean_before": 3.7350977393055036,
+  "nn_mean_after": 4.696279625465774,
+  "frac_nn_below3_before": 0.3031550432888936,
+  "frac_nn_below3_after": 0.0008764009135815584,
+  "frac_nn_eq_2p828_before": 0.3031550432888936,
+  "frac_nn_eq_2p828_after": 0.0008764009135815584,
+  "block_cv_before": 1.8704320876262501,
+  "block_cv_after": 1.6702022415620355,
+  "strike_alignment_before": 0.7665810743589506,
+  "strike_alignment_after": 0.7634186442932106,
+  "n_greedy_violators": 9260,
+  "n_anchors": 28394,
+  "r_min_px": 3.0,
+  "moved_min_clearance_after_px": 3.0,
+  "moved_min_clearance_before_px": 2.23606797749979,
+  "inherited_dots_below_3px": 1611,
+  "seconds": 1.8,
+  "mover_anchor_alignment_before": 0.7635151833792687,
+  "mover_anchor_alignment_after": 0.5575123912588802
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-spacing-pd3-20261023-6b481dc1.tif",
+  "zeros": "releases/h33-h33-2-b2-spacing-pd3-20261023-6b481dc1-zeros.tif",
+  "sha256": "6b481dc1813b84fe22a21943cbf221f53e9367b9c0dd805cec53302eabf9f713",
+  "sha256_zeros": "eaf65e714f5a51be0f52b83eeb75135bd01ec5d471eb0549efc74129d95105fe",
+  "sha8": "6b481dc1"
+ },
+ "gates": {
+  "nan": {
+   "ok": false,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-pd3-20261023-6b481dc1.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": false,
+     "detail": "6b481dc1813b84fe"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": false,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-pd3-20261023-6b481dc1-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": false,
+     "detail": "eaf65e714f5a51be"
+    }
+   ]
+  },
+  "twins_identical_mask": true
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03257542632269349,
+   "ci95_halfwidth": 0.005147920344355211,
+   "ci95": [
+    0.027427505978338276,
+    0.0377233466670487
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.005688247549677636,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0,
+  "model_inputs": {
+   "moved_dots": 9215,
+   "moved_mean_catalogue_kernel_before": 0.0047380415582532935,
+   "moved_mean_catalogue_kernel_after": 0.0,
+   "moved_frac_within_kernel_of_catalogue_before": 0.027021161150298425,
+   "moved_frac_within_kernel_of_catalogue_after": 0.0,
+   "pays_threshold_at_parent_dti": 0.05556,
+   "parent_min_clearance_px": 2.23606797749979,
+   "surrogate_dti_delta": -0.0010208714192776426
+  }
+ },
+ "predicted_change": "+0.003 (MODEL; band -0.016..+0.025). 9215 dots de-clustered; per-dot swing -0.10..+0.15 kernel units at c=1.78e-5. No-evidence outcome expected.",
+ "form_note": "R0 h33-h33-2-b2 + SPACING pd3: 9215/37654 dots (24.5%) de-clustered to NN>=3px, hops<=6px, count fixed, dcat>=3px; pred +0.003"
+}

@@ -1,22 +1,48 @@
-# SUBMIT — session GEMSDOE89
+# SUBMIT — session GEMSDOE89, SPACING (2026-10-23)
 
 The human submits from their own registered account. Nothing here logs in,
 scrapes, or uploads. One file per slot; the NaN-outside twin is the one to
 upload (the zeros twin is the fallback and scores identically per ledger
 history).
 
-## Slot 1 (primary)
+## Slot 1 (primary) — along-strike re-spacing
 
 | field | value |
 |---|---|
-| **file** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` |
-| **name** | `h33-h33-2-b2-relief-r10-20261023-366c87ca` |
-| **sha256** | `366c87ca620402158cfbbf4911ed8abc8ba2da34f198694c9df7c5ea640ab335` |
-| **fallback** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca-zeros.tif` (`e776fc20873321f7…`) |
-| **form note** (122 chars) | `R0 h33-h33-2-b2 + RELIEF r10: 3765/37654 dots (10%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.003` |
-| **predicted** | +0.003 MODEL (band −0.012 … +0.018) |
+| **file** | `releases/h33-h33-2-b2-spacing-strike3-20261023-59029fa7.tif` |
+| **name** | `h33-h33-2-b2-spacing-strike3-20261023-59029fa7` |
+| **sha256** | `59029fa7cbb9832c8ab59d1e366206f54a878420622ec62c824b40463479dd44` |
+| **fallback** | `…-59029fa7-zeros.tif` (`d42e8531df011c9f…`) |
+| **form note** (127 chars) | `R0 h33-h33-2-b2 + SPACING strike3: 9092/37654 dots (24.1%) re-spaced along det_elev strike, hops<=5px, count fixed; pred +0.004` |
+| **predicted** | +0.004 MODEL (band −0.013 … +0.024) |
 
-Format receipt — all gates pass, re-read from disk after writing:
+## Slot 2 (conditional) — isotropic Poisson-disk de-clustering
+
+Submit only if slot 1 is informative (any |Δ| ≥ 0.010).
+
+| field | value |
+|---|---|
+| **file** | `releases/h33-h33-2-b2-spacing-pd3-20261023-6b481dc1.tif` |
+| **name** | `h33-h33-2-b2-spacing-pd3-20261023-6b481dc1` |
+| **sha256** | `6b481dc1813b84fe22a21943cbf221f53e9367b9c0dd805cec53302eabf9f713` |
+| **fallback** | `…-6b481dc1-zeros.tif` (`eaf65e714f5a51be…`) |
+| **form note** (126 chars) | `R0 h33-h33-2-b2 + SPACING pd3: 9215/37654 dots (24.5%) de-clustered to NN>=3px, hops<=6px, count fixed, dcat>=3px; pred +0.003` |
+| **predicted** | +0.003 MODEL (band −0.016 … +0.025) |
+
+## Slot 3 (hold / control) — partial lattice
+
+Submit only to bracket a positive spacing result.
+
+| field | value |
+|---|---|
+| **file** | `releases/h33-h33-2-b2-spacing-lat3-t1p5-20261023-0dbab41e.tif` |
+| **name** | `h33-h33-2-b2-spacing-lat3-t1p5-20261023-0dbab41e` |
+| **sha256** | `0dbab41e2e67e92b5cad68c3dfde0d59c254c0c5b4b2eea511860f7e454d522a` |
+| **fallback** | `…-0dbab41e-zeros.tif` (`245f60882240afa0…`) |
+| **form note** (120 chars) | `R0 h33-h33-2-b2 + SPACING lat3-t1p5: 4642/37654 dots (12.3%) onto 3px lattice nodes, hops<=4px, count fixed; pred -0.001` |
+| **predicted** | −0.001 MODEL (band −0.008 … +0.012) |
+
+## Format receipt — every gate passes, files re-read from disk after writing
 
 | gate | result |
 |---|---|
@@ -24,47 +50,29 @@ Format receipt — all gates pass, re-read from disk after writing:
 | grid contract vs `sample_submission.tif` (shape, pixel scale, tiepoint, geokeys, EPSG:32611) | pass |
 | dtype float32, single band, shape 3730×3292 | pass |
 | values in [0,1] | pass (all dots exactly 1.0, all else 0 or NaN) |
-| no NaN inside footprint; NaN outside | pass |
-| dot count 37,654 and mask identity | pass |
+| no NaN inside footprint; NaN outside (NaN twin) / zeros outside (fallback) | pass |
+| dot count 37,654 and mask identity; twins carry identical masks | pass |
 | zero catalogue mass | pass |
-| added-dot clearance from catalogue ≥ 3.00 px | pass by construction (measured min 3.00 px) |
+| new-pixel clearance from catalogue ≥ 3.00 px (measured min 3.00); parent's inherited 2.236 px ring kept per IRREGULARITIES item 2 | pass |
+| no new pair closer than the parent's 2.828 px floor | pass |
 | sha256 not already in the ledger | pass |
-| twins carry an identical dot mask | pass |
 
-## Slot 2 (conditional)
+## Prior-session files
 
-Submit only if slot 1 scores **≥ 0.2878** (parent 0.2778 + 0.010).
-
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif` |
-| **name** | `h33-h33-2-b2-relief-r15-20261023-6aa774ce` |
-| **sha256** | `6aa774ce21fe10b33672fc4401822eddfc60fc010e7371db6058fd9c38cebd00` |
-| **fallback** | `…-6aa774ce-zeros.tif` (`e3b6c2ecfb65c109…`) |
-| **form note** (122 chars) | `R0 h33-h33-2-b2 + RELIEF r15: 5648/37654 dots (15%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.004` |
-| **predicted** | +0.004 MODEL (band −0.017 … +0.027) |
-
-## Slot 3 (alternate, not sequential)
-
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-relief-r15s-20261023-5f0ae851.tif` |
-| **name** | `h33-h33-2-b2-relief-r15s-20261023-5f0ae851` |
-| **sha256** | `5f0ae8512e44940bf02e9fecba94af91d9119450abd45d0b6074a7fc40f0a796` |
-| **fallback** | `…-5f0ae851-zeros.tif` (`3b2cbfd13dd4d3fa…`) |
-| **form note** (111 chars) | `R0 h33-h33-2-b2 + RELIEF r15s: 5648/37654 dots (15%) high->mid slope class, count fixed, dcat>=3px; pred +0.001` |
-| **predicted** | +0.001 MODEL (band −0.007 … +0.011) |
+The three RELIEF variants (`…-relief-r10/r15/r15s…`, 2026-10-23) remain in
+`releases/` and in the ledger, unscored. Do not upload a spacing file and a
+relief file in the same week without checking the rolling quota.
 
 ## Before you upload (2 minutes)
 
 ```
 export GEMSDOE_DATA=/path/to/verified/inputs      # parent, template, catalogue, features
-python -m pytest tests -q                          # 15 tests
+python -m pytest tests -q                          # 21 tests
 python tools/validate_raster.py                    # re-runs every gate on every release
 python tools/check_ledger.py                       # ledger <-> disk, no duplicate triples
-sha256sum releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif   # must start 366c87ca
+sha256sum releases/h33-h33-2-b2-spacing-strike3-20261023-59029fa7.tif   # must start 59029fa7
 ```
 
-Then fill `receipt_score` and `receipt_date` in `ledger/submissions.csv` from the
-submission-page receipt. Until that exists the file's score is **CLAIM only** —
-this repo currently holds no receipt for any file, including the parent's 0.2778.
+Then fill `receipt_score` and `receipt_date` in `ledger/submissions.csv` from
+the submission-page receipt. Until that exists the file's score is **CLAIM
+only** — this repo holds no receipt for any file, including the parent's 0.2778.
