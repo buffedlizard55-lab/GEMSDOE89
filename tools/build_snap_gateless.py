@@ -80,6 +80,10 @@ def verify_inputs(manifest):
     root, paths = data_paths(manifest)
     report = {}
     for f in manifest["files"]:
+        if f.get("unverified"):
+            report[f["id"]] = {"present": False, "ok": True,
+                               "skipped": "unverified report-only pin (IRREGULARITIES item 8)"}
+            continue
         p = paths[f["id"]]
         if not p.exists():
             report[f["id"]] = {"present": False, "ok": False}

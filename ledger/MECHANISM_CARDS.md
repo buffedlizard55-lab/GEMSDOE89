@@ -1,16 +1,166 @@
-# Mechanism cards — RELIEF axis, session GEMSDOE89
+# Mechanism cards — session GEMSDOE89 (`SPACING` + `RELIEF` + `SNAP`)
 
-Parent for every card: **R0 = h33-h33-2-b2** (GEMSDOE32 lineage; 37,654 unit-mass
-dots, none within 2 px of the catalogue; live 0.2778 = **CLAIM**, no receipt in
-this repo). All three variants hold the dot count at exactly 37,654 and change
-only *which relief class the mass sits in*.
+Parent for every card: **R0 = `h33-h33-2-b2`** (`GEMSDOE32` lineage; 37,654 unit-mass
+dots, zero on catalogue and zero at `d_cat <= 2.0 px`; rebuilt byte-identically from
+`scored_h19_5.tif` via `tools/rebuild_r0.py`, matching `c55bafc4…` zeros and `baeae321…`
+NaN; owner-reported live **0.2778 = CLAIM**, no submission receipt in this repo).
 
-Written for a structural geologist. Scores quoted are live DTI values; nothing
-here is a prediction expressed as a score.
+Written for a structural geologist. Every projection below is labelled **MODEL** and
+every local holdout measurement is labelled **PROXY**; neither is a live score. Any
+live public-leaderboard change with `|Δ| < 0.01` counts as **no evidence** (public
+chunks cover only part of the region:
+https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
 
 ---
 
-## The measurement the whole axis rests on
+# Part I — `SPACING` axis (`alongstrike` · `poisson` · `lattice`)
+
+## Physical and algebraic premise of the `SPACING` experiment
+
+1. **How R0 actually spaces dots.** R0 is `dot_thin(h19_5, r_min=2.8) & (d_cat > 2.0)` on
+   the 121,131-px `h19_5` corroborated ridge skeleton (99.9 % 1-px wide). `dot_thin`
+   starts a breadth-first search at the **northernmost (`min y`) pixel** of each
+   8-connected ridge component and greedily suppresses Euclidean radius `2.8 px`.
+   Because `sqrt(2^2 + 2^2) = 2.828 > 2.8`, **11,415 of R0's 37,654 dots (30.3 %)** sit
+   at `d = 2.828 px` — *inside* the `R = 300 m` (`3.0 px`) triangular DTI kernel
+   (`k(d) = max(0, 1 - d/3)`:
+   https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) — while
+   leaving asymmetric uncovered remainders (`<= 2.8 px`) at southern and eastern fault
+   terminations.
+2. **Survey uncertainty vs centerline fidelity.** GeoDAWN Area 2 aeromagnetics and
+   radiometrics were flown at **400 m line spacing, 150–200 m above terrain**, so
+   potential-field lineament positions carry cross-strike uncertainty comparable to the
+   300 m kernel radius
+   (https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7).
+   New-fault truth includes unmapped fault traces and newly mapped geometry of existing
+   systems, with known USGS/INGENIOUS pixels masked pixel-exactly
+   (https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516,
+   https://community.drivendata.org/t/where-do-you-draw-the-line/11536).
+3. **Strict single-variable isolation.** Spacing is only geometrically distinct on
+   extended multi-dot strands. All three `SPACING` variants freeze R0's 29,413 dots on
+   short (`< 6`-dot) fragments and the 1,611 inherited `2 < d_cat < 3 px` collar dots,
+   and re-space only the **834 major fault strands** (`>= 6` R0 dots at `d_cat >= 3.0 px`,
+   trace length `>= ~1.8 km`, holding **8,241 R0 dots = 21.89 %** of R0). Every strand
+   keeps its **exact integer R0 dot budget `k_c`**, holding total count (`37,654`),
+   5 km block-density CV (`0.8991 -> 0.8984..0.9001`), and elevation-tercile shares
+   (`< 0.18 %` drift) invariant. At fixed mass `S = 37,654` (`ΔS = 0`),
+   `ΔDTI ≈ ((1 - 0.2·DTI)·ΔT + 0.2·DTI·ΔM) / D ≈ (0.944·ΔT + 0.056·ΔM) / D`.
+
+---
+
+## Card S1 — `alongstrike` (`h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a`)
+
+**Hypothesis.** Unmapped Quaternary and range-bounding fault segments captured by `h19_5`
+lie within `<= 100 m` (`1 px`) of the `h19_5` ridge centerline, and R0 leaks kernel
+credit at southern/eastern strand terminations and Y-splays because its row-major BFS
+starts arbitrarily at northern component pixels. Equalizing stationing along strike on
+the 1-px ridge skeleton increases truth kernel credit `T` at zero mass cost.
+
+**Mechanism.** On each of the 834 major strands, graph-geodesic arc-length `s` is
+computed between diameter endpoints, `k_c` stations are initialized at uniform geodesic
+quantiles `(j + 0.5)·L / k_c` (preferring `r >= 3.0 px`, fallback `2.8 px`), and 1-swap
+local search maximizes exact DTI kernel coverage `T` on the strand. Relocates **5,222
+dots (13.87 %; symmetric diff 27.74 %)** by a mean of **1.17 px (117 m)** strictly along
+`h19_5`, lifting mean kernel coverage on the 834 strands from **0.71014 to 0.71952**
+(+280 kernel-credit units).
+
+**The non-fault process that could mimic it.** Erosional ridge crests, tilted volcanic
+flow margins, and linear tonal contacts also form continuous 1-px `h19_5` skeletons.
+Uniform geodesic stationing distributes kernel height more evenly along *every* long
+lineament, whether tectonic scarp or erosional hogback; if most `>= 1.8 km` unmasked
+`h19_5` strands are lithologic/erosional strike ridges rather than faults, the extra
+strand coverage earns zero truth credit (`ΔT ≈ 0`).
+
+**Predicted sign and size (MODEL).** Central **+0.002**, band **−0.003 … +0.006**
+(calibrated from off-catalogue strand jitter sensitivity: `+0.0017` at `σ_⊥ = 0 px`,
+`−0.0006` at `σ_⊥ = 0.8 px`, `−0.0016` at `σ_⊥ = 2.2 px`). A **no-evidence outcome
+(`|Δ| < 0.01`) is expected** because R0's BFS already captures `0.7101 / 0.7195 = 98.7 %`
+of the along-strike optimum on those 834 strands.
+
+**Falsifier.** A live change inside `±0.010` confirms that 1-D phase/termination defects
+in `dot_thin(2.8)` cost less than 0.01 DTI and need no further slot expenditure. A gain
+`>= +0.010` would imply test faults concentrate disproportionately at strand tips and
+relay terminations where northern-root BFS left `2–3 px` overhangs.
+
+---
+
+## Card S2 — `poisson` (`h33-h33-2-b2-spacing-poisson-20261023-ff167173`)
+
+**Hypothesis.** Because GeoDAWN Area 2 was flown at 400 m line spacing (150–200 m AGL)
+and Basin-and-Range Quaternary fan scarps commonly step `100–300 m` basinward of the
+steepest gravity/magnetic basement gradient, true unmapped fault traces are laterally
+displaced from `h19_5` centerlines. Staggering each strand's `k_c` dots in a 2-D
+Poisson-disk blue-noise arrangement across a `±150 m` (`d <= 1.5 px`) uncertainty
+corridor widens cross-strike capture while eliminating `< 3.0 px` kernel crowding.
+
+**Mechanism.** Within each active strand's Voronoi corridor (`d <= 1.5 px`, `d_cat >= 3.0 px`),
+seeded Bridson/dart-throwing packing (`r_disk = 3.4 -> 3.2 -> 3.0 -> 2.8 px`, `seed = 20261023`)
+relocates **7,639 dots (20.29 %; symmetric diff 40.57 %)** by a mean of **1.53 px (153 m)**.
+Crowded `< 3.0 px` nearest-neighbour pairs drop from **11,415 to 8,119**, and coverage of
+independent off-catalogue USGS SGMC faults (`d_cat > 3.0 px`,
+https://doi.org/10.3133/ds1052) rises from **0.08882 to 0.09016** (**PROXY**), at the
+direct cost of reducing on-centerline `h19_5` coverage from **0.71014 to 0.51347**.
+
+**The non-fault process that could mimic it.** Alluvial-fan distributary channels,
+shoreline terraces (Lake Lahontan), and pediment-fan contacts parallel range-front
+lineaments at `100–300 m` offset; furthermore, SGMC 1:500k–1:250k compilation traces carry
+cartographic generalization offsets of `200–500 m` that inflate off-ridge **PROXY**
+overlap even when actual 100 m fault scarps sit directly on the topographic/geophysical
+break.
+
+**Predicted sign and size (MODEL).** Central **−0.010**, band **−0.032 … +0.004**.
+Under `k(d) = 1 - d/3`, stepping `1–1.5 px` off a 1-px ridge costs `0.33–0.50` of peak
+kernel height whenever true faults sit within `<= 1.5 px` of `h19_5` (`−0.022` at
+`σ_⊥ = 0.8 px`, `−0.012` at `σ_⊥ = 1.5 px`, `−0.005` at `σ_⊥ = 2.2 px`); the sign turns
+positive only if unmapped test faults sit systematically `>= 250 m` off `h19_5`.
+
+**Falsifier.** A live score drop `<= −0.010` falsifies the wide-corridor uncertainty
+hypothesis and proves `h19_5` pins test faults tighter than `~150 m` (validating narrow
+ridge emission). Conversely, a live gain `>= +0.010` proves systematic cross-strike
+offset between `h19_5` and unmapped test faults and opens 2-D corridor emission.
+
+---
+
+## Card S3 — `lattice` (`h33-h33-2-b2-spacing-lattice-20261023-454c9098`)
+
+**Hypothesis.** For radial triangular kernels of radius `R = 3.0 px`, periodic
+equilateral-triangular (hexagonal) disk packing maximizes minimum 2-D coverage per dot
+(Kershner covering theorem). Sampling each active fault corridor (`d <= 2.0 px`) on an
+isometric hexagonal lattice (`pitch a = 3.5 px`, row step `3.031 px`, staggered rows)
+eliminates stochastic gaps left by random Poisson-disk dart throwing while maintaining
+cross-strike corridor reach.
+
+**Mechanism.** Candidate corridor pixels (`d <= 2.0 px`, `d_cat >= 3.0 px`) in each of
+the 834 major strands are ranked by distance to the global hexagonal lattice (with minor
+`0.15 × d_ridge` centerline tie-breaking and inter-dot separation `>= 3.0 -> 2.8 px`),
+relocating **7,305 dots (19.40 %; symmetric diff 38.80 %)** by a mean of **1.54 px**.
+Achieves the largest reduction in `< 3.0 px` pair crowding (**11,415 -> 7,667**),
+retains higher centerline coverage than `poisson` (**0.55832** vs `0.51347`), and raises
+off-catalogue SGMC coverage to **0.08928** (**PROXY**). Unlike `13GEMSDOE`
+(`r13-lattice-s5`, live `0.0904` CLAIM), which placed a blind regional lattice across
+the entire basin, this arm confines 100 % of mass to R0's exact fault corridors and
+per-corridor dot budgets.
+
+**The non-fault process that could mimic it.** A globally phase-fixed Cartesian/hexagonal
+lattice beats or loses to strike-following chains depending on accidental alignment
+between Great Basin NNE-striking (`010°–030°`) fault azimuths and the `0° / 60° / 120°`
+hexagonal axes; an apparent difference vs `poisson` could reflect azimuth aliasing on
+`060°` Humboldt-structural-zone segments rather than periodic covering optimality.
+
+**Predicted sign and size (MODEL).** Central **−0.007**, band **−0.025 … +0.003**
+(`−0.017` at `σ_⊥ = 0.8 px`, `−0.008` at `σ_⊥ = 1.5 px`, `−0.001` at `σ_⊥ = 2.2 px`).
+
+**Falsifier.** Do not submit in the same week as `poisson`: both test lateral corridor
+spreading. If `poisson` drops `<= −0.010`, `lattice` is retired without spending a slot.
+If `poisson` gains `>= +0.010`, `lattice` tests whether periodic hexagonal covering adds a
+further `>= +0.005` over stochastic blue-noise packing; otherwise periodic grid phase adds
+nothing on curvilinear faults.
+
+---
+
+# Part II — Prior `RELIEF` axis cards (preserved from PR #2)
+
+## The measurement the `RELIEF` axis rests on
 
 Equal-area terciles of `det_elev` (band 12 of the pinned feature stack; cuts at
 −142.9 m and +38.8 m), measured over the 5,164,312-px relief domain:
@@ -21,148 +171,34 @@ Equal-area terciles of `det_elev` (band 12 of the pinned feature stack; cuts at
 | 1 | piedmont | 1,721,437 | 24,711 | **14.35** | 15,742 | 9.14 | 1.03 |
 | 2 | range front | 1,721,437 | 17,684 | 10.27 | 14,204 | 8.25 | **1.30** |
 
-The catalogue is roughly 1.4× denser in the piedmont than in the range front,
-yet R0 carries 1.30× *more* mass per unit catalogue density in the range front
-than proportional allocation would give, and only 0.67× in the basin.
+At R0's claimed `0.2778`, an isolated dot must earn kernel credit `> 0.2 × DTI = 0.0556`
+to pay for itself; every `RELIEF` variant writes added dots onto ground with
+`|∇det_elev| >= 12.2` (50th percentile of parent dots).
 
-**The threshold that decides everything.** With the derived algebra
-DTI = T / (0.2T + 0.2(S−M) + 0.8|G|), removing or adding one dot of kernel
-credit *k* changes DTI in proportion to (k − 0.2·DTI). At the parent's claimed
-0.2778 that break-even credit is **0.0556** — a dot must lie within ≈2.8 px
-(280 m) of a truth pixel to pay for itself. A dot placed *uniformly at random*
-inside a class earns the class-average credit:
+## Card R1 — `r10` (`h33-h33-2-b2-relief-r10-20261023-366c87ca`)
+- **Hypothesis:** Moving 10 % of R0 (3,765 dots) from over-weighted range-front (`class 2`) to structured piedmont ground (`class 1`) raises credit per unit mass.
+- **Mechanism:** Quaternary basin-margin scarps are preserved and mappable in piedmont fans, whereas range-interior DEM edges frequently reflect bedrock fracture/contact grain.
+- **Non-fault mimic:** Fan-head incisive channels, bar-and-swale roughness, or mapping-exposure bias in the piedmont catalogue prior.
+- **Predicted sign and size (MODEL):** Central **+0.003**, band **−0.012 … +0.018**.
+- **Falsifier:** Live delta inside `±0.010` closes `RELIEF`; `< −0.010` proves parent ridge placement outweighs class reallocation.
 
-| class | P(pixel within 3 px of a catalogue px) | E[k] random placement | pays (>0.0556)? |
-|---|---|---|---|
-| basin | 0.069 | 0.036 | no |
-| piedmont | 0.097 | **0.050** | no — but closest |
-| range front | 0.070 | 0.036 | no |
-| flat-slope tercile | 0.049 | 0.025 | no |
-| mid-slope tercile | 0.105 | 0.054 | no — but closest |
+## Card R2 — `r15` (`h33-h33-2-b2-relief-r15-20261023-6aa774ce`)
+- **Hypothesis:** 1.5× dose (`5,648` dots, 15 %) of `r10` along the same range-front → piedmont transfer.
+- **Mechanism:** Linear dose-response check (`Δr15 ≈ 1.5 × Δr10`) conditional on `r10 >= +0.010`.
+- **Non-fault mimic:** Stripping 15 % from range fronts may remove non-redundant range-bounding scarps nonlinearly.
+- **Predicted sign and size (MODEL):** Central **+0.004**, band **−0.017 … +0.027**.
+- **Falsifier:** Failure of `r15` to exceed `r10` when `r10 >= +0.010` falsifies linear class-allocation gain.
 
-Two conclusions follow, and they bound every prediction below. (i) No relief
-class clears the bar on average, so a relief move can only win if the *added*
-dots land on structure inside the class rather than at random. (ii) The
-within-class placement rule therefore carries as much weight as the between-class
-move, which is why every variant writes its added dots only onto ground at least
-as structured as a typical parent dot (mean |∇det_elev| at parent dots = 13.6;
-the write-in threshold is the 50th percentile, 12.2).
+## Card R3 — `r15s` (`h33-h33-2-b2-relief-r15s-20261023-5f0ae851`)
+- **Hypothesis:** Defining piedmont by `det_elev_slope` terciles (band 19; cuts `1.8` and `8.1`) and shifting 15 % (`5,648` dots) high-slope → mid-slope isolates slope transition from elevation band.
+- **Mechanism:** Mid-slope fans carry 15.34 catalogue px / 1000 px vs 12.98 in high-slope (1.18× contrast).
+- **Non-fault mimic:** Slope strongly covaries with DEM edge magnitude, risking a local placement confound (`mean disp = 49 px`).
+- **Predicted sign and size (MODEL):** Central **+0.001**, band **−0.007 … +0.011**.
+- **Falsifier:** Moving `>= +0.010` when `r10` is null points to slope-conditioned edge placement rather than geomorphic relief class.
 
 ---
 
-## Card 1 — `r10` (primary, slot 1)
-
-**Hypothesis.** R0 over-weights the range-front tercile by 30 % relative to the
-known-fault density in that class, and under-weights the piedmont. Moving 10 %
-of the mass (3,765 dots) out of the range-front class and onto structured ground
-inside the piedmont class raises credit per unit mass.
-
-**Mechanism.** In the northern Great Basin, basin-margin faults place Quaternary
-scarps in alluvial-fan deposits, where they are preserved, exposed, and mapped;
-range-interior lineaments are more often bedrock fabric — fractures, lithologic
-contacts, and topographic grain that a DEM-edge-following model detects but that
-does not host a mapped fault trace. R0 was built from such a model, so its
-range-front dots should carry a higher non-fault fraction per unit mass than its
-piedmont dots. Rebalancing toward measured mappable-fault density should raise
-the credit earned per dot.
-
-**The non-fault process that could mimic it.** DEM edge density *peaks* at range
-fronts and in bedrock, so R0's range over-weighting may reflect terrain
-roughness rather than a fault-distribution error. If the added piedmont dots
-land on fan-head channels, bar-and-swale, or the fan/bedrock contact — all of
-which produce strong edges and are not faults — the move adds false-positive
-mass in a *different* class and the gain disappears. A second mimic: catalogue
-density is a *mapping-effort* prior (where geologists had exposure and reason to
-map), not a fault-density measurement.
-
-**Predicted sign and size (MODEL).** Central **+0.003**, band **−0.012 …
-+0.018**. The band is honest, not decorative: it spans u_r (unique credit of a
-removed dot) from 0 to 0.25 and the added dot's credit k_a from 0.10 to 0.35.
-Break-even k_a ranges 0.033 (fully redundant removals) to 0.24 (removals still
-carrying a quarter of a kernel unit). Everything under |Δ| = 0.01 counts as no
-evidence.
-
-**Falsifier.** A live change inside ±0.010 in either direction closes the axis:
-class-level allocation does not transfer, and the mass should stay where the
-parent put it. A live change below −0.010 is stronger evidence still — it says
-that *structure-following placement inside the parent's own class* is worth more
-than *any* class-level reallocation, which also retires the CONCENTRATION
-family. The one result that would open the axis is a change ≥ +0.010, and it
-must exceed the `r15` result's dose-consistency test (roughly 1.5× the r10
-delta) to be believed as mechanism rather than noise.
-
----
-
-## Card 2 — `r15` (slot 2, conditional)
-
-**Hypothesis.** Same as Card 1 at 1.5× the dose: 5,648 dots (15 %) moved
-range-front → piedmont. This is the second point on the dose-response line; on
-its own it is not an independent hypothesis.
-
-**Mechanism.** Identical to Card 1.
-
-**The non-fault process that could mimic it.** Identical, plus one that is
-specific to the higher dose: at 15 % the transfer starts to strip the range
-front below the density the parent's own model chose there, so a *nonlinear*
-loss of unique credit appears that has nothing to do with relief. A linear
-dose-response (r15 ≈ 1.5 × r10) is the evidence that the effect is the class
-move; a super-linear loss is evidence for the opposite.
-
-**Predicted sign and size (MODEL).** Central **+0.004**, band **−0.017 …
-+0.027**. Linearity with r10 is the thing to check, not the absolute number.
-
-**Falsifier.** If r10 lands at or above +0.010 but r15 does *not* exceed it, the
-r10 gain was not the class move (it would be a placement effect that saturates).
-If both land inside ±0.010, the axis is closed and slot 3 should go elsewhere.
-
----
-
-## Card 3 — `r15s` (alternate)
-
-**Hypothesis.** The geomorphic piedmont is a *slope* transition, not an elevation
-band. Redefining the classes by `det_elev_slope` (band 19; cuts 1.8 and 8.1)
-and moving the same 15 % from the high-slope class into the mid-slope class
-tests whether the definition or the direction carries the effect.
-
-**Mechanism.** The mid-slope tercile has the highest known-fault density of any
-partition measured here (15.34 / 1000 px, vs 14.35 for the elevation piedmont),
-consistent with fault scarps being best expressed where fans are steepest.
-The high-slope class it is drawn from (12.98 / 1000 px) is much less depleted
-than the elevation range-front class (10.27), so the density contrast driving
-this move is only 1.18× instead of 1.40×.
-
-**The non-fault process that could mimic it.** Slope is the strongest single
-predictor of DEM edge magnitude, so the slope classes and the model's own
-edge-response are close to collinear — this variant is the most likely of the
-three to be a placement change wearing a relief label. It also has the smallest
-mean displacement (49 px ≈ 4.9 km) because slope classes are interleaved at
-hundreds of metres, so much of the "move" is local re-shuffling.
-
-**Predicted sign and size (MODEL).** Central **+0.001**, band **−0.007 …
-+0.011** — scaled down from r15 by the 1.18/1.40 contrast ratio. This is the
-weakest of the three and is an alternate, not a sequential submission.
-
-**Falsifier.** A large change from this variant while r10/r15 do nothing would
-indicate the effect is slope-driven edge placement, not relief-class allocation,
-and would redirect the session toward the SPACING/placement family rather than
-toward more class work.
-
----
-
-## What these cards deliberately do not claim
-
-* The catalogue proxy (hide-and-recover) **cannot see this axis**. Every added
-  dot is ≥3.0 px from every catalogue pixel by construction, so the proxy can
-  only register the removal half of the move. Its measured deltas
-  (0.0384 → 0.0356 / 0.0348 / 0.0341 recall) are an artefact of that blindness,
-  not evidence against the variants, and they are reported as PROXY only.
-* The catalogue-surrogate DTI (0.0067 → 0.0062 / 0.0060 / 0.0059) is a
-  counterfactual measured on pixels that are *masked* in live scoring. It is not
-  a score and it was not used to set a predicted sign.
-
----
-
-# Mechanism cards — SNAP axis (gateless), session GEMSDOE89 (2026-10-23, branch arena/7efbb7cc)
+# Part III — SNAP axis, gateless `g0p00` corner (`1p0px` · `1p4px` · `2p0px`) — session GEMSDOE89 (branch arena/7efbb7cc, 2026-10-23)
 
 Parent for every card: **R0 = h33-h33-2-b2**, rebuilt byte-exactly this session
 (`tools/rebuild_r0.py` reproduces sha256 `c55bafc4…` from the mask; 37,654 dots).
@@ -221,7 +257,7 @@ SGMC control is not in the manifest (deferred, report-only).
 
 ---
 
-## Card S1 — `1p0px-g0p00` (window dose, low end)
+## Card SN1 — `1p0px-g0p00` (window dose, low end)
 
 **Hypothesis.** R0's dots are the output of a geometric BFS Poisson-disk walk
 over the H19-5 lineament field; traversal order, not physics, picks the
@@ -252,7 +288,7 @@ window-dose question then collapses to the cross-session *gate* comparison.
 (1.42 px-g0p02 moved 6.4 %, 2.0 px-g0p01 moved 26.5 %) to see whether the
 gate adds selection or just removes dose.
 
-## Card S2 — `1p4px-g0p00` (gate ablation at 1.42 px)
+## Card SN2 — `1p4px-g0p00` (gate ablation at 1.42 px)
 
 **Hypothesis.** Same as S1 with the 8-neighbour disc: the diagonal pixel is
 often the true edge (a lineament at 45° to the grid), so window 1.42 should
@@ -273,9 +309,9 @@ landing on a fan/bedrock contact that runs obliquely through the window.
 nothing at this window and upstream's arms can be read as pure dose. Receipt
 ≥ 0.010 *below* the gated arm ⇒ the gate is filtering harmful noise, i.e.
 selection matters more than dose — run windows at a *nonzero* gate next, not
-more gate 0. Below −0.010 ⇒ S1's falsifier fires for the whole family.
+more gate 0. Below −0.010 ⇒ SN1's falsifier fires for the whole family.
 
-## Card S3 — `2p0px-g0p00` (gate ablation at the physical window)
+## Card SN3 — `2p0px-g0p00` (gate ablation at the physical window)
 
 **Hypothesis.** GeoDAWN Area 2 was flown at ~400 m line spacing
 (https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7), so

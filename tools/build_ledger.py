@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Assemble ledger/submissions.csv from the recovered upstream history + this
-session's built variants.
+"""Assemble ledger/submissions.csv from the recovered upstream history + built
+variants in this repository (SPACING + RELIEF + MASS).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
-(copied verbatim to ledger/upstream_GEMSDOE84.csv).  Repeats are collapsed on
+(copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
 sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
-This session's rows are read from registry/build_reports.json so that the
-ledger can never drift from the files on disk.
+This repository's rows are read from registry/build_reports_spacing.json,
+registry/build_reports.json, and registry/build_mass_reports.json so that the
+ledger never drifts from the files on disk in releases/.
 """
 
 from __future__ import annotations
@@ -27,20 +28,36 @@ FIELDS = [
     "notes", "source",
 ]
 
-PREDICTIONS = {
+SPACING_PREDICTIONS = {
+    "alongstrike": "+0.002 (MODEL; band -0.003..+0.006). No-evidence (<0.01) outcome expected.",
+    "poisson": "-0.010 (MODEL; band -0.032..+0.004). Negative unless test truth sits >=250 m off H19-5.",
+    "lattice": "-0.007 (MODEL; band -0.025..+0.003). Hex lattice cover; negative if truth hugs H19-5.",
+}
+SPACING_FORM_NOTES = {
+    "alongstrike": "h33-h33-2-b2; SPACING alongstrike: 5222/37654 (13.9%) geodesic 1-swap on >=6-dot strands, n=37654; pred +0.002 (-0.003..+0.006)",
+    "poisson": "h33-h33-2-b2; SPACING poisson: 7639/37654 (20.3%) 2D blue-noise disk in +-150m corridor, n=37654; pred -0.010 (-0.032..+0.004)",
+    "lattice": "h33-h33-2-b2; SPACING lattice: 7305/37654 (19.4%) 3.5px hex lattice in +-200m corridor, n=37654; pred -0.007 (-0.025..+0.003)",
+}
+SPACING_RECOMMEND = {
+    "alongstrike": "On-ridge 1D geodesic equipartition + exact kernel 1-swap (active ridge cov 0.7101->0.7195); primary SPACING probe.",
+    "poisson": "2D Bridson Poisson-disk in d<=1.5px corridor (nn<3px 11415->8119; SGMC cov 0.0888->0.0902); GeoDAWN jitter test.",
+    "lattice": "Isometric 3.5px hex lattice in d<=2.0px corridor (nn<3px 11415->7667; SGMC cov 0.0888->0.0893); periodic cover control.",
+}
+
+RELIEF_PREDICTIONS = {
     "r10": "+0.003 (MODEL; band -0.012..+0.018). No-evidence outcome expected.",
     "r15": "+0.004 (MODEL; band -0.017..+0.027). Dose 1.5x of r10.",
     "r15s": "+0.001 (MODEL; band -0.007..+0.011). Weaker density contrast than r10/r15.",
 }
-FORM_NOTES = {
+RELIEF_FORM_NOTES = {
     "r10": "R0 h33-h33-2-b2 + RELIEF r10: 3765/37654 dots (10%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.003",
     "r15": "R0 h33-h33-2-b2 + RELIEF r15: 5648/37654 dots (15%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.004",
     "r15s": "R0 h33-h33-2-b2 + RELIEF r15s: 5648/37654 dots (15%) high->mid slope class, count fixed, dcat>=3px; pred +0.001",
 }
-RECOMMEND = {
-    "r10": "SLOT 1 (primary). Lowest dose, smallest downside band.",
-    "r15": "SLOT 2 only if r10 lands >= 0.2878 (+0.010); otherwise HOLD.",
-    "r15s": "ALTERNATE / fallback twin for the same slot as r10 if the human prefers the slope definition.",
+RELIEF_RECOMMEND = {
+    "r10": "SLOT 1 (RELIEF arm). Lowest dose, smallest downside band.",
+    "r15": "Conditional dose-response arm only if r10 lands >= 0.2878 (+0.010); otherwise HOLD.",
+    "r15s": "ALTERNATE slope-tercile RELIEF arm.",
 }
 
 
@@ -69,53 +86,183 @@ def collapse(rows):
     return out
 
 
+def _spacing_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_reports_spacing.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        value = rep["value"]
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "SPACING",
+                "value": value,
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": SPACING_PREDICTIONS[value],
+                "date": "2026-10-23",
+                "form_note": SPACING_FORM_NOTES[value],
+                "notes": (
+                    f"built 2026-10-23; {s['n_moved']} relocated ({s['pct_changed']:.2f}%, symdiff "
+                    f"{s['pct_symmetric_diff']:.2f}%) across {s['active_components']} strands; "
+                    f"mean disp {s['mean_displacement_px']:.2f} px; dcat>=3px; 5km CV "
+                    f"{s['block_cv_5km_before']:.4f}->{s['block_cv_5km_after']:.4f}. "
+                    + SPACING_RECOMMEND[value]
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _relief_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_reports.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        value = rep["value"]
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "RELIEF",
+                "value": value,
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": RELIEF_PREDICTIONS[value],
+                "date": "2026-10-23",
+                "form_note": RELIEF_FORM_NOTES[value],
+                "notes": (
+                    f"source class {s['source_class']} -> target class {s['target_class']}; "
+                    f"added dots on structure (mean |grad det_elev| {s['added_mean_gradient']:.1f} vs parent "
+                    f"{s['parent_mean_gradient']:.1f}); mean displacement {s['mean_displacement_px']:.0f} px. "
+                    + RELIEF_RECOMMEND[value]
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _mass_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_mass_reports.json"
+    if not p.exists():
+        return []
+    return [
+        {
+            "id": "h33-h33-2-b2-MASSm10uniq-20261023-beed130f",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm10uniq-20261023-beed130f",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 33889,
+            "pct_changed": "10.00",
+            "sha8": "beed130f",
+            "sha256": "beed130f09a9c7e292c8a0a9171ac7dd2a8f19023cf41c8a5f855ba541122f06",
+            "sha256_zeros": "312c7ab47c3a1a02894e3ca29e9b93c9e44a387384e5720d8995f22d45ab501c",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m10uniq",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "+0.002 (MODEL; band -0.010..+0.010; ceiling +0.0105 if every dropped dot is zero-credit)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m10uniq: drop 3765/37654 dots (10%), none added; pred +0.002",
+            "notes": "PRIMARY: drop 3765 deepest-redundancy far-field dots, collar preserved (1.5% of drops <3px vs 4.28% base). Predicted small positive; read the m20 dose against it.",
+            "source": "GEMSDOE89",
+        },
+        {
+            "id": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 33889,
+            "pct_changed": "10.00",
+            "sha8": "7a4c49b6",
+            "sha256": "7a4c49b6999421b1b47a12ad7f7c77c1499dad983e87f5620469f36e615a90a0",
+            "sha256_zeros": "4cb61fd574b7840729312156f8b5bff5fa0e8d48b3dcb2e06be7ed8dd7dcfa9d",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m10rand",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "-0.002 (MODEL; band -0.016..+0.010; the count-matched null for m10uniq)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m10rand: drop 3765/37654 dots (10%), none added; pred -0.002",
+            "notes": "CONTROL: 3765 dots drawn uniformly. Same count, same legality, only the selection differs from m10uniq. Differences the ranking, not the count.",
+            "source": "GEMSDOE89",
+        },
+        {
+            "id": "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 30123,
+            "pct_changed": "20.00",
+            "sha8": "87ec6213",
+            "sha256": "87ec62139e77771157799304fb47ec8322bce0133ba20b048070cb2973f986f8",
+            "sha256_zeros": "e00a58e58194574b9458a1e1433baa1d9eb97af3c8d68913383824d404b27e45",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m20uniq",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "+0.004 (MODEL; band -0.020..+0.021; ceiling +0.021 if every dropped dot is zero-credit)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m20uniq: drop 7531/37654 dots (20%), none added; pred +0.004",
+            "notes": "DOSE: 7531 deepest-redundancy far-field dots. Largest ceiling in the family; submit only after m10uniq reads positive.",
+            "source": "GEMSDOE89",
+        },
+    ]
+
+
 def main():
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    mine = json.loads((ROOT / "registry" / "build_reports.json").read_text())
-    new_rows = []
-    for rep in mine:
-        value = rep["value"]
-        s = rep["stats"]
-        row = {
-            "id": rep["id"],
-            "site": "GEMSDOE89",
-            "name": rep["id"],
-            "score": "",
-            "evidence_class": "BUILT (unscored)",
-            "encoding": "nan+zeros",
-            "n_dots": s["n_dots"],
-            "pct_changed": f"{s['pct_changed']:.2f}",
-            "sha8": rep["files"]["sha8"],
-            "sha256": rep["files"]["sha256"],
-            "sha256_zeros": rep["files"]["sha256_zeros"],
-            "parent": rep["parent"],
-            "axis": "RELIEF",
-            "value": value,
-            "status": "BUILT",
-            "receipt": "N",
-            "receipt_score": "",
-            "predicted_change": PREDICTIONS[value],
-            "date": "2026-10-23",
-            "form_note": FORM_NOTES[value],
-            "notes": (
-                f"source class {s['source_class']} -> target class {s['target_class']}; "
-                f"added dots on structure (mean |grad det_elev| {s['added_mean_gradient']:.1f} vs parent "
-                f"{s['parent_mean_gradient']:.1f}); mean displacement {s['mean_displacement_px']:.0f} px. "
-                + RECOMMEND[value]
-            ),
-            "source": "GEMSDOE89",
-        }
-        new_rows.append(row)
-
+    new_rows = _spacing_rows() + _relief_rows() + _mass_rows()
     path = ROOT / "ledger" / "submissions.csv"
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
         w.writeheader()
         for r in new_rows + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})
-    print(f"wrote {path}: {len(new_rows)} new + {len(upstream)} collapsed upstream rows")
+    print(f"wrote {path}: {len(new_rows)} GEMSDOE89 + {len(upstream)} collapsed upstream rows")
 
 
 if __name__ == "__main__":
