@@ -89,3 +89,23 @@ deltas (0.0384 → 0.0356 / 0.0348 / 0.0341) are an artefact of that blindness.
 **Decision.** The proxy is reported and is **not** used to set the predicted
 sign. Doing so would have flipped the sign of every variant for a reason that
 has nothing to do with the live score.
+
+## 8. 2026-10-23 re-audit: mandatory stop supersedes earlier exceptions
+
+At checkout `5875e057e8a2b92e84dab94940c8975743b5dd2a`, all four
+manifest paths are absent and `GEMSDOE_DATA` is unset. No hashes can be
+freshly verified. `registry/parent_verification.json` explicitly says the
+parent was not rebuilt from a recipe. A pinned mirror is not the required
+recipe rebuild. Historical item 1 describes earlier work, not this checkout.
+
+**Decision:** stop, build zero variants, hold all three existing candidates.
+No attempt to approximate R0 or to reuse occupied RELIEF values. Item 2's
+exception for inherited <3 px dots is not authorized by this brief; it cannot
+support submission clearance. Fresh format-only validation does not verify
+catalogue mass, footprint identity or the required collar. Historical BUILT
+ledger rows remain provenance, not approval to submit.
+
+Human must provide the exact reproducible parent recipe and its pinned inputs
+in non-public storage, plus the missing receipt/leaderboard/quota/deadline
+information. No competition pages were fetched; deadline remains UNVERIFIED.
+Audit evidence: `registry/start_gate_audit.json`.

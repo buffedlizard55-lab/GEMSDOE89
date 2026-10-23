@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-23",
+  "git_sha": "5875e057e8a2b92e84dab94940c8975743b5dd2a",
+  "status": "STOPPED_START_GATE",
+  "inputs": [
+    {
+      "id": "training_features",
+      "path": "data/training_features.tif",
+      "present": false,
+      "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "actual_sha256": null,
+      "verified": false
+    },
+    {
+      "id": "sample_submission",
+      "path": "data/sample_submission.tif",
+      "present": false,
+      "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "actual_sha256": null,
+      "verified": false
+    },
+    {
+      "id": "existing_faults",
+      "path": "data/existing_faults.tif",
+      "present": false,
+      "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "actual_sha256": null,
+      "verified": false
+    },
+    {
+      "id": "parent_r0_zeros",
+      "path": "data/parent_r0_zeros.tif",
+      "present": false,
+      "expected_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "actual_sha256": null,
+      "verified": false
+    }
+  ],
+  "parent_rebuild": "NOT PERFORMED: recipe and inputs absent; mirror restoration is not a recipe rebuild",
+  "new_variants": 0,
+  "existing_variants": 3,
+  "tests": "15 passed",
+  "ledger": "118 rows; 6 release files; consistent",
+  "validation": "format-only pass; catalogue and footprint checks unavailable; not submission clearance"
+}
