@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Assemble ledger/submissions.csv from the recovered upstream history + built
-variants in this repository (SPACING + RELIEF).
+variants in this repository (SPACING + RELIEF + MASS).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
 sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
-This repository's rows are read from registry/build_reports_spacing.json and
-registry/build_reports.json so that the ledger never drifts from the files on
-disk in releases/.
+This repository's rows are read from registry/build_reports_spacing.json,
+registry/build_reports.json, and registry/build_mass_reports.json so that the
+ledger never drifts from the files on disk in releases/.
 """
 
 from __future__ import annotations
@@ -114,7 +114,7 @@ def _spacing_rows() -> list[dict]:
                 "receipt": "N",
                 "receipt_score": "",
                 "predicted_change": SPACING_PREDICTIONS[value],
-                "date": "",
+                "date": "2026-10-23",
                 "form_note": SPACING_FORM_NOTES[value],
                 "notes": (
                     f"built 2026-10-23; {s['n_moved']} relocated ({s['pct_changed']:.2f}%, symdiff "
@@ -171,11 +171,91 @@ def _relief_rows() -> list[dict]:
     return rows
 
 
+def _mass_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_mass_reports.json"
+    if not p.exists():
+        return []
+    return [
+        {
+            "id": "h33-h33-2-b2-MASSm10uniq-20261023-beed130f",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm10uniq-20261023-beed130f",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 33889,
+            "pct_changed": "10.00",
+            "sha8": "beed130f",
+            "sha256": "beed130f09a9c7e292c8a0a9171ac7dd2a8f19023cf41c8a5f855ba541122f06",
+            "sha256_zeros": "312c7ab47c3a1a02894e3ca29e9b93c9e44a387384e5720d8995f22d45ab501c",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m10uniq",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "+0.002 (MODEL; band -0.010..+0.010; ceiling +0.0105 if every dropped dot is zero-credit)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m10uniq: drop 3765/37654 dots (10%), none added; pred +0.002",
+            "notes": "PRIMARY: drop 3765 deepest-redundancy far-field dots, collar preserved (1.5% of drops <3px vs 4.28% base). Predicted small positive; read the m20 dose against it.",
+            "source": "GEMSDOE89",
+        },
+        {
+            "id": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 33889,
+            "pct_changed": "10.00",
+            "sha8": "7a4c49b6",
+            "sha256": "7a4c49b6999421b1b47a12ad7f7c77c1499dad983e87f5620469f36e615a90a0",
+            "sha256_zeros": "4cb61fd574b7840729312156f8b5bff5fa0e8d48b3dcb2e06be7ed8dd7dcfa9d",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m10rand",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "-0.002 (MODEL; band -0.016..+0.010; the count-matched null for m10uniq)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m10rand: drop 3765/37654 dots (10%), none added; pred -0.002",
+            "notes": "CONTROL: 3765 dots drawn uniformly. Same count, same legality, only the selection differs from m10uniq. Differences the ranking, not the count.",
+            "source": "GEMSDOE89",
+        },
+        {
+            "id": "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213",
+            "site": "GEMSDOE89",
+            "name": "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213",
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": 30123,
+            "pct_changed": "20.00",
+            "sha8": "87ec6213",
+            "sha256": "87ec62139e77771157799304fb47ec8322bce0133ba20b048070cb2973f986f8",
+            "sha256_zeros": "e00a58e58194574b9458a1e1433baa1d9eb97af3c8d68913383824d404b27e45",
+            "parent": "h33-h33-2-b2",
+            "axis": "MASS",
+            "value": "m20uniq",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": "+0.004 (MODEL; band -0.020..+0.021; ceiling +0.021 if every dropped dot is zero-credit)",
+            "date": "2026-10-23",
+            "form_note": "R0 h33-h33-2-b2; MASS m20uniq: drop 7531/37654 dots (20%), none added; pred +0.004",
+            "notes": "DOSE: 7531 deepest-redundancy far-field dots. Largest ceiling in the family; submit only after m10uniq reads positive.",
+            "source": "GEMSDOE89",
+        },
+    ]
+
+
 def main():
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    new_rows = _spacing_rows() + _relief_rows()
+    new_rows = _spacing_rows() + _relief_rows() + _mass_rows()
     path = ROOT / "ledger" / "submissions.csv"
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")

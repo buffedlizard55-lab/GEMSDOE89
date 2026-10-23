@@ -1,79 +1,31 @@
-# IRREGULARITIES — session GEMSDOE89
+# IRREGULARITIES (Decision-Changing Only)
 
-Only items that change an engineering, experimental, or compliance decision.
+Only items that alter candidate validity, metric interpretation, governance, or slot allocation are listed here.
 
-## 1. Parent R0 is now rebuilt bit-for-bit from `scored_h19_5.tif`, while `scored_h19_5.tif` itself remains a pinned upstream artifact
+1. **Parent R0 (`0.2778`) Is a `CLAIM`, Not a `RECEIPT` in This Repo.**
+   - *Fact:* `h33-h33-2-b2` (`c55bafc4...` / `baeae321...`) is rebuilt bit-for-bit (`0` pixel diffs across all `12,279,160` grid cells) from pinned `scored_h19_5.tif` + `existing_faults.tif` + `sample_submission.tif`, so parent *geometry* is 100% verified. However, its `0.2778` live number carries `evidence_class = CLAIM` (no organizer receipt is stored in this repo).
+   - *Decision impact:* Every predicted live change (`MODEL`) is anchored to `0.2778` only up to `CLAIM` accuracy; if Slot 1 lands far from `0.2778`, parent baseline uncertainty (`CLAIM` vs `RECEIPT`) must be checked before attributing the gap to `SPACING`, `RELIEF`, or `MASS`.
 
-- **Finding.** In PR #2 (`arena/3e9736cf-gemsdoe89`), parent R0 (`h33-h33-2-b2`) was
-  verified by SHA-256 download only. In this session, `tools/rebuild_r0.py` (`gemsdoe/parent.py`)
-  rebuilds `d28` (44,090 dots) from pinned `scored_h19_5.tif` (`ec1f9b56…`) via exact BFS
-  `dot_thin(r_min=2.8)` and applies the `d_cat > 2.0 px` flank prune to reproduce R0
-  (37,654 dots), matching **both** upstream GeoTIFF digests byte-for-byte
-  (`c55bafc4…` zeros and `baeae321…` NaN; see `registry/parent_verification.json`).
-- **Decision impact (reproducibility rule, https://docs.nlr.gov/docs/fy26osti/96647.pdf).**
-  The step `scored_h19_5 -> d28 -> R0 -> variants` is 100 % script-reproduced here,
-  but if a Phase-1/2 winner audit requires regenerating `scored_h19_5.tif` itself from
-  raw `training_features.tif`, the `19GEMSDOE` ridge-extraction script must also be
-  bundled in the final prize archive.
+2. **Public Bridge Mirrors Host Competition Rasters (`GEMSDOE`, `GEMSDOE24`, `GEMSDOE86`, `GEMSDOE92`).**
+   - *Fact:* Input rasters pinned in `registry/data_manifest.json` were fetched from public GitHub repos under `buffedlizard55-lab/*`. DrivenData rules normally restrict redistributing challenge data publicly.
+   - *Decision impact:* `GEMSDOE89` keeps `data/` and `.cache/` strictly git-ignored (zero competition rasters committed to git or `releases/`), and the human team owner should review visibility/licensing of upstream mirror repos before prize audit.
 
-## 2. Hard Constraint 4 (`>= 3 px` from catalogue) conflicts with R0's inherited `2 < d_cat < 3 px` ring
+3. **`training_features.tif` Contains `-3.4e38` Float32 Sentinels Inside the Footprint (`IR-DEC-17`).**
+   - *Fact:* Bands 1–8 and 18 contain `-3.4028235e38` nodata sentinels inside `sample_submission.tif`'s valid footprint (e.g., `635,517` pixels in band 18 `iso_grav_anom_hg`), where `np.isfinite()` is `True`.
+   - *Decision impact:* Any feature computation or leakage canary must mask `band <= -1e30` to `NaN` (`tools/build_spacing.py` enforces this; `SPACING` geometry itself uses only binary `scored_h19_5` and `existing_faults`).
 
-- **Finding.** R0's own rule was `d_cat > 2.0 px`, leaving **1,611 dots at `2.236–2.828 px`**
-  (`2 < d_cat < 3 px`) and 560 dots at `d_cat == 3.0 px` (`2,171` at `<= 3.0 px`).
-- **Decision.** Both `SPACING` and `RELIEF` **freeze** R0's 1,611 inherited `< 3.0 px`
-  dots and enforce `d_cat >= 3.00 px` on 100 % of relocated/added dots (verified minimum
-  `3.00 px` across all 6 variants). Deleting the inherited `< 3.0 px` ring inside a
-  `SPACING` or `RELIEF` build would inject a simultaneous `PRUNE` edit (already tested
-  7 times in `ledger/submissions.csv`) and break single-variable attribution.
+4. **Catalogue Hide-and-Recover `PROXY` Is Structurally Blind to `>=3 px`-Collar Edits on Long Strands.**
+   - *Fact:* Because R0 was pruned at `d_cat > 2.0 px` and new variant dots obey `d_cat >= 3.0 px` (the exact 3-pixel DTI kernel radius), moving dots on `>=6`-dot strands leaves DTI on held-out `existing_faults.tif` (`PROXY`) invariant to 6 decimals (`0.038424`, 95% CI `[0.03285, 0.043997]`).
+   - *Decision impact:* Never rank or gate `SPACING` (or other `d_cat >= 3 px` collar-respecting edits) by catalogue hide-and-recover `PROXY`; use physical ridge-jitter sensitivity (`MODEL`) and off-catalogue USGS SGMC fault coverage (`PROXY`, `https://doi.org/10.3133/ds1052`) for diagnostic direction, and treat only live `RECEIPT` deltas `>= 0.01` as evidence.
 
-## 3. `sample_submission.tif` contains 60,988 positive pixels on the fault catalogue
+5. **`SPACING` 2D Lateral Arms (`poisson`, `lattice`) Trade Ridge Alignment for Packing Clearance.**
+   - *Fact:* On R0's 834 active strands, reducing `<3 px` neighbor pairs by `29%–33%` (`poisson` / `lattice`) forces ~`79%–85%` of moved dots `1–2 px` laterally off the 1-px `h19_5` skeleton, dropping active-strand 3-px ridge coverage from `0.710` to `0.513–0.558` (`MODEL` `-0.010` and `-0.007`).
+   - *Decision impact:* Only `alongstrike` (`100%` ridge retention, `MODEL` `+0.002`) is eligible for Slot 1; `poisson` and `lattice` are held strictly conditional on `alongstrike` surprising positively (`>= +0.010`).
 
-- **Finding.** Despite problem-page wording describing an empty/fault-free template,
-  `sample_submission.tif` (`2176d08e…`) has 60,988 pixels equal to `1.0` sitting directly
-  on `existing_faults.tif`.
-- **Decision.** `sample_submission.tif` is read **strictly** for grid tags and the finite
-  footprint mask (`5,167,373` px), never as pixel values or training/exclusion labels.
+6. **Upstream `MASS` Repeat Submissions Show Non-Zero Score Spread or Unverified Claims.**
+   - *Fact:* Upstream ledger entries for `h33-h33-2-b2` and `MASS` cousins (`GEMSDOE32` / `GEMSDOE49` / `GEMSDOE55`) are `CLAIM` rows without verified receipts in this repo, and `scored_h19_5.tif` is binary (`{0, 1}`, `121,131` pixels) with no continuous ranking stored in the parent raster.
+   - *Decision impact:* Reinforces the brief's `< 0.01 = no evidence` threshold and prevents over-interpreting sub-`0.01` differences across `SPACING`, `MASS`, and `RELIEF`.
 
-## 4. Competition rasters are hosted in public sibling GitHub repositories
-
-- **Finding.** Upstream sibling repos (`buffedlizard55-lab/GEMSDOE`, `GEMSDOE24`,
-  `GEMSDOE32`) expose mirrors of `training_features.tif`, `sample_submission.tif`, and
-  `existing_faults.tif` publicly; competition data-redistribution terms are unchecked.
-- **Decision.** This repository commits **zero** competition input rasters (`data/` is
-  git-ignored; `tools/fetch_pinned_data.py` fetches into local `data/` and verifies
-  SHA-256). The human must decide whether to make those upstream mirror repositories
-  private.
-
-## 5. Missing human-only parameters (`TOP_PUBLIC`, slot counts, deadline check, live receipts)
-
-- **Finding.** `TOP_PUBLIC` and remaining weekly/total slots are `____` in the brief, and
-  automated access to `drivendata.org` is prohibited by its Terms of Use
-  (https://www.drivendata.org/termsofuse/). All historical scores in `ledger/submissions.csv`
-  lack submission-page receipts in this repo and are therefore marked `CLAIM`.
-- **Decision.** Left as explicit placeholders in `README.md` and `SLOT_PLAN.md`, with
-  `2026-12-03` flagged `UNVERIFIED` until the human confirms it on the competition page.
-
-## 6. Opposite signs between the off-catalogue SGMC `PROXY` and centerline-jitter `MODEL` on lateral corridor arms
-
-- **Finding.** On `SPACING`, catalogue hide-and-recover (`0.038424` recall) is invariant
-  because `< 3 px` collar dots and `< 6`-dot strands are frozen while relocated dots obey
-  `d_cat >= 3.0 px`. Meanwhile, off-catalogue USGS SGMC faults
-  (https://doi.org/10.3133/ds1052, `d_cat > 3.0 px`) show *higher* coverage for
-  `poisson` (`0.09016`) and `lattice` (`0.08928`) than `R0` (`0.08882`), whereas
-  centerline-jitter `MODEL` sensitivity (`σ_⊥ <= 1.5 px` around `h19_5`) shows losses of
-  `−0.008` to `−0.040` DTI because shifting dots `1–1.5 px` off a 1-px ridge sacrifices
-  `33–50 %` of peak triangular-kernel height.
-- **Decision.** SGMC cartographic offsets (`200–500 m` at compilation scale) were **not**
-  allowed to flip the predicted sign: `poisson` (`−0.010`) and `lattice` (`−0.007`) carry
-  negative central `MODEL` predictions, and `alongstrike` (`+0.002`, zero cross-strike
-  loss) is ranked ahead of both in `SLOT_PLAN.md`.
-
-## 7. Block-density CV scale depends strongly on block size (`1 km` vs `5 km`)
-
-- **Finding.** The brief notes `0.51–0.59` block-density CV for top files. On `1 km × 1 km`
-  blocks (`10×10 px`, ~0.73 dots/block), Poisson shot noise puts R0 at **1.8704**; on
-  `5 km × 5 km` blocks (`50×50 px`), R0 sits at **0.8991** (matching upstream GEMSDOE84's
-  5 km scale).
-- **Decision.** Both `1 km` and `5 km` block-density CVs are recorded in every
-  `SPACING` build report to prove spatial-concentration invariance (`0.8991 -> 0.8984..0.9001`),
-  and neither is used as a tuning target or gate.
+7. **Missing Human Operational Inputs (`TOP_PUBLIC`, Weekly Slots, Deadline Verification).**
+   - *Fact:* `TOP_PUBLIC`, slots used this rolling week, and organizer confirmation of the `2026-12-03` deadline cannot be fetched without accessing `drivendata.org` (barred by ToS).
+   - *Decision impact:* Slot pacing in `SLOT_PLAN.md` and `README.md` leaves explicit placeholders for the human to fill before uploading Slot 1.
