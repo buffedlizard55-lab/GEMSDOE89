@@ -525,3 +525,20 @@ give short of a receipt on the parent itself.
 
 Any single live change below 0.01 is **no evidence** (brief §5); the table
 reads the three receipts as one experiment, not three independent scores.
+
+---
+
+# Part V — 2 km H19-supported CONCENTRATION (separate session)
+
+The independent `arena/0a75dd63` session added three non-duplicate values:
+`2km-b50-t33-m3765` (`da3a4886`, MODEL central +0.0024),
+`2km-b50-t33-m5648` (`51ba9656`, −0.0028), and
+`2km-b50-t33-m7531` (`1e857586`, −0.0126). They keep every added dot on H19-5
+and use exact sequential DTI marginals rather than Part IV's potential-field
+`q` placement. Their full hypothesis / mechanism / mimic / prediction /
+falsifier cards are in **`ledger/MECHANISM_CARDS_CONCENTRATION.md`**.
+
+These are **not clean scale-only controls** for Part IV: block size and
+placement both differ. Negative H19 coverage and crowding counter-indicators
+hold the 15% and 20% arms; the integrated queue keeps `cat10` as the primary
+allocation probe and the 2 km family as a separate, currently held mechanism.

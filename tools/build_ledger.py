@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Assemble ledger/submissions.csv from the recovered upstream history + built
-variants in this repository (SPACING + RELIEF + MASS).
+variants in this repository (SPACING + RELIEF + MASS + SNAP + both
+CONCENTRATION families).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
@@ -9,7 +10,8 @@ once, with a repeat count.
 
 This repository's rows are read from registry/build_reports_spacing.json,
 registry/build_reports.json, and registry/build_mass_reports.json so that the
-ledger never drifts from the files on disk in releases/.
+ledger never drifts from the files on disk in releases/.  Each new axis/family
+must have a reader here; the 2 km reader uses build_reports_concentration.json.
 """
 
 from __future__ import annotations
@@ -282,6 +284,40 @@ def _concentration_rows() -> list[dict]:
     return rows
 
 
+def _concentration_2km_rows() -> list[dict]:
+    """Preserve the independent H19-supported 2 km family on every rebuild."""
+    p = ROOT / "registry" / "build_reports_concentration.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        pred = rep["model_prediction"]
+        files = rep["files"]
+        rows.append({
+            "id": rep["id"], "site": "GEMSDOE89", "name": rep["id"], "score": "",
+            "evidence_class": "BUILT (unscored)", "encoding": "nan+zeros",
+            "n_dots": s["n_dots"], "pct_changed": f"{s['pct_changed']:.2f}",
+            "sha8": files["sha8"], "sha256": files["nan"]["sha256"],
+            "sha256_zeros": files["zeros"]["sha256"], "parent": rep["parent"],
+            "axis": "CONCENTRATION", "value": rep["value"], "status": "BUILT",
+            "receipt": "N", "receipt_score": "",
+            "predicted_change": (
+                f"MODEL central {pred['central']:+.4f}; sensitivity "
+                f"{pred['lo']:+.4f}..{pred['hi']:+.4f} (not a CI)"
+            ),
+            "date": "20261023", "form_note": rep["form_note"],
+            "notes": (
+                f"{rep['role']}; 2km CV {s['cv_2km_before']:.4f}->{s['cv_2km_after']:.4f}; "
+                f"5km CV {s['cv_5km_before']:.4f}->{s['cv_5km_after']:.4f}; "
+                f"H19 counterindicator {s['h19_surrogate_delta']:+.6f}; "
+                f"added min dcat {s['added_min_catalogue_clearance_px']:.2f}px"
+            ),
+            "source": "GEMSDOE89",
+        })
+    return rows
+
+
 def _mass_rows() -> list[dict]:
     p = ROOT / "registry" / "build_mass_reports.json"
     if not p.exists():
@@ -367,10 +403,10 @@ def main():
         upstream = collapse(list(csv.DictReader(fh)))
 
     new_rows = (_spacing_rows() + _relief_rows() + _mass_rows()
-                + _snap_rows() + _concentration_rows())
+                + _snap_rows() + _concentration_rows() + _concentration_2km_rows())
     path = ROOT / "ledger" / "submissions.csv"
     with open(path, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
+        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in new_rows + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})
