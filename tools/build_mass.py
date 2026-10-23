@@ -100,6 +100,11 @@ def ledger_hashes():
     return out
 
 
+REQUIRED = ("sample_submission", "existing_faults", "parent_r0_zeros",
+            "parent_field_h19_5", "parent_ancestor_solo_d28",
+            "parent_ancestor_d28")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--value", choices=sorted(VARIANTS), default=None)
@@ -109,7 +114,9 @@ def main():
         ap.error("give --value or --all")
 
     manifest = load_manifest()
-    required = set(manifest["session_gate"]["required_ids"])
+    # `registry/data_manifest.json` no longer carries a `session_gate` block
+    # (IRREGULARITIES item 10), so the requirements are named here.
+    required = set(REQUIRED)
     ver, bad = verify_inputs(manifest, required)
     if bad:
         print(json.dumps({"ERROR": "pinned inputs failed verification", "detail": bad}, indent=1))

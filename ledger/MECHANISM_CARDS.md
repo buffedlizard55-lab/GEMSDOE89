@@ -342,3 +342,186 @@ snap mechanism confirmed; then choose dose by receipt, not by principle.
 gate, not the snap, was destroying the gain). ≤ −0.010 ⇒ retire SNAP and the
 EM-crest story with it: R0's lineament placement beats EM-crest placement and
 the response surface should be rebuilt from DEM/lineament structure instead.
+---
+
+# Part IV — `CONCENTRATION` axis (`cat10` · `cat20` · `cat10away`)
+
+## Premise: what the metric rewards, and what R0 does instead
+
+`DTI = T / (0.2T + 0.2(S - M) + 0.8|G|)` (brief §2). The mass `S` is a penalty
+in the denominator; a unit dot earns its place only through the kernel credit
+`T` it adds on truth or the mass `M` it gets explained, and at the parent's
+`0.2778` the break-even is `k > 0.0556`. Every one of R0's 37,654 dots costs
+the same 0.2 of denominator; they differ only in where they sit.
+
+**Measured on R0 (5 km blocks, edge-inclusive grid, 2,063 eligible blocks):**
+
+| quantity | value |
+|---|---|
+| blocks containing catalogue pixels | 1,201 of 2,063 |
+| blocks with **zero** catalogued fault | 862 (41.8 %) |
+| R0 dots in those zero-fault blocks | **14,257 = 37.9 %** |
+| R0 dots in the top-prior quartile (519 blocks) | 9,845 = 26.1 % |
+| corr(R0 block density, catalogue block density) | **0.039** |
+
+So block-scale allocation is essentially independent of where faults are known
+to exist. That is the free parameter this axis spends.
+
+**Why this is a new question, not a repeat.** `GEMSDOE84` spent
+`5km-t25-move2400`, `5km-t50-move3765` and `spread5km-move2400` on this axis
+using the *parent's own* per-dot gain surface, averaged per block, as the
+prior. That surface is the one that placed R0's dots, so those arms moved mass
+from blocks the parent already ranks low into blocks it already ranks high --
+nearly a re-shuffle of a self-referential quantity (their own CV moves the
+wrong way against the brief's band). The prior here is **independent**: the
+density of catalogued (USGS/INGENIOUS) faults, the only fault data the
+organizers release, and the data set that the truth is defined against
+("new fault" = any fault pixel not already captured by USGS/INGENIOUS,
+including newly mapped geometry of existing systems:
+https://community.drivendata.org/t/where-do-you-draw-the-line/11536 ;
+new-fault truth can lie within 300 m of known traces:
+https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516).
+
+## The placement rule (identical in all three arms)
+
+R0 saturates its own field: only **201** `h19_5` pixels in the whole grid are
+>= 2.8 px from an R0 dot *and* >= 3 px from the catalogue, so a
+"same-field-same-rules" reallocation cannot be built above 201 dots. Added
+dots are therefore placed on a structural edge score `q` = mean of the
+Sobel gradient magnitudes of RTP magnetics (band 2) and isostatic gravity
+(band 13), each robust-scaled, averaged, then smoothed with a 500 m box mean.
+Candidates are ranked by `q` inside the recipient blocks and accepted greedily
+at Euclidean spacing >= 2.8 px (the parent's own suppression radius).
+
+What `q` is and is not (all MEASURED, all report-only): single-feature AUC
+against catalogue membership **0.548** (the best single band in the stack is
+0.572); 11.1 % of the top 1 % of `q` lies on or within 1 px of the corroborated
+`h19_5` ridge field against a 7.2 % base rate; the top 1 % is spread over 484
+of the 2,063 blocks (largest single-block share 3.0 %), so it is not a handful
+of survey seams. R0's own dots sit at `q = 0.201` against a footprint mean of
+0.180, while the added dots land at 0.49-0.70. **The added dots are on a
+different structural class than R0's dots** -- that is the confound this axis
+carries and it is why the sign-control arm exists.
+
+---
+
+## Card C1 — `cat10` (`h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377`) — PRIMARY
+
+**Hypothesis.** At 5 km scale, the density of *new* fault truth tracks the
+density of *known* faults, so mass moved out of blocks with no catalogued
+fault into the top-prior quartile earns more kernel credit than it gives up.
+
+**Mechanism.** A 3,765-dot move (10.0 %; symmetric difference
+20.0 %) at fixed count 37,654. Donors: all 862 zero-catalogue blocks, taking
+the dots with the smallest unique kernel credit `u` (the parent's own
+metric-derived redundancy ranking; removed mean `u = 6.27` vs parent 7.69).
+Recipients: the 519 top-quartile blocks (cut 0.0184 catalogue px per footprint
+px), filled on `q` at 2.8 px spacing, all new dots >= 3.0 px from the
+catalogue (achieved minimum exactly 3.00 px). Zero-fault-block mass falls
+14,257 -> 10,492; top-quartile mass rises 9,845 -> 13,610; 5 km density CV
+0.901 -> 0.949 (1 km: 1.870 -> 1.905); corr(prior, density) 0.039 -> 0.269.
+Mean displacement 128 px (12.8 km), so this is a block-scale move, not a snap.
+
+**The non-fault process that could mimic it.** Catalogue density is a proxy
+for *mapping effort*, not for fault density: well-surveyed corridors have both
+more mapped faults and more published structure, so concentrating into them
+reproduces the map's history rather than the geology. Second mimic: known
+faults in this region include Mesozoic bedrock structures with no Quaternary
+expression, and the truth is a *new-fault* inventory; a high catalogue-density
+block can be systematically *old*-fault terrain. Third: the added dots sit on
+potential-field gradients (AUC 0.548) that also mark lithological contacts,
+volcanic margins and basin fill -- a strong-gradient "win" would be a
+detector effect that the away arm shares, not a prior effect. Fourth: truth
+pixels on the catalogue are masked, so a high-prior block has a larger
+credit-dead ring (dots must sit >= 3 px away, and the mask removes the first
+3 px of any trace); the true upside is smaller than raw fault density implies.
+
+**Predicted sign and size (MODEL).** Central **+0.009**, band **-0.010 …
++0.038**. Derivation: with `S` fixed, `dDTI ~ n * k_bar * (p_recipient -
+p_donor) / D`, `k_bar = 2.5` credit units for a unit dot on a 1-px trace,
+`D = 2.0e4` measured from the lineage's own collar step (removing 2,545
+masked-collar dots bought +0.0070 -> `D = 0.2778 * 509 / 0.0070`), and a hit-rate
+difference of 2 percentage points. At 6 points it is +0.028; at 0 it is 0.
+**The central case sits on the brief's no-evidence line**, so this arm only
+reads out if the prior is real and strong.
+
+**Falsifier.** A live change inside `±0.010` at 10 % *and* at 20 % means the
+known-fault prior carries no usable block-scale signal; the axis closes and
+`cat20`'s receipts become the bound on how much block allocation can be worth.
+A live change <= -0.010 means the allocation actively hurts -- new faults
+avoid known-fault corridors at 5 km scale -- and the away arm becomes the
+candidate.
+
+---
+
+## Card C2 — `cat20` (`h33-h33-2-b2-CONC5kmcat20-20261023-4d229938`) — DOSE
+
+**Hypothesis.** Same as C1; the dose asks whether the effect is monotone in
+the moved count, which separates "allocation matters" from "10 % is inside the
+noise of the public chunks".
+
+**Mechanism.** Identical recipe at 20 %: 7,531 dots moved (symmetric
+difference 40.0 %), donors the same 862 zero-catalogue blocks, same recipient
+quartile, same `q` placement and the same 3.0 px clearance. Zero-fault-block
+mass 14,257 -> 6,726; top-quartile mass 9,845 -> 17,376; 5 km CV 0.901 ->
+1.132; corr(prior, density) 0.039 -> 0.404; mean displacement 108 px.
+
+**The non-fault process that could mimic it.** Everything in C1, plus a
+dose-specific one: at 20 % the arm removes almost a fifth of the parent's
+dots from its own corroborated ridge field, so a null or negative result
+cannot distinguish "prior is uninformative" from "the `q` placement is worse
+than `h19_5`". Read the pair, never this arm alone.
+
+**Predicted sign and size (MODEL).** Central **+0.019**, band **-0.010 …
++0.067** (2x the C1 arithmetic, same `D`, same `k_bar`, same 2-point hit-rate
+difference; the width doubles with `n`).
+
+**Falsifier.** If `cat20` lands within ±0.010 of R0 while `cat10` is also null,
+block allocation is dead at this prior and this placement. If `cat20` lands
+*below* `cat10 - 0.010`, the loss is coming from the placement (mass leaving
+`h19_5`), not from the allocation, and the axis needs a placement fix before
+another slot.
+
+---
+
+## Card C3 — `cat10away` (`h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28`) — SIGN CONTROL
+
+**Hypothesis.** If the mechanism in C1 is the *prior*, then moving the same
+number of dots with the same rule in the opposite direction must lose
+approximately what C1 gains. If direction does not matter, the mechanism is
+the placement or the mere act of moving mass, not the catalogue.
+
+**Mechanism.** Exact mirror of C1: donors are the 519 top-quartile blocks
+(same `u` ranking), recipients are the 862 zero-catalogue blocks, same `q`
+placement, same spacing and clearance, same 3,765 dots. Zero-fault-block mass
+rises 14,257 -> 18,022; corr(prior, density) falls 0.039 -> -0.165; 5 km CV
+0.901 -> 1.049.
+
+**The non-fault process that could mimic it.** Zero-catalogue blocks are not
+fault-free; they are *unmapped* blocks, which in this region include the
+basin interiors and the volcanic fields. If new-fault truth is frontier-heavy
+(new traces drawn where nothing was mapped before), this arm is the winner and
+the "known-fault prior" story is simply wrong.
+
+**Predicted sign and size (MODEL).** Central **-0.009**, band **-0.038 …
++0.010** -- the exact negation of C1 under the same scenario.
+
+**Falsifier.** A *gain* here (>= +0.010) falsifies the known-fault prior at
+block scale and says the frontier is where the remaining truth is; that is a
+decision-changing result worth one slot because it redirects every later arm.
+A loss of the same size as C1's gain is the cleanest confirmation the axis can
+give short of a receipt on the parent itself.
+
+---
+
+## Decision table for this axis (live changes are public-chunk only)
+
+| cat10 | cat20 | cat10away | reading | next |
+|---|---|---|---|---|
+| >= +0.010 | >= +0.010 | <= 0 | known-fault prior works and scales | combine: raise the moved share or add a second, finer prior; keep `q` placement |
+| inside ±0.010 | inside ±0.010 | inside ±0.010 | allocation at 5 km is worth less than 0.01 either way | close CONCENTRATION; spend slots on MASS/SPACING where the ceiling is measurable |
+| <= -0.010 | <= -0.010 | >= +0.010 | the prior is inverted at this scale | submit `cat10away` as the candidate; propose a FRONTIER axis in `SLOT_PLAN.md` |
+| >= +0.010 | inside ±0.010 | inside ±0.010 | effect saturates below 20 % | hold the 10 % dose, do not spend the 20 % |
+
+Any single live change below 0.01 is **no evidence** (brief §5); the table
+reads the three receipts as one experiment, not three independent scores.
