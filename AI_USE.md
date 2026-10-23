@@ -56,3 +56,59 @@ from what the human decided.
 - No model was trained on test truth; the only labels touched are the pinned,
   pixel-masked USGS/INGENIOUS catalogue, used for exclusion, for a global class
   prior, and for a REPORT-ONLY proxy.
+
+---
+
+# Second session (2026-10-23, SPACING axis)
+
+## What the AI wrote
+
+- `gemsdoe/spacing.py` — the SPACING constructions: nearest-neighbour geometry,
+  the greedy hard-disk independent set, the structure-tensor strike estimate
+  (derived only from the parent raster), the vectorised relocation engine with
+  its repair pass, the coverage-area statistic and the coverage→DTI model.
+- `tools/build_spacing.py` — manifest/parent verification, the build, the
+  twin write, the gates (including two new ones: new positions ≥ 3 px from the
+  catalogue, and no dot pair tighter than the parent's own 2.828 px disk),
+  the REPORT-ONLY instruments, the ledger rows and the build reports.
+- `tests/test_spacing.py` — 7 tests on synthetic ribbon fields (no competition
+  data): independent-set separation, count preservation, determinism,
+  clearance, footprint containment, coverage monotonicity, prediction algebra.
+- `ledger/MECHANISM_CARDS.md` (SPACING section), `SLOT_PLAN.md`,
+  `docs/SUBMIT.md`, the CURRENT STATE block of `README.md`, this section, and
+  irregularity item 8.
+
+## What the AI decided (and the human can reverse)
+
+- **Axis = SPACING.** Chosen, not assigned, because it was the only axis with no
+  `(axis, value)` pair anywhere in the recovered ledger (RELIEF was spent in the
+  first session; MASS, PRUNE, SNAP and CONCENTRATION already had pairs on this
+  parent). It also needs no external data: parent + template + catalogue only.
+- **No lattice arm.** The brief suggests lattice vs Poisson-disk vs along-strike.
+  Measuring R0 first showed a hard disk at 2.828 px, so a lattice or a
+  fully-rebuilt Poisson field would change > 50 % of the dots and break the
+  brief's own 1–50 % constraint. Dose + geometry arms were built instead; the
+  reason is logged as IRREGULARITIES item 8.
+- **A build defect was found and fixed before release.** The first pass let a
+  dot whose relocation failed stay in place while later placements ignored it,
+  producing 26 dot pairs at 1.0–2.24 px — tighter than the parent's own disk.
+  A repair pass now reverts any placement that lands within the target radius of
+  a stayer, and a MUST gate asserts the invariant. The defective files were
+  deleted, their ledger rows removed, and every file here is from the fixed
+  build (see `registry/build_report_spacing_*.json`, `n_reverted_by_repair`).
+- **Predictions are MODEL.** Each is the coverage-area integral converted to DTI
+  through dDTI = (1 − 0.2·DTI)·DTI·(dT/T) at the claimed parent DTI. The band's
+  negative side is the stated alternative assumption (truth concentrated on the
+  parent's own saturated ribbons). None of these is a score.
+
+## What the human still decides
+
+Which file to submit and when; `TOP_PUBLIC`; slots used/available; every
+`receipt_score`; the deadline confirmation; the data-exposure decision.
+
+## What no AI did here
+
+No competition page was fetched, no leaderboard was read, no credentials were
+handled, no test labels were used. The only labels touched are the pinned
+pixel-masked USGS/INGENIOUS catalogue, used for exclusion and for REPORT-ONLY
+instruments that cannot gate a file.

@@ -89,3 +89,29 @@ deltas (0.0384 → 0.0356 / 0.0348 / 0.0341) are an artefact of that blindness.
 **Decision.** The proxy is reported and is **not** used to set the predicted
 sign. Doing so would have flipped the sign of every variant for a reason that
 has nothing to do with the live score.
+
+## 8. The SPACING axis as specified presumes a field with free spacing; R0 has none
+
+The brief defines SPACING as "lattice vs Poisson-disk vs along-strike at matched
+count". Measured on the pinned parent, R0 is already a hard-disk field: the
+minimum dot-to-dot distance is **2.828 px** (√8, the (2,2) diagonal), 11,415 dots
+(30.3 %) sit at exactly that distance, the median nearest-neighbour distance is
+3.0 px, and no pair is closer. (The 1,611 dots "at 2.236 px" in item 2 are the
+catalogue clearance ring — a different quantity; this item's numbers are
+dot-to-dot.)
+
+**Consequence.** A lattice or a freshly sampled Poisson field at 37,654 dots
+would move essentially every dot — far outside the brief's 1–50 % change
+constraint — and would also destroy the single-variable control. The axis only
+has room to *coarsen* an already-saturated disk.
+
+**Decision.** Three arms were built instead, all at exactly 37,654 dots:
+hard-disk relaxation at 3.0 px (14.4 % of dots moved), at 4.0 px (36.5 %), and
+along the local strike at 3.0 px (13.7 %). The dose arms answer "does
+kernel-coverage area convert to T at fixed mass"; the along-strike arm answers
+the geometry question the brief's lattice arm would have answered less cleanly.
+The lattice arm is **not built and should not be built**: it is not available
+inside the constraint.
+
+**Overrule path.** If a lattice arm is required anyway, it must be registered as
+a > 50 % change and the brief's constraint waived explicitly for that file.

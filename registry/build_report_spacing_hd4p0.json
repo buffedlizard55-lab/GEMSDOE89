@@ -1,0 +1,315 @@
+{
+ "id": "h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b",
+ "value": "hd4p0",
+ "axis": "SPACING",
+ "spec": {
+  "mode": "poisson",
+  "target_sep": 4.0,
+  "window": 4,
+  "corridor": 2,
+  "dose": "strong"
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "inputs": {
+  "training_features": {
+   "required_by_this_axis": false,
+   "present": false,
+   "sha256_ok": false,
+   "sha256": null,
+   "expected": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+  },
+  "sample_submission": {
+   "required_by_this_axis": true,
+   "present": true,
+   "sha256_ok": true,
+   "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "expected": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+  },
+  "existing_faults": {
+   "required_by_this_axis": true,
+   "present": true,
+   "sha256_ok": true,
+   "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "expected": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "parent_r0_zeros": {
+   "required_by_this_axis": true,
+   "present": true,
+   "sha256_ok": true,
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "expected": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+  }
+ },
+ "feature_stack_used": false,
+ "stats": {
+  "mode": "poisson",
+  "target_sep_px": 4.0,
+  "window_px": 4,
+  "corridor_px": null,
+  "n_dots": 37654,
+  "n_kept": 21744,
+  "n_selected_for_move": 15910,
+  "n_moved": 13749,
+  "n_placement_failures": 1256,
+  "n_reverted_by_repair": 905,
+  "pct_changed": 36.51404897222075,
+  "mean_displacement_px": 2.7843819141014587,
+  "median_displacement_px": 2.23606797749979,
+  "p95_displacement_px": 5.656854249492381,
+  "max_displacement_px": 5.656854249492381,
+  "nn_min_before_px": 2.8284271247461903,
+  "nn_min_after_px": 2.8284271247461903,
+  "nn_median_before_px": 3.0,
+  "nn_median_after_px": 4.123105625617661,
+  "block_cv_before": 1.8704320876262501,
+  "block_cv_after": 1.7348536101657035,
+  "n_removed": 13749,
+  "n_added": 13749,
+  "added_min_clearance_px": 3.0,
+  "added_median_clearance_px": 20.615528106689453,
+  "removed_mean_nn_px": 3.0481117242102647,
+  "removed_frac_at_parent_hard_disk": 0.34162484544330496,
+  "coverage_before": 303052.5753383911,
+  "coverage_after": 331363.65259502473,
+  "median_coherence_at_moved_dots": 0.4776653051376343
+ },
+ "model": {
+  "coverage_rel_change": 0.09341968872899775,
+  "point": 0.024510096990689022,
+  "band": [
+   -0.012255048495344511,
+   0.06127524247672256
+  ]
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b.tif",
+  "zeros": "releases/h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b-zeros.tif",
+  "sha256": "0cf9025b510c0a5ed9ed7e9c429e0e72f2a02337c01f33ea6ba980d781ceed7a",
+  "sha256_zeros": "e82b846effae2a07cc1283b1d0583e232c6a904ef255e229f17e9688459e1742",
+  "sha8": "0cf9025b"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "0cf9025b510c0a5e"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "e82b846effae2a07"
+    }
+   ]
+  },
+  "twins_identical_mask": true,
+  "new_positions_catalogue_clearance": {
+   "ok": true,
+   "detail": "min clearance of new dots = 3.0 px (required >= 3.0)"
+  },
+  "pct_changed_within_1_50": {
+   "ok": true,
+   "detail": "36.51 % of the parent's dots changed"
+  },
+  "no_pair_tighter_than_parent_disk": {
+   "ok": true,
+   "detail": "min nearest-neighbour distance after = 2.828 px (required >= 2.828)"
+  }
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.029350677743769128,
+   "ci95_halfwidth": 0.004895046144331127,
+   "ci95": [
+    0.024455631599438,
+    0.03424572388810025
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "surrogate_dti_variant": 0.005102332304767831,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "leakage_canary": {
+   "parent_dot_indicator": {
+    "auc": 0.4984952395307358,
+    "flag": false
+   },
+   "distance_to_nearest_dot": {
+    "auc": 0.1931294343653725,
+    "flag": false
+   }
+  },
+  "sgmc_control": "not available: no SGMC layer is pinned in registry/data_manifest.json"
+ },
+ "seconds": 6.4,
+ "ledger_row": {
+  "id": "h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b",
+  "site": "GEMSDOE89",
+  "name": "h33-h33-2-b2-spacing-hd4p0-20261023-0cf9025b",
+  "score": "",
+  "evidence_class": "BUILT (unscored)",
+  "encoding": "nan+zeros",
+  "n_dots": 37654,
+  "pct_changed": "36.51",
+  "sha8": "0cf9025b",
+  "sha256": "0cf9025b510c0a5ed9ed7e9c429e0e72f2a02337c01f33ea6ba980d781ceed7a",
+  "sha256_zeros": "e82b846effae2a07cc1283b1d0583e232c6a904ef255e229f17e9688459e1742",
+  "parent": "h33-h33-2-b2",
+  "axis": "SPACING",
+  "value": "hd4p0",
+  "status": "BUILT",
+  "receipt": "N",
+  "receipt_score": "",
+  "predicted_change": "+0.0245 DTI (MODEL; band -0.0123..+0.0613; coverage +9.34% at fixed mass)",
+  "date": "20261023",
+  "form_note": "h33-h33-2-b2; SPACING hd4p0: 13749 dots relocated (36.5%), sep 4.0 px, mean 2.8 px; pred +0.025",
+  "notes": "poisson hard-disk relaxation at 4.0 px; 13749 dots moved, 1256 left in place, mean displacement 2.78 px; W=4, corridor=-",
+  "source": "GEMSDOE89"
+ }
+}

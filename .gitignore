@@ -5,3 +5,6 @@ __pycache__/
 .pytest_cache/
 *.pyc
 releases/_tmp_*.tif
+
+# local venv (not part of the deliverable)
+.venv/
