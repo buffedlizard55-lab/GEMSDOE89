@@ -1,0 +1,289 @@
+{
+ "id": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6",
+ "value": "m10rand",
+ "axis": "MASS",
+ "role": "CONTROL",
+ "spec": {
+  "fraction": 0.1,
+  "mode": "random",
+  "note": "drop 10% of dots uniformly at random (count-matched null for m10uniq)",
+  "role": "CONTROL"
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "parent_rebuild": {
+  "solo_d28": {
+   "ancestor_dots": 40199,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  },
+  "d28": {
+   "ancestor_dots": 44090,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  }
+ },
+ "ranking_audit": {
+  "h19_5_unique_values": [
+   0.0,
+   1.0,
+   NaN
+  ],
+  "h19_5_set_cells": 121131,
+  "conclusion": "the ancestor field is binary, so no stored ranking exists for this lineage"
+ },
+ "stats": {
+  "mode": "random",
+  "n_before": 37654,
+  "n_after": 33889,
+  "n_dropped": 3765,
+  "pct_changed": 9.998937695862326,
+  "unique_credit_total_before": 289633.67437271745,
+  "unique_credit_total_after": 260718.34509113635,
+  "unique_credit_lost": 28915.329281581064,
+  "unique_credit_lost_frac": 0.09983414167639615,
+  "u_mean_all": 7.691976267401005,
+  "u_mean_dropped": 7.680034337737334,
+  "u_mean_kept": 7.693302991859788,
+  "u_min_kept": 3.666666666666667,
+  "dropped_frac_within_3px_catalogue": 0.04541832669322709,
+  "dropped_frac_within_10px_catalogue": 0.2921646746347942,
+  "dropped_mean_dcat_px": 28.98957124344839,
+  "parent_frac_within_3px_catalogue": 0.04278429914484517,
+  "parent_mean_dcat_px": 28.996593932371773,
+  "dropped_mean_nn_px": 3.7784709052596535,
+  "dropped_median_nn_px": 3.0,
+  "parent_mean_nn_px": 3.7350977393055036,
+  "parent_median_nn_px": 3.0,
+  "cv_1km_before": 1.8704320876262501,
+  "cv_1km_after": 1.9101472982434486,
+  "cv_2p5km_before": 1.242322884707719,
+  "cv_2p5km_after": 1.2525926703929693,
+  "cv_5km_before": 0.8990629317740834,
+  "cv_5km_after": 0.9047349414932973,
+  "mass_before": 37654.0,
+  "mass_after": 33889.0,
+  "catalogue_clearance_min_px_after": 2.23606797749979,
+  "catalogue_clearance_violations_after": 1440
+ },
+ "predicted_delta_model": {
+  "D_lo": {
+   "k_0": 0.02091834,
+   "k_thr": -0.0,
+   "k_hi": -0.024261659999999997
+  },
+  "D_hi": {
+   "k_0": 0.01045917,
+   "k_thr": -0.0,
+   "k_hi": -0.012130829999999999
+  },
+  "central": 0.0001405599999999995
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif",
+  "zeros": "releases/h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6-zeros.tif",
+  "sha256": "7a4c49b6999421b1b47a12ad7f7c77c1499dad983e87f5620469f36e615a90a0",
+  "sha256_zeros": "4cb61fd574b7840729312156f8b5bff5fa0e8d48b3dcb2e06be7ed8dd7dcfa9d",
+  "sha8": "7a4c49b6"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "33889 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 33889 vs mask 33889"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "7a4c49b6999421b1"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "33889 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 33889 vs mask 33889"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "4cb61fd574b78407"
+    }
+   ]
+  },
+  "twins_identical": true
+ },
+ "parent_diff": {
+  "added_vs_parent": 0,
+  "removed_vs_parent": 3765,
+  "symmetric_difference": 3765,
+  "identical": false
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0339965019676432,
+   "ci95_halfwidth": 0.005254968141670757,
+   "ci95": [
+    0.028741533825972443,
+    0.03925147010931396
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006108138503700235,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0
+ },
+ "seconds": 5.3,
+ "prediction": {
+  "central": "-0.002 (MODEL; band -0.016..+0.010; the count-matched null for m10uniq)",
+  "note": "CONTROL: 3765 dots drawn uniformly. Same count, same legality, only the selection differs from m10uniq. Differences the ranking, not the count."
+ }
+}
