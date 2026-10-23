@@ -1,0 +1,320 @@
+{
+ "id": "h33-h33-2-b2-CONC5kmcat20-20261023-4d229938",
+ "value": "cat20",
+ "axis": "CONCENTRATION",
+ "role": "DOSE",
+ "spec": {
+  "fraction": 0.2,
+  "direction": "toward",
+  "role": "DOSE",
+  "predicted_note": "20 % dose of cat10 (2x the moved count)"
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "block_table": {
+  "block_px": 50,
+  "block_km": 5.0,
+  "eligible_blocks": 2063,
+  "zero_prior_blocks": 862,
+  "high_prior_blocks": 519,
+  "high_prior_cut": 0.0184,
+  "prior_median": 0.0052,
+  "prior_p90": 0.03231999999999998,
+  "r0_dots_in_zero_blocks": 14257,
+  "r0_dots_in_high_blocks": 9845,
+  "r0_dots_in_zero_blocks_share": 0.3786317522706751,
+  "corr_r0_block_density_vs_prior": 0.03907606880096921,
+  "brief_reported_best_cv": "0.51-0.59 (block size unstated; MEASURED: R0 sits at 0.516 at 15 km and 0.899 at 5 km, so the band cannot be used as a 5 km target)"
+ },
+ "parent_rebuild": {
+  "solo_d28": {
+   "ancestor_dots": 40199,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  },
+  "d28": {
+   "ancestor_dots": 44090,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  },
+  "recipe_dot_thin_2p8": {
+   "h19_5_pixels": 121131,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  }
+ },
+ "edge_bands": {
+  "2": "rtp",
+  "13": "iso_grav_anom"
+ },
+ "stats": {
+  "direction": "toward",
+  "fraction_requested": 0.2,
+  "n_dots": 37654,
+  "n_moved": 7531,
+  "pct_changed": 20.000531152068838,
+  "pct_symmetric_diff": 40.001062304137676,
+  "block_px": 50,
+  "block_km": 5.0,
+  "strata": {
+   "zero_blocks": 862,
+   "high_blocks": 519,
+   "high_cut": 0.0184,
+   "eligible_blocks": 2063,
+   "prior_median": 0.0052,
+   "prior_p90": 0.03231999999999998
+  },
+  "donor_blocks": 862,
+  "recipient_blocks": 519,
+  "dots_in_donor_before": 14257,
+  "dots_in_donor_after": 6726,
+  "dots_in_recipient_before": 9845,
+  "dots_in_recipient_after": 17376,
+  "dots_in_zero_blocks_before": 14257,
+  "dots_in_zero_blocks_after": 6726,
+  "density_cv_5km_before": 0.9011434769361741,
+  "density_cv_5km_after": 1.1319161447662889,
+  "density_cv_1km_before": 1.870233715534462,
+  "density_cv_1km_after": 2.076583312295664,
+  "cv_definition": "std/mean of dots per footprint pixel over blocks with footprint >= 50 % of area (edge-inclusive grid)",
+  "prior_vs_r0_density_corr_before": 0.03907606880096921,
+  "prior_vs_r0_density_corr_after": 0.4037120963439774,
+  "mean_displacement_px": 107.92493661182095,
+  "median_displacement_px": 96.00520819205592,
+  "removed_rank_mean": 6.800444602966309,
+  "parent_rank_mean": 7.691976547241211,
+  "removed_dcat_median_px": 52.0,
+  "removed_frac_within_3px_catalogue": 0.0,
+  "added_edge_score_mean": 0.4887676239013672,
+  "parent_edge_score_mean": 0.20089879631996155,
+  "added_edge_score_p10": 0.3674944043159485,
+  "min_sep_added_px": 2.8284271247461903,
+  "min_clearance_added_px": 3.0,
+  "min_clearance_all_px": 2.23606797749979,
+  "dots_within_3px_catalogue_before": 1611,
+  "dots_within_3px_catalogue_after": 1611,
+  "added_outside_donor_region": 7531
+ },
+ "predicted_delta_model": {
+  "n_moved": 7531,
+  "k_bar": 2.5,
+  "denom": 20000.0,
+  "per_unit_hit_rate_difference": 0.941375,
+  "null_dp_0p00": 0.0,
+  "central_dp_0p02": 0.0188275,
+  "strong_dp_0p06": 0.0564825,
+  "band": [
+   -0.01,
+   0.0664825
+  ],
+  "central": 0.0188275,
+  "note": "a live |change| < 0.01 is no evidence; the central case sits at the threshold, so this axis only reads out if it is large"
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938.tif",
+  "zeros": "releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif",
+  "sha256": "4d2299386c1bfd8ff601fb018a366e473fb92a45e51e8c2df9d0890361dc3d71",
+  "sha256_zeros": "6b53f30555557271046c559f71b5296d3033fd557a7812f21106ac1a681e6f23",
+  "sha8": "4d229938"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-CONC5kmcat20-20261023-4d229938.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "4d2299386c1bfd8f"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "6b53f30555557271"
+    }
+   ]
+  },
+  "twins_identical": true,
+  "new_dot_min_clearance_px": 3.0
+ },
+ "parent_diff": {
+  "added_vs_parent": 7531,
+  "removed_vs_parent": 7531,
+  "symmetric_difference": 15062,
+  "pct_changed_moved": 20.000531152068838,
+  "pct_changed_symdiff": 40.001062304137676,
+  "jaccard": 0.6666592895872524,
+  "identical": false
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279
+ },
+ "seconds": 6.5
+}

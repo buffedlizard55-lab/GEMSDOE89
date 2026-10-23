@@ -1,0 +1,320 @@
+{
+ "id": "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377",
+ "value": "cat10",
+ "axis": "CONCENTRATION",
+ "role": "PRIMARY",
+ "spec": {
+  "fraction": 0.1,
+  "direction": "toward",
+  "role": "PRIMARY",
+  "predicted_note": "10 % of dots moved from zero-catalogue blocks into the top-prior quartile"
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "block_table": {
+  "block_px": 50,
+  "block_km": 5.0,
+  "eligible_blocks": 2063,
+  "zero_prior_blocks": 862,
+  "high_prior_blocks": 519,
+  "high_prior_cut": 0.0184,
+  "prior_median": 0.0052,
+  "prior_p90": 0.03231999999999998,
+  "r0_dots_in_zero_blocks": 14257,
+  "r0_dots_in_high_blocks": 9845,
+  "r0_dots_in_zero_blocks_share": 0.3786317522706751,
+  "corr_r0_block_density_vs_prior": 0.03907606880096921,
+  "brief_reported_best_cv": "0.51-0.59 (block size unstated; MEASURED: R0 sits at 0.516 at 15 km and 0.899 at 5 km, so the band cannot be used as a 5 km target)"
+ },
+ "parent_rebuild": {
+  "solo_d28": {
+   "ancestor_dots": 40199,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  },
+  "d28": {
+   "ancestor_dots": 44090,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  },
+  "recipe_dot_thin_2p8": {
+   "h19_5_pixels": 121131,
+   "derived_dots": 37654,
+   "differing_cells_vs_parent": 0,
+   "identical": true
+  }
+ },
+ "edge_bands": {
+  "2": "rtp",
+  "13": "iso_grav_anom"
+ },
+ "stats": {
+  "direction": "toward",
+  "fraction_requested": 0.1,
+  "n_dots": 37654,
+  "n_moved": 3765,
+  "pct_changed": 9.998937695862326,
+  "pct_symmetric_diff": 19.99787539172465,
+  "block_px": 50,
+  "block_km": 5.0,
+  "strata": {
+   "zero_blocks": 862,
+   "high_blocks": 519,
+   "high_cut": 0.0184,
+   "eligible_blocks": 2063,
+   "prior_median": 0.0052,
+   "prior_p90": 0.03231999999999998
+  },
+  "donor_blocks": 862,
+  "recipient_blocks": 519,
+  "dots_in_donor_before": 14257,
+  "dots_in_donor_after": 10492,
+  "dots_in_recipient_before": 9845,
+  "dots_in_recipient_after": 13610,
+  "dots_in_zero_blocks_before": 14257,
+  "dots_in_zero_blocks_after": 10492,
+  "density_cv_5km_before": 0.9011434769361741,
+  "density_cv_5km_after": 0.9490230040479618,
+  "density_cv_1km_before": 1.870233715534462,
+  "density_cv_1km_after": 1.9052993845706176,
+  "cv_definition": "std/mean of dots per footprint pixel over blocks with footprint >= 50 % of area (edge-inclusive grid)",
+  "prior_vs_r0_density_corr_before": 0.03907606880096921,
+  "prior_vs_r0_density_corr_after": 0.269210170984508,
+  "mean_displacement_px": 128.03264005113874,
+  "median_displacement_px": 110.25878649794764,
+  "removed_rank_mean": 6.2671356201171875,
+  "parent_rank_mean": 7.691976547241211,
+  "removed_dcat_median_px": 52.773099207835045,
+  "removed_frac_within_3px_catalogue": 0.0,
+  "added_edge_score_mean": 0.5916109085083008,
+  "parent_edge_score_mean": 0.20089879631996155,
+  "added_edge_score_p10": 0.43165361881256104,
+  "min_sep_added_px": 2.8284271247461903,
+  "min_clearance_added_px": 3.0,
+  "min_clearance_all_px": 2.23606797749979,
+  "dots_within_3px_catalogue_before": 1611,
+  "dots_within_3px_catalogue_after": 1611,
+  "added_outside_donor_region": 3765
+ },
+ "predicted_delta_model": {
+  "n_moved": 3765,
+  "k_bar": 2.5,
+  "denom": 20000.0,
+  "per_unit_hit_rate_difference": 0.470625,
+  "null_dp_0p00": 0.0,
+  "central_dp_0p02": 0.0094125,
+  "strong_dp_0p06": 0.0282375,
+  "band": [
+   -0.01,
+   0.0382375
+  ],
+  "central": 0.0094125,
+  "note": "a live |change| < 0.01 is no evidence; the central case sits at the threshold, so this axis only reads out if it is large"
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif",
+  "zeros": "releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377-zeros.tif",
+  "sha256": "2dc19377e7592f408bf3d3bc67d49bb86b640deedaf2744de12db68f3cc2db52",
+  "sha256_zeros": "a42e5d1a160c2429b8364d8ea48d9047202a3a049805933dfdde71cb75b73ce9",
+  "sha8": "2dc19377"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "2dc19377e7592f40"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "a42e5d1a160c2429"
+    }
+   ]
+  },
+  "twins_identical": true,
+  "new_dot_min_clearance_px": 3.0
+ },
+ "parent_diff": {
+  "added_vs_parent": 3765,
+  "removed_vs_parent": 3765,
+  "symmetric_difference": 7530,
+  "pct_changed_moved": 9.998937695862326,
+  "pct_changed_symdiff": 19.99787539172465,
+  "jaccard": 0.8181993770974674,
+  "identical": false
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279
+ },
+ "seconds": 6.3
+}
