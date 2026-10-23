@@ -68,3 +68,35 @@ Brief §1 asks to confirm the 2026-12-03 deadline and the Phase-1/Phase-2 split 
 page; Brief §4.1 bans fetching `drivendata.org` (terms forbid automated access).
 **Decision:** `2026-12-03` is carried as **UNVERIFIED** in `SLOT_PLAN.md` and `README.md`. The human
 must confirm it. No scheduling decision in this repo depends on any other unverified date.
+
+## IR-89-07 — a parallel session built the same axis the same day, and `main` moved under this PR
+
+While this PR was open, PR #2 (`arena/3e9736cf-gemsdoe89`) was merged into `main` at `0fe4a4a`.
+It is a second GEMSDOE89 session that also chose **RELIEF** and shipped `relief-r10`, `relief-r15`,
+`relief-r15s` (shas `366c87ca` / `6aa774ce` / `5f0ae851`).
+
+**Decision-level consequences:**
+
+1. **Axis duplication.** The brief says each `(AXIS, value)` pair is built once across all sessions.
+   The *values* differ (`r10/r15/r15s` vs `basin10/pied10/rf10`), so the letter of the rule is met,
+   but the entity now has six RELIEF rasters and three slots. The human must choose one lineage —
+   do not upload from both this week.
+2. **The two parents are not the same kind of artefact.** The merged session *restored* the
+   published R0 file and verified its hash (`registry/parent_verification.json`: "Not rebuilt from a
+   recipe"). This session *rebuilt* R0 from the recorded recipe and matched **both** encodings
+   (`c55bafc4…` 219,065 B and `baeae321…` 355,443 B) — which independently corroborates the merged
+   session's pin, and is the stronger claim.
+3. **Collar count disagreement: 2,171 vs 1,611.** The merged session reports `dots_within_3px: 1,611`
+   for the same parent; this session and `GEMSDOE88`'s `PRUNEp3px` build both give **2,171**
+   (that variant deletes exactly −2,171 dots). 2,171 is corroborated by an independent lineage;
+   whoever re-bases on a 3 px collar should use 2,171, not 1,611.
+4. **`main` now tracks six competition-derived `.tif` files** (`releases/*.tif`). This repository's
+   CI refuses to pass with tracked rasters (`.github/workflows/ci.yml`), and Brief §4.2 says to keep
+   them out of public repos. Merging this branch as-is would immediately fail that check.
+
+**Decision:** the PR stays **open**. It conflicts with `main` on `README.md`, `.gitignore`,
+`.github/workflows/ci.yml`, `ledger/submissions.csv`, `SLOT_PLAN.md`, `docs/SUBMIT.md`,
+`registry/data_manifest.json` and `requirements.txt`, and a mechanical resolution would import the
+tracked rasters and silently merge two divergent ledgers. Per Brief §7 ("merge only if CI is green
+and no conflict markers exist; otherwise leave it open and say why"), it is left open for the human
+to arbitrate: keep one session's releases, one ledger, and one data-use policy.
