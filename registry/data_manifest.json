@@ -1,0 +1,62 @@
+{
+ "schema_version": 1,
+ "session": "GEMSDOE89",
+ "note": "Every entry was downloaded from the pinned repo@ref and its sha256 recomputed locally before use. These are owner-supplied MIRRORS of DrivenData competition files: integrity-pinned, NOT organizer-authenticated, and NOT licensed for redistribution. They are stored outside the repository (see data_root) and are not committed.",
+ "data_root_env": "GEMSDOE_DATA",
+ "data_root_default": "data",
+ "files": [
+  {
+   "id": "training_features",
+   "local": "training_features.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE",
+   "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
+   "parts": [
+    "data/bridge/gems-geodawn-numerical-features.tif.part-000",
+    "data/bridge/gems-geodawn-numerical-features.tif.part-001",
+    "data/bridge/gems-geodawn-numerical-features.tif.part-002",
+    "data/bridge/gems-geodawn-numerical-features.tif.part-003",
+    "data/bridge/gems-geodawn-numerical-features.tif.part-004"
+   ],
+   "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+   "bytes": 418912844,
+   "bands": 19,
+   "bands_used": {"12": "det_elev", "19": "det_elev_slope"},
+   "band_identity_source": "buffedlizard55-lab/GEMSDOE88 registry/feature_receipt.json -> verified_training_band_tags",
+   "provenance": "owner-supplied mirror of the DrivenData competition feature stack; integrity-pinned, NOT organizer-authenticated"
+  },
+  {
+   "id": "sample_submission",
+   "local": "sample_submission.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "path": "data/bridge/sample_submission.tif",
+   "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "bytes": 1599597,
+   "role": "grid/footprint template ONLY",
+   "provenance": "owner-supplied mirror of the DrivenData competition template; defines shape, transform, CRS, dtype and the scored footprint"
+  },
+  {
+   "id": "existing_faults",
+   "local": "existing_faults.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "path": "data/bridge/existing_faults.tif",
+   "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "bytes": 425830,
+   "role": "catalogue mask: exclusion collar + RELIEF class prior + REPORT-ONLY proxy",
+   "provenance": "owner-supplied mirror of the USGS/INGENIOUS known-fault mask (byte-identical to the training labels); these pixels are masked pixel-exactly in scoring"
+  },
+  {
+   "id": "parent_r0_zeros",
+   "local": "parent_r0_zeros.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE86",
+   "ref": "7f37d6ac43043e5b841b3f4e27d054b22ed63396",
+   "path": "data/scored_fleet/GEMSDOE32__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "bytes": 219065,
+   "role": "PARENT R0 (h33-h33-2-b2, claimed 0.2778 = CLAIM)",
+   "provenance": "owner-mirrored scored fleet raster; its sha256 equals the sha256_zeros recorded for h33-h33-2-b2 in GEMSDOE84 ledger/submissions.csv, so parent identity is exact"
+  }
+ ],
+ "not_used": "No external (non-competition) dataset was used this session; the RELIEF classes come from band 12/19 of the pinned feature stack, so no new licence applies."
+}

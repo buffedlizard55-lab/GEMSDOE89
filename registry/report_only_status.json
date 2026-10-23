@@ -1,0 +1,37 @@
+{
+ "note": "REPORT ONLY. None of these instruments can pass or fail a release.",
+ "catalogue_hide_and_recover": {
+  "seed": 20261023,
+  "holdout_fraction": 0.30,
+  "n_withheld": 18296,
+  "parent_recall": 0.0384,
+  "r10": 0.0356,
+  "r15": 0.0348,
+  "r15s": 0.0341,
+  "random_null": 0.0,
+  "ci": "Wilson 95% computed per file in registry/build_report_*.json",
+  "caveat": "Structurally blind to this axis: every added dot is >=3 px from every catalogue pixel by construction, so the proxy can only register the removal half of a RELIEF move. Deltas here are an artefact and were NOT used to set a predicted sign (IRREGULARITIES.md item 7)."
+ },
+ "surrogate_dti_catalogue_as_truth": {
+  "parent": 0.0067,
+  "r10": 0.0062,
+  "r15": 0.0060,
+  "r15s": 0.0059,
+  "random_null": 0.0,
+  "caveat": "The catalogue is masked pixel-exactly in live scoring, so this is a counterfactual coverage measure, not a score estimate."
+ },
+ "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature AUC 0.562 (threshold 0.90)",
+ "sgmc_control": {
+  "status": "NOT RUN",
+  "reason": "The SGMC control raster (ext_derived_sgmc_faults_100m_u8, sha256 643cbe99...) was not restored this session. It is report-only and cannot gate a file, so it was deferred rather than fetched; restore it via registry/data_manifest.json if the human wants the control.",
+  "impact_on_decisions": "none - no variant depends on it"
+ },
+ "block_density_cv": {
+  "definition": "1 km x 1 km blocks (10 x 10 px), density = dots / footprint px per block, blocks with >=50% footprint",
+  "parent": 1.87,
+  "r10": 1.862,
+  "r15": 1.887,
+  "r15s": 1.704,
+  "caveat": "Not comparable to the 0.51-0.59 figure quoted in the brief nor to the 0.62-0.76 reported upstream; at ~0.73 dots per block Poisson noise alone gives ~1.2. Reported, never used as a target (IRREGULARITIES.md item 6)."
+ }
+}

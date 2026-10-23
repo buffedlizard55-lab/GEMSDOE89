@@ -1,0 +1,61 @@
+{
+ "ascii_params": "WGS 84 / UTM zone 11N|WGS 84|",
+ "bands": 1,
+ "dtype": "float32",
+ "footprint_px": 5167373,
+ "geographic_crs": "EPSG:32611",
+ "geokeys": [
+  1,
+  1,
+  0,
+  7,
+  1024,
+  0,
+  1,
+  1,
+  1025,
+  0,
+  1,
+  1,
+  1026,
+  34737,
+  22,
+  0,
+  2049,
+  34737,
+  7,
+  22,
+  2054,
+  0,
+  1,
+  9102,
+  3072,
+  0,
+  1,
+  32611,
+  3076,
+  0,
+  1,
+  9001
+ ],
+ "nodata_tag": "nan",
+ "note": "Extracted from sample_submission.tif; pixel data is NOT stored in this repo. CI compares releases against this contract.",
+ "pixel_scale": [
+  100.0,
+  100.0,
+  0.0
+ ],
+ "shape": [
+  3730,
+  3292
+ ],
+ "source_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+ "tiepoint": [
+  0.0,
+  0.0,
+  0.0,
+  243350.0,
+  4508550.0,
+  0.0
+ ]
+}

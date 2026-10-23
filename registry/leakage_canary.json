@@ -1,0 +1,26 @@
+{
+ "instrument": "leakage canary (single-feature AUC vs catalogue membership)",
+ "threshold": 0.9,
+ "sample_px": 400000,
+ "seed": 11,
+ "features": {
+  "det_elev": {
+   "auc": 0.4833735581904295,
+   "flag": false
+  },
+  "det_elev_slope": {
+   "auc": 0.5543881495746192,
+   "flag": false
+  },
+  "elev_class": {
+   "auc": 0.4948056643012281,
+   "flag": false
+  },
+  "abs_elev_gradient": {
+   "auc": 0.561682529685672,
+   "flag": false
+  }
+ },
+ "verdict": "PASS: no single feature exceeds the canary threshold",
+ "note": "REPORT ONLY. AUC close to 0.5 means the feature carries no catalogue information by itself; a value above 0.90 would mean the feature nearly identifies catalogue pixels and must not be used."
+}
