@@ -27,6 +27,12 @@
 zeros-outside twins), all passing every MUST gate; see `ledger/submissions.csv`
 and `registry/build_report_spacing_*.json`.
 
+⚠️ **Read `IRREGULARITIES.md` item 9 before spending a slot.** `main` (commit
+3bededd) already carries SPACING `poisson` / `lattice` / `alongstrike` arms on
+the same parent, built by a parallel session. The files here do not collide on
+the `(parent, axis, value)` key but duplicate those experiments at different
+doses, so they are not independent evidence.
+
 **What only the human can supply:** TOP_PUBLIC + date; slots used/available; a
 receipt score for each submitted file (`receipt_score`, `receipt_date` in the
 ledger); confirmation of the 2026-12-03 deadline; and a decision on the

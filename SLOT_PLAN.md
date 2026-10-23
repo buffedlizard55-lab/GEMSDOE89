@@ -12,6 +12,13 @@ SPACING first because it is the axis with no prior `(axis, value)` pair anywhere
 in the recovered ledger, and because one of its arms has the largest predicted
 effect this repo has produced.
 
+> **Before using this plan:** `main` now also carries SPACING arms (`poisson`,
+> `lattice`, `alongstrike`) from a parallel session on the same parent — see
+> `IRREGULARITIES.md` item 9. The files below are valid and gate-passing but
+> duplicate those experiments at different doses. If both lineages are live,
+> the only additive question left in this set is the dose contrast
+> (`hd3p0` 14.4 % vs `hd4p0` 36.5 %) against main's 20.3 % poisson arm.
+
 ## The three slots, in order
 
 | # | File | Predicted live change | Submit only if | What the result changes |

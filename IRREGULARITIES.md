@@ -115,3 +115,44 @@ inside the constraint.
 
 **Overrule path.** If a lattice arm is required anyway, it must be registered as
 a > 50 % change and the brief's constraint waived explicitly for that file.
+
+### Correction to item 8 (same day, after rebasing my view onto `main`)
+
+`main` now carries a SPACING `lattice` arm
+(`h33-h33-2-b2-spacing-lattice-20261023-454c9098`) that moves 7,305 dots
+(19.4 %) by snapping to an isometric hexagonal lattice inside a ±200 m corridor.
+So the lattice construction **is** available inside the 1–50 % constraint; what
+is not available is a *global* lattice or a *global* re-sampled Poisson field.
+Item 8's conclusion (build dose + geometry arms rather than a global rebuild)
+stands; its claim that a lattice arm cannot be built is wrong and is withdrawn.
+
+## 9. A parallel session already built the SPACING axis on the same parent
+
+At branch time (commit 5875e05) the recovered ledger had no `(SPACING, value)`
+pair, which is why this session chose SPACING. `main` has since advanced to
+3bededd and now contains three SPACING arms built on the same parent R0:
+
+| main arm | dots moved | mean displacement |
+|---|---|---|
+| `spacing-poisson-…-ff167173` (2D Bridson Poisson-disk) | 7,639 (20.3 %) | 1.53 px |
+| `spacing-lattice-…-454c9098` (hex lattice, 3.5 px pitch) | 7,305 (19.4 %) | 1.54 px |
+| `spacing-alongstrike-…-3b263c7a` | 5,222 (13.9 %) | 1.17 px |
+
+**What this means for this session's files.** My `hd3p0` / `hd4p0` / `hd3p0-along`
+arm names do not collide on the `(parent, axis, value)` key, so the dedupe rule
+as written does not catch them — but in substance `hd3p0`/`hd4p0` are a
+hard-disk Poisson relaxation and `hd3p0-along` is an along-strike relaxation,
+i.e. the same two experiments as main's `poisson` and `alongstrike`, at
+different doses (14.4 % / 36.5 % / 13.7 % versus 20.3 % / 13.9 %).
+
+**Decision.** These three files are labelled BUILT and remain valid, gate-passing
+rasters, but they are **not independent evidence** and must not be spent as if
+they were: submitting one of mine after one of main's tests the dose, not the
+axis. If the human submits from this session at all, the only genuinely additive
+question is the **dose contrast** (`hd3p0` 14.4 % vs `hd4p0` 36.5 %) against
+main's 20.3 % poisson arm.
+
+**Overrule path.** If the human prefers one lineage, the cheapest defensible
+choice is to submit the collision-free half of this set once and delete the
+rest — I did not delete files or rows, because that decision is the human's and
+the files are cheap to keep.
