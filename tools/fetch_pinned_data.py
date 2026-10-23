@@ -45,13 +45,16 @@ def main() -> int:
         by_repo_ref[(entry["repo"], entry["ref"])].append(entry)
 
     for (repo, ref), entries in by_repo_ref.items():
-        wanted: dict[str, Path] = {}
+        # One archive member can back multiple manifest aliases (for example
+        # scored_h19_5.tif and h19_5.tif).  Keep every destination instead of
+        # silently overwriting the first alias in a path-keyed dictionary.
+        wanted: dict[str, list[Path]] = defaultdict(list)
         for entry in entries:
             if "parts" in entry:
                 for p in entry["parts"]:
-                    wanted[p] = data_root / f"_part_{entry['id']}_{Path(p).name}"
+                    wanted[p].append(data_root / f"_part_{entry['id']}_{Path(p).name}")
             else:
-                wanted[entry["path"]] = data_root / entry["local"]
+                wanted[entry["path"]].append(data_root / entry["local"])
 
         url = f"https://codeload.github.com/{repo}/tar.gz/{ref}"
         print(f"[fetch] {url} ({len(wanted)} member(s))", flush=True)
@@ -67,10 +70,14 @@ def main() -> int:
                         src = tf.extractfile(member)
                         if src is None:
                             continue
-                        out_path = wanted[rel]
-                        out_path.parent.mkdir(parents=True, exist_ok=True)
-                        with open(out_path, "wb") as out_fh:
+                        out_paths = wanted[rel]
+                        for out_path in out_paths:
+                            out_path.parent.mkdir(parents=True, exist_ok=True)
+                        primary = out_paths[0]
+                        with open(primary, "wb") as out_fh:
                             shutil.copyfileobj(src, out_fh, length=1 << 20)
+                        for alias in out_paths[1:]:
+                            shutil.copyfile(primary, alias)
                         found.add(rel)
 
         missing = set(wanted) - found
