@@ -1,0 +1,240 @@
+{
+  "schema": "gems89.relief-axis-report.v1",
+  "generated_utc": "2026-10-23T19:32:31Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "parent": "h33-h33-2-b2",
+  "axis": "RELIEF",
+  "control_arm": "h33-h33-2-b2-RELIEFpied10-20261023-b0285b17",
+  "instruments": {
+    "sgmc_proxy": "off-catalogue SGMC control raster; PROXY ONLY, never a gate, never a score",
+    "catalogue_control": "the known-fault catalogue as truth; a control that must not move"
+  },
+  "arms": [
+    {
+      "id": "h33-h33-2-b2-RELIEFbasin10-20261023-d1a3b00d",
+      "value": "basin10",
+      "source_tercile": "piedmont",
+      "receiving_tercile": "basin",
+      "n_dots": 37654,
+      "pct_changed": 19.9979,
+      "allocation_after": {
+        "basin": 11461,
+        "piedmont": 11979,
+        "range_front": 14214
+      },
+      "sgmc_proxy": {
+        "parent": {
+          "dti": 0.0928930494744682,
+          "T": 6687.851208796859,
+          "M": 2825.9839812372375,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "after_removal": {
+          "dti": 0.08738591454682845,
+          "T": 6222.111028651719,
+          "M": 2557.727125837024,
+          "S": 33889.0,
+          "G": 79615.0
+        },
+        "variant": {
+          "dti": 0.10139604784366649,
+          "T": 7309.198701314393,
+          "M": 2995.013542471046,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "dT_removal": -465.7401801451406,
+        "dT_addition": 1087.0876726626739,
+        "dM_removal": -268.2568554002137,
+        "dM_addition": 437.2864166340223,
+        "dDTI_removal": -0.0055071349276397535,
+        "dDTI_addition": 0.014010133296838034,
+        "dDTI_total": 0.00850299836919828
+      },
+      "catalogue_control": {
+        "parent": {
+          "dti": 0.006709118968955278,
+          "T": 377.9998967710639,
+          "M": 277.93795319758647,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "after_removal": {
+          "dti": 0.006555886592842749,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 33889.0,
+          "G": 60988.0
+        },
+        "variant": {
+          "dti": 0.006468265978537297,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "dT_removal": -13.575045798966812,
+        "dT_addition": 0.0,
+        "dM_removal": -9.635573158870102,
+        "dM_addition": 0.0,
+        "dDTI_removal": -0.00015323237611252882,
+        "dDTI_addition": -8.762061430545205e-05,
+        "dDTI_total": -0.00024085299041798087
+      },
+      "contrast_vs_control_sgmc": 0.00029358583942366845,
+      "contrast_vs_control_catalogue": 0.0
+    },
+    {
+      "id": "h33-h33-2-b2-RELIEFpied10-20261023-b0285b17",
+      "value": "pied10",
+      "source_tercile": "piedmont",
+      "receiving_tercile": "piedmont",
+      "n_dots": 37654,
+      "pct_changed": 19.9979,
+      "allocation_after": {
+        "basin": 7696,
+        "piedmont": 15744,
+        "range_front": 14214
+      },
+      "sgmc_proxy": {
+        "parent": {
+          "dti": 0.0928930494744682,
+          "T": 6687.851208796859,
+          "M": 2825.9839812372375,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "after_removal": {
+          "dti": 0.08738591454682845,
+          "T": 6222.111028651719,
+          "M": 2557.727125837024,
+          "S": 33889.0,
+          "G": 79615.0
+        },
+        "variant": {
+          "dti": 0.10110246200424282,
+          "T": 7287.600514489412,
+          "M": 2994.921487049767,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "dT_removal": -465.7401801451406,
+        "dT_addition": 1065.4894858376929,
+        "dM_removal": -268.2568554002137,
+        "dM_addition": 437.1943612127434,
+        "dDTI_removal": -0.0055071349276397535,
+        "dDTI_addition": 0.013716547457414366,
+        "dDTI_total": 0.008209412529774612
+      },
+      "catalogue_control": {
+        "parent": {
+          "dti": 0.006709118968955278,
+          "T": 377.9998967710639,
+          "M": 277.93795319758647,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "after_removal": {
+          "dti": 0.006555886592842749,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 33889.0,
+          "G": 60988.0
+        },
+        "variant": {
+          "dti": 0.006468265978537297,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "dT_removal": -13.575045798966812,
+        "dT_addition": 0.0,
+        "dM_removal": -9.635573158870102,
+        "dM_addition": 0.0,
+        "dDTI_removal": -0.00015323237611252882,
+        "dDTI_addition": -8.762061430545205e-05,
+        "dDTI_total": -0.00024085299041798087
+      },
+      "contrast_vs_control_sgmc": 0.0,
+      "contrast_vs_control_catalogue": 0.0
+    },
+    {
+      "id": "h33-h33-2-b2-RELIEFrf10-20261023-7d62b548",
+      "value": "rf10",
+      "source_tercile": "piedmont",
+      "receiving_tercile": "range_front",
+      "n_dots": 37654,
+      "pct_changed": 19.9979,
+      "allocation_after": {
+        "basin": 7696,
+        "piedmont": 11979,
+        "range_front": 17979
+      },
+      "sgmc_proxy": {
+        "parent": {
+          "dti": 0.0928930494744682,
+          "T": 6687.851208796859,
+          "M": 2825.9839812372375,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "after_removal": {
+          "dti": 0.08738591454682845,
+          "T": 6222.111028651719,
+          "M": 2557.727125837024,
+          "S": 33889.0,
+          "G": 79615.0
+        },
+        "variant": {
+          "dti": 0.09957394176856882,
+          "T": 7174.965562287148,
+          "M": 3005.670814184028,
+          "S": 37654.0,
+          "G": 79615.0
+        },
+        "dT_removal": -465.7401801451406,
+        "dT_addition": 952.8545336354291,
+        "dM_removal": -268.2568554002137,
+        "dM_addition": 447.94368834700435,
+        "dDTI_removal": -0.0055071349276397535,
+        "dDTI_addition": 0.012188027221740366,
+        "dDTI_total": 0.006680892294100613
+      },
+      "catalogue_control": {
+        "parent": {
+          "dti": 0.006709118968955278,
+          "T": 377.9998967710639,
+          "M": 277.93795319758647,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "after_removal": {
+          "dti": 0.006555886592842749,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 33889.0,
+          "G": 60988.0
+        },
+        "variant": {
+          "dti": 0.006468265978537297,
+          "T": 364.4248509720971,
+          "M": 268.30238003871636,
+          "S": 37654.0,
+          "G": 60988.0
+        },
+        "dT_removal": -13.575045798966812,
+        "dT_addition": 0.0,
+        "dM_removal": -9.635573158870102,
+        "dM_addition": 0.0,
+        "dDTI_removal": -0.00015323237611252882,
+        "dDTI_addition": -8.762061430545205e-05,
+        "dDTI_total": -0.00024085299041798087
+      },
+      "contrast_vs_control_sgmc": -0.0015285202356739996,
+      "contrast_vs_control_catalogue": 0.0
+    }
+  ],
+  "reading": "dDTI_addition is the only quantity that differs between arms; it carries the tercile signal."
+}

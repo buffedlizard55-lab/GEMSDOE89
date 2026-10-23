@@ -1,0 +1,46 @@
+{
+  "schema": "gems89.mechanism-cards.v1",
+  "parent": "h33-h33-2-b2",
+  "axis": "RELIEF",
+  "band": "det_elev (training_features Band 12, detrended elevation in metres); terciles -143.06 m / +38.59 m",
+  "cards": [
+    {
+      "id": "AXIS-RELIEF",
+      "applies_to": ["RELIEFbasin10", "RELIEFrf10", "RELIEFpied10"],
+      "hypothesis": "Where a dot sits in the relief column predicts whether it can pay credit: the new-fault truth is not uniformly distributed across basin floor, piedmont and range front, and the parent's allocation is not matched to it.",
+      "mechanism": "Basin and Range normal faults are expressed as scarps at the base of range fronts and across the piedmont; the basin floor is where scarps are buried by playa and lacustrine fill. Moving mass between these three positions therefore changes the probability that a dot's 300 m kernel touches a fault pixel, without changing the count, the spacing or the kernel.",
+      "mimic": "Every one of these positions also carries non-fault sharp ground: relict Lake Lahontan shorelines and playa margins (basin), fan-head and distributary channels (piedmont), and lithological contacts, erosional bedrock steps and hillslope breaks (range front). A gain can come from any of them, and the metric cannot tell you which.",
+      "shared_confound": "The known-fault catalogue is itself concentrated on range fronts (that is where faults get mapped). Those pixels are masked out of scoring, so the *scored* truth is whatever is left - which biases the target away from the range front and toward ground the mappers skipped. This is why the off-catalogue SGMC proxy and the live score can honestly disagree.",
+      "predicted_sign_and_size": "MODEL: +0.008 for every arm, credible range [-0.004, +0.016]; the tercile contrasts are expected at +/-0.002, i.e. below the 0.01 evidence bar. The manipulation is dominated by the shared remove/insert rule (+0.0122 to +0.0140 insertion credit, -0.0055 removal cost, on the proxy), not by the tercile.",
+      "falsifier": "Any arm that lands within 0.005 of the control makes the tercile variable indistinguishable from noise at 10 % mass; the axis is then closed and the placement rule is promoted instead."
+    },
+    {
+      "id": "RELIEFbasin10",
+      "receiving_tercile": "basin",
+      "hypothesis": "Unmapped faults inside the basin - step-overs, relay ramps and faults under thin alluvium - are the bulk of the new-fault truth, because the mapped catalogue covers the range fronts and stops at the mountain base.",
+      "mechanism": "Intrabasin normal faults in the central Nevada rift are commonly buried by Lake Lahontan and playa deposits; they are under-represented in USGS/INGENIOUS Quaternary compilations precisely because they have no surface scarp. Their geophysical expression (magnetic/gravity lineaments, subtle detrended-elevation steps) survives at the 100 m grid.",
+      "mimic": "Shoreline and playa-margin edges: the sharpest ground in the basin tercile is a relict lake shoreline, not a fault. Dots placed on those edges will pay credit only if a fault happens to run along the same line.",
+      "predicted_sign_and_size": "MODEL +0.008 [-0.004, +0.016]; proxy ranks it first of the three arms (dDTI +0.00850, tercile contrast +0.00029).",
+      "falsifier": "Live <= R0 - 0.01, or below the reshuffle control by >= 0.01: basin mass is shoreline-driven, and the buried-fault hypothesis is rejected at this resolution."
+    },
+    {
+      "id": "RELIEFrf10",
+      "receiving_tercile": "range_front",
+      "hypothesis": "Unmapped splays and hinterland faults of the range-front systems carry the new truth, and the parent under-allocates to them because its field was trained against the mapped catalogue.",
+      "mechanism": "Range-front normal faults are the master faults of the province; splays, antithetic faults and step-overs sit within a few hundred metres of the mapped traces, so a dot in that zone can pay credit against both mapped (masked) and unmapped truth. The proxy agrees: off-catalogue SGMC density is 0.0264 in this tercile versus 0.0126 (piedmont) and 0.0072 (basin), and the parent's own dot density is 0.0083.",
+      "mimic": "The mapped faults themselves are masked, so credit has to come from a fault pixel this arm did not target; and the zone is full of non-fault bedrock steps and lithological contacts.",
+      "predicted_sign_and_size": "MODEL +0.007 [-0.005, +0.015]; proxy ranks it last (dDTI +0.00668, tercile contrast -0.00153) despite the SGMC density, because the inserted dots there land on unoccupied sharp ground far from any mapped trace (mean NN 38.5 px).",
+      "falsifier": "Live <= control - 0.01: the range front is already saturated by the catalogue and the mask, and the splay hypothesis is rejected."
+    },
+    {
+      "id": "RELIEFpied10",
+      "receiving_tercile": "piedmont",
+      "role": "RESHUFFLE CONTROL",
+      "hypothesis": "The remove/insert rule alone - de-duplicate the most redundant dots and re-place them on uncovered sharp ground - produces the arm's whole effect, with no tercile reallocation at all.",
+      "mechanism": "A dot whose 25-cell kernel footprint is shared with a neighbour supplies almost no unique credit; deleting it costs little T while freeing a dot that can be placed where no other dot reaches. This is metric algebra, not geology: it holds for any truth surface.",
+      "mimic": "None needed - this arm is the mimic detector. Any difference between an arm and this control is the tercile effect; any difference between this control and R0 is the placement effect.",
+      "predicted_sign_and_size": "MODEL +0.008 [-0.004, +0.016]; proxy dDTI +0.00821 (removal -0.00551, insertion +0.01372), tercile contrast 0 by construction.",
+      "falsifier": "If this control beats both tercile-shift arms by >= 0.01, the axis that matters is placement, not relief - which is exactly what the decomposition already suggests."
+    }
+  ]
+}

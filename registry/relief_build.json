@@ -1,0 +1,17 @@
+{
+  "schema": "gems89.relief-build.v1",
+  "generated_utc": "2026-10-23T19:31:30Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "k": 3765,
+  "fraction": 0.1,
+  "tercile_edges_m": [
+    -143.0626678466797,
+    38.58847300211596
+  ],
+  "slope_threshold": 14.098604583740235,
+  "variants": [
+    "h33-h33-2-b2-RELIEFbasin10-20261023-d1a3b00d",
+    "h33-h33-2-b2-RELIEFrf10-20261023-7d62b548",
+    "h33-h33-2-b2-RELIEFpied10-20261023-b0285b17"
+  ]
+}

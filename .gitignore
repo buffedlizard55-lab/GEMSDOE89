@@ -1,0 +1,10 @@
+# Runtime data (competition rasters) and candidate submissions are NEVER tracked.
+# Agent Brief v2 section 4.2: keep competition rasters out of public repos.
+data/
+releases/*.tif
+releases/*.zip
+*.part
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/

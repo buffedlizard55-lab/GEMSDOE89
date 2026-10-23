@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "updated_utc": "2026-10-23T00:00:00+00:00",
+  "policy": "Agent Brief v2 section 4.2: SHA-256 and byte length verified before use; no dropbox.com, no drivendata.org; competition rasters never tracked in Git (data/ and releases/*.tif are gitignored).",
+  "public_mirror_flag": {
+    "status": "FLAGGED_DATA_USE_UNCHECKED",
+    "detail": "Owner mirrors of login-walled DrivenData competition files are public on GitHub (buffedlizard55-lab/GEMSDOE, /GEMSDOE24, /GEMSDOE32, /GEMSDOE88). Redistribution terms are unchecked. GEMSDOE89 only reads these pins and never tracks competition or candidate GeoTIFFs in Git. Logged in IRREGULARITIES.md (IR-89-02)."
+  },
+  "transport": {
+    "host": "api.github.com",
+    "method": "gh api <repos/{repo}/contents/{path}> -H 'Accept: application/vnd.github.raw' (size limit 100 MB per blob)",
+    "note": "raw.githubusercontent.com and dropbox.com are outside the sandbox allowlist; every pin below resolves through api.github.com at a frozen commit ref."
+  },
+  "files": [
+    {
+      "id": "sample_submission",
+      "dest": "data/bridge/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "bytes": 1599597,
+      "role": "format reference (CRS, shape, transform, dtype, band count)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "data/bridge/sample_submission.tif"}],
+      "provenance": "Owner-supplied mirror of the DrivenData #306 sample_submission.tif / example_submission.tif (login-walled). Identical bytes to GEMSDOE/data/bridge/example_submission.tif per bridge manifest.",
+      "license": "Competition terms (not redistributable). Local cache only."
+    },
+    {
+      "id": "existing_faults",
+      "dest": "data/bridge/existing_faults.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "bytes": 425830,
+      "role": "known-fault catalogue = label raster used for the zero-mass and >=3 px collar rules",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "data/bridge/existing_faults.tif"}],
+      "provenance": "Owner-supplied mirror of the DrivenData known-fault raster; byte-identical to the mirrored labels.tif (same sha256 in GEMSDOE/data/bridge/manifest.json). USGS/INGENIOUS quaternary faults.",
+      "license": "Competition terms (not redistributable). Local cache only."
+    },
+    {
+      "id": "parent_r0_zeros",
+      "dest": "data/registry/parent_r0_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "bytes": 219065,
+      "role": "R0 published artifact, zeros-outside encoding (rebuild target)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE32", "ref": "078f3cea1bc75d15beb81b095ab488a912327a5d", "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"}],
+      "provenance": "GEMSDOE32 registry/submission_build.json file.sha256. 37,654 unit-mass dots. Live score 0.2778 is a CLAIM (no receipt).",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "parent_r0_nan",
+      "dest": "data/registry/parent_r0_nan.tif",
+      "sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+      "bytes": 355443,
+      "role": "R0 published artifact, NaN-outside encoding (rebuild target)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE32", "ref": "078f3cea1bc75d15beb81b095ab488a912327a5d", "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif"}],
+      "provenance": "GEMSDOE32 registry/submission_build.json pack entry 'NaN-outside twin of the primary'.",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "anc_h19_5",
+      "dest": "data/registry/family/anc_h19_5.tif",
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "bytes": 1712322,
+      "role": "lineage stage 1: H19-5 continuous field (121,131 px, CLAIM 0.1922)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif"}],
+      "provenance": "GEMSDOE24 data_manifest.json id scored_h19_5 (same sha256).",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "anc_d1_5",
+      "dest": "data/registry/family/anc_d1_5.tif",
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "bytes": 1632732,
+      "role": "lineage stage 2: Poisson-disk thinning at min_dist 1.5 px (60,069 px, CLAIM 0.2477)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif"}],
+      "provenance": "GEMSDOE24 data_manifest.json id scored_d15_scored (same sha256).",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "anc_d2_8",
+      "dest": "data/registry/family/anc_d2_8.tif",
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "bytes": 1603424,
+      "role": "lineage stage 3: thinning at min_dist 2.8 px (44,090 px, CLAIM 0.2600)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif"}],
+      "provenance": "GEMSDOE24 data_manifest.json id scored_d28_unscored (same sha256).",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "anc_solo_d2_8",
+      "dest": "data/registry/family/anc_solo_d2_8.tif",
+      "sha256": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+      "bytes": 830036,
+      "role": "lineage stage 4: SOLO-D2.8 = d2.8 minus dots with d_cat <= 1 px (40,199 px, CLAIM 0.2708)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE28", "ref": "d618b648f3ff3b30d04f376dcd6610c3cf28cf28", "path": "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"}],
+      "provenance": "GEMSDOE88 registry/data_manifest.json id anc_solo_d2_8 (same sha256, same bytes).",
+      "license": "Same owner. Derived from competition data; local cache only."
+    },
+    {
+      "id": "training_features",
+      "dest": "data/training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "bytes": 418912844,
+      "role": "19-band competition feature stack; Band 12 = det_elev (detrended elevation, m), Band 19 = det_elev_slope, used by AXIS=RELIEF",
+      "sources": [
+        {"repo": "buffedlizard55-lab/GEMSDOE", "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0", "path": "data/bridge/gems-geodawn-numerical-features.tif.part-000", "sha256": "0a330f8951af6c921029e25c84a579319d2db554d62d30d894d6ddc97f98cff7", "bytes": 94371840},
+        {"repo": "buffedlizard55-lab/GEMSDOE", "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0", "path": "data/bridge/gems-geodawn-numerical-features.tif.part-001", "sha256": "3c98037b2c997e3bbfcdfc2d9a982e8b820a77410dd7404b05cdb80594922c50", "bytes": 94371840},
+        {"repo": "buffedlizard55-lab/GEMSDOE", "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0", "path": "data/bridge/gems-geodawn-numerical-features.tif.part-002", "sha256": "c375c4dbc40c59bbaece572b5e348700b75935f9a30c879c82b6417e0836f31c", "bytes": 94371840},
+        {"repo": "buffedlizard55-lab/GEMSDOE", "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0", "path": "data/bridge/gems-geodawn-numerical-features.tif.part-003", "sha256": "b164159e6d0cb2595bc9f63a948af2646b124114a9c5921880c7516092137320", "bytes": 94371840},
+        {"repo": "buffedlizard55-lab/GEMSDOE", "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0", "path": "data/bridge/gems-geodawn-numerical-features.tif.part-004", "sha256": "fa0a6f9c936fac1d6f20ca37f5929b2d60bf7a80f3d477dcab886f941aee2696", "bytes": 41425484}
+      ],
+      "concat_order": "part-000,part-001,part-002,part-003,part-004",
+      "band_names": ["mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc", "geod_shearrate", "geod_dilaterate", "tmi_vg", "deq_n100a15", "iso_grav_anom_vg", "det_elev", "iso_grav_anom", "tmi", "depth_to_base_surf", "ieq_n100a15", "cond_surf", "iso_grav_anom_hg", "det_elev_slope"],
+      "band_names_source": "GEMSDOE32 data/prepared_manifest.json (band index -> name), itself derived from the competition feature stack.",
+      "provenance": "Owner mirror of the DrivenData #306 numerical feature stack, split only to satisfy GitHub's 100 MB blob limit (GEMSDOE/data/bridge/manifest.json).",
+      "license": "Competition terms (not redistributable). Local cache only."
+    },
+    {
+      "id": "sgmc_faults_control",
+      "dest": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "bytes": 198602,
+      "role": "REPORT-ONLY control: independent State Geological Map Compilation fault raster at 100 m (never a gate, never the target)",
+      "sources": [{"repo": "buffedlizard55-lab/GEMSDOE24", "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b", "path": "data/external/derived_sgmc_faults_100m_u8.tif"}],
+      "provenance": "Derived by the owner's pipeline from USGS State Geologic Map Compilation (SGMC) faults rasterised to the competition grid. Public-domain USGS source: https://www.usgs.gov/publication/ds1052",
+      "license": "USGS public domain (source). Derived raster: same owner."
+    }
+  ]
+}

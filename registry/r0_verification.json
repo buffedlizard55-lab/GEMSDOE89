@@ -1,0 +1,90 @@
+{
+  "schema": "gems89.r0-verification.v1",
+  "generated_utc": "2026-10-23T19:25:52Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "parent": "h33-h33-2-b2",
+  "method": "full recorded H19-5 -> D1.5 -> D2.8 -> SOLO-D2.8 -> R0 recipe, re-executed",
+  "manifest_verified": true,
+  "stages": {
+    "H19-5": {
+      "rebuilt": 121131,
+      "expected": 121131,
+      "ok": true
+    },
+    "D1.5": {
+      "rebuilt": 60069,
+      "expected": 60069,
+      "ok": true
+    },
+    "D2.8": {
+      "rebuilt": 44090,
+      "expected": 44090,
+      "ok": true
+    },
+    "SOLO-D2.8": {
+      "rebuilt": 40199,
+      "expected": 40199,
+      "ok": true
+    },
+    "R0": {
+      "rebuilt": 37654,
+      "expected": 37654,
+      "ok": true
+    }
+  },
+  "pixel_checks": {
+    "D1.5": true,
+    "D2.8": true,
+    "SOLO-D2.8": true,
+    "R0": true,
+    "R0_nan_twin": true
+  },
+  "writer_profile": {
+    "driver": "GTiff",
+    "dtype": "float32",
+    "nodata": "None",
+    "width": "3292",
+    "height": "3730",
+    "count": "1",
+    "crs": "EPSG:32611",
+    "transform": "| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|",
+    "blockxsize": "256",
+    "blockysize": "256",
+    "tiled": "True",
+    "compress": "deflate",
+    "interleave": "band",
+    "predictor": "3",
+    "zlevel": "9"
+  },
+  "encoder": {
+    "container": "GDAL GTiff tiled 256x256, Predictor=3",
+    "deflate": "libdeflate",
+    "libdeflate_level": 10
+  },
+  "r0_zeros_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "r0_zeros_sha256_expected": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "r0_zeros_byte_exact": true,
+  "r0_nan_sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+  "r0_nan_sha256_expected": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+  "r0_nan_byte_exact": true,
+  "parent_geometry": {
+    "footprint_px": 5167373,
+    "catalogue_px": 60988,
+    "dots": 37654,
+    "zero_catalogue_mass": true,
+    "min_d_cat_px": 2.23606797749979,
+    "n_within_2px": 0,
+    "n_within_3px": 2171
+  },
+  "dti_self_check": {
+    "tp": 377.9998967710639,
+    "fp": 37376.06204680241,
+    "fn": 60610.00010322894,
+    "n_truth": 60988,
+    "n_emitted": 37654,
+    "dti": 0.006709118968955278,
+    "coverage": 0.006197938885863841
+  },
+  "note": "R0 equality is mandatory and never approximated. The 0.2778 live score remains a CLAIM without a submission receipt.",
+  "ok": true
+}

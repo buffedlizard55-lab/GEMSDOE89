@@ -1,0 +1,80 @@
+{
+  "schema": "gems89.relief-analysis.v1",
+  "generated_utc": "2026-10-23T19:26:36Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "band": {
+    "index": 12,
+    "name": "det_elev",
+    "slope_index": 19,
+    "slope_name": "det_elev_slope"
+  },
+  "tercile_edges_m": [
+    -143.0626678466797,
+    38.58847300211596
+  ],
+  "terciles": [
+    {
+      "tercile": "basin",
+      "det_elev_range_m": [
+        null,
+        -143.0626678466797
+      ],
+      "footprint_cells": 1722458,
+      "parent_dots": 7696,
+      "parent_dot_density": 0.004468033473094844,
+      "h19_5_px": 26974,
+      "insertion_pool_px": 17,
+      "sgmc_off_catalogue_px": 12471,
+      "sgmc_off_density": 0.0072402345949799645,
+      "mean_det_elev_m": -6.0471968724957986e+35,
+      "mean_det_elev_slope": -6.0471968724957986e+35
+    },
+    {
+      "tercile": "piedmont",
+      "det_elev_range_m": [
+        -143.0626678466797,
+        38.58847300211596
+      ],
+      "footprint_cells": 1722457,
+      "parent_dots": 15744,
+      "parent_dot_density": 0.009140431372161976,
+      "h19_5_px": 51300,
+      "insertion_pool_px": 37,
+      "sgmc_off_catalogue_px": 21677,
+      "sgmc_off_density": 0.012584929551216662,
+      "mean_det_elev_m": -65.8739087494966,
+      "mean_det_elev_slope": 5.42306533500158
+    },
+    {
+      "tercile": "range_front",
+      "det_elev_range_m": [
+        38.58847300211596,
+        null
+      ],
+      "footprint_cells": 1722458,
+      "parent_dots": 14214,
+      "parent_dot_density": 0.00825216057517803,
+      "h19_5_px": 42857,
+      "insertion_pool_px": 36,
+      "sgmc_off_catalogue_px": 45467,
+      "sgmc_off_density": 0.026396579771466127,
+      "mean_det_elev_m": 258.910140072543,
+      "mean_det_elev_slope": 14.495703758016475
+    }
+  ],
+  "invariants": {
+    "min_sep_px": 2.8284271247461903,
+    "collar_px": 3.0,
+    "footprint_px": 5167373,
+    "catalogue_px": 60988
+  },
+  "canary": {
+    "det_elev_vs_catalogue": 0.48411815101872563,
+    "det_elev_vs_sgmc_off_catalogue": 0.6605264003191893,
+    "det_elev_slope_vs_catalogue": 0.5570854245958592,
+    "tercile_vs_catalogue_auc": 0.4952490142103806,
+    "threshold": 0.9,
+    "verdict": "PASS"
+  },
+  "note": "PROXY control = off-catalogue SGMC only. It is never a gate and never a score."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "gems89.restore.v1",
+  "manifest": "registry/data_manifest.json",
+  "checked_only": false,
+  "files": [
+    {
+      "id": "training_features",
+      "dest": "data/training_features.tif",
+      "status": "downloaded+assembled",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "bytes": 418912844,
+      "ok": true
+    }
+  ],
+  "all_ok": true
+}

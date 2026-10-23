@@ -1,0 +1,46 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests (DTI algebra vs brute force; ledger and receipt integrity)
+        run: python -m pytest -q
+      - name: Confirm no competition raster is tracked
+        run: |
+          if git ls-files | grep -qiE '\.(tif|tiff|zip)$'; then
+            echo "::error::a raster or archive is tracked in git; competition data-use policy forbids it"
+            git ls-files | grep -iE '\.(tif|tiff|zip)$'
+            exit 1
+          fi
+          echo "no raster or archive tracked"
+      - name: Confirm receipts are internally consistent
+        run: |
+          python - <<'PY'
+          import csv, json, pathlib, sys
+          root = pathlib.Path(".")
+          rows = {r["id"]: r for r in csv.DictReader((root/"ledger"/"submissions.csv").open())}
+          bad = []
+          for p in sorted((root/"releases").glob("*.json")):
+              rec = json.loads(p.read_text())
+              if rows.get(rec["id"], {}).get("sha256") != rec["files"]["nan"]["sha256"]:
+                  bad.append(rec["id"])
+          print(f"{len(list((root/'releases').glob('*.json')))} receipts checked")
+          sys.exit(1 if bad else 0)
+          PY

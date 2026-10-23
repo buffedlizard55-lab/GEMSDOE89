@@ -1,0 +1,215 @@
+{
+  "schema": "gems89.relief-variant.v1",
+  "id": "h33-h33-2-b2-RELIEFrf10-20261023-7d62b548",
+  "parent": "h33-h33-2-b2",
+  "parent_sha256_zeros": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "axis": "RELIEF",
+  "value": "rf10",
+  "source_tercile": "piedmont",
+  "receiving_tercile": "range_front",
+  "k_dots": 3765,
+  "fraction_of_dots_moved": 0.1,
+  "generated_utc": "2026-10-23T19:31:14Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "inputs": {
+    "det_elev_band": 12,
+    "det_elev_slope_band": 19,
+    "band_names": {
+      "12": "det_elev",
+      "19": "det_elev_slope"
+    }
+  },
+  "tercile_edges_m": [
+    -143.0626678466797,
+    38.58847300211596
+  ],
+  "slope_threshold": 14.098604583740235,
+  "slope_percentile": 80.0,
+  "min_sep_px": 2.8284271247461903,
+  "collar_px": 3.0,
+  "encoder": {
+    "container": "GDAL GTiff tiled 256x256, Predictor=3",
+    "deflate": "libdeflate",
+    "level": 10
+  },
+  "files": {
+    "nan": {
+      "path": "releases/h33-h33-2-b2-RELIEFrf10-20261023-7d62b548.tif",
+      "sha256": "7d62b54885ec1f7405ab0683a615f1edca23a3ffbaefb74daf658b3917bbbb3c",
+      "bytes": 353175
+    },
+    "zeros": {
+      "path": "releases/h33-h33-2-b2-RELIEFrf10-20261023-7d62b548-zeros.tif",
+      "sha256": "d645fe705a033b6f214b8ea9d9c8309d5be37619920359234670271d59c2a255",
+      "bytes": 216836
+    }
+  },
+  "gate_nan": {
+    "crs": [
+      "EPSG:32611",
+      true
+    ],
+    "shape": [
+      [
+        3730,
+        3292
+      ],
+      true
+    ],
+    "dtype": [
+      "float32",
+      true
+    ],
+    "count": [
+      1,
+      true
+    ],
+    "transform": [
+      [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      true
+    ],
+    "no_nan_inside": [
+      0,
+      true
+    ],
+    "values_in_0_1": [
+      0.0,
+      1.0
+    ],
+    "values_in_0_1_ok": true,
+    "outside_nan": [
+      7111787,
+      true
+    ],
+    "nodata_is_nan": [
+      "nan",
+      true
+    ],
+    "n_dots": [
+      37654,
+      true
+    ],
+    "catalogue_mass": [
+      0,
+      true
+    ],
+    "min_d_cat_px": [
+      2.23606797749979,
+      true
+    ],
+    "n_within_2px": [
+      0,
+      true
+    ],
+    "n_within_3px": [
+      2095,
+      true
+    ],
+    "sha256": "7d62b54885ec1f7405ab0683a615f1edca23a3ffbaefb74daf658b3917bbbb3c"
+  },
+  "gate_zeros": {
+    "crs": [
+      "EPSG:32611",
+      true
+    ],
+    "shape": [
+      [
+        3730,
+        3292
+      ],
+      true
+    ],
+    "dtype": [
+      "float32",
+      true
+    ],
+    "count": [
+      1,
+      true
+    ],
+    "transform": [
+      [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      true
+    ],
+    "no_nan_inside": [
+      0,
+      true
+    ],
+    "values_in_0_1": [
+      0.0,
+      1.0
+    ],
+    "values_in_0_1_ok": true,
+    "outside_zero": [
+      0.0,
+      true
+    ],
+    "n_dots": [
+      37654,
+      true
+    ],
+    "catalogue_mass": [
+      0,
+      true
+    ],
+    "min_d_cat_px": [
+      2.23606797749979,
+      true
+    ],
+    "n_within_2px": [
+      0,
+      true
+    ],
+    "n_within_3px": [
+      2095,
+      true
+    ],
+    "sha256": "d645fe705a033b6f214b8ea9d9c8309d5be37619920359234670271d59c2a255"
+  },
+  "diff_vs_parent": {
+    "n_removed": 3765,
+    "n_added": 3765,
+    "n_unchanged": 33889,
+    "pct_changed": 19.9979,
+    "mean_displacement_px_of_changed": null,
+    "added_min_d_cat_px": 3.1622776601683795,
+    "added_min_nn_px": 30.479501308256342,
+    "inherited_min_d_cat_px": 2.23606797749979,
+    "inherited_n_within_3px": 2095,
+    "tercile_allocation_before": {
+      "basin": 7696,
+      "piedmont": 15744,
+      "range_front": 14214
+    },
+    "tercile_allocation_after": {
+      "basin": 7696,
+      "piedmont": 11979,
+      "range_front": 17979
+    },
+    "added_mean_nn_px": 38.510751216956486
+  },
+  "proxy": {
+    "instrument": "off-catalogue SGMC control raster (REPORT ONLY)",
+    "n_truth_px": 79615,
+    "parent_dti": 0.0928930494744682,
+    "variant_dti": 0.09957394176856882,
+    "delta": 0.006680892294100613,
+    "catalogue_control_parent_dti": 0.006709118968955278,
+    "catalogue_control_variant_dti": 0.006468265978537297,
+    "catalogue_control_delta": -0.00024085299041798087
+  }
+}

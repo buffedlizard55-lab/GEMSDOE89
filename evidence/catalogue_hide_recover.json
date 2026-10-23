@@ -1,0 +1,30 @@
+{
+  "schema": "gems89.catalogue-hide-recover.v1",
+  "generated_utc": "2026-10-23T19:36:11Z",
+  "git_sha": "9bf120b9cc25bdab5078dfdd66c36c605ef6bf84",
+  "seed": 20261023,
+  "fraction_withheld": 0.1,
+  "n_withheld_positives": 6099,
+  "parent_dti": 0.0028804191292615545,
+  "arms": {
+    "basin10": {
+      "id": "h33-h33-2-b2-RELIEFbasin10-20261023-d1a3b00d",
+      "dti": 0.0028209478415255574,
+      "delta_vs_parent": -5.94712877359971e-05
+    },
+    "pied10": {
+      "id": "h33-h33-2-b2-RELIEFpied10-20261023-b0285b17",
+      "dti": 0.0028209478415255574,
+      "delta_vs_parent": -5.94712877359971e-05
+    },
+    "rf10": {
+      "id": "h33-h33-2-b2-RELIEFrf10-20261023-7d62b548",
+      "dti": 0.0028209478415255574,
+      "delta_vs_parent": -5.94712877359971e-05
+    }
+  },
+  "degenerate": true,
+  "delta_identical_across_arms": true,
+  "why": "every candidate is built at >= 1 px from the full catalogue and every added dot at > 3 px, so withheld positives sit inside the exclusion collar and are unrecoverable by construction; all arms score within 1e-4 of the parent",
+  "note": "REPORT ONLY. This instrument cannot discriminate on this lineage; it is not a gate."
+}
