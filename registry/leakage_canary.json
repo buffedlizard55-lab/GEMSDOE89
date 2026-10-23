@@ -1,26 +1,91 @@
 {
- "instrument": "leakage canary (single-feature AUC vs catalogue membership)",
+ "instrument": "leakage canary (single-feature AUC vs catalogue membership across all 19 bands + scored_h19_5)",
  "threshold": 0.9,
  "sample_px": 400000,
  "seed": 11,
+ "max_single_feature_strength": 0.568803,
  "features": {
-  "det_elev": {
-   "auc": 0.4833735581904295,
+  "b01_mag_anom": {
+   "auc": 0.485730021560445,
    "flag": false
   },
-  "det_elev_slope": {
-   "auc": 0.5543881495746192,
+  "b02_rtp": {
+   "auc": 0.48845644658107307,
    "flag": false
   },
-  "elev_class": {
-   "auc": 0.4948056643012281,
+  "b03_tmi_hg": {
+   "auc": 0.5247083358177819,
    "flag": false
   },
-  "abs_elev_gradient": {
-   "auc": 0.561682529685672,
+  "b04_geod_2ndinv": {
+   "auc": 0.567240747409511,
+   "flag": false
+  },
+  "b05_iso_grav_anom_slope": {
+   "auc": 0.5291584356111619,
+   "flag": false
+  },
+  "b06_tc": {
+   "auc": 0.44227593774725366,
+   "flag": false
+  },
+  "b07_geod_shearrate": {
+   "auc": 0.568802700313693,
+   "flag": false
+  },
+  "b08_geod_dilaterate": {
+   "auc": 0.5212407629583232,
+   "flag": false
+  },
+  "b09_tmi_vg": {
+   "auc": 0.4907476696993401,
+   "flag": false
+  },
+  "b10_deq_n100a15": {
+   "auc": 0.5485149315657472,
+   "flag": false
+  },
+  "b11_iso_grav_anom_vg": {
+   "auc": 0.5296676527470838,
+   "flag": false
+  },
+  "b12_det_elev": {
+   "auc": 0.48773023344533306,
+   "flag": false
+  },
+  "b13_iso_grav_anom": {
+   "auc": 0.4587303007473842,
+   "flag": false
+  },
+  "b14_tmi": {
+   "auc": 0.48705434224326816,
+   "flag": false
+  },
+  "b15_depth_to_base_surf": {
+   "auc": 0.5138309046868671,
+   "flag": false
+  },
+  "b16_ieq_n100a15": {
+   "auc": 0.5661035430851725,
+   "flag": false
+  },
+  "b17_cond_surf": {
+   "auc": 0.4845292916867879,
+   "flag": false
+  },
+  "b18_iso_grav_anom_hg": {
+   "auc": 0.501068032203176,
+   "flag": false
+  },
+  "b19_det_elev_slope": {
+   "auc": 0.5511242470526468,
+   "flag": false
+  },
+  "scored_h19_5": {
+   "auc": 0.48819812778700983,
    "flag": false
   }
  },
- "verdict": "PASS: no single feature exceeds the canary threshold",
- "note": "REPORT ONLY. AUC close to 0.5 means the feature carries no catalogue information by itself; a value above 0.90 would mean the feature nearly identifies catalogue pixels and must not be used."
+ "verdict": "PASS: no single feature exceeds 0.90",
+ "note": "REPORT ONLY unless > 0.90. Checked all 19 competition bands plus scored_h19_5."
 }

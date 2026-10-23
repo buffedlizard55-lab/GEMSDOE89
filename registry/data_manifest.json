@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "session": "GEMSDOE89",
- "note": "Every entry was downloaded from the pinned repo@ref and its sha256 recomputed locally before use. These are owner-supplied MIRRORS of DrivenData competition files: integrity-pinned, NOT organizer-authenticated, and NOT licensed for redistribution. They are stored outside the repository (see data_root) and are not committed.",
+ "note": "Every entry is fetched from its pinned repo@ref via codeload.github.com and its sha256 is verified locally before use. Competition mirrors are integrity-pinned, NOT organizer-authenticated, and NOT licensed for redistribution; they live outside Git in data_root.",
  "data_root_env": "GEMSDOE_DATA",
  "data_root_default": "data",
  "files": [
@@ -20,7 +20,27 @@
    "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
    "bytes": 418912844,
    "bands": 19,
-   "bands_used": {"12": "det_elev", "19": "det_elev_slope"},
+   "verified_band_tags": {
+    "1": "mag_anom",
+    "2": "rtp",
+    "3": "tmi_hg",
+    "4": "geod_2ndinv",
+    "5": "iso_grav_anom_slope",
+    "6": "tc",
+    "7": "geod_shearrate",
+    "8": "geod_dilaterate",
+    "9": "tmi_vg",
+    "10": "deq_n100a15",
+    "11": "iso_grav_anom_vg",
+    "12": "det_elev",
+    "13": "iso_grav_anom",
+    "14": "tmi",
+    "15": "depth_to_base_surf",
+    "16": "ieq_n100a15",
+    "17": "cond_surf",
+    "18": "iso_grav_anom_hg",
+    "19": "det_elev_slope"
+   },
    "band_identity_source": "buffedlizard55-lab/GEMSDOE88 registry/feature_receipt.json -> verified_training_band_tags",
    "provenance": "owner-supplied mirror of the DrivenData competition feature stack; integrity-pinned, NOT organizer-authenticated"
   },
@@ -43,20 +63,65 @@
    "path": "data/bridge/existing_faults.tif",
    "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "bytes": 425830,
-   "role": "catalogue mask: exclusion collar + RELIEF class prior + REPORT-ONLY proxy",
+   "role": "catalogue mask: exclusion collar + class prior + REPORT-ONLY proxy",
    "provenance": "owner-supplied mirror of the USGS/INGENIOUS known-fault mask (byte-identical to the training labels); these pixels are masked pixel-exactly in scoring"
+  },
+  {
+   "id": "scored_h19_5",
+   "local": "scored_h19_5.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "path": "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "bytes": 1712322,
+   "role": "ancestor ridge network (121,131 px, claimed 0.1922 = CLAIM) for exact R0 rebuild and SPACING re-discretisation",
+   "provenance": "owner-mirrored H19-5 multi-layer corroborated ridge mask"
+  },
+  {
+   "id": "scored_d28",
+   "local": "scored_d28.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "bytes": 1603424,
+   "role": "intermediate BFS-thinned d2.8 dot raster (44,090 dots, claimed 0.2600 = CLAIM) verified during R0 rebuild",
+   "provenance": "owner-mirrored GEMSDOE24/25 dot_thin(h19_5, 2.8) artifact"
   },
   {
    "id": "parent_r0_zeros",
    "local": "parent_r0_zeros.tif",
-   "repo": "buffedlizard55-lab/GEMSDOE86",
-   "ref": "7f37d6ac43043e5b841b3f4e27d054b22ed63396",
-   "path": "data/scored_fleet/GEMSDOE32__gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE32",
+   "ref": "078f3cea1bc75d15beb81b095ab488a912327a5d",
+   "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
    "bytes": 219065,
-   "role": "PARENT R0 (h33-h33-2-b2, claimed 0.2778 = CLAIM)",
-   "provenance": "owner-mirrored scored fleet raster; its sha256 equals the sha256_zeros recorded for h33-h33-2-b2 in GEMSDOE84 ledger/submissions.csv, so parent identity is exact"
+   "role": "PARENT R0 zeros-outside twin (h33-h33-2-b2, claimed 0.2778 = CLAIM)",
+   "provenance": "owner-mirrored GEMSDOE32 parent raster; rebuilt bit-for-bit by tools/rebuild_r0.py"
+  },
+  {
+   "id": "parent_r0_nan",
+   "local": "parent_r0_nan.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE32",
+   "ref": "078f3cea1bc75d15beb81b095ab488a912327a5d",
+   "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+   "sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+   "bytes": 355443,
+   "role": "PARENT R0 NaN-outside twin (h33-h33-2-b2)",
+   "provenance": "owner-mirrored GEMSDOE32 parent raster; rebuilt bit-for-bit by tools/rebuild_r0.py"
+  },
+  {
+   "id": "sgmc_faults",
+   "local": "sgmc_faults.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "path": "data/external/derived_sgmc_faults_100m_u8.tif",
+   "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+   "bytes": 198602,
+   "role": "REPORT-ONLY SGMC off-catalogue control (never used to build or gate any variant)",
+   "license": "US Public Domain (17 U.S.C. 105)",
+   "source_url": "https://doi.org/10.3133/ds1052",
+   "provenance": "USGS State Geologic Map Compilation (SGMC, Horton et al. 2017, https://doi.org/10.3133/ds1052) fault lines rasterised to the 100 m EPSG:32611 grid; used strictly as a REPORT-ONLY off-catalogue diagnostic"
   }
- ],
- "not_used": "No external (non-competition) dataset was used this session; the RELIEF classes come from band 12/19 of the pinned feature stack, so no new licence applies."
+ ]
 }

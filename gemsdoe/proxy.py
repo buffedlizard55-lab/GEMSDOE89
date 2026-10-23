@@ -112,3 +112,50 @@ def canary(features: dict, catalogue_mask, threshold=0.90):
 def surrogate_dti(dots, catalogue_mask, radius=KERNEL_RADIUS_PX):
     """DTI with the pinned catalogue as the truth raster (counterfactual)."""
     return dti(catalogue_mask, dots.astype(np.float64), radius)
+
+
+def sgmc_off_catalogue_control(
+    dots,
+    footprint,
+    catalogue_mask,
+    sgmc_mask,
+    collar_px: float = 3.0,
+    radius: float = KERNEL_RADIUS_PX,
+    g_lb: float = 12691.0,
+) -> dict:
+    """REPORT-ONLY off-catalogue fault control using USGS SGMC faults > collar_px from catalogue.
+
+    Never gates a file and is never called a live score (evidence_class = PROXY).
+    """
+    foot = np.asarray(footprint, dtype=bool)
+    cat = np.asarray(catalogue_mask, dtype=bool) & foot
+    d_cat = ndi.distance_transform_edt(~cat)
+    sgmc_truth = np.asarray(sgmc_mask, dtype=bool) & foot & (~cat) & (d_cat > collar_px)
+    n_truth = int(sgmc_truth.sum())
+    off_dots = np.asarray(dots, dtype=bool) & foot & (~cat)
+    if n_truth == 0 or not off_dots.any():
+        return {
+            "evidence_class": "PROXY",
+            "sgmc_off_catalogue_truth_px": n_truth,
+            "emitted_dots": int(off_dots.sum()),
+            "sgmc_coverage": 0.0,
+            "sgmc_raw_dti": 0.0,
+            "sgmc_prevalence_calibrated_dti": 0.0,
+        }
+    d_pred = ndi.distance_transform_edt(~off_dots)
+    k_truth = np.clip(1.0 - d_pred[sgmc_truth] / radius, 0.0, 1.0)
+    tp = float(k_truth.sum())
+    cov = float(tp / n_truth)
+    raw = dti(sgmc_truth, off_dots.astype(np.float64), radius=radius)
+    tp_cal = cov * g_lb
+    fp_cal = max(0.0, float(off_dots.sum()) - tp_cal)
+    cal = float(tp_cal / (0.2 * (tp_cal + fp_cal) + 0.8 * g_lb))
+    return {
+        "evidence_class": "PROXY",
+        "sgmc_off_catalogue_truth_px": n_truth,
+        "emitted_dots": int(off_dots.sum()),
+        "sgmc_coverage": round(cov, 6),
+        "sgmc_raw_dti": round(raw, 6),
+        "sgmc_prevalence_calibrated_dti": round(cal, 6),
+    }
+

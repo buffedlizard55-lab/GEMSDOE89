@@ -1,68 +1,43 @@
 # SLOT PLAN — one page, session GEMSDOE89 (2026-10-23)
 
-Deadline **2026-12-03** (UNVERIFIED — confirm on the competition page; ≈6 weeks,
-41 days). Quota: 3 scored submissions per rolling week per entity + one final
-blind submission. Slots used/available: **not supplied** — fill in before
-spending any.
+Deadline **2026-12-03** (`UNVERIFIED` — confirm on the competition page; ≈6 weeks, 41 days).
+Quota: **ONE entity = 3 scored submissions per rolling week + ONE final blind submission**
+(https://docs.nlr.gov/docs/fy26osti/96647.pdf). Slots left this week / total: **`__ / __`**
+(human fills before spending a slot). Live deltas `|Δ| < 0.01` count as no evidence.
 
-## The three slots, in order
+## Next 3 slots in order (orthogonal axes first; never burn two slots on collinear arms)
 
-| # | File | Predicted live change | Submit only if | What the result changes |
+| # | File | Axis / value | Predicted change (MODEL) | What the live result changes |
 |---|---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` | **+0.003** MODEL (band −0.012…+0.018) | gates green (already verified) | The primary evidence. ≥ +0.010 → class allocation transfers; run slot 2. Inside ±0.010 → the axis is dead, skip to the DEDUPE axis below. < −0.010 → placement quality dominates allocation; close both RELIEF and CONCENTRATION. |
-| **2** | `releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif` | **+0.004** MODEL (band −0.017…+0.027) | slot 1 scored, and its delta ≥ +0.010 | Dose-response. r15 delta ≈ 1.5 × r10 → the effect is the class move. Super-linear loss → 15 % strips too much from the source class. |
-| **3** | *hold*, or `…-relief-r15s-…-5f0ae851.tif` (alternate) | **+0.001** MODEL (band −0.007…+0.011) | slot 1 scored and inside ±0.010 | If r10 is null and the human still wants the axis closed from a second definition; otherwise keep the slot for the DEDUPE axis below once it exists. |
+| **1** | `releases/h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif` | `SPACING alongstrike` | **+0.002** (−0.003…+0.006) | Zero cross-strike downside; tests 1-D geodesic + exact kernel 1-swap vs northern-BFS thinning (`0.2778` CLAIM). `>= +0.010` → adopt geodesic emitter permanently; inside `±0.010` → on-ridge spacing is saturated (98.7 %). |
+| **2** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` | `RELIEF r10` | **+0.003** (−0.012…+0.018) | Orthogonal macro-allocation probe (10 % range-front → structured piedmont). `>= +0.010` → run `RELIEF r15` (`6aa774ce`) in Slot 3 for 1.5× dose-response; inside `±0.010` → close `RELIEF`. |
+| **3** | `releases/h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif` *(or `RELIEF r15` if Slot 2 ≥ +0.010; else hold)* | `SPACING poisson` | **−0.010** (−0.032…+0.004) | Definitive test of GeoDAWN 400 m line-spacing lateral offset (`±150 m` 2-D corridor). `<= −0.010` → proves test faults hug `h19_5` within `<=150 m` (retires `poisson` and `lattice` `454c9098`); `>= +0.010` → proves `>=250 m` scarp step-out and opens `lattice`. |
 
-Do **not** submit r15 and r15s in the same week: they answer the same question
-at 1.5× dose and a different class definition, so a third file should probe
-something new.
+Do **not** upload `poisson` (`ff167173`) and `lattice` (`454c9098`) in the same week: both spread mass laterally across the fault corridor and share the same centerline-loss risk.
 
-## Weeks to the deadline
+## Weeks to the deadline (one entity, 3 slots/week)
 
-| week | dates | plan |
+| Week | Dates | Plan |
 |---|---|---|
-| 1 | 10-23 → 10-29 | slot 1 (r10) + slot 2 (r15) if r10 ≥ +0.010; otherwise slot 1 only and hold |
-| 2 | 10-30 → 11-05 | whichever of r15 / r15s the week-1 result justifies; build the DEDUPE axis |
-| 3-4 | 11-06 → 11-19 | combine the two best axes seen so far (default expectation: DEDUPE + best placement), one factor at a time |
-| 5 | 11-20 → 11-26 | confirm the winner against its own parent; freeze the final file and a fallback |
-| 6 | 11-27 → 12-03 | re-validate the format of **both** final files, then submit one blind |
+| **1** | 10-23 → 10-29 | Slot 1 (`SPACING alongstrike`) + Slot 2 (`RELIEF r10`); Slot 3 = `RELIEF r15` if `r10 >= +0.010`, else `SPACING poisson` (or unscored upstream `SNAP 2p0px-g0p02` / `MASS -10pct`). |
+| **2** | 10-30 → 11-05 | Score remaining orthogonal single-axis arms (`SNAP`, `MASS`, `CONCENTRATION` from ledger if still unscored); build top proposed axis (`DEDUPE`) below. |
+| **3–4** | 11-06 → 11-19 | Combine the two best confirmed axes one factor at a time (e.g., best emitter/snap + best redundancy prune), holding parent-diff gates strict. |
+| **5** | 11-20 → 11-26 | Confirm the composite candidate directly against its immediate parent; freeze **one primary final file** and **one conservative fallback**. |
+| **6** | 11-27 → 12-03 | Re-validate CRS, transform, footprint NaN mask, `[0,1]` range, and SHA-256 of **both** final files from disk; submit one blind before the deadline. |
 
 ## Proposed better axes (mechanism · confounder · falsifier) — not built this session
 
-These come from the algebra, which is the strongest thing this session produced:
-`DTI = T / (0.2T + 0.2(S−M) + 0.8|G|)`, so one dot of credit *k* changes DTI by
-`(k − 0.2·DTI)/(D + 0.2)` — at 0.2778 a dot must sit within ≈280 m of a truth
-pixel to pay, and **a dot whose credit is already claimed by a neighbour is pure
-mass**.
+1. **`DEDUPE` (exact marginal-credit redundancy prune; highest expected value).**
+   *Mechanism:* Under `DTI = T / (0.2T + 0.2(S−M) + 0.8|G|)`, R0's 11,415 dots at `d = 2.828 px` and Y-junction triplets share overlapping `R = 3.0 px` kernels; ranking dots by exact removal gain `gemsdoe.metric.marginal_gain_remove` against the multi-layer ridge prior and dropping the most redundant 12–18 % *without* refill cuts `0.2(S−M)` while preserving `T`.
+   *Confounder:* Alters both total dot count (`MASS`) and local pair density (`SPACING`), so it must be benchmarked directly against `MASS -10pct` (`2cde51f3`) and `SPACING alongstrike` (`3b263c7a`).
+   *Falsifier:* Failure to beat `MASS -10pct` by `>= +0.005` on live chunks falsifies kernel-overlap redundancy as the primary denominator drag.
 
-**1. DEDUPE (highest expected value; untested).** Remove the *most redundant*
-dots rather than the *lowest-ranked* ones: rank by unique marginal credit
-(compute the exact ΔDTI of removing each dot with `gemsdoe.metric.marginal_gain_remove`),
-drop the bottom 15-25 %, do **not** refill.
-*Mechanism:* the max operator means a neighbour's kernel already claims the
-credit; the duplicate still costs 0.2 of denominator. This is strictly better
-targeted than the upstream `MASS −10 %`, which dropped the traversal tail by
-rank (predicted −0.003) and therefore mostly removed dots that were still
-earning. *Confounder:* de-duplication also de-clusters, so a win cannot be
-separated from a spacing effect — the SPACING arm at matched removal is the
-control. *Falsifier:* if removing genuinely redundant dots does not beat
-`MASS −10 %` by ≥ 0.005, the redundancy measure is not the right cost model for
-this metric.
+2. **`RELAY-BRIDGE` (strike-collinear step-over & gap bridging `<= 600 m`).**
+   *Mechanism:* `h19_5` has 26,645 disconnected 8-connected components because alluvial fans bury short (`300–600 m`) segments between collinear scarps; bridging co-striking (`Δθ <= 15°`) strand tips separated by `4–7 px` (swapping out isolated 1-px noise fragments to hold `S = 37,654` fixed) targets structurally continuous fault systems (Faulds interaction prior on fault tips/relays).
+   *Confounder:* Bridges across stream breaches of erosional hogbacks look geometrically identical to breached relay ramps.
+   *Falsifier:* Live delta `< +0.010` vs R0 proves unmapped test faults do not preferentially occupy short collinear gaps between `h19_5` fragments.
 
-**2. FLOOR (medium).** Cover the flat-slope tercile, which holds 33 % of the
-footprint and 20 % of the catalogue (12,150 px) but only **177 of R0's 37,654
-dots** (0.1 per 1000 px). Add ~2,000 dots there at catalogued-fault-density
-proportional spacing rather than at random.
-*Mechanism:* the flat third is almost entirely unsurveyed by the parent; at the
-measured catalogue density a structured placement would clear the 0.0556 bar.
-*Confounder:* flat ground has no DEM edge response, so any dot there is a bet on
-a non-DEM signal (magnetics/gravity) that R0's own model already declined to
-make. *Falsifier:* if a 2,000-dot FLOOR arm scores below R0 − 0.005, flat-ground
-fault truth is not recoverable from the supplied bands and the coverage gap is
-correctly left empty.
-
-**3. DOSE (cheap sanity check, any week).** Re-submit a byte-identical twin of a
-scored file once per month. Upstream history shows ≥8 slots went to exact
-repeats *by accident*; a *deliberate* repeat is the only way to measure the
-score's own run-to-run noise, which sets the true bar for "under 0.01 is no
-evidence".
+3. **`REPEAT-CALIBRATION` (single deliberate twin upload only if slack permits).**
+   *Mechanism:* Upstream history burned `>= 8` slots on accidental byte-identical repeats that returned identical public scores; verifying deterministic public-chunk scoring vs Phase-1 private variance requires zero slots if historical receipts already confirm exact determinism—check receipts first before ever spending a slot.
+   *Confounder:* Public determinism says nothing about public-to-private chunk variance.
+   *Falsifier:* Any two receipts for the same `sha8` differing by `> 0.0001` would indicate stochastic evaluation.

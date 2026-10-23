@@ -1,7 +1,11 @@
 # competition rasters live outside the repo (see registry/data_manifest.json)
 data/
+.cache/
+.venv/
 *.part-*
 __pycache__/
 .pytest_cache/
 *.pyc
 releases/_tmp_*.tif
+
+
