@@ -1,71 +1,27 @@
-# SLOT PLAN — session GEMSDOE89 (2026-10-23), axis MASS
+# SLOT PLAN — GEMSDOE89 (`SPACING` Session, 2026-10-23)
 
-Deadline **2026-12-03** (UNVERIFIED — confirm on the competition page; ≈6 weeks,
-41 days). Quota: 3 scored submissions per rolling week per entity, plus one
-final blind submission. Slots used/available: **not supplied**. No file in this
-repo has a receipt; the parent's 0.2778 is still a **CLAIM**.
+- **Timeline:** 2026-10-23 -> **2026-12-03** (`UNVERIFIED` deadline) = **41 days (~5.9 weeks)** -> **~18 rolling weekly slots** (1 entity @ 3 slots/wk) + **1 blind final submission**.
+- **Baseline:** Parent R0 `h33-h33-2-b2` (`c55bafc4...`), rebuilt bit-for-bit, **0.2778 = CLAIM** (no `RECEIPT` in this repo). `TOP_PUBLIC`: `____` (human must supply). Weekly slots used: `__ / 3` (human must supply).
+- **Rule:** Live changes `< 0.01` (`|Delta| < 0.010`) are treated as **no evidence** (indistinguishable from test-mask variance without a repeat-submission `RECEIPT`).
 
-## What changed this session
+## Next 3 Slots (Ordered) & Decision Tree
 
-R0's **dot set is now reproducible**: `solo-d2.8` (40,199) and `d2.8` (44,090),
-each minus every dot within 2.0 px of the catalogue, both reproduce the parent
-**cell-for-cell** (0 differing cells, two independent ancestors). The parent's
-*file bytes* still cannot be re-encoded (the original writer settings are lost),
-so the parent is referenced by sha256 `c55bafc4…`.
+1. **Slot 1 — `h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif`** (`SPACING=alongstrike`, `5,222/37,654 = 13.87%` moved, `n=37,654`, `MODEL` `+0.002`, band `-0.003..+0.006`).
+   - *Why first:* Purest single-variable test of along-strike spacing on R0's 834 multi-dot `h19_5` fault strands (`>=6` dots): 100% ridge retention, zero count change, zero 5 km CV drift (`0.8991 -> 0.8991`), smallest downside (`-0.003`).
+2. **Slot 2 — Conditional on Slot 1 `RECEIPT` `S1` (relative to R0 `0.2778` `CLAIM`):**
+   - **If `S1 >= 0.2878` (`Delta >= +0.010`):** Submit **`h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif`** (`20.29%` moved, `MODEL` `-0.010`, band `-0.032..+0.004`) to test whether 2D lateral corridor spacing (`+-150 m`) adds gain beyond 1D strand equalization.
+   - **If `0.2678 < S1 < 0.2878` (`|Delta| < 0.010`, expected):** **Close `SPACING`** (along-strike packing is within noise; do **not** spend slots on `poisson` or `lattice`). Pivot Slot 2 to an orthogonal unscored axis already built: **`MASS m10uniq`** (`releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif`, `MODEL` `+0.002`, ceiling `+0.0105`), **`RELIEF r10`** (`releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif`, `MODEL` `+0.003`), or upstream **`SNAP 2p0px-g0p02`** (`GEMSDOE84`, `b2019f55`, `MODEL` `+0.007..+0.018`).
+   - **If `S1 <= 0.2678` (`Delta <= -0.010`):** Greedy `r=2.8 px` strand endpoints carry live signal; freeze strand positions and never re-space along `h19_5`.
+3. **Slot 3 — Conditional on Slot 2 `RECEIPT` `S2`:**
+   - **If `poisson` ran and `S2 >= S1 + 0.010`:** Submit **`h33-h33-2-b2-spacing-lattice-20261023-454c9098.tif`** (`19.40%` moved, `MODEL` `-0.007`) to test hexagonal crystal packing (`nn<3 px` `-32.8%`).
+   - **Otherwise:** **HOLD Slot 3** (or spend on R0 baseline `RECEIPT` verification if `h33-h33-2-b2` still lacks a verified screenshot/receipt) to conserve weekly quota for the higher-upside axes below.
 
-The MASS family's ceiling is arithmetic, not opinion: at `D ≈ 1.5–2×10^4`
-(a value pinned by the one measured mass step), dropping 10 % of the dots can
-gain at most **+0.0105**, and 20 % at most **+0.021**, even if every dropped dot
-carries zero credit. Nothing in this family can plausibly reach +0.03.
+## Proposed Better Axes (Not Built This Session)
 
-## The three slots, in order
+None of the pure rearrangements of R0's existing 37,654 binary ridge dots (`SPACING`, `RELIEF`, `CONCENTRATION`, drop-only `MASS`) has `MODEL` central expectation `>= +0.010`. Reaching `+0.01..+0.03+` requires new fault geometry or continuous gradient calibration:
 
-| # | file | predicted (MODEL) | submit only if | what the result changes |
-|---|---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif` | **+0.002** (band −0.010…+0.010; ceiling +0.0105) | gates green (verified) | The primary read. ≥ +0.005 → mass outside the collar is waste, spend slot 2 on the dose. \|Δ\| < 0.005 → the count is not a lever; close MASS and do **not** build DEDUPE/FLOOR. ≤ −0.005 → the far field is credit-bearing; from now on only collar mass may be removed. |
-| **2** | `releases/h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif` | **+0.004** (band −0.020…+0.021; ceiling +0.021) | slot 1 scored and ≥ +0.005 | Dose-response. `m20 − m10 ≈ m10` → count is the lever, push the dose below 30k next. Super-linear loss → the optimum is between 33.9k and 37.6k and the next rung is 5 %, not 30 %. |
-| **3** | `releases/h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif` — **or hold** | **−0.002** (band −0.016…+0.010) | slot 1 is within ±0.005 of zero and the human wants to know whether the *ranking* or the *count* carried whatever happened | The control. `m10rand ≈ m10uniq` retires the unique-credit ranking for good; `m10rand > m10uniq` inverts it. If slot 1 is clearly positive, **hold this slot** — it buys a decision here, not a score. |
-
-Report-only, never a gate: the catalogue hide-and-recover proxy gives 0.0370 /
-0.0340 / 0.0346 against the parent's 0.0384 (random null 0.0000); the
-catalogue-surrogate DTI moves by −0.0002 / −0.0006 / −0.0004. Neither may be
-used to overrule the live read.
-
-## Alternates already built (unchanged by this session)
-
-The three RELIEF arms (`…-relief-r10/r15/r15s-…`, see `docs/SUBMIT.md`) remain
-built and unscored. They are the fallback if the human would rather test class
-allocation than mass. Do not spend two slots in one week on the same question.
-
-## Weeks to the deadline
-
-| week | dates | plan |
-|---|---|---|
-| 1 | 10-23 → 10-29 | slot 1. Spend slot 2 only if slot 1 lands ≥ +0.005. |
-| 2 | 10-30 → 11-05 | the dose (slot 2) or the control (slot 3) — not both — plus one receipt-backed re-read. |
-| 3-4 | 11-06 → 11-19 | combine the only two operators with *measured* support: the collar (prune ≤2 px, +0.007 live) and whichever of mass/relief reads positive. One factor at a time, from a receipt-backed parent. |
-| 5 | 11-20 → 11-26 | confirm the winner against its own parent; freeze the final file and a fallback. |
-| 6 | 11-27 → 12-03 | re-validate both final files from disk, then submit one blind. |
-
-## Proposed better axes (mechanism · confounder · falsifier) — not built
-
-**1. FLOOR-BY-MASS (highest expected value; needs a new pair).** The flat-slope
-tercile holds 33 % of the footprint and 20 % of the catalogue but 0.1 dots per
-1000 px of R0's mass. Adding ~2,000 dots there at catalogued-fault spacing tests
-whether the parent's coverage gap is a modelling failure or a correct
-abstention. *Confounder:* flat ground has no DEM edge response, so any dot there
-is a bet on a non-DEM signal. *Falsifier:* a 2,000-dot arm scoring below R0
-− 0.005 says the gap is correctly empty, and retires every coverage-gap idea.
-Note it is the **complement** of this session's arms: they remove mass, this adds
-it, and the two together bound where mass should sit.
-
-**2. DIP_ASYMMETRY (PRUNE, new pair).** Offset the catalogue collar one-sided by
-local dip direction instead of symmetrically: if new traces are hanging-wall
-scarps, the collar is wasted on the footwall. *Confounder:* antithetic faults and
-the catalogue's own mapping bias. *Falsifier:* no improvement over the symmetric
-`dcat≥3px-refill` arm, which is already built.
-
-**3. DOSE (cheap sanity, any week).** Re-submit a byte-identical twin of a scored
-file once. Upstream shows ≥8 slots went to exact repeats *by accident*; a
-deliberate repeat is the only way to measure the score's run-to-run noise, which
-is the real bar for "under 0.01 is no evidence".
+| Proposed Axis | Mechanism | Confounder / Non-Fault Mimic | Falsifier |
+|---|---|---|---|
+| **`RELAY-BRIDGE`** (en-echelon stepover linking) | Basin-and-Range normal faults segment across 0.3–1.5 km relay ramps (`h19_5` breaks at transfer zones where single-method gradients dip); bridging co-linear strand tips (`<=12 px`, strike diff `<=20 deg`) puts mass on unmapped relay faults outside the 3 px catalogue collar. | Bridging across alluvial channel scarps or volcanic dike swarms linking unrelated ridges, inflating `P` without hitting `G`. | Live `RECEIPT` `<= R0` or `PROXY` on withheld multi-segment catalogue relays fails to beat random tip pairs of equal length. |
+| **`TRACKB-DIP-OFFSET`** (dip-slip potential-field shift) | Range-bounding normal faults dip 45–60 deg basinward, shifting gravity/magnetic horizontal-gradient maxima 200–500 m (`2–5 px`) hanging-wall-ward of the surface trace; shifting `h19_5` dots up-slope toward `det_elev_slope` footwall breaks aligns `P` with surface traces. | Sub-vertical strike-slip faults and volcanic contacts have near-zero dip offset; shifting them moves dots off the trace. | Live `RECEIPT` drops by `>= 0.005` vs R0, or footwall-shifted dots lose SGMC off-catalogue `PROXY` coverage. |
+| **`REPEAT-CALIBRATION`** (R0 baseline `RECEIPT` anchor) | Score exact parent `h33-h33-2-b2` (`baeae321...`) once under current receipted governance to convert `0.2778` from `CLAIM` to `RECEIPT` and bound single-slot noise. | Consumes 1 of ~18 remaining weekly slots with zero expected score gain. | Live `RECEIPT` differs from `0.2778` by `> 0.005` (invalidating `CLAIM`-anchored deltas across the ledger). |

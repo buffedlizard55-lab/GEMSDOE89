@@ -1,72 +1,44 @@
-# SUBMIT — session GEMSDOE89 (2026-10-23), axis MASS
+# Manual Submission Guide (`docs/SUBMIT.md`)
 
-The human submits from their own registered account. Nothing here logs in,
-scrapes, or uploads. One file per slot; the **NaN-outside twin** is the one to
-upload (the zeros twin is the fallback and scores identically per ledger
-history). Every file below was re-read from disk after writing and every MUST
-gate re-run on the re-read array.
+Automated access to `drivendata.org` is prohibited by challenge rules and agent constraints. A human operator must perform any upload and record the returned receipt.
 
-## Slot 1 (primary)
+## 1. Pre-Upload Verification (Local Check)
 
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif` |
-| **name** | `h33-h33-2-b2-MASSm10uniq-20261023-beed130f` |
-| **sha256** | `beed130f09a9c7e292c8a0a9171ac7dd2a8f19023cf41c8a5f855ba541122f06` |
-| **fallback** | `releases/…-beed130f-zeros.tif` (`312c7ab47c3a1a02…`) |
-| **form note** (82 chars) | `R0 h33-h33-2-b2; MASS m10uniq: drop 3765/37654 dots (10%), none added; pred +0.002` |
-| **predicted** | +0.002 MODEL (band −0.010 … +0.010; arithmetic ceiling +0.0105) |
+Before uploading any candidate in `releases/`, verify its SHA-256 hash on disk matches `ledger/submissions.csv`:
 
-## Slot 2 (conditional: only if slot 1 scores ≥ +0.005)
-
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif` |
-| **name** | `h33-h33-2-b2-MASSm20uniq-20261023-87ec6213` |
-| **sha256** | `87ec62139e77771157799304fb47ec8322bce0133ba20b048070cb2973f986f8` |
-| **fallback** | `releases/…-87ec6213-zeros.tif` (`e00a58e58194574b…`) |
-| **form note** (82 chars) | `R0 h33-h33-2-b2; MASS m20uniq: drop 7531/37654 dots (20%), none added; pred +0.004` |
-| **predicted** | +0.004 MODEL (band −0.020 … +0.021; ceiling +0.021) |
-
-## Slot 3 (control — or hold)
-
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif` |
-| **name** | `h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6` |
-| **sha256** | `7a4c49b6999421b1b47a12ad7f7c77c1499dad983e87f5620469f36e615a90a0` |
-| **fallback** | `releases/…-7a4c49b6-zeros.tif` (`4cb61fd574b78407…`) |
-| **form note** (82 chars) | `R0 h33-h33-2-b2; MASS m10rand: drop 3765/37654 dots (10%), none added; pred -0.002` |
-| **predicted** | −0.002 MODEL (band −0.016 … +0.010) — a decision, not a score |
-
-## Format receipt (all three files, all gates, re-read from disk)
-
-| gate | result |
-|---|---|
-| readable / re-read after write | pass |
-| grid contract vs `sample_submission.tif` (shape 3730×3292, pixel scale 100 m, tiepoint, geokeys, EPSG:32611) | pass |
-| dtype float32, single band | pass |
-| values in [0,1] | pass (dots exactly 1.0, everything else 0 or NaN) |
-| no NaN inside footprint; NaN outside (NaN twin) / zeros outside (zeros twin) | pass |
-| dot count 33,889 / 33,889 / 30,123 and raster==mask identity | pass |
-| zero catalogue mass | pass (0 dots on catalogue; the parent's own 2.236 px ring is inherited, min distance unchanged) |
-| sha256 not already in the ledger | pass |
-| twins carry an identical dot mask | pass |
-| drop-only parent diff | pass (added vs parent = 0 for all three) |
-
-## Before you upload (2 minutes)
-
-```
-export GEMSDOE_DATA=/path/to/verified/inputs     # parent, template, catalogue, 2 ancestors
-python -m pytest tests -q                        # 24 tests
-python tools/validate_raster.py                  # re-runs every gate on every release
-python tools/check_ledger.py                     # ledger <-> disk, no duplicate triples
-sha256sum releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif   # must start beed130f
+```bash
+sha256sum releases/h33-h33-2-b2-spacing-*.tif releases/h33-h33-2-b2-relief-*.tif releases/h33-h33-2-b2-MASS*.tif
+python3 tools/validate_raster.py
+python3 tools/check_ledger.py
 ```
 
-Then fill `receipt_score` and `receipt_date` in `ledger/submissions.csv` from the
-submission-page receipt. Until that exists the file has no score — this repo
-holds no receipt for any file, including the parent's 0.2778 (CLAIM).
+### `SPACING` Candidates Built This Session (Primary = NaN outside footprint)
 
-Not needed for these files: `training_features.tif` (419 MB). A drop-only MASS
-edit reads no band. Its absence is recorded as NOT FETCHED, not as a failure.
+| Slot Role | Primary File (`NaN` outside footprint) | SHA-256 (`primary`) | Fallback (`0.0` outside) | SHA-256 (`-zeros`) |
+|---|---|---|---|---|
+| **Slot 1 (`SPACING` primary)** | `releases/h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif` | `3b263c7aa90ee0928d8ad8b2a81e42bc99decc7c881f46204af36b877d8bdbaa` | `...-zeros.tif` | `d18297a5192f05902b8baadd585de37de0d81fadb3dc9aba626767cfc9494cc6` |
+| **Slot 2 (if Slot 1 >= 0.2878)** | `releases/h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif` | `ff167173aa2b8e45187d123db0193ad8da7e16a6e65c0f466630be9db7cfea34` | `...-zeros.tif` | `f04da689f1da475c117d2332a84b6c91cb3f2a3febb01818d342678af0652f69` |
+| **Hold (`SPACING` hex lattice)** | `releases/h33-h33-2-b2-spacing-lattice-20261023-454c9098.tif` | `454c909877ddd82b91cfb6b6b2f71710524b1d76d37a0f72d0d33107b0f0431d` | `...-zeros.tif` | `56c77db28955ebaae090d0878daa7f258d1d0c7bfe30c6f1279f266e17cf6fab` |
+
+*(Orthogonal `GEMSDOE89` release pairs `RELIEF` `r10`/`r15`/`r15s` and `MASS` `m10uniq`/`m10rand`/`m20uniq` also remain verified in `releases/` and `ledger/submissions.csv`.)*
+
+## 2. DrivenData Upload Steps
+
+1. Log in to DrivenData (`GEMS: Geothermal Exploration with Machine Learning`, challenge `#306`) using the team's single authorized entity account (**3 scored slots/rolling week**).
+2. Record **current `TOP_PUBLIC` score + date** and **remaining weekly slots** before submitting.
+3. Upload the **primary `.tif`** (NaN outside footprint, matching `sample_submission.tif` encoding).
+   - Paste the exact `<=140`-character `form_note` from `ledger/submissions.csv`:
+     - `alongstrike`: `h33-h33-2-b2; SPACING alongstrike: 5222/37654 (13.9%) geodesic 1-swap on >=6-dot strands, n=37654; pred +0.002 (-0.003..+0.006)`
+     - `poisson`: `h33-h33-2-b2; SPACING poisson: 7639/37654 (20.3%) 2D blue-noise disk in +-150m corridor, n=37654; pred -0.010 (-0.032..+0.004)`
+     - `lattice`: `h33-h33-2-b2; SPACING lattice: 7305/37654 (19.4%) 3.5px hex lattice in +-200m corridor, n=37654; pred -0.007 (-0.025..+0.003)`
+4. **Only if** the platform scorer rejects NaN outside the footprint, upload the matching `-zeros.tif` fallback twin instead (noting that doing so consumes a submission if the first was scored).
+
+## 3. Recording the Receipt
+
+After scoring completes:
+1. Save a timestamped screenshot / receipt record outside public release artifacts if required, and update `ledger/submissions.csv`:
+   - `score` and `receipt_score` -> exact 4-decimal live DTI returned by DrivenData
+   - `evidence_class` -> `RECEIPT`
+   - `receipt` -> `Y`
+   - `status` -> `SCORED`
+2. Apply the `SLOT_PLAN.md` decision tree (`|Delta| < 0.01` = no evidence).

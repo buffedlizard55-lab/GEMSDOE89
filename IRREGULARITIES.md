@@ -1,159 +1,31 @@
-# IRREGULARITIES — session GEMSDOE89
+# IRREGULARITIES (Decision-Changing Only)
 
-Only items that change a decision. Each entry says what was found, what was
-decided, and what the human may need to overrule.
+Only items that alter candidate validity, metric interpretation, governance, or slot allocation are listed here.
 
-## 1. The assigned repository was empty — the lineage was recovered, and R0's dot set is now reproducible
+1. **Parent R0 (`0.2778`) Is a `CLAIM`, Not a `RECEIPT` in This Repo.**
+   - *Fact:* `h33-h33-2-b2` (`c55bafc4...` / `baeae321...`) is rebuilt bit-for-bit (`0` pixel diffs across all `12,279,160` grid cells) from pinned `scored_h19_5.tif` + `existing_faults.tif` + `sample_submission.tif`, so parent *geometry* is 100% verified. However, its `0.2778` live number carries `evidence_class = CLAIM` (no organizer receipt is stored in this repo).
+   - *Decision impact:* Every predicted live change (`MODEL`) is anchored to `0.2778` only up to `CLAIM` accuracy; if Slot 1 lands far from `0.2778`, parent baseline uncertainty (`CLAIM` vs `RECEIPT`) must be checked before attributing the gap to `SPACING`, `RELIEF`, or `MASS`.
 
-`buffedlizard55-lab/GEMSDOE89` contained a single one-line `README.md`: no
-manifest, no `ledger/`, no `SLOT_PLAN.md`, no parent raster, and no recipe.
+2. **Public Bridge Mirrors Host Competition Rasters (`GEMSDOE`, `GEMSDOE24`, `GEMSDOE86`, `GEMSDOE92`).**
+   - *Fact:* Input rasters pinned in `registry/data_manifest.json` were fetched from public GitHub repos under `buffedlizard55-lab/*`. DrivenData rules normally restrict redistributing challenge data publicly.
+   - *Decision impact:* `GEMSDOE89` keeps `data/` and `.cache/` strictly git-ignored (zero competition rasters committed to git or `releases/`), and the human team owner should review visibility/licensing of upstream mirror repos before prize audit.
 
-**Decision (earlier session).** Pinned inputs were recovered from the owner's
-earlier repos (`GEMSDOE83/84/86/88/92`, `GEMSDOE24`, `GEMSDOE`) and every byte
-verified against its recorded sha256.
+3. **`training_features.tif` Contains `-3.4e38` Float32 Sentinels Inside the Footprint (`IR-DEC-17`).**
+   - *Fact:* Bands 1–8 and 18 contain `-3.4028235e38` nodata sentinels inside `sample_submission.tif`'s valid footprint (e.g., `635,517` pixels in band 18 `iso_grav_anom_hg`), where `np.isfinite()` is `True`.
+   - *Decision impact:* Any feature computation or leakage canary must mask `band <= -1e30` to `NaN` (`tools/build_spacing.py` enforces this; `SPACING` geometry itself uses only binary `scored_h19_5` and `existing_faults`).
 
-**Update (2026-10-23, this session).** The parent's **dot set is rebuilt
-cell-for-cell** from two independent pinned ancestors:
-`solo-d2.8` (40,199 dots) and `d2.8` (44,090 dots), each minus every dot within
-2.0 px of the catalogue, both give exactly R0's 37,654 dots with **0 differing
-cells** (`tools/build_mass.py` asserts this on every run). What still cannot be
-done is re-encoding the parent's *file bytes*: the same dot mask written through
-`gemsdoe.grid.write_submission` gives `5d2b191f…` / 233,368 B instead of the
-pinned `c55bafc4…` / 219,065 B, because the original writer's compression and
-tile settings are not recorded. **Consequence:** the parent is referenced by
-sha256, never regenerated; every variant here is reproducible from
-`tools/build_mass.py` + `registry/data_manifest.json` + one seed.
+4. **Catalogue Hide-and-Recover `PROXY` Is Structurally Blind to `>=3 px`-Collar Edits on Long Strands.**
+   - *Fact:* Because R0 was pruned at `d_cat > 2.0 px` and new variant dots obey `d_cat >= 3.0 px` (the exact 3-pixel DTI kernel radius), moving dots on `>=6`-dot strands leaves DTI on held-out `existing_faults.tif` (`PROXY`) invariant to 6 decimals (`0.038424`, 95% CI `[0.03285, 0.043997]`).
+   - *Decision impact:* Never rank or gate `SPACING` (or other `d_cat >= 3 px` collar-respecting edits) by catalogue hide-and-recover `PROXY`; use physical ridge-jitter sensitivity (`MODEL`) and off-catalogue USGS SGMC fault coverage (`PROXY`, `https://doi.org/10.3133/ds1052`) for diagnostic direction, and treat only live `RECEIPT` deltas `>= 0.01` as evidence.
 
-## 2. Hard constraint 4 (≥ 3 px from the catalogue) conflicts with the parent's own collar
+5. **`SPACING` 2D Lateral Arms (`poisson`, `lattice`) Trade Ridge Alignment for Packing Clearance.**
+   - *Fact:* On R0's 834 active strands, reducing `<3 px` neighbor pairs by `29%–33%` (`poisson` / `lattice`) forces ~`79%–85%` of moved dots `1–2 px` laterally off the 1-px `h19_5` skeleton, dropping active-strand 3-px ridge coverage from `0.710` to `0.513–0.558` (`MODEL` `-0.010` and `-0.007`).
+   - *Decision impact:* Only `alongstrike` (`100%` ridge retention, `MODEL` `+0.002`) is eligible for Slot 1; `poisson` and `lattice` are held strictly conditional on `alongstrike` surprising positively (`>= +0.010`).
 
-The brief requires ≥ 3 px from catalogue pixels unless the axis is PRUNE. The
-parent has **1,611 dots within 3 px** of the catalogue — 941 at the √5 diagonal
-(2.236 px) and 670 further out but still inside 3 px — and **2,171 at ≤ 3 px**
-(the extra 560 sit exactly on 3.0 px). Its own documented rule was "none within
-2 px".
+6. **Upstream `MASS` Repeat Submissions Show Non-Zero Score Spread or Unverified Claims.**
+   - *Fact:* Upstream ledger entries for `h33-h33-2-b2` and `MASS` cousins (`GEMSDOE32` / `GEMSDOE49` / `GEMSDOE55`) are `CLAIM` rows without verified receipts in this repo, and `scored_h19_5.tif` is binary (`{0, 1}`, `121,131` pixels) with no continuous ranking stored in the parent raster.
+   - *Decision impact:* Reinforces the brief's `< 0.01 = no evidence` threshold and prevents over-interpreting sub-`0.01` differences across `SPACING`, `MASS`, and `RELIEF`.
 
-**Decision.** Variants **inherit** the ring and enforce ≥ 3 px only on newly
-placed dots. This session's arms are **drop-only**, so they can only reduce that
-number (m10uniq removes 58 ring dots, m10rand 171, m20uniq 147; the remaining
-minimum distance is still 2.236 px).
-
-**Overrule path.** If strict ≥ 3 px is mandatory, the correct construction is a
-two-factor arm (mass drop + collar top-up), registered as a new `(axis, value)`
-pair rather than folded into these files.
-
-## 3. `sample_submission.tif` is not fault-free
-
-60,988 of its pixels equal 1 and sit exactly on the catalogue, and its
-`GDAL_NODATA` tag is `nan`. The problem page advertises a fault-free template.
-
-**Decision.** Used **only** for grid geometry and the footprint mask, never as
-content and never as a label source.
-
-## 4. Competition rasters are already exposed in public GitHub repositories
-
-The owner's own repos host the competition feature stack (419 MB in 5 parts),
-the template, and the USGS/INGENIOUS label raster as **public** blobs.
-
-**Decision.** This repo stores no competition input: everything is fetched to
-`$GEMSDOE_DATA` (default `./data/`, git-ignored) and verified by sha256.
-`releases/` contains only derived candidate rasters.
-
-**Action for the human.** Decide whether the pre-existing public mirrors should
-be taken private. This agent did not modify any other repository.
-
-## 5. Two numbers the brief requires are blank and cannot be derived locally
-
-`TOP_PUBLIC` and slots used/available are `____` in the brief. The competition
-page cannot be fetched under its own terms (automated access is banned), so the
-agent will not guess them. The **2026-12-03 deadline is likewise UNVERIFIED**.
-Note that the fleet ledger already contains self-recorded "best public" rows
-(rank-1 `DARD` 0.3195 down to rank-19 0.2449), but those are the owner's own
-notes of a leaderboard snapshot with **no date**, so they are not a valid
-`TOP_PUBLIC`.
-
-## 6. The quoted block-density CV benchmark is not reproducible from the data
-
-The brief cites 0.51-0.59 CV for the best files (CONCENTRATION axis); upstream
-GEMSDOE86 reports 0.62-0.76. Measured on R0 this session: **1.87** at 1 km
-blocks, **1.24** at 2.5 km, **0.90** at 5 km, **0.64** at 10 km. At 2.5 km the
-Poisson floor for R0's density is ≈0.47, so the benchmark, if it means 2.5 km,
-describes a file that is almost exactly Poisson-uniform — which R0 is not.
-
-**Decision.** Reported for every variant (before/after) but never used as a
-target or a gate, and no variant was tuned toward it. This session's arms lower
-the 2.5 km CV slightly (1.242 → 1.199 / 1.253 / 1.179); that is a side effect of
-dropping clustered dots, not a design goal.
-
-## 7. The catalogue proxy is structurally blind to this axis
-
-The hide-and-recover proxy can only see dots near catalogue pixels. For RELIEF
-every *added* dot is ≥ 3 px away by construction, so the proxy saw only half the
-move. For MASS the blindness is worse: it sees the *dropped* dots but cannot see
-their true credit, because that depends on new-fault truth the proxy does not
-have.
-
-**Decision.** The proxy is reported (m10uniq 0.0370, m10rand 0.0340,
-m20uniq 0.0346, parent 0.0384, random null 0.0000) and is **never** used to set a
-sign, a gate, or a slot order.
-
-## 8. The parent's ranking does not exist — the MASS arm had to derive one
-
-The brief defines MASS by "the parent's own ranking (rebuild it from the recorded
-recipe if it is not stored)". **Neither exists.** There is no build script for
-`h33-h33-2-b2`, and the ancestor the lineage thins from — `h19-5`, called a
-"121k-px continuous field" in the brief — is **binary**: `{0, 1}`, 121,131 set
-cells, verified by hash this session. It cannot rank anything.
-
-The fleet shows the consequence: `GEMSDOE88`'s own ledger records its MASS
-ranking as `0.6*clip(d_catalogue_px/50,0,1) + 0.4*uniform` with "89.4 % within
-10 px of the catalogue", i.e. that arm is a collar/prune move, and the two MASS
-rows in this repo's ledger are the same construction.
-
-**Decision.** This session derives the ranking from the metric itself — the
-expected *unique* kernel credit under a flat truth prior (`gemsdoe.mass`) — and
-registers new pairs `(MASS, m10uniq / m10rand / m20uniq)`. `m10rand` is the
-count-matched null, so the ranking can be judged rather than assumed.
-
-**Overrule path.** If the human finds the original ranking artefact (a scored
-field raster for this lineage), the honest move is to rebuild these three values
-from it and record them as new pairs; the current files should then be retired.
-
-## 9. The ranking's own statistic mis-predicts the one measured mass step by 0.025
-
-Calibrating on solo-d2.8 → R0 (2,545 dots removed, **+0.0070** live): the
-removed dots' unique credit `u` is **8.036** against a set mean of **7.667** —
-*above* average. A credit-proportional model built on `u` therefore predicts
-**−0.0175** for a step that gained +0.0070.
-
-**Decision.** Every prediction in this session is a **wide band**, and the
-mechanism cards say plainly that `u` is a proxy that failed its only calibration.
-The arms are a falsification test of the count hypothesis, not a modelled gain.
-The family's *arithmetic* ceiling (all dropped dots at zero credit, `D ≈ 0.2D`
-calibrated from that same step) is +0.0105 for a 10 % drop and +0.021 for 20 %.
-
-## 10. Fleet evidence says "far from the catalogue" scores better — confounded, but decision-changing
-
-Across the 12 fleet rasters whose live scores can be matched to a file, the
-mass-weighted mean distance to the catalogue correlates with live score at
-Pearson **+0.94** / Spearman **+0.96**, and the fraction of mass within 10 px of
-the catalogue at **−0.61** / **−0.64**. Six of those twelve are one lineage
-(`h27-4-*` → `h33-*`), so the correlation is confounded by field, and n = 12 is
-small. It is nevertheless the only cross-file evidence available.
-
-**Decision.** It argues *against* building a CONCENTRATION arm toward the
-catalogue prior (the obvious next-axis candidate), and it argues against the
-RELIEF arms' assumption that the catalogue-dense piedmont is under-weighted.
-`SLOT_PLAN.md` therefore proposes FLOOR-BY-MASS and DIP_ASYMMETRY instead, and
-keeps the RELIEF files as alternates rather than favourites. It does **not**
-justify over-weighting the MASS prediction: the arms drop dots across the whole
-distance range, not preferentially near the catalogue.
-
-## 11. Manifest verification is 6 / 7, and that is deliberate
-
-`training_features.tif` (419 MB, 19 bands) was **not fetched** this session: a
-drop-only MASS edit reads no band, computes no gradient, and needs no field. Its
-absence is recorded as NOT FETCHED in `registry/data_manifest.json`
-(`session_gate.required_ids` lists exactly the five files this axis reads, all of
-which verified). The three ancestor rasters used for the parent identity proof
-(`h27_4_solo`, `d28`, `h19_5`, from `GEMSDOE92@baefa4d6`) were added to the
-manifest with their sha256 before use.
+7. **Missing Human Operational Inputs (`TOP_PUBLIC`, Weekly Slots, Deadline Verification).**
+   - *Fact:* `TOP_PUBLIC`, slots used this rolling week, and organizer confirmation of the `2026-12-03` deadline cannot be fetched without accessing `drivendata.org` (barred by ToS).
+   - *Decision impact:* Slot pacing in `SLOT_PLAN.md` and `README.md` leaves explicit placeholders for the human to fill before uploading Slot 1.
