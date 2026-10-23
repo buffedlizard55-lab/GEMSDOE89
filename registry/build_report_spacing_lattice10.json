@@ -1,0 +1,272 @@
+{
+ "id": "h33-h33-2-b2-spacing-lattice10-20261023-9d7dc126",
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "axis": "SPACING",
+ "value": "lattice10",
+ "pattern": "lattice",
+ "git_sha": "c65c6d55c2f43e4620ec015cf42d1673407acbc8",
+ "source_clean_at_build": true,
+ "seed": 20261023,
+ "environment": {
+  "python": "3.11.2",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "tifffile": "2026.3.3"
+ },
+ "stats": {
+  "pattern": "lattice",
+  "n_dots": 37654,
+  "n_moved": 3765,
+  "pct_changed": 9.998937695862326,
+  "seed": 20261023,
+  "removed_sha256": "ef579d518721c2ba6f34f9fd3dbc8cf8219a646e0a859d175d35e76d8c541691",
+  "anchors_sha256": "3c3dbeeb9d84f9a9ba751aa93b991e7cdea0d16f05b2dfd42a3a9d6c1c904554",
+  "control_block_px": 50,
+  "control_block_km": 5.0,
+  "control_block_counts_preserved": true,
+  "catalogue_clearance_px": 3.0,
+  "min_separation_px": 2.8,
+  "added_min_catalogue_clearance_px": 3.0,
+  "added_min_nearest_dot_px": 2.8284271247461903,
+  "catalogue_mass": 0,
+  "mean_displacement_px": 4.421458120072294,
+  "median_displacement_px": 4.47213595499958,
+  "p95_displacement_px": 6.0,
+  "max_displacement_px": 12.649110640673518,
+  "mean_anchor_shift_px": 1.6602880849724657,
+  "anchor_exact_matches": 404,
+  "source_nn_median_px": 2.8284271247461903,
+  "nn_median_before_px": 3.0,
+  "nn_median_after_px": 3.1622776601683795,
+  "nn_below_3px_before": 11415,
+  "nn_below_3px_after": 5618,
+  "block_cv_1km_before": 1.8704320876262501,
+  "block_cv_1km_after": 1.8193390699246406,
+  "search_radius_usage": {
+   "6": 3689,
+   "8": 59,
+   "10": 13,
+   "12": 2,
+   "16": 2
+  },
+  "expanded_beyond_6px": 76,
+  "best_candidate_draws": 16,
+  "lattice_step_px": 3,
+  "added_on_3px_lattice_fraction": 1.0,
+  "strike_fit_radius_px": 20,
+  "strike_along_scale": 0.25,
+  "strike_orientation_fallbacks": 0
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-spacing-lattice10-20261023-9d7dc126.tif",
+  "zeros": "releases/h33-h33-2-b2-spacing-lattice10-20261023-9d7dc126-zeros.tif",
+  "sha256": "9d7dc126634c0a66cca27b16f6eac770a8c6d36459f235fdfd11c3c3bcc3c11a",
+  "sha256_zeros": "b2705fa90d5f6fff22fc76491dee65f5e3d11aa8cb07486cb533417666360579"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-lattice10-20261023-9d7dc126.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "9d7dc126634c0a66"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-lattice10-20261023-9d7dc126-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "b2705fa90d5f6fff"
+    }
+   ]
+  },
+  "parent_diff": {
+   "ok": true,
+   "results": {
+    "count_fixed": true,
+    "changed_1_to_50_percent": true,
+    "exact_ten_percent_parent_diff": true,
+    "added_catalogue_clearance_at_least_3px": true,
+    "zero_catalogue_mass": true,
+    "minimum_dot_separation_at_least_2p8px": true,
+    "same_5km_block_counts": true,
+    "twins_identical_mask": true
+   }
+  }
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03465238303454307,
+   "ci95_halfwidth": 0.005303538316627554,
+   "ci95": [
+    0.029348844717915518,
+    0.039955921351170626
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006112668092494957,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0,
+  "surrogate_dti_delta": -0.000596450876460322,
+  "leakage_canary": "registry/leakage_canary_spacing.json",
+  "sgmc_control": "NOT RUN: no SGMC raster is pinned in registry/data_manifest.json; report-only and not used in any decision",
+  "caveat": "Added dots are >=3 px from catalogue pixels, so catalogue recovery cannot see their credit; the proxy is blind to the placement half of this edit."
+ },
+ "predicted_change": "+0.001 (MODEL; plausible -0.008..+0.010, not a calibrated interval)",
+ "mechanism_card": "ledger/MECHANISM_CARDS_SPACING.md",
+ "seconds": 5.7
+}

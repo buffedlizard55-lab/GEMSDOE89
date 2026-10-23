@@ -80,12 +80,15 @@ because at ~0.73 dots per block Poisson noise alone gives ≈ 1.2.
 **Decision.** The statistic is reported for every variant (before/after) but is
 **not** used as a target or a gate, and no variant was tuned toward it.
 
-## 7. The catalogue proxy is structurally blind to this axis
+## 7. The catalogue proxy is structurally blind to RELIEF and SPACING
 
 Every added dot is ≥ 3 px from every catalogue pixel by construction, so the
-hide-and-recover proxy can only register the removal half of a RELIEF move. Its
-deltas (0.0384 → 0.0356 / 0.0348 / 0.0341) are an artefact of that blindness.
+hide-and-recover proxy can register only the removal half of these edits. Its
+RELIEF deltas (0.0384 → 0.0356 / 0.0348 / 0.0341) are an artefact of that
+blindness. All three SPACING arms instead have identical proxy and catalogue-
+surrogate values because they share removals and their additions have zero
+catalogue-kernel credit; those instruments cannot rank lattice/Poisson/strike.
 
-**Decision.** The proxy is reported and is **not** used to set the predicted
-sign. Doing so would have flipped the sign of every variant for a reason that
-has nothing to do with the live score.
+**Decision.** The proxy is reported and is **not** used to set a predicted sign
+or select an arm. Doing so would penalise variants for a reason that has nothing
+to do with new-fault live credit.

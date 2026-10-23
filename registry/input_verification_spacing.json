@@ -1,0 +1,51 @@
+{
+ "all_ok": true,
+ "date": "2026-10-23",
+ "files": {
+  "existing_faults": {
+   "bytes": 425830,
+   "expected_bytes": 425830,
+   "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "ok": true,
+   "path": "/home/user/GEMSDOE89/data/existing_faults.tif",
+   "present": true,
+   "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "parent_r0_zeros": {
+   "bytes": 219065,
+   "expected_bytes": 219065,
+   "expected_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "ok": true,
+   "path": "/home/user/GEMSDOE89/data/parent_r0_zeros.tif",
+   "present": true,
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+  },
+  "sample_submission": {
+   "bytes": 1599597,
+   "expected_bytes": 1599597,
+   "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "ok": true,
+   "path": "/home/user/GEMSDOE89/data/sample_submission.tif",
+   "present": true,
+   "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+  },
+  "training_features": {
+   "bytes": 418912844,
+   "expected_bytes": 418912844,
+   "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+   "ok": true,
+   "path": "/home/user/GEMSDOE89/data/training_features.tif",
+   "present": true,
+   "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+  }
+ },
+ "git_sha": "c65c6d55c2f43e4620ec015cf42d1673407acbc8",
+ "parent": {
+  "id": "h33-h33-2-b2",
+  "n_dots": 37654,
+  "note": "Byte-exact artifact restored from the pinned mirror; no approximate parent or recipe substitution.",
+  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "sha256_match": true,
+  "unit_mass": true
+ }
+}

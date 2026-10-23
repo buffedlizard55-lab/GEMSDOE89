@@ -1,0 +1,18 @@
+{
+ "instrument": "REPORT-ONLY single-geometry-feature AUC against catalogue membership",
+ "threshold": 0.9,
+ "sample_px": 400000,
+ "seed": 11,
+ "features": {
+  "distance_to_parent_dot": {
+   "auc": 0.4636739026320132,
+   "flag": false
+  },
+  "distance_to_surviving_dot": {
+   "auc": 0.46429303985544024,
+   "flag": false
+  }
+ },
+ "verdict": "PASS",
+ "note": "No external feature is used by SPACING. The mandated catalogue-distance exclusion is not tested as a predictor because it is label-defined by construction."
+}

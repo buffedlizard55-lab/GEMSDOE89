@@ -2,7 +2,7 @@
  "note": "REPORT ONLY. None of these instruments can pass or fail a release.",
  "catalogue_hide_and_recover": {
   "seed": 20261023,
-  "holdout_fraction": 0.30,
+  "holdout_fraction": 0.3,
   "n_withheld": 18296,
   "parent_recall": 0.0384,
   "r10": 0.0356,
@@ -10,21 +10,23 @@
   "r15s": 0.0341,
   "random_null": 0.0,
   "ci": "Wilson 95% computed per file in registry/build_report_*.json",
-  "caveat": "Structurally blind to this axis: every added dot is >=3 px from every catalogue pixel by construction, so the proxy can only register the removal half of a RELIEF move. Deltas here are an artefact and were NOT used to set a predicted sign (IRREGULARITIES.md item 7)."
+  "caveat": "RELIEF additions are invisible to this proxy. All SPACING arms also share removals and have additions at >=3 px, so their proxy values are identical and cannot rank the patterns. Never used as a gate or predicted-sign input.",
+  "spacing_all_three": 0.03465238303454307
  },
  "surrogate_dti_catalogue_as_truth": {
   "parent": 0.0067,
   "r10": 0.0062,
-  "r15": 0.0060,
+  "r15": 0.006,
   "r15s": 0.0059,
   "random_null": 0.0,
-  "caveat": "The catalogue is masked pixel-exactly in live scoring, so this is a counterfactual coverage measure, not a score estimate."
+  "caveat": "The catalogue is masked pixel-exactly in live scoring, so this is a counterfactual coverage measure, not a score estimate.",
+  "spacing_all_three": 0.006112668092494957
  },
- "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature AUC 0.562 (threshold 0.90)",
+ "leakage_canary": "RELIEF bands: PASS, max AUC 0.562 (registry/leakage_canary.json). SPACING geometry: PASS, max AUC 0.4643 (registry/leakage_canary_spacing.json). Threshold 0.90; REPORT ONLY.",
  "sgmc_control": {
   "status": "NOT RUN",
-  "reason": "The SGMC control raster (ext_derived_sgmc_faults_100m_u8, sha256 643cbe99...) was not restored this session. It is report-only and cannot gate a file, so it was deferred rather than fetched; restore it via registry/data_manifest.json if the human wants the control.",
-  "impact_on_decisions": "none - no variant depends on it"
+  "reason": "No SGMC control raster is pinned in the current data manifest. No unpinned substitute was fetched or invented.",
+  "impact_on_decisions": "none - report-only and no variant depends on it"
  },
  "block_density_cv": {
   "definition": "1 km x 1 km blocks (10 x 10 px), density = dots / footprint px per block, blocks with >=50% footprint",
@@ -32,6 +34,22 @@
   "r10": 1.862,
   "r15": 1.887,
   "r15s": 1.704,
-  "caveat": "Not comparable to the 0.51-0.59 figure quoted in the brief nor to the 0.62-0.76 reported upstream; at ~0.73 dots per block Poisson noise alone gives ~1.2. Reported, never used as a target (IRREGULARITIES.md item 6)."
+  "caveat": "Not comparable to the 0.51-0.59 figure quoted in the brief nor to the 0.62-0.76 reported upstream; at ~0.73 dots per block Poisson noise alone gives ~1.2. Reported, never used as a target (IRREGULARITIES.md item 6).",
+  "spacing_lattice10": 1.8193390699246406,
+  "spacing_poisson10": 1.808646976817338,
+  "spacing_strike10": 1.8144889625786078
+ },
+ "spacing_matched_control": {
+  "removed_coordinate_sha256": "ef579d518721c2ba6f34f9fd3dbc8cf8219a646e0a859d175d35e76d8c541691",
+  "poisson_anchor_coordinate_sha256": "3c3dbeeb9d84f9a9ba751aa93b991e7cdea0d16f05b2dfd42a3a9d6c1c904554",
+  "n_withheld": 18296,
+  "proxy_recall_each_arm": 0.03465238303454307,
+  "proxy_ci95_each_arm": [
+   0.029348844717915518,
+   0.039955921351170626
+  ],
+  "surrogate_dti_each_arm": 0.006112668092494957,
+  "surrogate_delta_from_parent": -0.000596450876460322,
+  "why_identical": "Same removals and fixed count; every added dot is >=3 px from the catalogue and therefore has zero catalogue-kernel credit. This is expected, not a duplicated raster."
  }
 }
