@@ -112,3 +112,29 @@ def canary(features: dict, catalogue_mask, threshold=0.90):
 def surrogate_dti(dots, catalogue_mask, radius=KERNEL_RADIUS_PX):
     """DTI with the pinned catalogue as the truth raster (counterfactual)."""
     return dti(catalogue_mask, dots.astype(np.float64), radius)
+
+
+def sgmc_off_catalogue(dots, sgmc_mask, catalogue_mask, footprint,
+                       clearance_px=3.0, radius=KERNEL_RADIUS_PX):
+    """REPORT-ONLY off-catalogue SGMC geologic-map fault control.
+
+    Evaluates dot recall and counterfactual DTI against USGS State Geologic Map
+    Compilation (Horton et al., 2017, https://doi.org/10.3133/ds1052) fault
+    pixels inside the footprint and >= clearance_px from the masked catalogue.
+    Pre-Quaternary bedrock faults are an imperfect proxy for test truth (live
+    SGMC-only submissions scored ~0.05), so this is never a gate or score.
+    """
+    d_cat = ndi.distance_transform_edt(~catalogue_mask)
+    offcat_sgmc = np.asarray(sgmc_mask, dtype=bool) & footprint & (d_cat >= clearance_px)
+    sgmc_pts = np.argwhere(offcat_sgmc)
+    dots_pts = np.argwhere(dots)
+    rec, half, n = _recall(dots_pts, sgmc_pts, radius=radius)
+    return {
+        "n_sgmc_offcat_px": int(n),
+        "clearance_from_catalogue_px": float(clearance_px),
+        "recall_within_3px": float(rec),
+        "ci95_halfwidth": float(half),
+        "ci95": [max(0.0, rec - half), min(1.0, rec + half)],
+        "surrogate_dti_sgmc_offcat": float(dti(offcat_sgmc, dots.astype(np.float64), radius)),
+    }
+

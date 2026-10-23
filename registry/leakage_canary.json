@@ -5,11 +5,11 @@
  "seed": 11,
  "features": {
   "det_elev": {
-   "auc": 0.4833735581904295,
+   "auc": 0.48773023344533306,
    "flag": false
   },
   "det_elev_slope": {
-   "auc": 0.5543881495746192,
+   "auc": 0.5511242470526468,
    "flag": false
   },
   "elev_class": {
@@ -17,10 +17,22 @@
    "flag": false
   },
   "abs_elev_gradient": {
-   "auc": 0.561682529685672,
+   "auc": 0.5611847556487757,
+   "flag": false
+  },
+  "scored_h19_5": {
+   "auc": 0.48819812778700983,
+   "flag": false
+  },
+  "h19_centrality_s1p5": {
+   "auc": 0.651380909825783,
+   "flag": false
+  },
+  "h19_strike_coherence": {
+   "auc": 0.525981914823887,
    "flag": false
   }
  },
  "verdict": "PASS: no single feature exceeds the canary threshold",
- "note": "REPORT ONLY. AUC close to 0.5 means the feature carries no catalogue information by itself; a value above 0.90 would mean the feature nearly identifies catalogue pixels and must not be used."
+ "note": "REPORT ONLY. AUC close to 0.5 means the feature carries little catalogue information alone; AUC > 0.90 triggers an immediate stop."
 }

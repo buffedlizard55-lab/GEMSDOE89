@@ -1,0 +1,289 @@
+{
+ "id": "h33-h33-2-b2-spacing-poisson-20261023-95c51e18",
+ "axis": "SPACING",
+ "value": "poisson",
+ "spec": {
+  "mode": "poisson",
+  "note": "isotropic farthest-point (Poisson-disk) + discrete Voronoi/Lloyd relaxation inside R0's 610 widest multi-dot fault corridors, exact per-corridor count preserved",
+  "predicted_change": "+0.001 (MODEL; band -0.002..+0.004). Isotropic 2-D corridor covering benchmark.",
+  "form_note": "h33-h33-2-b2; SPACING poisson (4800/37654=12.75% Voronoi/Poisson on H19, dcat>=3px); pred +0.001 (-0.002..+0.004)",
+  "recommend": "SLOT 2 (control if strike moves >=0.010 or to separate 2-D corridor scatter vs 1-D crest)."
+ },
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "git_sha": "5875e057e8a2b92e84dab94940c8975743b5dd2a",
+ "seed": 20261023,
+ "stats": {
+  "mode": "poisson",
+  "n_dots": 37654,
+  "n_corridors_repacked": 610,
+  "n_cleared_in_corridors": 8508,
+  "n_moved": 4800,
+  "pct_changed": 12.747649652095395,
+  "pct_symmetric_diff": 25.49529930419079,
+  "mean_displacement_px": 1.2707872535703115,
+  "median_displacement_px": 1.0,
+  "nn_p10_before_px": 2.8284271247461903,
+  "nn_p10_after_px": 2.8284271247461903,
+  "nn_median_before_px": 3.0,
+  "nn_median_after_px": 3.0,
+  "crest_dots_before": 24691,
+  "crest_dots_after": 25286,
+  "t_crest_before": 52607.587097642114,
+  "t_crest_after": 52847.683661314484,
+  "t_crest_delta": 240.0965636723704,
+  "t_manifold_before": 76725.88495626673,
+  "t_manifold_after": 77012.15498995736,
+  "t_manifold_delta": 286.2700336906273,
+  "across_strike_twins_before": 4802,
+  "across_strike_twins_after": 4921,
+  "block_cv_before": 1.8704320876262501,
+  "block_cv_after": 1.871238357111763,
+  "block_cv_5km_before": 0.8990629317740834,
+  "block_cv_5km_after": 0.8986175547478248
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18.tif",
+  "zeros": "releases/h33-h33-2-b2-spacing-poisson-20261023-95c51e18-zeros.tif",
+  "sha256": "95c51e182563dba79eec1e8b306fa9b673955c6615a687cdc0f8f35af4cd3b15",
+  "sha256_zeros": "dc82177c1fa9c962464e78c5efa2a416a91c998a7a2e54feef168efefa77ca6e",
+  "sha8": "95c51e18"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-poisson-20261023-95c51e18.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "95c51e182563dba7"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-spacing-poisson-20261023-95c51e18-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "dc82177c1fa9c962"
+    }
+   ]
+  },
+  "added_clearance_ge_3px": true,
+  "all_dots_on_h19_5_support": true,
+  "pct_changed_in_1_50": true,
+  "twins_identical_mask": true
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "sgmc_off_catalogue_variant": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.20140682181841227,
+   "ci95_halfwidth": 0.006257388615927895,
+   "ci95": [
+    0.19514943320248437,
+    0.20766421043434016
+   ],
+   "surrogate_dti_sgmc_offcat": 0.0957429108067686
+  },
+  "sgmc_off_catalogue_parent": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.20147019217059298,
+   "ci95_halfwidth": 0.006258124563115974,
+   "ci95": [
+    0.195212067607477,
+    0.20772831673370895
+   ],
+   "surrogate_dti_sgmc_offcat": 0.09613245598517174
+  },
+  "sgmc_off_catalogue_random_null": {
+   "n_sgmc_offcat_px": 63121,
+   "clearance_from_catalogue_px": 3.0,
+   "recall_within_3px": 0.17642306047115858,
+   "ci95_halfwidth": 0.005947373365068176,
+   "ci95": [
+    0.1704756871060904,
+    0.18237043383622675
+   ],
+   "surrogate_dti_sgmc_offcat": 0.07411400133345228
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0,
+  "model_inputs": {
+   "added_dots": 4800,
+   "removed_dots": 4800,
+   "added_min_clearance_px": 3.0,
+   "all_dots_on_scored_h19_5": true,
+   "added_frac_within_kernel_of_catalogue": 0.0,
+   "t_crest_delta_units": 240.0965636723704,
+   "t_manifold_delta_units": 286.2700336906273,
+   "crest_dots_delta": 595,
+   "across_strike_twins_delta": 119,
+   "pays_threshold_at_parent_dti": 0.05556,
+   "inherited_dots_below_3px_of_catalogue": 1611,
+   "parent_min_clearance_px": 2.23606797749979
+  }
+ },
+ "seconds": 9.0
+}
