@@ -60,6 +60,10 @@ def load_manifest():
 def verify_inputs(manifest):
     report = {}
     for f in manifest["files"]:
+        if f.get("unverified"):
+            report[f["id"]] = {"present": False, "ok": True,
+                               "skipped": "unverified report-only pin (IRREGULARITIES item 8)"}
+            continue
         data_root = Path(os.environ.get(manifest.get("data_root_env", "GEMSDOE_DATA"), ROOT / manifest.get("data_root_default", "data")))
         path = data_root / f["local"]
         if not path.exists():

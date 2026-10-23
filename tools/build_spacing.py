@@ -71,6 +71,9 @@ def verify_manifest(manifest: dict, data_root: Path) -> dict[str, Path]:
     paths: dict[str, Path] = {}
     bad = {}
     for entry in manifest["files"]:
+        if entry.get("unverified"):
+            print(f"[skip] unverified report-only pin {entry['id']} (IRREGULARITIES item 8)")
+            continue
         p = data_root / entry["local"]
         if not p.exists():
             bad[entry["id"]] = {"present": False, "path": str(p)}
@@ -164,7 +167,7 @@ def main() -> int:
     cat_mask = (np.isfinite(catalogue_raw) & (catalogue_raw > 0)) & foot
     h19_raw = grid.read_back(paths["scored_h19_5"])[0]
     h19_mask = (np.isfinite(h19_raw) & (h19_raw > 0)) & foot
-    d28_pin = (np.isfinite(grid.read_back(paths["scored_d28"])[0]) & (grid.read_back(paths["scored_d28"])[0] > 0)) & foot
+    d28_pin = (np.isfinite(grid.read_back(paths["parent_ancestor_d28"])[0]) & (grid.read_back(paths["parent_ancestor_d28"])[0] > 0)) & foot
     r0_pin = (grid.read_back(paths["parent_r0_zeros"])[0] > 0) & foot
     sgmc_mask = (grid.read_back(paths["sgmc_faults"])[0] > 0) & foot
 

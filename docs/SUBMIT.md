@@ -1,44 +1,73 @@
-# Manual Submission Guide (`docs/SUBMIT.md`)
+# SUBMIT — session GEMSDOE89 (integrated queue, 2026-10-23)
 
-Automated access to `drivendata.org` is prohibited by challenge rules and agent constraints. A human operator must perform any upload and record the returned receipt.
+The human submits from their own registered account. Nothing here logs in,
+scrapes, or uploads. One file per slot; upload the NaN-outside twin (the
+`-zeros.tif` twin is the fallback and scores identically per ledger history).
 
-## 1. Pre-Upload Verification (Local Check)
+## Slot 1 (allocation fork)
 
-Before uploading any candidate in `releases/`, verify its SHA-256 hash on disk matches `ledger/submissions.csv`:
+| field | value |
+|---|---|
+| **file** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` |
+| **name** | `h33-h33-2-b2-relief-r10-20261023-366c87ca` |
+| **sha256** | `366c87ca620402158cfbbf4911ed8abc8ba2da34f198694c9df7c5ea640ab335` |
+| **form note** (122 chars) | `R0 h33-h33-2-b2 + RELIEF r10: 3765/37654 dots (10%) range->piedmont class, count fixed, dcat>=3px, structured; pred +0.003` |
+| **predicted** | +0.003 MODEL (−0.012 … +0.018) |
 
-```bash
-sha256sum releases/h33-h33-2-b2-spacing-*.tif releases/h33-h33-2-b2-relief-*.tif releases/h33-h33-2-b2-MASS*.tif
-python3 tools/validate_raster.py
-python3 tools/check_ledger.py
+## Slot 2 (placement fork — SNAP session build)
+
+| field | value |
+|---|---|
+| **file** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` |
+| **name** | `h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae` |
+| **sha256** | `69db3aae7da2311d43a621d0c4d2ab423a3cd39acfea9cf13f666def10fd5c54` |
+| **fallback** | `releases/…-69db3aae-zeros.tif` (`0fe545f9de5723e2…`) |
+| **form note** (105 chars) | `R0 h33-h33-2-b2 + SNAP 2p0px-g0p00: 31,287/37654 dots moved, mean 1.86 px, targets dcat>=3px; pred +0.028` |
+| **predicted** | +0.028 MODEL (−0.028 … +0.084) — widest band in the repo; the negative side prices non-fault EM crests (cards: `ledger/MECHANISM_CARDS.md` Part III) |
+
+## Slot 3 (conditional — pick at most one, or hold)
+
+| condition | file (name = file minus `.tif`) | predicted |
+|---|---|---|
+| slot 1 ≥ **0.2878** | `…-relief-r15-20261023-6aa774ce.tif` (`6aa774ce21fe10b3…`) | +0.004 (−0.017…+0.027) |
+| else slot 2 ≥ **0.2878** | `…-snap1p4px-g0p00-20261023-e1474851.tif` (`e14748519b3fb35c…`) | +0.028 (−0.028…+0.083) |
+| else | `…-spacing-alongstrike-20261023-3b263c7a.tif` (`3b263c7a…`) or **hold** | +0.002 (−0.003…+0.006) |
+
+## The rest of the gated queue (names in `ledger/submissions.csv`, status BUILT)
+
+| axis | value (sha8) | predicted | trigger |
+|---|---|---|---|
+| SNAP | `1p0px-g0p00` (1add5aa6) | +0.027 (−0.027…+0.081) | only if two gate-0 receipts both fire and a 3rd window point is wanted (it saturates — prefer hold) |
+| RELIEF | `r15s` (5f0ae851) | +0.001 (−0.007…+0.011) | alternate definition if r10 null and the axis still needs closing |
+| MASS | `m10uniq` (beed130f) | +0.002 (−0.010…+0.010) | orthogonal axis when a fork is null |
+| MASS | `m20uniq` (87ec6213) | +0.004 (−0.020…+0.021) | after m10uniq ≥ +0.010 (dose) |
+| MASS | `m10rand` (7a4c49b6) | −0.002 (−0.016…+0.010) | null control for m10uniq |
+| SPACING | `poisson` (ff167173) / `lattice` (454c9098) | −0.010 / −0.007 | held; only if `alongstrike` ≥ +0.010 |
+| upstream | gated SNAP `2p0px-g0p01` (GEMSDOE84, `b2019f55`… class) | +0.018…+0.044 | conservative first SNAP probe if the human prefers a tighter band; file is **not in this repo** |
+
+## Format receipt (re-read from disk after writing; data gates live-verified at build)
+
+| gate | result |
+|---|---|
+| grid contract vs `sample_submission.tif` (3730×3292, 100 m, EPSG:32611, float32, 1 band) | pass ×24 files |
+| values in [0,1]; dots exactly 1.0; no NaN inside footprint; NaN/zeros outside per twin | pass |
+| dot count 37,654 per file; twins carry identical masks | pass |
+| zero catalogue mass; moved-target clearance ≥ 3.00 px (inherited 2.236-px parent collar unchanged-or-shrinking) | pass |
+| sha256 not already in the ledger; no duplicate (parent, axis, value) triples | pass (127 rows) |
+| R0 parent rebuild (recipe + mask paths) byte-exact vs both pins | pass (`python tools/rebuild_r0.py`) |
+
+## Before you upload (2 minutes)
+
+```
+export GEMSDOE_DATA=/path/to/verified/inputs      # 10 pinned files + optional SGMC
+python tools/fetch_pinned_data.py                 # or verify hashes yourself
+python -m pytest tests -q
+python tools/validate_raster.py                   # every release, every gate
+python tools/check_ledger.py                      # ledger <-> disk, no dup triples
+python tools/rebuild_r0.py                        # must print "[ok] R0 rebuilt byte-identical"
+sha256sum releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif   # must start 69db3aae
 ```
 
-### `SPACING` Candidates Built This Session (Primary = NaN outside footprint)
-
-| Slot Role | Primary File (`NaN` outside footprint) | SHA-256 (`primary`) | Fallback (`0.0` outside) | SHA-256 (`-zeros`) |
-|---|---|---|---|---|
-| **Slot 1 (`SPACING` primary)** | `releases/h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif` | `3b263c7aa90ee0928d8ad8b2a81e42bc99decc7c881f46204af36b877d8bdbaa` | `...-zeros.tif` | `d18297a5192f05902b8baadd585de37de0d81fadb3dc9aba626767cfc9494cc6` |
-| **Slot 2 (if Slot 1 >= 0.2878)** | `releases/h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif` | `ff167173aa2b8e45187d123db0193ad8da7e16a6e65c0f466630be9db7cfea34` | `...-zeros.tif` | `f04da689f1da475c117d2332a84b6c91cb3f2a3febb01818d342678af0652f69` |
-| **Hold (`SPACING` hex lattice)** | `releases/h33-h33-2-b2-spacing-lattice-20261023-454c9098.tif` | `454c909877ddd82b91cfb6b6b2f71710524b1d76d37a0f72d0d33107b0f0431d` | `...-zeros.tif` | `56c77db28955ebaae090d0878daa7f258d1d0c7bfe30c6f1279f266e17cf6fab` |
-
-*(Orthogonal `GEMSDOE89` release pairs `RELIEF` `r10`/`r15`/`r15s` and `MASS` `m10uniq`/`m10rand`/`m20uniq` also remain verified in `releases/` and `ledger/submissions.csv`.)*
-
-## 2. DrivenData Upload Steps
-
-1. Log in to DrivenData (`GEMS: Geothermal Exploration with Machine Learning`, challenge `#306`) using the team's single authorized entity account (**3 scored slots/rolling week**).
-2. Record **current `TOP_PUBLIC` score + date** and **remaining weekly slots** before submitting.
-3. Upload the **primary `.tif`** (NaN outside footprint, matching `sample_submission.tif` encoding).
-   - Paste the exact `<=140`-character `form_note` from `ledger/submissions.csv`:
-     - `alongstrike`: `h33-h33-2-b2; SPACING alongstrike: 5222/37654 (13.9%) geodesic 1-swap on >=6-dot strands, n=37654; pred +0.002 (-0.003..+0.006)`
-     - `poisson`: `h33-h33-2-b2; SPACING poisson: 7639/37654 (20.3%) 2D blue-noise disk in +-150m corridor, n=37654; pred -0.010 (-0.032..+0.004)`
-     - `lattice`: `h33-h33-2-b2; SPACING lattice: 7305/37654 (19.4%) 3.5px hex lattice in +-200m corridor, n=37654; pred -0.007 (-0.025..+0.003)`
-4. **Only if** the platform scorer rejects NaN outside the footprint, upload the matching `-zeros.tif` fallback twin instead (noting that doing so consumes a submission if the first was scored).
-
-## 3. Recording the Receipt
-
-After scoring completes:
-1. Save a timestamped screenshot / receipt record outside public release artifacts if required, and update `ledger/submissions.csv`:
-   - `score` and `receipt_score` -> exact 4-decimal live DTI returned by DrivenData
-   - `evidence_class` -> `RECEIPT`
-   - `receipt` -> `Y`
-   - `status` -> `SCORED`
-2. Apply the `SLOT_PLAN.md` decision tree (`|Delta| < 0.01` = no evidence).
+Then fill `receipt_score` and `receipt_date` in `ledger/submissions.csv` from the
+submission-page receipt. Until that exists the file's score is **CLAIM only** —
+this repo currently holds no receipt for any file, including the parent's 0.2778.

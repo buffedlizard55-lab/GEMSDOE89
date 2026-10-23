@@ -51,6 +51,9 @@ def main() -> int:
 
     verified = {}
     for entry in manifest["files"]:
+        if entry.get("unverified"):
+            print(f"[skip] unverified report-only pin {entry['id']} (IRREGULARITIES item 8)")
+            continue
         p = data_root / entry["local"]
         if not p.exists():
             print(f"STOP: missing pinned input {entry['id']} at {p}")
@@ -60,7 +63,7 @@ def main() -> int:
             print(f"STOP: sha256 mismatch on {entry['id']}: got {got}, expected {entry['sha256']}")
             return 2
         verified[entry["id"]] = got
-    print(f"[ok] verified all {len(verified)} manifest sha256 pins")
+    print(f"[ok] verified {len(verified)} manifest sha256 pins (unverified entries skipped)")
 
     sample_arr, _ = grid.read_template(data_root / "sample_submission.tif")
     foot = np.isfinite(sample_arr)
@@ -68,7 +71,9 @@ def main() -> int:
     cat = (np.isfinite(cat_arr) & (cat_arr > 0)) & foot
     h19_arr = grid.read_back(data_root / "scored_h19_5.tif")[0]
     h19 = (np.isfinite(h19_arr) & (h19_arr > 0)) & foot
-    d28_pin_arr = grid.read_back(data_root / "scored_d28.tif")[0]
+    # the scored d28 ancestor pin lives under manifest id parent_ancestor_d28 (local d28.tif)
+    d28_local = next(f["local"] for f in manifest["files"] if f["id"] == "parent_ancestor_d28")
+    d28_pin_arr = grid.read_back(data_root / d28_local)[0]
     d28_pin = (np.isfinite(d28_pin_arr) & (d28_pin_arr > 0)) & foot
     r0_pin_arr = grid.read_back(data_root / "parent_r0_zeros.tif")[0]
     r0_pin = (r0_pin_arr > 0) & foot
@@ -137,7 +142,7 @@ def main() -> int:
         "git_sha": git_sha(),
         "h19_5_sha256": verified["scored_h19_5"],
         "h19_5_pixels": int(h19.sum()),
-        "d28_sha256": verified["scored_d28"],
+        "d28_sha256": verified["parent_ancestor_d28"],
         "d28_dots_rebuilt": int(d28_mask.sum()),
         "d28_exact_mask_match": d28_equal,
         "sha256": rebuilt_zeros_sha,

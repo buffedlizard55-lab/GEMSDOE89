@@ -3,7 +3,7 @@
 Only items that alter candidate validity, metric interpretation, governance, or slot allocation are listed here.
 
 1. **Parent R0 (`0.2778`) Is a `CLAIM`, Not a `RECEIPT` in This Repo.**
-   - *Fact:* `h33-h33-2-b2` (`c55bafc4...` / `baeae321...`) is rebuilt bit-for-bit (`0` pixel diffs across all `12,279,160` grid cells) from pinned `scored_h19_5.tif` + `existing_faults.tif` + `sample_submission.tif`, so parent *geometry* is 100% verified. However, its `0.2778` live number carries `evidence_class = CLAIM` (no organizer receipt is stored in this repo).
+   - *Fact:* `h33-h33-2-b2` (`c55bafc4...` / `baeae321...`) is rebuilt bit-for-bit (`0` pixel diffs across all `12,279,160` grid cells) from pinned `scored_h19_5.tif` + `existing_faults.tif` + `sample_submission.tif`, so parent *geometry* is 100% verified (the `SNAP` session additionally reproduced the same two byte streams from the final mask alone — mask + parent writer profile — so identity holds even if the recipe path regresses). However, its `0.2778` live number carries `evidence_class = CLAIM` (no organizer receipt is stored in this repo).
    - *Decision impact:* Every predicted live change (`MODEL`) is anchored to `0.2778` only up to `CLAIM` accuracy; if Slot 1 lands far from `0.2778`, parent baseline uncertainty (`CLAIM` vs `RECEIPT`) must be checked before attributing the gap to `SPACING`, `RELIEF`, or `MASS`.
 
 2. **Public Bridge Mirrors Host Competition Rasters (`GEMSDOE`, `GEMSDOE24`, `GEMSDOE86`, `GEMSDOE92`).**
@@ -29,3 +29,7 @@ Only items that alter candidate validity, metric interpretation, governance, or 
 7. **Missing Human Operational Inputs (`TOP_PUBLIC`, Weekly Slots, Deadline Verification).**
    - *Fact:* `TOP_PUBLIC`, slots used this rolling week, and organizer confirmation of the `2026-12-03` deadline cannot be fetched without accessing `drivendata.org` (barred by ToS).
    - *Decision impact:* Slot pacing in `SLOT_PLAN.md` and `README.md` leaves explicit placeholders for the human to fill before uploading Slot 1.
+
+8. **Three Manifest Pins Were Wrong and One Is UNVERIFIED (fixed/flagged 2026-10-23, SNAP session merge).**
+   - *Fact:* `parent_r0_nan` pointed at a nonexistent path (`...-e5eb6e7e.tif` — the real file is `...-e5eb6e7e-nan.tif`) with a sha256 (`baeae321d33f676...`) that matches no fetched file; the real twin hashes `baeae3219bba6a19...`, equal to `gemsdoe/parent.py`'s pin and to `tools/rebuild_r0.py` output. `scored_h19_5` and `scored_h27_4_solo` pointed at GEMSDOE86 paths that404 (repointed to the GEMSDOE92 bridge mirrors with identical pinned bytes). `sgmc_faults_control` names a ref (`13792bb1...`) that does not exist in GEMSDOE84 and a path with no commit history; `data.usgs.gov` is unreachable from the build sandbox.
+   - *Decision impact:* the three wrong pins are corrected and re-verified (all 10 fetchable entries hash to their pins); the SGMC entry is marked `unverified: true`, is skipped by every verify/fetch step, and can never gate a file (report-only). **SGMC numbers carried into docs/reports from other sessions are UNVERIFIED provenance** until the human restores the raster from an official USGS source (doi `10.3133/ds1052`). Tools also learned to read the `scored_d28` ancestor via the manifest's `parent_ancestor_d28` id, which their committed scripts referenced under an undeclared name.

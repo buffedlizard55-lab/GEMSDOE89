@@ -35,6 +35,9 @@ def main() -> int:
 
     by_repo_ref: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for entry in manifest["files"]:
+        if entry.get("unverified"):
+            print(f"[skip] unverified report-only pin {entry['id']} (IRREGULARITIES item 8)")
+            continue
         dest = data_root / entry["local"]
         if dest.exists() and sha256_file(dest) == entry["sha256"]:
             print(f"[cached-ok] {entry['id']} -> {dest.name} ({entry['sha256'][:12]})")
@@ -87,6 +90,9 @@ def main() -> int:
 
     all_ok = True
     for entry in manifest["files"]:
+        if entry.get("unverified"):
+            print(f"[skip] unverified report-only pin {entry['id']} (IRREGULARITIES item 8)")
+            continue
         dest = data_root / entry["local"]
         if not dest.exists():
             print(f"FAIL {entry['id']}: missing {dest}")

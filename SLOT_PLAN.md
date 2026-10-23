@@ -1,27 +1,46 @@
-# SLOT PLAN — GEMSDOE89 (`SPACING` Session, 2026-10-23)
+# SLOT PLAN — GEMSDOE89 (integrated after the SNAP-session merge, 2026-10-23)
 
-- **Timeline:** 2026-10-23 -> **2026-12-03** (`UNVERIFIED` deadline) = **41 days (~5.9 weeks)** -> **~18 rolling weekly slots** (1 entity @ 3 slots/wk) + **1 blind final submission**.
-- **Baseline:** Parent R0 `h33-h33-2-b2` (`c55bafc4...`), rebuilt bit-for-bit, **0.2778 = CLAIM** (no `RECEIPT` in this repo). `TOP_PUBLIC`: `____` (human must supply). Weekly slots used: `__ / 3` (human must supply).
-- **Rule:** Live changes `< 0.01` (`|Delta| < 0.010`) are treated as **no evidence** (indistinguishable from test-mask variance without a repeat-submission `RECEIPT`).
+- **Timeline:** 2026-10-23 → **2026-12-03** (`UNVERIFIED` deadline) ≈ 41 days ≈
+  **~18 rolling slots** (1 entity × 3/week) + 1 blind final. Slots used:
+  `__ / 3` (human must supply).
+- **Baseline:** R0 `h33-h33-2-b2` recipe-rebuilt byte-exact (`c55bafc4…` zeros,
+  `baeae321…` nan), **0.2778 = CLAIM** (no receipt here). `TOP_PUBLIC`: `____`.
+- **Rule:** any live change `< 0.01` is **no evidence**; report-only instruments
+  (PROXY/canary/SGMC) never gate and are never called scores.
 
-## Next 3 Slots (Ordered) & Decision Tree
+## Next 3 slots, in order
 
-1. **Slot 1 — `h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif`** (`SPACING=alongstrike`, `5,222/37,654 = 13.87%` moved, `n=37,654`, `MODEL` `+0.002`, band `-0.003..+0.006`).
-   - *Why first:* Purest single-variable test of along-strike spacing on R0's 834 multi-dot `h19_5` fault strands (`>=6` dots): 100% ridge retention, zero count change, zero 5 km CV drift (`0.8991 -> 0.8991`), smallest downside (`-0.003`).
-2. **Slot 2 — Conditional on Slot 1 `RECEIPT` `S1` (relative to R0 `0.2778` `CLAIM`):**
-   - **If `S1 >= 0.2878` (`Delta >= +0.010`):** Submit **`h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif`** (`20.29%` moved, `MODEL` `-0.010`, band `-0.032..+0.004`) to test whether 2D lateral corridor spacing (`+-150 m`) adds gain beyond 1D strand equalization.
-   - **If `0.2678 < S1 < 0.2878` (`|Delta| < 0.010`, expected):** **Close `SPACING`** (along-strike packing is within noise; do **not** spend slots on `poisson` or `lattice`). Pivot Slot 2 to an orthogonal unscored axis already built: **`MASS m10uniq`** (`releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif`, `MODEL` `+0.002`, ceiling `+0.0105`), **`RELIEF r10`** (`releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif`, `MODEL` `+0.003`), or upstream **`SNAP 2p0px-g0p02`** (`GEMSDOE84`, `b2019f55`, `MODEL` `+0.007..+0.018`).
-   - **If `S1 <= 0.2678` (`Delta <= -0.010`):** Greedy `r=2.8 px` strand endpoints carry live signal; freeze strand positions and never re-space along `h19_5`.
-3. **Slot 3 — Conditional on Slot 2 `RECEIPT` `S2`:**
-   - **If `poisson` ran and `S2 >= S1 + 0.010`:** Submit **`h33-h33-2-b2-spacing-lattice-20261023-454c9098.tif`** (`19.40%` moved, `MODEL` `-0.007`) to test hexagonal crystal packing (`nn<3 px` `-32.8%`).
-   - **Otherwise:** **HOLD Slot 3** (or spend on R0 baseline `RECEIPT` verification if `h33-h33-2-b2` still lacks a verified screenshot/receipt) to conserve weekly quota for the higher-upside axes below.
+| # | File | Predicted live change | Submit only if | What the result changes |
+|---|---|---|---|---|
+| **1** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` | **+0.003** MODEL (−0.012…+0.018) | gates green (verified) | Allocation fork. ≥ +0.010 → class allocation transfers → slot 3 = r15. Inside ±0.010 → close RELIEF *and* CONCENTRATION. < −0.010 → placement beats allocation, prioritize SNAP. |
+| **2** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` | **+0.028** MODEL (−0.028…+0.084) | human knowingly accepts the widest band in the repo | Placement fork, independent of slot 1 (position change at fixed count/CV). ≥ +0.010 → snap mechanism real → slot 3 = 1p4px window dose; receipts vs upstream gated arms isolate the *gate*. Inside ±0.010 → gateless dead; test upstream `2p0px-g0p01` (+0.018…+0.044 MODEL, GEMSDOE84) for selection-vs-dose. ≤ −0.010 → retire SNAP + EM-crest story. |
+| **3** | conditional: `…relief-r15…6aa774ce` if slot 1 ≥ **0.2878**; else `…snap1p4px-g0p00…e1474851` if slot 2 ≥ **0.2878**; else `…spacing-alongstrike…3b263c7a` (band −0.003…+0.006) **or HOLD** | +0.004 / +0.028 / +0.002 | the named parent arm scored ≥ +0.010 | Dose-response for whichever fork fired; a null fork makes `alongstrike` the cheapest remaining probe — or hold the slot for a late receipt. |
 
-## Proposed Better Axes (Not Built This Session)
+Same-week: never two same-question files together (no r15+r15s; no two gate-0
+snap windows — the window dose saturates at 80.8→83.1 % moved). Negative-Model
+arms (`SPACING poisson` −0.010, `lattice` −0.007) stay held unless their own
+cards' triggers fire.
 
-None of the pure rearrangements of R0's existing 37,654 binary ridge dots (`SPACING`, `RELIEF`, `CONCENTRATION`, drop-only `MASS`) has `MODEL` central expectation `>= +0.010`. Reaching `+0.01..+0.03+` requires new fault geometry or continuous gradient calibration:
+## Weeks to the deadline
 
-| Proposed Axis | Mechanism | Confounder / Non-Fault Mimic | Falsifier |
+| week | dates | plan |
+|---|---|---|
+| 1 | 10-23 → 10-29 | slots 1 + 2; keep 1 spare for late receipts |
+| 2 | 10-30 → 11-05 | slot 3 conditional as above; record every receipt |
+| 3-4 | 11-06 → 11-19 | combine the axes with receipts ≥ +0.010, one factor at a time (expect one axis only) |
+| 5 | 11-20 → 11-26 | confirm winner vs its own parent; freeze final file + fallback |
+| 6 | 11-27 → 12-03 | re-validate format of **both**; one blind final submission |
+
+## Proposed better axes (mechanism · confounder · falsifier) — not built
+
+| Axis | Mechanism | Confounder / mimic | Falsifier |
 |---|---|---|---|
-| **`RELAY-BRIDGE`** (en-echelon stepover linking) | Basin-and-Range normal faults segment across 0.3–1.5 km relay ramps (`h19_5` breaks at transfer zones where single-method gradients dip); bridging co-linear strand tips (`<=12 px`, strike diff `<=20 deg`) puts mass on unmapped relay faults outside the 3 px catalogue collar. | Bridging across alluvial channel scarps or volcanic dike swarms linking unrelated ridges, inflating `P` without hitting `G`. | Live `RECEIPT` `<= R0` or `PROXY` on withheld multi-segment catalogue relays fails to beat random tip pairs of equal length. |
-| **`TRACKB-DIP-OFFSET`** (dip-slip potential-field shift) | Range-bounding normal faults dip 45–60 deg basinward, shifting gravity/magnetic horizontal-gradient maxima 200–500 m (`2–5 px`) hanging-wall-ward of the surface trace; shifting `h19_5` dots up-slope toward `det_elev_slope` footwall breaks aligns `P` with surface traces. | Sub-vertical strike-slip faults and volcanic contacts have near-zero dip offset; shifting them moves dots off the trace. | Live `RECEIPT` drops by `>= 0.005` vs R0, or footwall-shifted dots lose SGMC off-catalogue `PROXY` coverage. |
-| **`REPEAT-CALIBRATION`** (R0 baseline `RECEIPT` anchor) | Score exact parent `h33-h33-2-b2` (`baeae321...`) once under current receipted governance to convert `0.2778` from `CLAIM` to `RECEIPT` and bound single-slot noise. | Consumes 1 of ~18 remaining weekly slots with zero expected score gain. | Live `RECEIPT` differs from `0.2778` by `> 0.005` (invalidating `CLAIM`-anchored deltas across the ledger). |
+| **DEDUPE** | drop the most *redundant* dots (exact `marginal_gain_remove`), bottom 15-25 %, no refill: the max operator means a neighbour already claims the credit | de-clusters ≈ spacing effect — `SPACING` at matched removal is its control | fails to beat `MASS −10 %` by ≥ 0.005 |
+| **FLOOR** | ~2,000 dots on the flat-slope tercile (33 % of footprint, 0.1 R0 dots/1000 px) at catalogue-proportional spacing | flat ground has no DEM edge — a bet on signal R0's own model declined | score < R0 − 0.005 → coverage gap is correctly empty |
+| **DOSE** | one byte-identical re-submission per month | burns a slot with zero expected gain | receipt differs > 0.005 → CLAIM-anchored deltas across the ledger are invalid |
+| **RELAY-BRIDGE** | en-echelon strand tips (≤12 px, ≤20°) bridged: mass on unmapped relay faults | bridges channel scarps/dike swarms, inflating P without hitting G | receipt ≤ R0, or withheld multi-segment PROXY loses to random tip pairs |
+| **TRACKB-DIP-OFFSET** | range-bounding faults dip 45-60° basinward; shift gravity/mag crest 2-5 px hanging-wall-ward toward the surface trace | sub-vertical faults/volcanic contacts have ~zero dip offset | receipt drops ≥ 0.005 vs R0 |
+| **REPEAT-CALIBRATION** | resubmit exact R0 to convert CLAIM → RECEIPT and bound slot noise | costs 1 of ~18 slots, zero expected gain | receipt differs from 0.2778 by > 0.005 |
+
+Future in-axis values (not new axes): SNAP response-surface variants (DEM-scarp
+vs EM-only vs fused) — only after one snap receipt shows any sign of life.
