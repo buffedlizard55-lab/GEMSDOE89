@@ -56,3 +56,13 @@ from what the human decided.
 - No model was trained on test truth; the only labels touched are the pinned,
   pixel-masked USGS/INGENIOUS catalogue, used for exclusion, for a global class
   prior, and for a REPORT-ONLY proxy.
+
+## Follow-up audit, 2026-10-23
+
+The AI inspected the existing manifest, ledger and parent record, checked local
+input presence, ran 15 tests, ledger consistency and format-only validation,
+and stopped without building a raster. It wrote the start-gate audit and HOLD
+notices, corrected CURRENT STATE and SLOT_PLAN, and installed test dependencies
+in an ignored local virtual environment. The AI did not treat historical
+restoration as reproduction or waive the 3 px collar. No new human submission
+decision, receipt, or external-data authorization was supplied.

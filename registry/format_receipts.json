@@ -46,16 +46,6 @@
     "detail": "0 NaN px"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -66,17 +56,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e776fc20873321f7"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r10-20261023-366c87ca.tif": {
   "ok": true,
@@ -120,16 +108,6 @@
     "detail": "0 out-of-range px; min=0.0, max=1.0"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -140,17 +118,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "366c87ca62040215"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15-20261023-6aa774ce-zeros.tif": {
   "ok": true,
@@ -199,16 +175,6 @@
     "detail": "0 NaN px"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -219,17 +185,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e3b6c2ecfb65c109"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif": {
   "ok": true,
@@ -273,16 +237,6 @@
     "detail": "0 out-of-range px; min=0.0, max=1.0"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -293,17 +247,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "6aa774ce21fe10b3"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15s-20261023-5f0ae851-zeros.tif": {
   "ok": true,
@@ -352,16 +304,6 @@
     "detail": "0 NaN px"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -372,17 +314,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "3b2cbfd13dd4d3fa"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15s-20261023-5f0ae851.tif": {
   "ok": true,
@@ -426,16 +366,6 @@
     "detail": "0 out-of-range px; min=0.0, max=1.0"
    },
    {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
-   },
-   {
     "gate": "unit_dots",
     "ok": true,
     "detail": "37654 dots all == 1.0"
@@ -446,16 +376,14 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "5f0ae8512e44940b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  }
 }

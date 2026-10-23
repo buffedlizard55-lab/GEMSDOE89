@@ -1,3 +1,10 @@
+> **2026-10-23 audit: HOLD — do not upload these files.** The start gate failed:
+> no local pinned inputs and no recipe rebuild of R0. Historical all-gates-pass
+> claims below are superseded: current checks are format-only, and prior records
+> report inherited catalogue clearance below the mandatory 3 px for RELIEF.
+> Existing predictions are MODEL only. Require a parent receipt before using
+> absolute score thresholds; 0.2778 remains CLAIM. No new candidates were built.
+
 # SUBMIT — session GEMSDOE89
 
 The human submits from their own registered account. Nothing here logs in,
