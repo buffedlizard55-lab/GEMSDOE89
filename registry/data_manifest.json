@@ -69,7 +69,7 @@
    "bytes": 425830,
    "role": "catalogue mask: R0 prune boundary (>2.0 px) + variant exclusion collar (>=3.0 px) + REPORT-ONLY hide-and-recover proxy",
    "provenance": "owner-supplied mirror of the USGS/INGENIOUS known-fault mask (byte-identical to the training labels; 60,988 set pixels inside footprint, int8 values {-1=nodata-outside-footprint,0,1}; masked pixel-exactly in scoring)",
-   "pin_note": "prose count corrected 2026-10-24 (TRACKB session): the earlier '91,924 set pixels inside footprint' was wrong; the hash-verified pin has 60,988 +1 pixels, all inside the 5,167,373-px footprint (30% hide-and-recover holdout = 18,296). R0 rebuild and every gate already used the correct >0 mask. IRREGULARITIES item 16."
+   "pin_note": "prose count corrected 2026-10-24 (TRACKB session): the earlier '91,924 set pixels inside footprint' was wrong; the hash-verified pin has 60,988 +1 pixels, all inside the 5,167,373-px footprint (30% hide-and-recover holdout = 18,296). R0 rebuild and every gate already used the correct >0 mask. IRREGULARITIES item 22."
   },
   {
    "id": "parent_r0_zeros",

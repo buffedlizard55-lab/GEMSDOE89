@@ -1,5 +1,24 @@
-# SUBMIT — GEMSDOE89 (31-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (32-pair queue, 2026-10-24)
 
+## ⚠ Encoding rule (fixes “Predicted values must be in range [0, 1]”)
+
+Always upload the **`-zeros.tif`** twin (0 NaN pixels anywhere; finite
+min 0.0 / max 1.0). The NaN-outside twin is the archive copy; NaN fails
+range checks that do not special-case it. Fleet history scores the two
+encodings identically. **Never upload both twins.** Steps + copy-paste
+name/note blocks: `docs/index.html` (executive summary at the top).
+
+## BSTP session build (2026-10-24) — BUILT, **negative**, no slot
+
+| role | file / stem | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | evidence |
+|---|---|---|---|---|
+| **DO NOT SLOT** (format-safe if human overrides) | `releases/gems89-bstp40-20261024-2e7e8a8f.tif` | `2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596` / `4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33` | `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` | HOLDOUT-DTI −0.0254 [−0.0296,−0.0210] (`segment-holdout-v1`, 39,310 px); verdict negative — see `registry/run_card_bstp40.json` |
+
+Siblings `bstp40corr` (`e3b6d3d2`) and `bstp40corrE` (`598993b2`) were
+withdrawn; their TIFs are deleted and they have no ledger row — do not
+re-register those sha8s.
+
+---
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
 **Never upload both twins in separate slots.** Submission name = the file stem.
@@ -81,18 +100,18 @@ Dual-phase R0-consolidating 150-trace builds (`3.76%–4.21%` of R0 changed, pre
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
 - **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 68 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 70 files re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×68 files** (`34` `.tif` + `34` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×68 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×34 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/TRACKB-conc/SNAP/CONC/RELIEF/SPACING = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×68 files** |
+| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×70 files** (`35` `.tif` + `35` `-zeros.tif`) |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×70 files** |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×35 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/TRACKB-conc/BSTP/SNAP/CONC/RELIEF/SPACING = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×70 files** |
 | Phase-2 GeoJSON dossiers (`releases/*TRACKB*.geojson`, all traces `>= 1.0 km` + geologist evidence) | **PASS ×8 GeoJSONs** (1 full 1,520-trace inventory + 3 TR10/TR20/TR30 receiving + 3 t150 + 1 top12) |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`149` ledger rows: `34` `GEMSDOE89` + `115` upstream)** |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`150` ledger rows: `35` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`, 2026-10-24)** |
-| unit tests / leakage canary | **94 passed (merged tree)** / **PASS** (all features `< 0.90`: 19-band + TRACKB-composite footprint-masked max 0.569, composite 0.543; SNAP-response canary 0.665) |
+| unit tests / leakage canary | **98 passed (merged tree)** / **PASS** (all features `< 0.90`: 19-band + TRACKB-composite footprint-masked max 0.569, composite 0.543; SNAP-response canary 0.665) |
 
 Machine receipts: `registry/format_receipts.json`, `registry/build_report_trackb_conc_*.json`,
 `registry/build_report_snap_<value>.json`, `registry/build_report_snap_directional.json`,

@@ -1,6 +1,20 @@
 # GEMSDOE89 — start here before every session
 
-Read the [project charter](docs/PROJECT_CHARTER.md) before changing code or evaluating a candidate. It captures the scientific goal, lane/duplicate rules, required holdout, evidence labels, weekly-slot budget, official sources, and current limitations. The [review and ranked hypothesis slate](docs/REVIEW_AND_HYPOTHESES_20261024.md) records this review and why it stopped before an unvalidated submission.
+Read the [project charter](docs/PROJECT_CHARTER.md) (and the condensed session-prompt charter in `PROMPT.md`) before changing code or evaluating a candidate. Site: `docs/index.html`. Analysis: `docs/ANALYSIS.md` · hypotheses: `docs/HYPOTHESES.md` · review: `docs/REVIEW_AND_HYPOTHESES_20261024.md`.
+
+## ⬇ Executive summary — download & submit status (2026-10-24, BSTP session)
+
+| | |
+|---|---|
+| **Unique file this session** | `releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif` (site copy: `docs/downloads/`) |
+| **Upload it as** | name `gems89-bstp40-20261024-2e7e8a8f`, note `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` (110/140 chars) |
+| **SHA-256 (zeros / NaN twin)** | `4b86c16d…` / `2e7e8a8f…` (full hashes in `registry/run_card_bstp40.json`) |
+| **✅ Format** | PASS — 3730×3292 float32, EPSG:32611, values {0,1}, **0 NaN anywhere in the zeros file** (the NaN twin is the likely cause of the “Predicted values must be in range [0, 1]” upload error; always upload `-zeros.tif`) |
+| **✅ Unique** | PASS — ≤3 px dot overlap 60.0% vs R0 / 62.4% worst prior raster (< 70%); surface ρ 0.29 (< 0.90); leakage canary max AUC 0.521 (< 0.90) |
+| **⛔ Slot recommendation** | **DO NOT PROMOTE** — HOLDOUT-DTI (segment-holdout-v1, 39,310 withheld px) **−0.0254 [−0.0296, −0.0210]** vs R0-fold; 3/3 experiments negative; verdict **negative** (`registry/run_card_bstp40.json`). Upload only as a deliberate human risk decision; the evidence queue below (`SLOT_PLAN.md`) is unchanged |
+| **Live score** | none (unscored). Parent 0.2778 remains CLAIM; no ORGANIZER-CONFIRMED receipt exists in this ledger |
+
+How-to-submit steps: `docs/index.html` §“How to make a submission” and `docs/SUBMIT.md`.
 
 ## Downloadable GeoTIFF — status is explicit
 
@@ -16,10 +30,11 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **34 pairs / 68 GeoTIFFs + 5 GeoJSON dossiers**, all `BUILT` and
+- **Built, unscored:** **35 pairs / 70 GeoTIFFs + 6 GeoJSON dossiers**, all `BUILT` and
   format/data-gated (`SNAP` 9 factorial + 3 directional, `CONCENTRATION` 9, `SPACING` 3,
-  `RELIEF` 3, drop-`MASS` 3, `TRACKB` 7 Phase-2 pairs across three sub-families). No
-  `(parent, axis, value)` repeat anywhere in the ledger.
+  `RELIEF` 3, drop-`MASS` 3, `TRACKB` 7 Phase-2 pairs across three sub-families, `BSTP` 1
+  basin-lineament pair with a **negative** segment-holdout verdict). No `(parent, axis, value)`
+  repeat anywhere in the ledger.
 - **This session (2026-10-24) — `TRACKB` structural concentration** (`branch
   arena/7fd24ce1-gemsdoe89`; `ledger/MECHANISM_CARDS_TRACKB_CONC.md`): a Phase-2 trace
   inventory `releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson` (**1,520** strike-consistent
@@ -34,6 +49,9 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
   (`5a09404f`, +3.76 % px, `39,069` px, P2 `+0.012 MODEL`), `t150swap` (`8cfcbe4c`,
   count-fixed control, P2 `+0.011`), `t150link` (`eded7713`, 100 gaps bridged, P2 `+0.009`),
   plus review-only `top12` (`fb156257`, 145-dot overlay, `ledger/TRACKB_TRACES.md`).
+- **`BSTP` basin-lineament lane (merged 2026-10-24, `gemsoe/bstep.py`):**
+  `gems89-bstp40` (`2e7e8a8f`), whole-segment holdout **NEGATIVE** (not promoted); siblings
+  withdrawn. `gemsdoe/holdout.py` buffered holdout evaluator added (`IRREGULARITIES.md` item 19).
 - **`SNAP` directional corner (merged 2026-10-24, `ledger/MECHANISM_CARDS.md` Part VIII):**
   `dirfw2p0` (`dc578b2f`) / mirror `dirhw2p0` (`5cccfc1d`) / dose `dirfw1p0` (`373c8fd6`);
   count fixed 37,654, `d_cat ≥ 3 px`, read as `fw − hw`, never alone. The undirected crest arm
@@ -49,15 +67,17 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
 - **Governing-rules conflict (2026-10-24):** the repo `docs/PROJECT_CHARTER.md` (PR #20)
   imposes a >70 % dot-overlap / >0.90 rank-correlation duplicate cutoff and a required buffered
   whole-segment holdout; governing brief v2 instead dedupes **only** by exact SHA-256 and
-  repeated `(parent,axis,value)` and treats PROXY/MODEL as never-gating. Overlap is measured
-  report-only in `registry/report_only_status.json::trackb_conc_overlap` (90–96 %, mechanically
-  expected for single-axis edits of a shared parent). See `IRREGULARITIES.md` item 22 — the
-  human must decide which rule governs.
+  repeated `(parent,axis,value)` and treats PROXY/MODEL as never-gating. A buffered holdout
+  evaluator (`gemsdoe/holdout.py`) now exists (PR #22) but brief v2 keeps it report-only here.
+  Overlap is measured report-only in `registry/report_only_status.json::trackb_conc_overlap`
+  (90–96 %, mechanically expected for single-axis edits of a shared parent). See
+  `IRREGULARITIES.md` item 23 — the human must decide which rule governs.
+- **TOP_PUBLIC:** stays `____` — PR #22 flagged conflicting unverified public-top claims
+  (0.4413 vs 0.3195); human must supply value + date (item 19).
 - **Report only, never gates:** catalogue hide-and-recover CIs overlap R0 for every arm;
   leakage canaries all `< 0.90` (19-band + TRACKB composite footprint-masked max `0.569`,
   composite `0.543`; SNAP-response canary `0.665`); SGMC skipped (UNVERIFIED pin).
-- **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other
-  target number is valid. **Slots this week:** `__ / 3` — human supplies used/available
+  **Slots this week:** `__ / 3` — human supplies used/available
   (3 per rolling week per entity + 1 blind final).
 - **Deadline:** `2026-12-03` (≈6 weeks, ~17 rolling slots) is **UNVERIFIED**; automated
   competition-page access is barred, so the human confirms it.

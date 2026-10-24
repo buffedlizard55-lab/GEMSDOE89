@@ -1,0 +1,125 @@
+{
+ "evaluator": "segment-holdout-v1 (gemsdoe/holdout.py; metric DTI a=0.2 b=0.8 R=3px)",
+ "k_folds": 5,
+ "buffer_px": 10.0,
+ "min_segment_px": 20,
+ "seed": 20261024,
+ "n_segments_total": 911,
+ "n_withheld_positives_px": 39310,
+ "pooled_holdout_dti_parent": 0.09143220780619153,
+ "pooled_holdout_dti_candidate": 0.06454689782371621,
+ "diff_candidate_minus_parent": -0.02688530998247532,
+ "diff_ci95_bootstrap_segments": [
+  -0.03369328668668429,
+  -0.02036531017199699
+ ],
+ "n_bootstrap": 2000,
+ "ci_note": "segment cluster bootstrap of (T,|G|) at fixed realised (S,M)",
+ "folds": [
+  {
+   "fold": 0,
+   "n_segments": 183,
+   "n_withheld_px": 7878,
+   "parent": {
+    "dti_fold": 0.09505577731540328,
+    "n_dots_masked": 38887,
+    "T": 1353.4965068845706,
+    "S": 38887.0,
+    "M": 557.6388606442903,
+    "G": 7878.0
+   },
+   "candidate": {
+    "dti_fold": 0.06327304122297937,
+    "n_dots_masked": 38887,
+    "T": 897.0753587709912,
+    "S": 38887.0,
+    "M": 406.8513360450973,
+    "G": 7878.0
+   }
+  },
+  {
+   "fold": 1,
+   "n_segments": 182,
+   "n_withheld_px": 7858,
+   "parent": {
+    "dti_fold": 0.08429676299444815,
+    "n_dots_masked": 38764,
+    "T": 1195.5152728100104,
+    "S": 38764.0,
+    "M": 480.41321253589166,
+    "G": 7858.0
+   },
+   "candidate": {
+    "dti_fold": 0.06647930607670655,
+    "n_dots_masked": 38764,
+    "T": 940.5654428145498,
+    "S": 38764.0,
+    "M": 395.34548112551005,
+    "G": 7858.0
+   }
+  },
+  {
+   "fold": 2,
+   "n_segments": 182,
+   "n_withheld_px": 7858,
+   "parent": {
+    "dti_fold": 0.09039776650017849,
+    "n_dots_masked": 38767,
+    "T": 1283.1922763425255,
+    "S": 38767.0,
+    "M": 507.4145787103797,
+    "G": 7858.0
+   },
+   "candidate": {
+    "dti_fold": 0.06374334100010107,
+    "n_dots_masked": 38767,
+    "T": 901.5459214729685,
+    "S": 38767.0,
+    "M": 383.6751606872198,
+    "G": 7858.0
+   }
+  },
+  {
+   "fold": 3,
+   "n_segments": 182,
+   "n_withheld_px": 7858,
+   "parent": {
+    "dti_fold": 0.09692951338868144,
+    "n_dots_masked": 38912,
+    "T": 1379.7657693779843,
+    "S": 38912.0,
+    "M": 550.0994039435586,
+    "G": 7858.0
+   },
+   "candidate": {
+    "dti_fold": 0.062216179051921346,
+    "n_dots_masked": 38912,
+    "T": 881.4627502473742,
+    "S": 38912.0,
+    "M": 386.75458144726156,
+    "G": 7858.0
+   }
+  },
+  {
+   "fold": 4,
+   "n_segments": 182,
+   "n_withheld_px": 7858,
+   "parent": {
+    "dti_fold": 0.09044877969437166,
+    "n_dots_masked": 38828,
+    "T": 1284.7040658320334,
+    "S": 38828.0,
+    "M": 526.3846273014399,
+    "G": 7858.0
+   },
+   "candidate": {
+    "dti_fold": 0.06702626718195356,
+    "n_dots_masked": 38828,
+    "T": 949.0517661942984,
+    "S": 38828.0,
+    "M": 412.0488823886893,
+    "G": 7858.0
+   }
+  }
+ ]
+}

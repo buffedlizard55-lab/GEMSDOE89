@@ -1,0 +1,96 @@
+{
+ "stem": "gems89-bstp40-20261024-2e7e8a8f",
+ "axis": "BSTP",
+ "value": "bstp40",
+ "date": "20261024",
+ "parent": "h33-h33-2-b2",
+ "n_dots": 37654,
+ "sha256_nan": "2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596",
+ "sha256_zeros": "4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33",
+ "build_diag": {
+  "n_parent": 37654,
+  "n_retained": 22592,
+  "n_new": 15062,
+  "n_candidate": 37654,
+  "retain_fraction": 0.6,
+  "unique_credit_retained_min": 7.326029189505288,
+  "unique_credit_dropped_max": 7.326029189505288,
+  "new_dot_surface_min": 0.03112286888062954,
+  "new_dot_surface_median": 0.04551263526082039,
+  "eligible_px": 4033215,
+  "min_dcat_new_px": 3.0,
+  "min_dparent_new_px": 3.1622776601683795
+ },
+ "surface_diag": {
+  "bstep_grad_depth_to_base": {
+   "p50": 0.0,
+   "p99": 0.1358669400215149,
+   "frac_positive_in_footprint": 0.49999970971710384
+  },
+  "cond_grad_cond_surf": {
+   "p50": 0.0,
+   "p99": 0.12843799591064453,
+   "frac_positive_in_footprint": 0.4956727528668823
+  },
+  "edge_max_tmiHG_gravHG": {
+   "p50": 0.01712600141763687,
+   "p99": 0.16666674613952637,
+   "frac_positive_in_footprint": 0.7584592790185651
+  },
+  "surface_geomean": {
+   "p50": 0.0,
+   "p99": 0.05240429937839508,
+   "frac_positive_in_footprint": 0.183933112628022
+  }
+ },
+ "edge_diag": {
+  "bands": [
+   {
+    "index": 3,
+    "name": "tmi_hg",
+    "nodata_fraction": 0.000592370630105421,
+    "mean_in_footprint": 0.012773808091878891,
+    "p99_in_footprint": 0.12818479537963867
+   },
+   {
+    "index": 18,
+    "name": "iso_grav_anom_hg",
+    "nodata_fraction": 0.000592370630105421,
+    "mean_in_footprint": 0.019909732043743134,
+    "p99_in_footprint": 0.14271411299705505
+   }
+  ],
+  "sigma_px": 1.0,
+  "robust_pct": 99.5,
+  "fused_mean_in_footprint": 0.029426103457808495
+ },
+ "leakage_canary": {
+  "bstep_grad_depth_to_base": {
+   "auc": 0.5208734532846869,
+   "flag_gt_0p90": false
+  },
+  "cond_grad_cond_surf": {
+   "auc": 0.5056706647585075,
+   "flag_gt_0p90": false
+  },
+  "edge_max_tmiHG_gravHG": {
+   "auc": 0.5193085038264578,
+   "flag_gt_0p90": false
+  },
+  "surface_geomean": {
+   "auc": 0.5167487649810006,
+   "flag_gt_0p90": false
+  }
+ },
+ "surface_spearman_vs_edge_only": 0.29486821927094387,
+ "uniqueness": {
+  "parent_R0": 0.5999893769586232,
+  "worst_releases_file": "gems89-bstp40corr-20261024-e3b6d3d2-zeros.tif",
+  "worst_releases_overlap": 0.7972858129282414,
+  "density_spearman_5km_vs_R0": 0.6201732463789811
+ },
+ "gates_ok": {
+  "gems89-bstp40-20261024-2e7e8a8f.tif": true,
+  "gems89-bstp40-20261024-2e7e8a8f-zeros.tif": true
+ }
+}
