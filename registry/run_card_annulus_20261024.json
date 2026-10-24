@@ -1,0 +1,202 @@
+{
+  "experiment": "ANNULUS",
+  "experiment_budget": {
+    "experiments_run": "see session notes",
+    "maximum": 3
+  },
+  "holdout_protocol": {
+    "candidate": {
+      "ci95": {
+        "lower_95": 0.000455,
+        "upper_95": 0.002061
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.001202
+    },
+    "evaluator_version": "GEMSDOE89-spatial-segment-holdout-v1",
+    "evidence_class": "HOLDOUT-DTI",
+    "paired_delta_candidate_minus_R0": {
+      "ci95": {
+        "lower_95": -0.180591,
+        "upper_95": -0.139843
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "value": -0.160028
+    },
+    "visible_only_R0_baseline": {
+      "ci95": {
+        "lower_95": 0.142648,
+        "upper_95": 0.180061
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.16123
+    }
+  },
+  "leakage_canary": {
+    "note": "max single-feature strength 0.5365 < 0.90 (re-stated from experiment output; per-feature detail not re-computed)",
+    "threshold_strength": 0.9,
+    "verdict": "PASS"
+  },
+  "note_reconstructed": true,
+  "raster": {
+    "path": "releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif",
+    "sha256": "e9b2bec11c2c60cdb674e8d322d8083c2c28fd14dd6a6824eb7e747b629a632a",
+    "validator": {
+      "crs_shape_transform_dtype_match_template": true,
+      "dot_count": 38897,
+      "finite_max": 1.0,
+      "finite_min": 0.0,
+      "gates": [
+        {
+          "detail": "h89-annulus-splay-20261024-e9b2bec1-candidate.tif",
+          "gate": "readable",
+          "ok": true
+        },
+        {
+          "detail": "matches template",
+          "gate": "grid_contract",
+          "ok": true
+        },
+        {
+          "detail": "float32",
+          "gate": "dtype_float32",
+          "ok": true
+        },
+        {
+          "detail": "ndim=2",
+          "gate": "single_band",
+          "ok": true
+        },
+        {
+          "detail": "[3730, 3292]",
+          "gate": "shape",
+          "ok": true
+        },
+        {
+          "detail": "EPSG:32611",
+          "gate": "crs_epsg32611",
+          "ok": true
+        },
+        {
+          "detail": "0 out-of-range px; min=0.0, max=1.0",
+          "gate": "values_in_0_1",
+          "ok": true
+        },
+        {
+          "detail": "0 NaN px inside",
+          "gate": "no_nan_inside_footprint",
+          "ok": true
+        },
+        {
+          "detail": "0 finite px outside",
+          "gate": "nan_outside_footprint",
+          "ok": true
+        },
+        {
+          "detail": "38897 dots all == 1.0",
+          "gate": "unit_dots",
+          "ok": true
+        },
+        {
+          "detail": "raster 38897 vs mask 38897",
+          "gate": "dot_count_matches_mask",
+          "ok": true
+        },
+        {
+          "detail": "0 dots on catalogue pixels",
+          "gate": "zero_catalogue_mass",
+          "ok": true
+        },
+        {
+          "detail": "e9b2bec11c2c60cd",
+          "gate": "sha256_not_in_ledger",
+          "ok": true
+        }
+      ],
+      "nan_inside_footprint": 0,
+      "passed": true
+    }
+  },
+  "registry_uniqueness": {
+    "duplicate_thresholds": {
+      "abs_spearman_gt": 0.9,
+      "dot_overlap_within_3px_gt": 0.7
+    },
+    "exact_sha256_against_ledger": {
+      "candidate_sha256": "e9b2bec11c2c60cdb674e8d322d8083c2c28fd14dd6a6824eb7e747b629a632a",
+      "checked_ledger_hash_values": 231,
+      "unique": true
+    },
+    "postwrite": null,
+    "prewrite": {
+      "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
+      "duplicate_stop": false,
+      "max_abs_surface_spearman": 0.13002843597634112,
+      "max_dot_overlap_3px": 0.35995063886675066,
+      "n_reference_geometries": 38,
+      "n_reference_paths": 71,
+      "sample_pixels": 150000,
+      "surface_tested": "candidate score surface",
+      "top_correlations": [
+        {
+          "r_spearman": 0.13002843597634112,
+          "registry_raster": "releases/h89-pfpeaks-20261024-18f0316a-candidate.tif"
+        },
+        {
+          "r_spearman": 0.012156648851358075,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "r_spearman": 0.010243117791135075,
+          "registry_raster": "releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif"
+        },
+        {
+          "r_spearman": 0.008524183741941268,
+          "registry_raster": "releases/h33-h33-2-b2-conc2km-b50-t33-m7531-20261023-1e857586-zeros.tif"
+        },
+        {
+          "r_spearman": 0.008213716508403062,
+          "registry_raster": "releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f-zeros.tif"
+        }
+      ],
+      "top_overlaps": [
+        {
+          "fraction_dots_within_3px": 0.35995063886675066,
+          "registry_positive_pixels": 38897,
+          "registry_raster": "releases/h89-pfpeaks-20261024-18f0316a-candidate.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.33300768696814664,
+          "registry_positive_pixels": 121131,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.30423940149625933,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.29110214155333314,
+          "registry_positive_pixels": 44090,
+          "registry_raster": "data/d28.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.2822582718461578,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4-zeros.tif"
+        }
+      ]
+    }
+  },
+  "schema_version": 1,
+  "submission": {
+    "download_submit_status": "DO_NOT_SUBMIT",
+    "name": "h89-annulus-splay-20261024-e9b2bec1-candidate",
+    "note": "ANNULUS: PF ridge peaks 200-800m from visible faults; splay/stepover targeting; exact known-fault mask; holdout candidate (negative)",
+    "note_chars": 132,
+    "slot_status": "not selected; selector step is separate"
+  },
+  "verdict": "negative"
+}

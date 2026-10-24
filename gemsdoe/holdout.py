@@ -49,6 +49,36 @@ def conductivity_edge(cond: np.ndarray, valid: np.ndarray, scales=(2.0, 4.0)) ->
     return out
 
 
+def potential_field_edge(fields: dict[str, np.ndarray], valid: np.ndarray,
+                         scales=(2.0, 4.0)) -> np.ndarray:
+    """Max multi-scale Gaussian gradient magnitude across potential-field layers.
+
+    For each named layer, invalid cells are median-filled for convolution only;
+    per-layer, per-scale gradients are combined by elementwise maximum so a
+    ridge scores where either the magnetic or the gravity field has an edge at
+    either smoothing scale. Nodata boundaries are eroded out of the output.
+    """
+    out = None
+    for name in sorted(fields):
+        field = np.asarray(fields[name], dtype=np.float32)
+        v = np.asarray(valid, dtype=bool) & np.isfinite(field) & (field > -1.0e30)
+        if not v.any():
+            continue
+        med = np.float32(np.median(field[v]))
+        filled = np.where(v, field, med).astype(np.float32, copy=False)
+        for sigma in scales:
+            grad = ndi.gaussian_gradient_magnitude(filled, sigma=float(sigma), mode="nearest")
+            grad = np.where(v, grad, 0.0).astype(np.float32, copy=False)
+            out = grad if out is None else np.maximum(out, grad)
+            del grad
+    if out is None:
+        raise ValueError("no valid potential-field layers")
+    support = ndi.minimum_filter(valid.astype(np.uint8), size=2 * int(np.ceil(max(scales))) + 1,
+                                 mode="constant", cval=0) > 0
+    out[~support] = np.nan
+    return out
+
+
 def select_spaced_peaks(score: np.ndarray, eligible: np.ndarray, n: int,
                         min_sep_px: float = 2.8) -> np.ndarray:
     """Deterministically take the highest-scoring local peaks with disk NMS."""

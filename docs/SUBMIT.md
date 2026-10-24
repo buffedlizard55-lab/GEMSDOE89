@@ -2,17 +2,23 @@
 
 ## Executive status — read before downloading
 
-**Current candidate: DO NOT SUBMIT.** The file below passes the local registry uniqueness and format gates, but its proper spatial holdout result is worse than the visible-only R0 baseline. It is preserved as a negative result. Do not spend a weekly slot on it.
+**All session candidates: DO NOT SUBMIT.** Three holdout experiments (ANNULUS, PF-PEAKS, TC-UNION) plus the prior COND-EDGE lane were run against the spatially blocked segment holdout; every candidate scored far below the visible-only R0 baseline (HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`). None is cleared for a competition slot. All GeoTIFFs below are format-validated research artifacts with verdict `negative` — **do not upload them to DrivenData**. No organizer submission receipt exists for any file in this repo.
 
-- **Research TIF:** [`../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif`](../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif)
-- **Run card:** [`../registry/run_card_condedge_20261024.json`](../registry/run_card_condedge_20261024.json)
-- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positives; 95% spatial-tile bootstrap CI): candidate `0.049875` `[0.036830, 0.061751]`; visible-only R0 `0.161230` `[0.142648, 0.180061]`; paired delta `−0.111355` `[−0.133218, −0.087864]`. These are local validation values, not organizer scores.
-- **File-format status:** PASS. One float32 band; EPSG:32611; shape 3730×3292; template transform matched; no NaN inside the footprint; finite predictions in `[0,1]`; NaN outside; exact known-fault pixels masked. Format validity does not override the negative holdout.
-- **Competition name/note (for future selector use only):** `h89-condedge-s2-4-20261024-829cc418-candidate` / `COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate` (99 characters).
+| candidate | run card | holdout DTI (95% CI) vs R0 | format | download / submit status |
+|---|---|---|---|---|
+| `releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif` | `registry/run_card_annulus_20261024.json` | `0.001202 [0.000455, 0.002061]`; delta −0.160028 [−0.180591, −0.139843] | PASS (sha256 `e9b2bec1…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
+| `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | `registry/run_card_pfpeaks_20261024.json` | `0.068825 [0.042551, 0.095776]`; delta −0.092405 [−0.136201, −0.049139] | PASS (sha256 `18f0316a…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
+| `h89-tcunion-20261024-…` (no TIF emitted) | `registry/run_card_tcunion_20261024.json` | `0.070181 [0.043417, 0.097668]`; delta −0.091049 [−0.135214, −0.047593] | blocked by duplicate guard (100% of dots within 3 px of PF-PEAKS raster) | **no file** — negative |
+| `releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif` (prior session) | `registry/run_card_condedge_20261024.json` | `0.049875 [0.036830, 0.061751]`; delta −0.111355 [−0.133218, −0.087864] | PASS (sha256 `829cc418…`) | **DO NOT SUBMIT** — negative |
+| `releases/gems89-bstp40-20261024-2e7e8a8f.tif` (upstream lane) | `registry/run_card_bstp40.json` | segment-holdout candidate 0.06598 vs parent 0.09143; diff −0.02545 CI excludes 0 | PASS | **DO NOT SUBMIT** — negative |
 
-## Separate BSTP candidate from the merged upstream lane — NEGATIVE
+**Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live `0.2778 = CLAIM` with no organizer receipt in this repo. Its holdout on this data is `0.161230 [0.142648, 0.180061]`, the comparator no session candidate beat.
 
-`releases/gems89-bstp40-20261024-2e7e8a8f.tif` is a separately registered artifact with its own negative `HOLDOUT-DTI` run card (`registry/run_card_bstp40.json`). It is not cleared for a slot and does not replace the COND-EDGE finding above. Do not submit it. See [`docs/index.html`](index.html) and the ledger for additional upstream records.
+**Why `h33-h33-2-b2-zeros` (0.2778) leads the GEMSDOE sites:** it is the fleet's best *claim* — a potential-field ridge skeleton (TMI + gravity horizontal gradient) with sparse fixed-mass placement (37,654 unit dots) and a >2 px catalogue prune. The value itself is unverified (no receipt), and the competing public snapshots `0.4413` / `0.3195` are undated and conflict. No mechanism has been isolated, and no session candidate has beaten R0 on holdout, so no submission can honestly be presented as an improvement yet.
+
+## How to submit a future promoted GeoTIFF
+
+Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. No file in this repository currently meets that bar. A machine-format PASS alone is insufficient.
 
 ## How to submit a future promoted GeoTIFF
 

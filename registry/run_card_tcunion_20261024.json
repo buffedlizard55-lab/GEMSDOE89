@@ -1,0 +1,196 @@
+{
+  "experiment": "TC-UNION",
+  "experiment_budget": {
+    "experiments_run": 3,
+    "maximum": 3
+  },
+  "holdout_protocol": {
+    "alpha": 0.2,
+    "beta": 0.8,
+    "buffer_px": 3.0,
+    "candidate": {
+      "ci95": {
+        "lower_95": 0.04341718784385153,
+        "method": "percentile bootstrap over non-overlapping 512 px spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261024,
+        "upper_95": 0.09766818519264225
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.07018088188886074
+    },
+    "evaluator_version": "GEMSDOE89-spatial-segment-holdout-v1",
+    "evidence_class": "HOLDOUT-DTI",
+    "folds": 5,
+    "kernel_radius_px": 3.0,
+    "paired_delta_candidate_minus_R0": {
+      "ci95": {
+        "lower_95": -0.1352142550037614,
+        "method": "paired percentile bootstrap over non-overlapping spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261025,
+        "upper_95": -0.04759302991253947
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "value": -0.09104908450516308
+    },
+    "pooled_dti_definition": "exact DTI sufficient statistics summed over disjoint, boundary-guarded spatial tile interiors; spatial-tile percentile bootstrap CI",
+    "spatial_tiles": 56,
+    "tile_interior_guard_px": 3,
+    "tile_size_px": 512,
+    "unique_withheld_components_in_scored_cores": 3179,
+    "visible_only_R0_baseline": {
+      "ci95": {
+        "lower_95": 0.1426483514878838,
+        "method": "percentile bootstrap over non-overlapping 512 px spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261024,
+        "upper_95": 0.18006054632169743
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.16122996639402382
+    },
+    "withheld_positive_pixels": 59168
+  },
+  "hypothesis": "Fault-related magnetic contacts that are weak in plain horizontal-gradient magnitude are enhanced by the tilt/total curvature transform (band 6 `tc`); a max(tmi_hg, tc, iso_grav_anom_hg) multi-scale edge surface therefore places more dots near held-out fault segments than R0's skeleton-only surface under R0's own placement constraints.",
+  "leakage_canary": {
+    "features_tested": {
+      "band_03_tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction_g2": {
+        "auc": 0.5250563356,
+        "flag_leakage": false,
+        "strength": 0.5250563356
+      },
+      "band_03_tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction_g4": {
+        "auc": 0.5239471444,
+        "flag_leakage": false,
+        "strength": 0.5239471444
+      },
+      "band_06_tc - Tilt angle or total curvature - magnetic field derivative for edge detection_g2": {
+        "auc": 0.5070938384,
+        "flag_leakage": false,
+        "strength": 0.5070938384
+      },
+      "band_06_tc - Tilt angle or total curvature - magnetic field derivative for edge detection_g4": {
+        "auc": 0.5090315942,
+        "flag_leakage": false,
+        "strength": 0.5090315942
+      },
+      "band_18_iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change_g2": {
+        "auc": 0.5334156984,
+        "flag_leakage": false,
+        "strength": 0.5334156984
+      },
+      "band_18_iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change_g4": {
+        "auc": 0.536477042,
+        "flag_leakage": false,
+        "strength": 0.536477042
+      },
+      "pf_edge_tmi3_tc6_grav18_max_s2s4": {
+        "auc": 0.5278695374,
+        "flag_leakage": false,
+        "strength": 0.5278695374
+      }
+    },
+    "flagged_features": [],
+    "threshold_strength": 0.9,
+    "verdict": "PASS"
+  },
+  "mechanism": "Bands 3 tmi_hg + 6 tc + 18 iso_grav_anom_hg; max multi-scale Gaussian gradient magnitude (sigma 2, 4 px); fixed-mass spaced peaks > 2 px from visible faults per fold (R0 placement rule); final dots outside catalogue only, catalogue pixels masked pixel-exactly; mass = median fold R0 count; 2.8 px disk NMS.",
+  "non_fault_mimic": "Lithologic and intrusive contacts, dikes, cultural magnetic noise, and raster derivatives of smooth potential-field fields produce tc/gradient edges without faults; the holdout on held-out segments is the gate.",
+  "official_sources": [
+    "https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and",
+    "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516"
+  ],
+  "raster": {
+    "path": null,
+    "sha256": null,
+    "validator": null
+  },
+  "registry_uniqueness": {
+    "duplicate_thresholds": {
+      "abs_spearman_gt": 0.9,
+      "dot_overlap_within_3px_gt": 0.7
+    },
+    "exact_sha256_against_ledger": {
+      "candidate_sha256": null,
+      "checked_ledger_hash_values": 231,
+      "unique": true
+    },
+    "postwrite": null,
+    "prewrite": {
+      "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
+      "duplicate_stop": true,
+      "max_abs_surface_spearman": 0.14064393606981493,
+      "max_dot_overlap_3px": 1.0,
+      "n_reference_geometries": 39,
+      "n_reference_paths": 72,
+      "sample_pixels": 150000,
+      "surface_tested": "pre-placement tc-union edge surface",
+      "top_correlations": [
+        {
+          "r_spearman": 0.14064393606981493,
+          "registry_raster": "releases/h89-pfpeaks-20261024-18f0316a-candidate.tif"
+        },
+        {
+          "r_spearman": 0.10010886073433256,
+          "registry_raster": "releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif"
+        },
+        {
+          "r_spearman": 0.04446181277979002,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "r_spearman": 0.04143501551892099,
+          "registry_raster": "releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040-zeros.tif"
+        },
+        {
+          "r_spearman": 0.03859012784513501,
+          "registry_raster": "releases/h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28-zeros.tif"
+        }
+      ],
+      "top_overlaps": [
+        {
+          "fraction_dots_within_3px": 1.0,
+          "registry_positive_pixels": 38897,
+          "registry_raster": "releases/h89-pfpeaks-20261024-18f0316a-candidate.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.29439288376995654,
+          "registry_positive_pixels": 38897,
+          "registry_raster": "releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.28490629097359693,
+          "registry_positive_pixels": 121131,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.27999588657222924,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.2770907782091164,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28-zeros.tif"
+        }
+      ]
+    }
+  },
+  "schema_version": 1,
+  "submission": {
+    "download_submit_status": "DO_NOT_SUBMIT",
+    "name": null,
+    "note": "TC-UNION: tmi_hg+tc+iso_grav_anom_hg ridge peaks >2px from visible faults; exact known-fault mask; holdout candidate",
+    "note_chars": 116,
+    "slot_status": "not selected; selector step is separate"
+  },
+  "verdict": "negative"
+}
