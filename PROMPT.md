@@ -51,10 +51,21 @@ GeoDAWN https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surv
 INGENIOUS https://gbcge.org/current-projects/ingenious/ · GDR
 https://gdr.openei.org/submissions/1391 · CRS https://epsg.io/32611 ·
 metric family https://en.wikipedia.org/wiki/Tversky_index .
-Known upload trap: “Predicted values must be in range [0, 1]” when a
-NaN-outside twin is submitted — always upload the `-zeros.tif`.
+**Submission-format caution.** The official problem description requires a
+single-band float32 GeoTIFF on the provided grid, with probabilities in
+[0, 1] and null/NaN outside the bounds. The checked-in sample itself uses a
+NaN nodata mask outside its finite footprint. A previous form attempt
+reported “Predicted values must be in range [0, 1]”; that message alone does
+not establish whether NaN, an out-of-range sentinel, or another file issue
+caused the rejection. Never claim the portal accepts a file unless an
+organizer receipt or verified portal validation is recorded. For this run,
+the GeoTIFF validator verifies finite values in [0, 1] inside the footprint,
+no NaN inside, and NaN only outside the footprint. The candidate is still
+**DO NOT SUBMIT** because its HOLDOUT-DTI verdict is negative.
 
-*(Full verbatim session prompt is preserved in the session transcript;
-this charter is its operative content. The fleet score annex that
-accompanied it lives, deduplicated and labelled CLAIM, in
-`ledger/submissions.csv`.)*
+This charter is the repository's persistent, operative project prompt; the
+README links to it and it must be read at the start of each session. The
+user-supplied fleet annex is recorded in `ledger/submissions.csv` with
+unconfirmed external scores labelled CLAIM, not copied into organizer
+receipts. See `docs/SUBMIT.md` for the current exact file status and
+submission workflow.

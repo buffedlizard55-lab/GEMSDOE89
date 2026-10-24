@@ -32,7 +32,8 @@ from gemsdoe import grid  # noqa: E402
 from gemsdoe.holdout import (  # noqa: E402
     EVALUATOR_VERSION, auc_strength, bootstrap_dti, component_holdouts,
     conductivity_edge, dti_from_components, metric_components,
-    paired_delta_bootstrap, select_spaced_peaks, surface_registry_audit,
+    metric_components_by_regions, paired_delta_bootstrap, select_spaced_peaks,
+    surface_registry_audit,
     tile_fold_map,
 )
 from submission_writer import write_candidate, note_length  # noqa: E402
@@ -54,7 +55,7 @@ def read_mask(path: Path, positive=True) -> np.ndarray:
 
 def core_slice(tile: dict, guard: int = CORE_GUARD_PX):
     y0, y1, x0, x1 = tile["y0"], tile["y1"], tile["x0"], tile["x1"]
-    # The 3-pixel interior guard makes radius-3 interactions local to one tile.
+    # The 3-pixel interior guard keeps positive-radius interactions in-tile.
     return (slice(y0 + guard, max(y0 + guard, y1 - guard)),
             slice(x0 + guard, max(x0 + guard, x1 - guard)))
 
@@ -191,25 +192,35 @@ def main() -> int:
         candidate_by_fold[item["fold"]] = select_spaced_peaks(
             edge_score, eligible, n_points, min_sep_px=MIN_SEP_PX)
 
-    # Build per-tile score components for exact pooled DTI and spatial bootstrap.
-    candidate_rows, baseline_rows = [], []
+    # Build one out-of-fold prediction raster per method, assigning only each
+    # tile's scored interior. Full-map EDT preserves all real <=3 px neighbor
+    # interactions; interiors are inset by 3 px, so different tile cores are
+    # separated far enough that no cross-fold interaction can earn kernel mass.
     candidate_oof = np.zeros(footprint.shape, dtype=bool)
     baseline_oof = np.zeros(footprint.shape, dtype=bool)
-    tile_truth_counts = []
+    score_regions = []
     for tile in tiles:
         sy, sx = core_slice(tile)
-        item = holdouts[tile["fold"]]
-        truth = catalogue[sy, sx]
-        pred_c = candidate_by_fold[tile["fold"]][sy, sx]
-        pred_b = baseline_by_fold[tile["fold"]][sy, sx]
-        candidate_oof[sy, sx] = pred_c
-        baseline_oof[sy, sx] = pred_b
-        candidate_rows.append(metric_components(truth, pred_c))
-        baseline_rows.append(metric_components(truth, pred_b))
-        tile_truth_counts.append(int(truth.sum()))
+        candidate_oof[sy, sx] = candidate_by_fold[tile["fold"]][sy, sx]
+        baseline_oof[sy, sx] = baseline_by_fold[tile["fold"]][sy, sx]
+        score_regions.append((sy, sx))
+    candidate_rows = metric_components_by_regions(
+        truth_domain, candidate_oof, score_regions, radius_px=3.0)
+    baseline_rows = metric_components_by_regions(
+        truth_domain, baseline_oof, score_regions, radius_px=3.0)
 
     candidate_dti = dti_from_components(candidate_rows)
     baseline_dti = dti_from_components(baseline_rows)
+    # Fail closed if any pooled sufficient statistic diverges from direct
+    # whole-map calculations, not merely if the final ratio happens to match.
+    candidate_direct = metric_components(truth_domain, candidate_oof)
+    baseline_direct = metric_components(truth_domain, baseline_oof)
+    for rows, direct in ((candidate_rows, candidate_direct),
+                         (baseline_rows, baseline_direct)):
+        pooled = {key: sum(float(row[key]) for row in rows) for key in direct}
+        if any(not np.isclose(pooled[key], direct[key], rtol=0.0, atol=1e-9)
+               for key in direct):
+            raise RuntimeError("tile-pooled DTI components differ from whole-map calculation")
     _, candidate_ci = bootstrap_dti(candidate_rows, seed=SEED, n_boot=2000)
     _, baseline_ci = bootstrap_dti(baseline_rows, seed=SEED, n_boot=2000)
     delta_ci = paired_delta_bootstrap(candidate_rows, baseline_rows, seed=SEED, n_boot=2000)
@@ -330,6 +341,7 @@ def main() -> int:
             "alpha": 0.2,
             "beta": 0.8,
             "pooled_dti_definition": "exact DTI sufficient statistics summed over disjoint, boundary-guarded spatial tile interiors; spatial-tile percentile bootstrap CI",
+            "distance_transform_context": "full out-of-fold prediction and held-out-truth rasters; only disjoint tile-core pixels contribute T/S/M/G; 3-pixel guards separate scored cores by more than the 3-pixel kernel radius, preventing cross-fold credit while retaining valid kernel neighbors within each core",
             "candidate": {"evidence_class": "HOLDOUT-DTI", "value": candidate_dti,
                           "n_withheld_positive_pixels": n_withheld, "ci95": candidate_ci},
             "visible_only_R0_baseline": {"evidence_class": "HOLDOUT-DTI", "value": baseline_dti,

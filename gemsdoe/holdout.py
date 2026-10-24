@@ -4,10 +4,11 @@ The evaluator is deliberately distinct from the older pixel-random catalogue
 proxy in ``gemsdoe.proxy``. It holds out whole 8-connected fault components by
 large spatial tiles, removes a 300 m buffer around held-out components from the
 visible catalogue, and scores only held-out fault pixels inside tile interiors.
-Prediction/truth interactions cannot cross tile boundaries because each tile
-is inset by the DTI kernel radius. The pooled metric is assembled from exact
-per-tile DTI sufficient statistics; its confidence interval is a spatial-tile
-cluster bootstrap.
+Distance transforms are computed over the complete out-of-fold score rasters,
+then their contributions are summed over disjoint tile interiors. This retains
+valid neighboring predictions/truth within the triangular kernel at each tile
+edge; cropping each tile before a distance transform would incorrectly lose
+those contributions. Confidence intervals use a spatial-tile cluster bootstrap.
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ from scipy.stats import rankdata, spearmanr
 from .metric import kernel_weight
 
 KERNEL_RADIUS_PX = 3.0
-EVALUATOR_VERSION = "GEMSDOE89-spatial-segment-holdout-v1"
+EVALUATOR_VERSION = "GEMSDOE89-spatial-segment-holdout-v3"
 
 
 def conductivity_edge(cond: np.ndarray, valid: np.ndarray, scales=(2.0, 4.0)) -> np.ndarray:
@@ -174,26 +175,52 @@ def component_holdouts(catalogue: np.ndarray, fold_map: np.ndarray,
 
 def metric_components(truth: np.ndarray, pred: np.ndarray,
                       radius_px: float = KERNEL_RADIUS_PX) -> dict:
-    """Exact DTI sufficient statistics T, S, M, G for a disjoint tile."""
+    """Exact DTI sufficient statistics T, S, M, G for a complete raster."""
     truth = np.asarray(truth, dtype=bool)
     pred = np.asarray(pred, dtype=bool)
     if truth.shape != pred.shape:
         raise ValueError("truth and prediction shapes differ")
+    if radius_px <= 0:
+        raise ValueError("radius_px must be positive")
     g = int(truth.sum())
     s = int(pred.sum())
     if g and s:
         d_pred = ndi.distance_transform_edt(~pred)
         t = float(np.clip(1.0 - d_pred[truth] / radius_px, 0.0, 1.0).sum())
-    else:
-        # EDT on an all-ones array measures distance to its implicit outside
-        # background; an empty prediction must not get phantom TP credit.
-        t = 0.0
-    if s and g:
         d_truth = ndi.distance_transform_edt(~truth)
         m = float(np.clip(1.0 - d_truth[pred] / radius_px, 0.0, 1.0).sum())
     else:
+        t = 0.0
         m = 0.0
     return {"T": t, "S": float(s), "M": m, "G": float(g)}
+
+
+def metric_components_by_regions(truth: np.ndarray, pred: np.ndarray, regions,
+                                 radius_px: float = KERNEL_RADIUS_PX) -> list[dict]:
+    """Partition exact whole-raster DTI contributions over disjoint regions.
+
+    Distance transforms are formed on the complete out-of-fold score rasters;
+    region slicing is applied only when summing T/S/M/G. Thus neighbors across
+    region boundaries are retained whenever they are part of the score raster.
+    """
+    truth = np.asarray(truth, dtype=bool)
+    pred = np.asarray(pred, dtype=bool)
+    if truth.shape != pred.shape:
+        raise ValueError("truth and prediction shapes differ")
+    if radius_px <= 0:
+        raise ValueError("radius_px must be positive")
+    d_pred = ndi.distance_transform_edt(~pred) if pred.any() else None
+    d_truth = ndi.distance_transform_edt(~truth) if truth.any() else None
+    rows = []
+    for region in regions:
+        tr = truth[region]
+        pr = pred[region]
+        t = (float(np.clip(1.0 - d_pred[region][tr] / radius_px, 0.0, 1.0).sum())
+             if d_pred is not None and tr.any() else 0.0)
+        m = (float(np.clip(1.0 - d_truth[region][pr] / radius_px, 0.0, 1.0).sum())
+             if d_truth is not None and pr.any() else 0.0)
+        rows.append({"T": t, "S": float(pr.sum()), "M": m, "G": float(tr.sum())})
+    return rows
 
 
 def dti_from_components(rows: list[dict]) -> float:

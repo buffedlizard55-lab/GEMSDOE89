@@ -57,7 +57,7 @@
    "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
    "bytes": 1599597,
    "role": "grid/footprint template ONLY",
-   "provenance": "owner-supplied mirror of the DrivenData competition template; defines shape (3730x3292), 100 m UTM Zone 11N transform, EPSG:32611 CRS, float32 dtype, and the 9,108,339-pixel scored footprint"
+   "provenance": "owner-supplied mirror of the DrivenData competition template; verified against this SHA-256 pin: shape (3730x3292), 100 m UTM Zone 11N transform, EPSG:32611 CRS, float32 dtype, and 5,167,373 finite pixels (finite-value count, not an organizer-authenticated scoring mask)"
   },
   {
    "id": "existing_faults",
@@ -68,7 +68,7 @@
    "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "bytes": 425830,
    "role": "catalogue mask: R0 prune boundary (>2.0 px) + variant exclusion collar (>=3.0 px) + REPORT-ONLY hide-and-recover proxy",
-   "provenance": "owner-supplied mirror of the USGS/INGENIOUS known-fault mask (byte-identical to the training labels; 91,924 set pixels inside footprint); masked pixel-exactly in scoring"
+   "provenance": "owner-supplied mirror of the USGS/INGENIOUS known-fault mask; measured 60,988 positive pixels, all within the pinned template's 5,167,373 finite pixels; the competition training-label raster is not independently available here for a byte-identity check; exact known pixels are masked in local candidate builds"
   },
   {
    "id": "parent_r0_zeros",

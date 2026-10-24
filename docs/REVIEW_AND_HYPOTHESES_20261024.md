@@ -1,6 +1,6 @@
-# GEMSDOE89 review and hypothesis slate — 2026-10-24
+# GEMSDOE89 review and hypothesis slate — 2026-10-24 (archived preflight)
 
-**Decision:** negative / hold. No new candidate was built or promoted. The checkout lacks the locally cached competition stack/template, labels, and the requested shared whole-segment holdout evaluator and writer. The existing pixel-sampled `gemsdoe.proxy.hide_and_recover` numbers do not implement the required buffered, whole-fault-segment DTI evaluation. Treating them as equivalent would give false assurance. No weekly slot is authorized by this report.
+> **ARCHIVE NOTICE — superseded.** The opening decision below records an earlier preflight for a separate hypothesis lane and is not the current project status. The pinned stack and shared holdout/writer are present in this repository; data can be fetched with `python tools/fetch_pinned_data.py`. The current COND-EDGE result, exact v3 evaluator, corrected HOLDOUT-DTI, uniqueness checks, TIF hash, and explicit **DO NOT SUBMIT** status are in [`README.md`](../README.md), [`docs/HYPOTHESIS_REGISTER.md`](HYPOTHESIS_REGISTER.md), and [`registry/run_card_condedge_20261024.json`](registry/run_card_condedge_20261024.json). The old directional-SNAP duplicate finding below is only about that artifact and is not the COND-EDGE candidate.
 
 ## Evidence review: what the reported 0.2778 does and does not establish
 

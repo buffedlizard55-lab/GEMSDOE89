@@ -46,6 +46,22 @@ def test_dti_tile_statistics_match_metric():
     assert holdout.dti_from_components([comp]) == pytest.approx(dti(truth, pred), abs=1e-12)
 
 
+def test_region_partition_retains_kernel_neighbors_across_partition_edge():
+    truth = np.zeros((20, 20), dtype=bool)
+    pred = np.zeros_like(truth)
+    truth[10, 9] = True
+    pred[10, 10] = True
+    left = (slice(0, 20), slice(0, 10))
+    right = (slice(0, 20), slice(10, 20))
+
+    rows = holdout.metric_components_by_regions(truth, pred, [left, right])
+    whole = holdout.metric_components(truth, pred)
+    pooled = {key: sum(row[key] for row in rows) for key in whole}
+    assert pooled == pytest.approx(whole)
+    assert rows[0]["T"] == pytest.approx(2.0 / 3.0)
+    assert rows[1]["M"] == pytest.approx(2.0 / 3.0)
+
+
 def test_pooled_dti_equals_full_noninteracting_tile_composition():
     truth1 = np.zeros((30, 30), dtype=bool)
     pred1 = np.zeros_like(truth1)

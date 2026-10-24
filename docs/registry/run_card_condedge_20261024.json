@@ -21,7 +21,8 @@
       "n_withheld_positive_pixels": 59168,
       "value": 0.049875147059355675
     },
-    "evaluator_version": "GEMSDOE89-spatial-segment-holdout-v1",
+    "distance_transform_context": "full out-of-fold prediction and held-out-truth rasters; only disjoint tile-core pixels contribute T/S/M/G; 3-pixel guards separate scored cores by more than the 3-pixel kernel radius, preventing cross-fold credit while retaining valid kernel neighbors within each core",
+    "evaluator_version": "GEMSDOE89-spatial-segment-holdout-v3",
     "evidence_class": "HOLDOUT-DTI",
     "folds": 5,
     "hidden_component_fold_memberships": 3350,
