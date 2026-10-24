@@ -542,6 +542,53 @@ def _trackb_rows() -> list[dict]:
     return rows
 
 
+def _h89_discovery_rows() -> list[dict]:
+    p = ROOT / "registry" / "h89_discovery_report.json"
+    if not p.exists():
+        return []
+    rep = json.loads(p.read_text(encoding="utf-8"))
+    pkg = rep["packaging"]
+    cand = rep["pooled_holdout"]["scores"][rep["selected_experiment"]]
+    diff_r0 = rep["pooled_holdout"]["paired_differences"]["r0_fold_fair"]
+    uq = rep["uniqueness_audit"]
+    reg = rep["regime_allocation"]["candidate"]
+    return [
+        {
+            "id": pkg["stem"],
+            "site": "GEMSDOE89",
+            "name": pkg["stem"],
+            "score": "",
+            "evidence_class": "HOLDOUT-DTI",
+            "encoding": "nan+zeros",
+            "n_dots": pkg["n_dots"],
+            "pct_changed": f"{pkg['pct_changed_vs_r0']:.2f}",
+            "sha8": pkg["sha8"],
+            "sha256": pkg["release_nan_sha256"],
+            "sha256_zeros": pkg["release_zeros_sha256"],
+            "parent": "training_features+existing_faults (from-scratch H89)",
+            "axis": "DISCOVERY_H89",
+            "value": "bh-rtp-habc",
+            "status": "ELIGIBLE_FOR_SELECTOR (unscored)",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": (
+                f"HOLDOUT-DTI {cand['dti']:.5f} 95% CI [{cand['ci95'][0]:.5f}, {cand['ci95'][1]:.5f}] "
+                f"(+{diff_r0['delta']:.5f} vs R0 fold-fair on gems57-pooled-hide-v2, K=11321; not a live projection)"
+            ),
+            "date": rep["date_utc"],
+            "form_note": pkg["form_note"],
+            "notes": (
+                f"built {rep['date_utc']}; H89 BH-RTP-HABC dual-expert LOQO HistGBDT (30 zero-cat phys + 12 self-masked net) "
+                f"+ Dinkelbach CELF 300m allocation ({pkg['n_dots']} dots, min dcat {pkg['min_dcat_px']:.2f}px); "
+                f"regime shares bedrock/piedmont/basin={reg['bedrock_le_80m_share']:.1%}/{reg['piedmont_80_400m_share']:.1%}/{reg['concealed_basin_gt_400m_share']:.1%}; "
+                f"3px overlap vs R0={pkg['dot_overlap_3px_vs_r0']:.3f}, max across 91 refs={uq['max_dot_overlap_3px_forward']:.4f} (<=0.70), "
+                f"max |Spearman rho|={uq['max_abs_surface_spearman']:.4f} (<=0.90); primary download in docs/downloads/{pkg['submission_name']}.tif (sha256 {pkg['primary_download_tif_sha256'][:12]})."
+            ),
+            "source": "GEMSDOE89",
+        }
+    ]
+
+
 def _bstp_rows() -> list[dict]:
     """BSTP rows. Added 2026-10-24 (bstp40 session): without a reader here a
     ledger rebuild would drop the BSTP row while its release files stay on
@@ -625,45 +672,50 @@ def _trackb_150_rows() -> list[dict]:
     return rows
 
 
-
-def _condedge_rows() -> list[dict]:
-    """Register the one COND-EDGE TIF without treating holdout as a live score."""
-    card_path = ROOT / "registry" / "run_card_condedge_20261024.json"
-    if not card_path.exists():
-        return []
-    card = json.loads(card_path.read_text())
-    raster = card.get("raster", {})
-    if not raster.get("path") or not raster.get("sha256"):
-        return []
-    holdout = card["holdout_protocol"]
-    candidate = holdout["candidate"]
-    base = holdout["visible_only_R0_baseline"]
-    delta = holdout["paired_delta_candidate_minus_R0"]
-    sha = raster["sha256"]
-    name = Path(raster["path"]).stem
-    note = card["submission"]["note"]
-    return [{
-        "id": name, "site": "GEMSDOE89", "name": name, "score": "",
-        "evidence_class": "HOLDOUT-DTI", "encoding": "nan",
-        "n_dots": raster["validator"]["dot_count"], "pct_changed": "",
-        "sha8": sha[:8], "sha256": sha, "sha256_zeros": "",
-        "parent": "h33-h33-2-b2", "axis": "COND-EDGE", "value": "cond17-sigma2-4",
-        "status": "NEGATIVE (do not submit)", "receipt": "N", "receipt_score": "",
-        "predicted_change": (
-            f"{delta['value']:+.6f} HOLDOUT-DTI {holdout['evaluator_version']}; "
-            f"{candidate['n_withheld_positive_pixels']} withheld positives; "
-            f"delta 95% CI [{delta['ci95']['lower_95']:+.6f}, {delta['ci95']['upper_95']:+.6f}]"
-        ),
-        "date": "2026-10-24", "form_note": note,
-        "notes": (
-            f"Negative research artifact; candidate HOLDOUT-DTI {candidate['value']:.6f} "
-            f"95% CI [{candidate['ci95']['lower_95']:.6f}, {candidate['ci95']['upper_95']:.6f}]; "
-            f"visible-only R0 HOLDOUT-DTI {base['value']:.6f}; unique local hash and format PASS; "
-            "remote site geometry not exhaustively audited; DO NOT SUBMIT."
-        ),
-        "source": "GEMSDOE89",
-    }]
-
+def _negative_card_rows() -> list[dict]:
+    """Register the three negative research candidate TIFs (condedge, annulus, pfpeaks)."""
+    specs = [
+        ("run_card_condedge_20261024.json", "COND-EDGE", "cond17-sigma2-4"),
+        ("run_card_annulus_20261024.json", "ANNULUS", "splay-200-800m"),
+        ("run_card_pfpeaks_20261024.json", "PFPEAKS", "pf-ridge-peaks"),
+    ]
+    rows: list[dict] = []
+    for fname, axis_name, val_name in specs:
+        card_path = ROOT / "registry" / fname
+        if not card_path.exists():
+            continue
+        card = json.loads(card_path.read_text(encoding="utf-8"))
+        raster = card.get("raster", {})
+        if not raster.get("path") or not raster.get("sha256"):
+            continue
+        holdout = card["holdout_protocol"]
+        candidate = holdout["candidate"]
+        base = holdout["visible_only_R0_baseline"]
+        delta = holdout["paired_delta_candidate_minus_R0"]
+        sha = raster["sha256"]
+        name = Path(raster["path"]).stem
+        note = card["submission"]["note"]
+        rows.append({
+            "id": name, "site": "GEMSDOE89", "name": name, "score": "",
+            "evidence_class": "HOLDOUT-DTI", "encoding": "zeros",
+            "n_dots": raster["validator"]["dot_count"], "pct_changed": "",
+            "sha8": sha[:8], "sha256": sha, "sha256_zeros": sha,
+            "parent": "h33-h33-2-b2", "axis": axis_name, "value": val_name,
+            "status": "NEGATIVE (do not submit)", "receipt": "N", "receipt_score": "",
+            "predicted_change": (
+                f"{delta['value']:+.6f} HOLDOUT-DTI {holdout['evaluator_version']}; "
+                f"{candidate['n_withheld_positive_pixels']} withheld positives; "
+                f"delta 95% CI [{delta['ci95']['lower_95']:+.6f}, {delta['ci95']['upper_95']:+.6f}]"
+            ),
+            "date": "2026-10-24", "form_note": note,
+            "notes": (
+                f"Negative research artifact; candidate HOLDOUT-DTI {candidate['value']:.6f} "
+                f"95% CI [{candidate['ci95']['lower_95']:.6f}, {candidate['ci95']['upper_95']:.6f}]; "
+                f"visible-only R0 HOLDOUT-DTI {base['value']:.6f}; unique local hash and format PASS; DO NOT SUBMIT."
+            ),
+            "source": "GEMSDOE89",
+        })
+    return rows
 
 
 def main():
@@ -693,7 +745,8 @@ def main():
         + _trackb_rows()
         + _bstp_rows()
         + _trackb_150_rows()
-        + _condedge_rows()
+        + _negative_card_rows()
+        + _h89_discovery_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

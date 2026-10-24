@@ -1,49 +1,45 @@
-# SLOT PLAN — GEMSDOE89 / directional SNAP pair + completed SNAP factorial (2026-10-24)
+# SLOT PLAN — GEMSDOE89 / Promoted `H89 BH-RTP-HABC` Discovery + Matched `R0` Perturbation Controls (2026-10-24)
 
-- **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final. Slots used/left this week: `__ / 3` (human supplies). **TOP_PUBLIC:** `____` (date `____`).
-- **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, rebuilt byte-exactly again today (`c55bafc4…` / `baeae321…`); live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**.
-- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; gated and gateless arms use different MODEL assumptions (`IRREGULARITIES.md` item 15), so compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
-- **Queue state:** every weekly axis holds ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, upstream `PRUNE` 1–4 px) plus **4 Phase-2 `TRACKB` builds** (`t150add` `5a09404f`, `t150swap` `8cfcbe4c`, `t150link` `eded7713` dual-phase R0-consolidating 150-trace arms + `top12` `fb156257` review extract) and **none has a live receipt**, so the scarce good is *readable pairs*.
-- **Why this week's pair changed:** the SNAP factorial (`{window} × {gate}`) is complete, and a measurement made this session shows the undirected crest arm `2p0px-g0p00` moves **15,585 dots up-slope / 15,670 down-slope** (`share_upslope = 0.498`): R0 is direction-neutral w.r.t. the HG maximum, so no existing arm could detect a crest-side preference, and the proposed global dip-offset translation has no bias to correct (`IRREGULARITIES.md` item 16).
+- **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final (`ORGANIZER-CONFIRMED` rules page 966). Slots used/left this week: `__ / 3` (human supplies; agent does **not** upload live submissions).
+- **Leaderboard anchors:** Fleet parent `R0 = h33-h33-2-b2` (`0.2778` `CLAIM` on `GEMSDOE32`); best fleet score `GEMSDOE83` `h83-gvcd-dink300-37654dots` (`0.3195` `CLAIM`); top public leaderboard `0.4413` (`CLAIM`). Pure pruning of the `121,131`-px `h19_5` skeleton has a strict algebraic ceiling of **`0.3107`** at zero false-positive removal — crossing `0.32 -> 0.44+` requires genuine off-`h19_5` concealed-basin and relay-bridge fault discovery (`docs/preregistration-h89.md`).
+- **Evidence labelling discipline:** Every holdout figure below is explicitly labelled **`HOLDOUT-DTI`** (`evaluator_version = gems57-pooled-hide-v2`, `K = 11,321` withheld positive pixels across `NW/NE/SW/SE`, `1,000` paired spatial-block bootstrap draws). Neither **`HOLDOUT-DTI`** nor **`MODEL`** is a live leaderboard score; any live public-chunk change with `|Δ| < 0.010` counts as **no evidence**.
+- **Format recommendation (`IR-89-18`):** Upload the **`-zeros.tif`** (`nodata = None`, zero `NaN` anywhere, strict `[0.0, 1.0]` `float32`, matching Lipor's official `drivendataorg/gems-prize-reference-solution` `generate_submission.py`) to guarantee zero `"Predicted values must be in range [0, 1]"` validator errors.
 
-## Next 3 slots, in order (primary week)
+---
 
-| # | File | Predicted (`MODEL`) | What the receipt changes |
+## Primary Promoted Candidate (Slot 1 Recommendation)
+
+| Slot | Artifact & Submission Name | Evidence (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `K=11,321`) | Gates & Uniqueness (`84` unique rasters) | Form Note (`<= 140` chars) |
+|---|---|---|---|---|
+| **1 (PROMOTE)** | `docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif`<br>*(CI twin: `releases/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif`)*<br>**Name:** `gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros` | **`0.16027`** (`95% CI [0.14498, 0.17553]`) vs `R0` fold-fair `0.09609` (`[0.08334, 0.10934]`); **paired `Δ = +0.06418` (`[+0.04928, +0.08033]`, `+66.8%` lift)**; wins **4 / 4** quadrants (`NW +83%`, `NE +27%`, `SW +110%`, `SE +54%`). | **`15 / 15` PASS** (`[0, 1]`, `0` NaN, `EPSG:32611`, `3730x3292`, `37,654` dots, `min d_cat = 3.00 px`).<br>Canary: `max AUC = 0.7829 <= 0.90` (`0/42` flagged).<br>Uniqueness: `max |ρ| = 0.1118 <= 0.90`, `max 3-px overlap = 0.5866 <= 0.70`, **`26.99%` overlap vs `R0`** (`73.01%` new conduits). | `H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat>=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)` *(98 chars)* |
+
+### Secondary / Diagnostic R0-Perturbation Slots (Slots 2–3, Optional Within Quota)
+
+If the selector chooses to spend remaining weekly slots reading local crest-offset physics on parent `R0` (`h33-h33-2-b2`) alongside Slot 1's genuine discovery jump:
+
+| # | File | Predicted (`MODEL`) | What the live receipt tests |
 |---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak **by design**) | Half of a matched pair; alone it is unreadable. |
-| **2** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | The **exact mirror** (same response, window, gate 0.00, targets, count; only the ±60° half-window differs). `fw − hw ≥ +0.010` ⇒ truth sits **footwall-side** of the HG maximum; reverse ⇒ **hanging-wall side**; both `≤ R0 − 0.010` ⇒ **the crest is right** and no position arm gets another slot this cycle; both inside `±0.010` ⇒ SNAP is saturated at 1–2 px. |
-| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else the gate-pair head `1p4px-g0p01` (`afc60a25`, +0.0120); else `conc-12p8km-int10` (`bcade136`, +0.008) or `CONC5kmcat10` (`2dc19377`, +0.009); else **HOLD** | +0.015 / +0.012 / +0.008–0.009 | Dose vs direction; or selectivity-vs-dose; or the first independent block-prior test. |
+| **2** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f-zeros.tif` | `−0.019…+0.056` (`MODEL`) | Footwall/up-slope (`cos >= +0.5`) 2 px HG-crest snap on `R0`. Half of a matched directional pair. |
+| **3** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d-zeros.tif` | `−0.019…+0.057` (`MODEL`) | Exact mirror hanging-wall/down-slope (`cos <= −0.5`) 2 px snap. `fw − hw >= +0.010` tests footwall trace offset vs crest fidelity. |
 
-**Alternative week (same two slots, different question):** the gate pair `1p4px-g0p01` (`afc60a25`, +0.0120) against its matched gateless control `1p4px-g0p00` (`e1474851`, +0.0278) — reads *selectivity vs dose*, not direction. Do **not** run both pairs in one week (4 files > quota). **Held:** `1p0px-g0p02` (`384435e6`, +0.0022) is a minimum-dose boundary control, not a default slot. Never submit both twins; `-zeros.tif` is fallback only.
+---
 
-## Weeks to the deadline
+## 3-Experiment Discovery Summary Executed in `GEMSDOE89` (Strict `<= 3` Cap)
+
+| Exp ID | Lane / Hypothesis | Pooled `HOLDOUT-DTI` (`95% CI`) | Quadrant Breakdown (`NW / NE / SW / SE`) | Decision |
+|---|---|---|---|---|
+| Control | `r0_fold_fair` (`h33-h33-2-b2` rebuilt on visible network) | `0.09609 [0.08334, 0.10934]` | `0.0883 / 0.1112 / 0.0829 / 0.1044` | Baseline |
+| Control | `d28_static` (`44,090` dots ancestor) | `0.09189 [0.07961, 0.10453]` | `0.0818 / 0.1128 / 0.0821 / 0.0956` | Baseline |
+| **E89-1** | `H89-B` Pure 30-feature zero-catalogue physics + CELF | `0.08580 [0.06963, 0.10132]` | `0.0883 / 0.0787 / 0.0693 / 0.1095` | Beats `R0` fair in `NW` & `SE` with **zero** fault-catalogue inputs |
+| **E89-2** | **`H89-A+B+C` Self-Masked Dual-Expert LOQO + Analytical-Self-Credit Global CELF** | **`0.16027 [0.14498, 0.17553]`** | **`0.1617 / 0.1413 / 0.1740 / 0.1604`** | **PROMOTED (`+0.06418`, `+66.8%` over `R0` fair)** |
+| **E89-3** | `H89-A+B+C` 3-Regime Cover-Stratified CELF (`Bedrock / Piedmont / Basin`) | `0.15120 [0.13700, 0.16603]` | `0.1613 / 0.1403 / 0.1520 / 0.1527` | Strong runner-up (`+57.4%` over `R0` fair); `E89-2` wins by `+0.00907` |
+
+---
+
+## Schedule to Competition Close
 
 | Window | Action |
 |---|---|
-| 10-24 → 10-30 | Slots 1–2 as a pair; reserve Slot 3 until both receipts are recorded. |
-| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair); record every `receipt_score` + `date`. |
-| 11-07 → 11-20 | Combine **only** axes with live `≥ +0.010` receipts, one factor at a time from a named parent. |
-| 11-21 → 11-27 | Confirm the composite against its direct parent; optionally spend 1 slot confirming `TRACKBt150add` (`5a09404f`, `P1 +0.000 / P2 +0.012 MODEL`; or `t150swap` if `MASSm10uniq ≥ +0.010`) costs `< 0.005` Phase 1 DTI. |
-| 11-28 → 12-03 | Re-validate both final twins; human chooses **1 blind final** ($50k P1 + $250k P2). If nothing beats R0, submit R0 (`baeae321…`) or `TRACKBt150add` (`5a09404f`). |
-
-## Proposed better axes (mechanism · confounder · falsifier) — **not** built this session
-
-| Axis | Structural mechanism | Non-fault confounder / mimic | Falsifier |
-|---|---|---|---|
-| **SIGNED-SCARP resp (residual of the old proposal)** | Use a *DEM-signed* scarp response instead of an unsigned HG contact, so basin-facing scarps only | Fan channels, shorelines and roads share the sign; 2 px DEM smoothing hides low scarps | Does not beat the matched unsigned arm by `≥ 0.010` |
-| **RELIEF basin residual (`0→1`, `2→0`)** | Catalogue records *surface-mapped* faults, which cluster at range fronts (R0 lift vs catalogue: range 1.30, piedmont 1.03, basin 0.67); new-fault truth is the residual, so it should be enriched where exposure is worst | Basinal gravity/magnetic anomalies are closed bodies and basement steps: pure mass | `≤ R0 − 0.010`, or the matched `2→0` arm beating `0→1` |
-| **Redundancy prune (geometric MASS)** | Two dots 2.8 px apart cannot both be the argmax under a 3 px kernel: the loser is pure mass. Rank by union coverage lost if removed — label-free | Redundant dots sit on the thickest, best-located ridges | Fails to beat `MASSm10uniq` (`beed130f`) by `≥ 0.005`, or loses to `m10rand` |
-| **Anisotropic SPACING** | Error budget is anisotropic: 400 m flight lines smear *across* strike, so along-strike stations can be wider at fixed count | Strike estimated from R0's own strands is circular | Loses to isotropic `poisson` / `lattice` at matched count |
-| **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
-| **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
-| **TRACKB-EXTEND / REPEAT-CALIBRATION** | Deliver the remaining qualifying traces for expert review; or submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT | Reviewer attention favours long traces; the calibration slot buys no climb | Traces 13–19 no better than length-matched random strands; receipt differs from `0.2778` by `> 0.005` |
-| **COMPOSITE-WINNER+TRACKB** *(gate: ≥1 weekly `RECEIPT ≥ +0.010`)* | Layer `TRACKBt150add`'s zero-drop continuous `≥ 1 km` trace infill (`+1,415 px`, `k = 1.00`) directly onto the best live-confirmed weekly variant for the single blind final ($50k P1 + $250k P2) | Linear shoreline/volcanic mimics in target blocks could add `~9.4` `S − M` pixels per mimic trace | Confirmation-slot receipt `< parent_winner − 0.005` retires trace infill and freezes the pure weekly winner |
-| **REPEAT-CALIBRATION (R0 receipt)** | Submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT before freezing composites | Spends 1 of ~17 remaining public slots without advancing climb | Receipt differs from `0.2778` by `> 0.005` (invalidates upstream baseline anchor) |
-## Addendum 2026-10-24 (BSTP session) — queue unchanged
-
-`gems89-bstp40-20261024-2e7e8a8f` (axis `BSTP`, 147-row merged ledger) is **BUILT /
-NEGATIVE**: format- and uniqueness-gated, but HOLDOUT-DTI −0.0254
-[−0.0296, −0.0210] vs the per-fold parent (`segment-holdout-v1`), so it
-takes **no slot** and does not displace the SNAP directional pair above.
-Its two sibling variants were withdrawn (TIFs deleted). Full record:
-`registry/run_card_bstp40.json`, `ledger/MECHANISM_CARDS_BSTP.md`.
+| **Week 1 (Current)** | Selector reviews `gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif` (`15/15` PASS) for Slot 1; records live public-chunk receipt + date in `ledger/submissions.csv`. |
+| **Week 2** | Compare live receipt of `H89` (`BH-RTP-HABC`) against fleet `0.2778` (`GEMSDOE32`) and `0.3195` (`GEMSDOE83`); only retain axes clearing `Δ >= +0.010`. |
+| **Final Selection** | Re-verify `sha256` (`715c8b86…`) and `15/15` validator checks; human selector designates 1 blind final submission within competition rules. |

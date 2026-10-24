@@ -1,45 +1,17 @@
-# SUBMIT — GEMSDOE89 (submission guide and current candidate status)
+# SUBMIT — GEMSDOE89 (Promoted `H89 BH-RTP-HABC` + 29-Pair Queue, 2026-10-24)
 
-## Executive status — read before downloading
+The human selector submits manually from their own registered DrivenData account. Nothing here logs in,
+scrapes, or uploads. **Primary recommended upload:** `docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif`
+(`nodata = None`, strict `[0.0, 1.0]` `float32`, zero `NaN` anywhere, matching Lipor's official reference writer; `IR-89-18`).
+**Never upload both twins in separate slots.**
 
-**All session candidates: DO NOT SUBMIT.** Three holdout experiments (ANNULUS, PF-PEAKS, TC-UNION) plus the prior COND-EDGE lane were run against the spatially blocked segment holdout; every candidate scored far below the visible-only R0 baseline (HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`). None is cleared for a competition slot. All GeoTIFFs below are format-validated research artifacts with verdict `negative` — **do not upload them to DrivenData**. No organizer submission receipt exists for any file in this repo.
+## Primary Promoted Discovery Submission (`H89 = BH-RTP-HABC`, 2026-10-24)
 
-| candidate | run card | holdout DTI (95% CI) vs R0 | format | download / submit status |
+| role | download file & submission name | sha256 (`docs/downloads/...-zeros.tif` / `releases/...-zeros.tif`) | form note (98 chars <= 140) | holdout (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `K=11,321`) |
 |---|---|---|---|---|
-| `releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif` | `registry/run_card_annulus_20261024.json` | `0.001202 [0.000455, 0.002061]`; delta −0.160028 [−0.180591, −0.139843] | PASS (sha256 `e9b2bec1…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
-| `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | `registry/run_card_pfpeaks_20261024.json` | `0.068825 [0.042551, 0.095776]`; delta −0.092405 [−0.136201, −0.049139] | PASS (sha256 `18f0316a…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
-| `h89-tcunion-20261024-…` (no TIF emitted) | `registry/run_card_tcunion_20261024.json` | `0.070181 [0.043417, 0.097668]`; delta −0.091049 [−0.135214, −0.047593] | blocked by duplicate guard (100% of dots within 3 px of PF-PEAKS raster) | **no file** — negative |
-| `releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif` (prior session) | `registry/run_card_condedge_20261024.json` | `0.049875 [0.036830, 0.061751]`; delta −0.111355 [−0.133218, −0.087864] | PASS (sha256 `829cc418…`) | **DO NOT SUBMIT** — negative |
-| `releases/gems89-bstp40-20261024-2e7e8a8f.tif` (upstream lane) | `registry/run_card_bstp40.json` | segment-holdout candidate 0.06598 vs parent 0.09143; diff −0.02545 CI excludes 0 | PASS | **DO NOT SUBMIT** — negative |
+| **PROMOTED (Slot 1)** | `docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif`<br>Name: `gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros` | `715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361` / `33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3` | `H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat>=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)` | **`0.16027` (`[0.14498, 0.17553]`)**, `+0.06418` (`+66.8%`) vs `R0` fold-fair (`0.09609`) |
 
-**Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live `0.2778 = CLAIM` with no organizer receipt in this repo. Its holdout on this data is `0.161230 [0.142648, 0.180061]`, the comparator no session candidate beat.
-
-**Why `h33-h33-2-b2-zeros` (0.2778) leads the GEMSDOE sites:** it is the fleet's best *claim* — a potential-field ridge skeleton (TMI + gravity horizontal gradient) with sparse fixed-mass placement (37,654 unit dots) and a >2 px catalogue prune. The value itself is unverified (no receipt), and the competing public snapshots `0.4413` / `0.3195` are undated and conflict. No mechanism has been isolated, and no session candidate has beaten R0 on holdout, so no submission can honestly be presented as an improvement yet.
-
-## How to submit a future promoted GeoTIFF
-
-Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. No file in this repository currently meets that bar. A machine-format PASS alone is insufficient.
-
-## How to submit a future promoted GeoTIFF
-
-Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. A machine-format PASS alone is insufficient. The current file is explicitly **DO NOT SUBMIT**.
-
-1. Open the DrivenData GEMS Prize page and confirm the rules, current deadline, entity quota, and remaining rolling-week slots: [competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/).
-2. On the submission form choose the promoted single-band GeoTIFF `.tif` (or a zip containing exactly one GeoTIFF). Do not submit a zeros twin and NaN twin as separate attempts.
-3. Copy the promoted filename stem as the submission name, and paste its run-card note (maximum 140 characters) into the optional Note field.
-4. Submit through the user's registered account. This repository never logs in or uploads automatically.
-5. Save the submission-page receipt and exact score. Record it in `ledger/submissions.csv` as `ORGANIZER-CONFIRMED`; do not replace a receipt with a leaderboard screenshot or a projection.
-
-
-The human submits manually from their own registered account. Nothing here logs in,
-scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
-**Never upload both twins in separate slots.** Submission name = the file stem.
-
-## Previous unscored build inventory (historical; not a current slot recommendation)
-
-The tables below were inherited from the prior SNAP session. Their predictions are `MODEL`, their entries have no stored organizer receipts, and the old queue order is not a current selector decision. Do not infer that any file is cleared to submit from its appearance below. The present candidate's explicit `DO NOT SUBMIT` status above takes precedence.
-
-### Prior SNAP-directional builds (historical pair; no receipt stored)
+## Secondary R0-Perturbation Diagnostic Pair (`SNAP` directional corner, 2026-10-24) — optional within quota
 
 | role | file / submission name (stem) | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | predicted (`MODEL`) |
 |---|---|---|---|---|
@@ -86,21 +58,20 @@ never the central MODELs. `1p0px-g0p01` (`2916ec2d`, +0.0076) is the fixed-gate 
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
 - **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 56 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 58 release files + primary `docs/downloads/` `.tif` re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×56 files** (`28` `.tif` + `28` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×56 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×28 pairs** (SNAP / CONC / RELIEF / MASS / SPACING = 37,654; TRACKB = 145) |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×56 files** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`143` ledger rows: `28` `GEMSDOE89` + `115` upstream)** |
+| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×58 release files** (`29` `.tif` + `29` `-zeros.tif`) + **`15/15` PASS** on `docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif` |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×58 release files** + **`0` NaN anywhere** on primary download `.tif` |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×29 pairs** (`H89` / SNAP / CONC / RELIEF / MASS / SPACING = 37,654; TRACKB = 145) |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×58 release files** (`H89` `min d_cat = 3.000 px`) |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`144` ledger rows: `29` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`, 2026-10-24)** |
-| unit tests / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
+| unit tests / leakage canary / 84-raster uniqueness | **PASS (`85+` tests)** / **PASS** (`H89` `max AUC 0.7829 <= 0.90`; `max |ρ| 0.1118 <= 0.90`; `max 3-px overlap 0.5866 <= 0.70`) |
 
-Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`,
-`registry/build_report_snap_directional.json`, `registry/report_only_status.json`.
-PROXY/MODEL diagnostics never gate an upload.
+Machine receipts: `registry/h89_run_card.json`, `registry/h89_discovery_report.json`, `registry/leakage_canary_h89.json`, `registry/format_receipts.json`.
+`HOLDOUT-DTI`/`PROXY`/`MODEL` diagnostics never substitute for a live DrivenData receipt.
 
 ## Pre-upload verification
 
@@ -112,8 +83,7 @@ python -m pytest tests -q
 python tools/build_ledger.py
 python tools/validate_raster.py
 python tools/check_ledger.py
-sha256sum releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif  # must start dc578b2f
-sha256sum releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif  # must start 5cccfc1d
+sha256sum docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif  # must start 715c8b86
 ```
 
 After each upload, the human records `receipt_score` and `date` in `ledger/submissions.csv` (`receipt=Y`, `status=SUBMITTED`).

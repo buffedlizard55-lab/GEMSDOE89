@@ -1,0 +1,222 @@
+{
+  "instrument": "H89 42-feature leakage canary (single-feature AUC vs pooled withheld hidden truth on gems57-pooled-hide-v2)",
+  "threshold": 0.9,
+  "withheld_positive_pixels": 11321,
+  "sampled_negative_pixels": 388679,
+  "seed": 11,
+  "max_single_feature_strength": 0.78288,
+  "any_flagged": false,
+  "verdict": "PASS: no single feature exceeds 0.90",
+  "features": {
+    "f01_log_cover_depth": {
+      "auc": 0.525224,
+      "symmetric_auc": 0.525224,
+      "flag": false
+    },
+    "f02_basement_grad_150m": {
+      "auc": 0.538875,
+      "symmetric_auc": 0.538875,
+      "flag": false
+    },
+    "f03_basement_grad_350m": {
+      "auc": 0.539324,
+      "symmetric_auc": 0.539324,
+      "flag": false
+    },
+    "f04_basement_hinge_inflection": {
+      "auc": 0.532673,
+      "symmetric_auc": 0.532673,
+      "flag": false
+    },
+    "f05_basement_ridge_aniso": {
+      "auc": 0.53709,
+      "symmetric_auc": 0.53709,
+      "flag": false
+    },
+    "f06_verduzco_grav_tilt_zero": {
+      "auc": 0.506659,
+      "symmetric_auc": 0.506659,
+      "flag": false
+    },
+    "f07_grav_abs_b18_corr": {
+      "auc": 0.506376,
+      "symmetric_auc": 0.506376,
+      "flag": false
+    },
+    "f08_grav_slope_b05": {
+      "auc": 0.524186,
+      "symmetric_auc": 0.524186,
+      "flag": false
+    },
+    "f09_grav_vg_abs_b11": {
+      "auc": 0.508638,
+      "symmetric_auc": 0.508638,
+      "flag": false
+    },
+    "f10_rtp_hg_120m": {
+      "auc": 0.533492,
+      "symmetric_auc": 0.533492,
+      "flag": false
+    },
+    "f11_rtp_hg_300m": {
+      "auc": 0.535465,
+      "symmetric_auc": 0.535465,
+      "flag": false
+    },
+    "f12_rtp_tilt_zero": {
+      "auc": 0.502992,
+      "symmetric_auc": 0.502992,
+      "flag": false
+    },
+    "f13_tmi_verduzco_tilt_zero": {
+      "auc": 0.506979,
+      "symmetric_auc": 0.506979,
+      "flag": false
+    },
+    "f14_mag_tc_b06": {
+      "auc": 0.471402,
+      "symmetric_auc": 0.528598,
+      "flag": false
+    },
+    "f15_gallardo_meju_rtp_grav_parallel": {
+      "auc": 0.535415,
+      "symmetric_auc": 0.535415,
+      "flag": false
+    },
+    "f16_flightline_seam_clean_rtp": {
+      "auc": 0.526801,
+      "symmetric_auc": 0.526801,
+      "flag": false
+    },
+    "f17_cond_surf_b17": {
+      "auc": 0.478653,
+      "symmetric_auc": 0.521347,
+      "flag": false
+    },
+    "f18_cond_lateral_grad": {
+      "auc": 0.523154,
+      "symmetric_auc": 0.523154,
+      "flag": false
+    },
+    "f19_hydrothermal_demag_conduit": {
+      "auc": 0.487895,
+      "symmetric_auc": 0.512105,
+      "flag": false
+    },
+    "f20_transtensional_releasing_index": {
+      "auc": 0.525112,
+      "symmetric_auc": 0.525112,
+      "flag": false
+    },
+    "f21_geod_strain_2ndinv_b04": {
+      "auc": 0.5666,
+      "symmetric_auc": 0.5666,
+      "flag": false
+    },
+    "f22_geod_dilaterate_b08": {
+      "auc": 0.516532,
+      "symmetric_auc": 0.516532,
+      "flag": false
+    },
+    "f23_seismic_proximity_log_b10": {
+      "auc": 0.462994,
+      "symmetric_auc": 0.537006,
+      "flag": false
+    },
+    "f24_seismic_intensity_log_b16": {
+      "auc": 0.542543,
+      "symmetric_auc": 0.542543,
+      "flag": false
+    },
+    "f25_piedmont_toe_concavity": {
+      "auc": 0.581657,
+      "symmetric_auc": 0.581657,
+      "flag": false
+    },
+    "f26_scarp_crest_convexity": {
+      "auc": 0.531239,
+      "symmetric_auc": 0.531239,
+      "flag": false
+    },
+    "f27_strike_coherence_600m": {
+      "auc": 0.528651,
+      "symmetric_auc": 0.528651,
+      "flag": false
+    },
+    "f28_lrm_elev_500m": {
+      "auc": 0.537793,
+      "symmetric_auc": 0.537793,
+      "flag": false
+    },
+    "f29_cover_deconfounded_slope": {
+      "auc": 0.588314,
+      "symmetric_auc": 0.588314,
+      "flag": false
+    },
+    "f30_cover_deconfounded_rtp_grav": {
+      "auc": 0.522659,
+      "symmetric_auc": 0.522659,
+      "flag": false
+    },
+    "f31_tip_beam_short_1p2km": {
+      "auc": 0.78288,
+      "symmetric_auc": 0.78288,
+      "flag": false
+    },
+    "f32_tip_beam_long_3p0km": {
+      "auc": 0.781655,
+      "symmetric_auc": 0.781655,
+      "flag": false
+    },
+    "f33_wingcrack_horsetail_lobe": {
+      "auc": 0.76548,
+      "symmetric_auc": 0.76548,
+      "flag": false
+    },
+    "f34_relay_breach_bridge": {
+      "auc": 0.684688,
+      "symmetric_auc": 0.684688,
+      "flag": false
+    },
+    "f35_aniso_axial_corridor_2km": {
+      "auc": 0.756661,
+      "symmetric_auc": 0.756661,
+      "flag": false
+    },
+    "f36_aniso_axial_corridor_4p5km": {
+      "auc": 0.755039,
+      "symmetric_auc": 0.755039,
+      "flag": false
+    },
+    "f37_dist_vis_clamped_log": {
+      "auc": 0.25721,
+      "symmetric_auc": 0.74279,
+      "flag": false
+    },
+    "f38_district_fault_density_5km": {
+      "auc": 0.69884,
+      "symmetric_auc": 0.69884,
+      "flag": false
+    },
+    "f39_district_tip_junc_density_10km": {
+      "auc": 0.609849,
+      "symmetric_auc": 0.609849,
+      "flag": false
+    },
+    "f40_phys_x_tip_corrob": {
+      "auc": 0.782335,
+      "symmetric_auc": 0.782335,
+      "flag": false
+    },
+    "f41_phys_x_relay_corrob": {
+      "auc": 0.684929,
+      "symmetric_auc": 0.684929,
+      "flag": false
+    },
+    "f42_strike_alignment_cos2": {
+      "auc": 0.548343,
+      "symmetric_auc": 0.548343,
+      "flag": false
+    }
+  }
+}

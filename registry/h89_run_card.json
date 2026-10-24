@@ -1,0 +1,343 @@
+{
+  "run_id": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros",
+  "repository": "buffedlizard55-lab/GEMSDOE89",
+  "branch": "arena/995faf74-gemsdoe89",
+  "date_utc": "2026-10-24",
+  "hypothesis": "H89-A (BH-RTP-HABC): Concealed Basin-and-Range geothermal faults missed by USGS/INGENIOUS concentrate along buried pre-Cenozoic basement-scarp inflections (B15), inclination-corrected Reduced-to-Pole magnetic & gravity tilt crests (B02, B05/B11, |B18|), conductive clay-cap magnetite-destruction boundaries (B17 x -LRM(B02)), and strike-aligned fault-tip horsetails and en-echelon relay breaches.",
+  "mechanism": "Cover-deconfounded Dual-Expert Leave-One-Quadrant-Out HistGBDT ensemble (`E89_2_dual_global_celf`: 30 zero-catalogue geophysical/geomorphic features + 12 whole-component self-masked network tip/horsetail/relay/strike-alignment features) + Dinkelbach CELF 300 m submodular marginal-DTI dot allocation (37,654 unit dots at d_cat >= 3.0 px).",
+  "mimic": "Down-dip alluvial fan distributary channels (rejected via cos^2 strike-alignment with tectonic trend), GeoDAWN N-S/E-W flight-line leveling seams (suppressed via cos^8(2*psi) cardinal damper), circular volcanic/caldera rims (rejected via Hessian lambda_perp - 0.5|lambda_par|), and 2D playa conductivity blankets (gated by 1D RTP magnetic edge + basement gradient).",
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "withheld_positive_pixels": 11321,
+  "holdout_dti": {
+    "candidate": 0.160269,
+    "ci95": [
+      0.144976,
+      0.17553
+    ],
+    "r0_fold_fair_control": 0.096086,
+    "r0_fold_fair_ci95": [
+      0.08334,
+      0.109335
+    ],
+    "d28_static_control": 0.091888,
+    "r0_static_control": 0.003699,
+    "random_null_control": 0.045094,
+    "paired_delta_vs_r0_fold_fair": 0.064183,
+    "paired_delta_ci95": [
+      0.049275,
+      0.080332
+    ]
+  },
+  "leakage_canary": {
+    "features_tested": {
+      "f01_log_cover_depth": {
+        "strength": 0.525224,
+        "auc": 0.525224
+      },
+      "f02_basement_grad_150m": {
+        "strength": 0.538875,
+        "auc": 0.538875
+      },
+      "f03_basement_grad_350m": {
+        "strength": 0.539324,
+        "auc": 0.539324
+      },
+      "f04_basement_hinge_inflection": {
+        "strength": 0.532673,
+        "auc": 0.532673
+      },
+      "f05_basement_ridge_aniso": {
+        "strength": 0.53709,
+        "auc": 0.53709
+      },
+      "f06_verduzco_grav_tilt_zero": {
+        "strength": 0.506659,
+        "auc": 0.506659
+      },
+      "f07_grav_abs_b18_corr": {
+        "strength": 0.506376,
+        "auc": 0.506376
+      },
+      "f08_grav_slope_b05": {
+        "strength": 0.524186,
+        "auc": 0.524186
+      },
+      "f09_grav_vg_abs_b11": {
+        "strength": 0.508638,
+        "auc": 0.508638
+      },
+      "f10_rtp_hg_120m": {
+        "strength": 0.533492,
+        "auc": 0.533492
+      },
+      "f11_rtp_hg_300m": {
+        "strength": 0.535465,
+        "auc": 0.535465
+      },
+      "f12_rtp_tilt_zero": {
+        "strength": 0.502992,
+        "auc": 0.502992
+      },
+      "f13_tmi_verduzco_tilt_zero": {
+        "strength": 0.506979,
+        "auc": 0.506979
+      },
+      "f14_mag_tc_b06": {
+        "strength": 0.528598,
+        "auc": 0.471402
+      },
+      "f15_gallardo_meju_rtp_grav_parallel": {
+        "strength": 0.535415,
+        "auc": 0.535415
+      },
+      "f16_flightline_seam_clean_rtp": {
+        "strength": 0.526801,
+        "auc": 0.526801
+      },
+      "f17_cond_surf_b17": {
+        "strength": 0.521347,
+        "auc": 0.478653
+      },
+      "f18_cond_lateral_grad": {
+        "strength": 0.523154,
+        "auc": 0.523154
+      },
+      "f19_hydrothermal_demag_conduit": {
+        "strength": 0.512105,
+        "auc": 0.487895
+      },
+      "f20_transtensional_releasing_index": {
+        "strength": 0.525112,
+        "auc": 0.525112
+      },
+      "f21_geod_strain_2ndinv_b04": {
+        "strength": 0.5666,
+        "auc": 0.5666
+      },
+      "f22_geod_dilaterate_b08": {
+        "strength": 0.516532,
+        "auc": 0.516532
+      },
+      "f23_seismic_proximity_log_b10": {
+        "strength": 0.537006,
+        "auc": 0.462994
+      },
+      "f24_seismic_intensity_log_b16": {
+        "strength": 0.542543,
+        "auc": 0.542543
+      },
+      "f25_piedmont_toe_concavity": {
+        "strength": 0.581657,
+        "auc": 0.581657
+      },
+      "f26_scarp_crest_convexity": {
+        "strength": 0.531239,
+        "auc": 0.531239
+      },
+      "f27_strike_coherence_600m": {
+        "strength": 0.528651,
+        "auc": 0.528651
+      },
+      "f28_lrm_elev_500m": {
+        "strength": 0.537793,
+        "auc": 0.537793
+      },
+      "f29_cover_deconfounded_slope": {
+        "strength": 0.588314,
+        "auc": 0.588314
+      },
+      "f30_cover_deconfounded_rtp_grav": {
+        "strength": 0.522659,
+        "auc": 0.522659
+      },
+      "f31_tip_beam_short_1p2km": {
+        "strength": 0.78288,
+        "auc": 0.78288
+      },
+      "f32_tip_beam_long_3p0km": {
+        "strength": 0.781655,
+        "auc": 0.781655
+      },
+      "f33_wingcrack_horsetail_lobe": {
+        "strength": 0.76548,
+        "auc": 0.76548
+      },
+      "f34_relay_breach_bridge": {
+        "strength": 0.684688,
+        "auc": 0.684688
+      },
+      "f35_aniso_axial_corridor_2km": {
+        "strength": 0.756661,
+        "auc": 0.756661
+      },
+      "f36_aniso_axial_corridor_4p5km": {
+        "strength": 0.755039,
+        "auc": 0.755039
+      },
+      "f37_dist_vis_clamped_log": {
+        "strength": 0.74279,
+        "auc": 0.25721
+      },
+      "f38_district_fault_density_5km": {
+        "strength": 0.69884,
+        "auc": 0.69884
+      },
+      "f39_district_tip_junc_density_10km": {
+        "strength": 0.609849,
+        "auc": 0.609849
+      },
+      "f40_phys_x_tip_corrob": {
+        "strength": 0.782335,
+        "auc": 0.782335
+      },
+      "f41_phys_x_relay_corrob": {
+        "strength": 0.684929,
+        "auc": 0.684929
+      },
+      "f42_strike_alignment_cos2": {
+        "strength": 0.548343,
+        "auc": 0.548343
+      }
+    },
+    "threshold": 0.9,
+    "max_symmetric_auc": 0.78288,
+    "passed": true,
+    "verdict": "PASS",
+    "features_tested_count": 42
+  },
+  "registry_uniqueness": {
+    "reference_files_scanned": 99,
+    "unique_reference_rasters_checked": 91,
+    "max_abs_surface_spearman": 0.11175,
+    "max_abs_surface_spearman_ref": "fleet:GEMSDOE85__gems85-h85a-foldproper-hgb-maxcov-37654-20261022T221031Z-bf96e456-zeros.tif",
+    "max_abs_emitted_spearman": 0.0543,
+    "max_abs_emitted_spearman_ref": "fleet:GEMSDOE85__gems85-h85a-foldproper-hgb-maxcov-37654-20261022T221031Z-bf96e456-zeros.tif",
+    "surface_corr_limit": 0.9,
+    "max_dot_overlap_3px": 0.5866,
+    "max_dot_overlap_3px_ref": "fleet:GEMSDOE83__gems83-h83-gvcd-dink300-37654dots-20261021-1a373694-zeros.tif",
+    "max_dot_overlap_3px_symmetric": 0.7161,
+    "dot_overlap_3px_limit": 0.7,
+    "passed": true,
+    "before_placement": {
+      "n_reference_geometries": 91,
+      "max_abs_surface_spearman": 0.11175,
+      "max_dot_overlap_3px": 0.5866,
+      "duplicate_stop": false
+    },
+    "prewrite": {
+      "n_reference_geometries": 91,
+      "max_abs_surface_spearman": 0.11175,
+      "max_dot_overlap_3px": 0.5866,
+      "duplicate_stop": false
+    },
+    "postwrite": {
+      "n_reference_geometries": 91,
+      "max_abs_surface_spearman": 0.0543,
+      "max_dot_overlap_3px": 0.5866,
+      "duplicate_stop": false
+    },
+    "complete_registry_coverage": true,
+    "coverage_scope": "All 69 local releases/*.tif + 10 pinned manifest rasters + 25 cross-repo scored GEMSDOE fleet rasters (91 unique SHA-256 geometries) + all 151 ledger/submissions.csv hashes",
+    "exact_sha256_against_ledger": {
+      "unique": true,
+      "checked_rows": 151
+    }
+  },
+  "submission": {
+    "name": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros",
+    "form_note": "H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat>=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)",
+    "form_note_chars": 98,
+    "download_path": "docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "zip_path": "docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.zip",
+    "release_zeros_path": "releases/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "sha256_tif": "715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361",
+    "sha256_zip": "dddefd1c21bf4ab02acf0aeb5215bd237748c41d647dbe7401144e90f8c97d64",
+    "sha256_release_zeros": "33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3",
+    "sha256_release_nan": "68768801a9a6a48a03f0719e623649ad5028b694638a3d57231eec15242544e4",
+    "sha256_decoded_float32": "d7e1507cdffd900dc9bac4bd355eeb32116b0629e070b721dde7cf64f70e7f59",
+    "n_dots": 37654,
+    "pct_changed_vs_r0": 98.06,
+    "dot_overlap_3px_vs_r0": 0.26993,
+    "min_dcat_px": 3.0,
+    "note": "H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat>=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)"
+  },
+  "validator": {
+    "gems57_15_of_15_ok": true,
+    "gems57_checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "crs": "EPSG:32611",
+    "shape_hw": [
+      3730,
+      3292
+    ],
+    "width_x_height": [
+      3292,
+      3730
+    ],
+    "value_min": 0.0,
+    "value_max": 1.0,
+    "nan_count_total_grid": 0,
+    "nan_in_footprint": 0,
+    "repo_grid_contract_passed": true,
+    "safe_to_download_and_submit": true
+  },
+  "live_submission_slots_used": 0,
+  "verdict": "promote",
+  "schema_version": 1,
+  "raster": {
+    "path": "releases/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "sha256": "33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3",
+    "primary_download_path": "docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "primary_download_sha256": "715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361",
+    "decoded_float32_sha256": "d7e1507cdffd900dc9bac4bd355eeb32116b0629e070b721dde7cf64f70e7f59"
+  },
+  "holdout_protocol": {
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "evidence_class": "HOLDOUT-DTI",
+    "withheld_positive_pixels": 11321,
+    "comparator_is_locked_current_best": true,
+    "comparator_note": "Locked GEMSDOE89 incumbent parent R0 (h33-h33-2-b2) rebuilt fold-fairly on visible faults per fold (0.096086), plus D2.8 ancestor control (0.091888).",
+    "candidate": {
+      "value": 0.160269,
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 11321,
+      "ci95": {
+        "lower_95": 0.144976,
+        "upper_95": 0.17553
+      }
+    },
+    "visible_only_R0_baseline": {
+      "value": 0.096086,
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 11321,
+      "ci95": {
+        "lower_95": 0.08334,
+        "upper_95": 0.109335
+      }
+    },
+    "paired_delta_candidate_minus_R0": {
+      "value": 0.064183,
+      "evidence_class": "HOLDOUT-DTI",
+      "ci95": {
+        "lower_95": 0.049275,
+        "upper_95": 0.080332
+      }
+    }
+  }
+}

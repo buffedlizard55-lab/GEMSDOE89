@@ -29,8 +29,9 @@ jobs:
           status=$?
           set -e
           test "$status" -eq 2
+          python tools/submission_readiness.py registry/h89_run_card.json --output registry/submission_readiness_h89.json
           python tools/build_pages_site.py
-          git diff --exit-code -- registry/submission_readiness.json docs/index.html docs/submit.html docs/registry
+          git diff --exit-code -- registry/submission_readiness.json registry/submission_readiness_h89.json docs/index.html docs/submit.html docs/registry
       - name: No conflict markers
         run: |
           if git grep -nE '^(<<<<<<<|=======|>>>>>>>)' -- . ; then
