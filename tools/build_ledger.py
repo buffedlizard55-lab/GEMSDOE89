@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Assemble ledger/submissions.csv from the recovered upstream history + all built
-variants in this repository (SPACING + RELIEF + MASS + SNAP + CONCENTRATION).
+"""Assemble ledger/submissions.csv from the recovered upstream history + built
+variants in this repository (SPACING + RELIEF + MASS + SNAP + both
+CONCENTRATION families).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
@@ -8,10 +9,9 @@ sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
 This repository's rows are read from registry/build_reports_spacing.json,
-registry/build_reports.json, registry/build_mass_reports.json,
-registry/build_reports_snap.json, and registry/build_reports_concentration.json,
-while preserving any human-entered receipt_score/date/receipt fields already in
-ledger/submissions.csv so no build script ever clobbers another axis or receipt.
+registry/build_reports.json, and registry/build_mass_reports.json so that the
+ledger never drifts from the files on disk in releases/.  Each new axis/family
+must have a reader here; the 2 km reader uses build_reports_concentration.json.
 """
 
 from __future__ import annotations
@@ -44,6 +44,22 @@ SPACING_RECOMMEND = {
     "alongstrike": "On-ridge 1D geodesic equipartition + exact kernel 1-swap (active ridge cov 0.7101->0.7195); primary SPACING probe.",
     "poisson": "2D Bridson Poisson-disk in d<=1.5px corridor (nn<3px 11415->8119; SGMC cov 0.0888->0.0902); GeoDAWN jitter test.",
     "lattice": "Isometric 3.5px hex lattice in d<=2.0px corridor (nn<3px 11415->7667; SGMC cov 0.0888->0.0893); periodic cover control.",
+}
+
+CONCENTRATION_PREDICTIONS = {
+    "cat10": "+0.009 (MODEL; band -0.010..+0.038). At the no-evidence line: reads out only if the block prior is real.",
+    "cat20": "+0.019 (MODEL; band -0.010..+0.067). 2x dose of cat10.",
+    "cat10away": "-0.009 (MODEL; band -0.038..+0.010). Sign control: if the prior is real, this arm must lose.",
+}
+CONCENTRATION_FORM_NOTES = {
+    "cat10": "R0 h33-h33-2-b2; CONC 5km cat-prior t10: 3765/37654 (10%) zero->top25% fault blocks, n37654; pred +0.009",
+    "cat20": "R0 h33-h33-2-b2; CONC 5km cat-prior t20: 7531/37654 (20%) zero->top25% fault blocks, n37654; pred +0.019",
+    "cat10away": "R0 h33-h33-2-b2; CONC 5km cat-prior t10 AWAY: 3765 (10%) top25%->zero fault blocks; pred -0.009",
+}
+CONCENTRATION_RECOMMEND = {
+    "cat10": "PRIMARY: block prior is catalogued-fault density (r=0.04 with R0 block density); 37.9% of R0 mass sits in zero-fault blocks.",
+    "cat20": "DOSE: same rule at 2x. Submit only after cat10 shows a change, or as the single large-effect probe.",
+    "cat10away": "SIGN CONTROL: identical placement rule, reversed strata. A gain here falsifies the known-fault prior.",
 }
 
 RELIEF_PREDICTIONS = {
@@ -173,6 +189,135 @@ def _relief_rows() -> list[dict]:
     return rows
 
 
+def _snap_rows() -> list[dict]:
+    """SNAP (gateless) rows. Added 2026-10-23: without this reader a ledger
+    rebuild silently dropped the whole SNAP axis from submissions.csv
+    (IRREGULARITIES item 11)."""
+    p = ROOT / "registry" / "build_reports_snap.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        m = rep["model_prediction"]
+        band = m["band"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["dots_out"],
+                "pct_changed": f"{s['pct_dots_moved']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["nan"]["sha256"],
+                "sha256_zeros": rep["files"]["zeros"]["sha256"],
+                "parent": rep["parent"],
+                "axis": "SNAP",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": (
+                    f"{band[0]:+.4f}..{band[2]:+.4f} "
+                    f"(MODEL central {m['central']:+.4f}; band prices the mimic)"
+                ),
+                "date": "20261023",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"window {round(rep['spec']['window_px'], 2)} px, gate {rep['spec']['margin']:.2f}, "
+                    f"{s['dots_moved']:,} dots moved, mean displacement "
+                    f"{s['mean_displacement_px']:.3f} px, moved-target min dcat "
+                    f"{s['moved_targets_min_dcat_px']:.2f} px, cv1km "
+                    f"{s['block_cv_1km_before']:.3f}->{s['block_cv_1km_after']:.3f}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _concentration_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_concentration_reports.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        value = rep["value"]
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "CONCENTRATION",
+                "value": value,
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": CONCENTRATION_PREDICTIONS[value],
+                "date": "2026-10-23",
+                "form_note": CONCENTRATION_FORM_NOTES[value],
+                "notes": (
+                    f"5km blocks; {s['direction']}: {s['n_moved']} dots moved "
+                    f"(symdiff {s['pct_symmetric_diff']:.2f}%), zero-fault-block mass "
+                    f"{s['dots_in_zero_blocks_before']}->{s['dots_in_zero_blocks_after']}; "
+                    f"CV5km {s['density_cv_5km_before']:.4f}->{s['density_cv_5km_after']:.4f}; "
+                    f"corr(prior,density) {s['prior_vs_r0_density_corr_before']:.3f}->"
+                    f"{s['prior_vs_r0_density_corr_after']:.3f}; new dots dcat>=3px, sep>=2.8px. "
+                    + CONCENTRATION_RECOMMEND[value]
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _concentration_2km_rows() -> list[dict]:
+    """Preserve the independent H19-supported 2 km family on every rebuild."""
+    p = ROOT / "registry" / "build_reports_concentration.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        pred = rep["model_prediction"]
+        files = rep["files"]
+        rows.append({
+            "id": rep["id"], "site": "GEMSDOE89", "name": rep["id"], "score": "",
+            "evidence_class": "BUILT (unscored)", "encoding": "nan+zeros",
+            "n_dots": s["n_dots"], "pct_changed": f"{s['pct_changed']:.2f}",
+            "sha8": files["sha8"], "sha256": files["nan"]["sha256"],
+            "sha256_zeros": files["zeros"]["sha256"], "parent": rep["parent"],
+            "axis": "CONCENTRATION", "value": rep["value"], "status": "BUILT",
+            "receipt": "N", "receipt_score": "",
+            "predicted_change": (
+                f"MODEL central {pred['central']:+.4f}; sensitivity "
+                f"{pred['lo']:+.4f}..{pred['hi']:+.4f} (not a CI)"
+            ),
+            "date": "20261023", "form_note": rep["form_note"],
+            "notes": (
+                f"{rep['role']}; 2km CV {s['cv_2km_before']:.4f}->{s['cv_2km_after']:.4f}; "
+                f"5km CV {s['cv_5km_before']:.4f}->{s['cv_5km_after']:.4f}; "
+                f"H19 counterindicator {s['h19_surrogate_delta']:+.6f}; "
+                f"added min dcat {s['added_min_catalogue_clearance_px']:.2f}px"
+            ),
+            "source": "GEMSDOE89",
+        })
+    return rows
+
+
 def _mass_rows() -> list[dict]:
     p = ROOT / "registry" / "build_mass_reports.json"
     if not p.exists():
@@ -253,51 +398,9 @@ def _mass_rows() -> list[dict]:
     ]
 
 
-def _snap_rows() -> list[dict]:
-    p = ROOT / "registry" / "build_reports_snap.json"
-    if not p.exists():
-        return []
-    rows = []
-    for rep in json.loads(p.read_text()):
-        s = rep["stats"]
-        mp = rep["model_prediction"]
-        lo, mid, hi = mp["band"]
-        rows.append(
-            {
-                "id": rep["id"],
-                "site": "GEMSDOE89",
-                "name": rep["id"],
-                "score": "",
-                "evidence_class": "BUILT (unscored)",
-                "encoding": "nan+zeros",
-                "n_dots": s["dots_out"],
-                "pct_changed": f"{s['pct_dots_moved']:.2f}",
-                "sha8": rep["files"]["sha8"],
-                "sha256": rep["files"]["nan"]["sha256"],
-                "sha256_zeros": rep["files"]["zeros"]["sha256"],
-                "parent": rep["parent"],
-                "axis": "SNAP",
-                "value": rep["value"],
-                "status": "BUILT",
-                "receipt": "N",
-                "receipt_score": "",
-                "predicted_change": f"{lo:+.4f}..{hi:+.4f} (MODEL central {mid:+.4f}; band prices the mimic)",
-                "date": "20261023",
-                "form_note": rep["form_note"],
-                "notes": (
-                    f"window {s['max_shift_px']} px, gate 0.00, {s['dots_moved']:,} dots moved, "
-                    f"mean displacement {s['mean_displacement_px']:.3f} px, moved-target min dcat "
-                    f"{s['moved_targets_min_dcat_px']:.2f} px, cv1km "
-                    f"{s['block_cv_1km_before']:.3f}->{s['block_cv_1km_after']:.3f}"
-                ),
-                "source": "GEMSDOE89",
-            }
-        )
-    return rows
-
-
-def _concentration_rows() -> list[dict]:
-    p = ROOT / "registry" / "build_reports_concentration.json"
+def _concentration_12p8km_rows() -> list[dict]:
+    """Preserve the 12.8 km Faulds fault-interaction + catalogue-free GPS strain family."""
+    p = ROOT / "registry" / "build_reports_concentration_12p8km.json"
     if not p.exists():
         return []
     rows = []
@@ -344,15 +447,27 @@ def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
     if path.exists():
-        with open(path, newline="") as fh:
-            for r in csv.DictReader(fh):
-                existing_by_id[r["id"]] = r
+        try:
+            with open(path, newline="") as fh:
+                for r in csv.DictReader(fh):
+                    if r.get("id") and not str(r.get("id")).startswith(("<<<<<<<", "=======", ">>>>>>>")):
+                        existing_by_id[r["id"]] = r
+        except Exception:
+            existing_by_id = {}
 
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    local_rows = _spacing_rows() + _relief_rows() + _mass_rows() + _snap_rows() + _concentration_rows()
-    for r in local_rows:
+    new_rows = (
+        _spacing_rows()
+        + _relief_rows()
+        + _mass_rows()
+        + _snap_rows()
+        + _concentration_rows()
+        + _concentration_2km_rows()
+        + _concentration_12p8km_rows()
+    )
+    for r in new_rows:
         prev = existing_by_id.get(r["id"])
         if prev:
             for human_col in ("status", "receipt", "receipt_score", "date", "score"):
@@ -360,11 +475,11 @@ def main():
                     r[human_col] = prev[human_col]
 
     with open(path, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
+        w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
-        for r in local_rows + upstream:
+        for r in new_rows + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})
-    print(f"wrote {path}: {len(local_rows)} GEMSDOE89 + {len(upstream)} collapsed upstream rows")
+    print(f"wrote {path}: {len(new_rows)} GEMSDOE89 + {len(upstream)} collapsed upstream rows")
 
 
 if __name__ == "__main__":

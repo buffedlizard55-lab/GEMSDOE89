@@ -1,4 +1,4 @@
-# Mechanism cards — session GEMSDOE89 (`SPACING` + `RELIEF` + `SNAP` + `CONCENTRATION`)
+# Mechanism cards — session GEMSDOE89 (`SPACING` + `RELIEF` + `SNAP`)
 
 Parent for every card: **R0 = `h33-h33-2-b2`** (`GEMSDOE32` lineage; 37,654 unit-mass
 dots, zero on catalogue and zero at `d_cat <= 2.0 px`; rebuilt byte-identically from
@@ -342,64 +342,240 @@ snap mechanism confirmed; then choose dose by receipt, not by principle.
 gate, not the snap, was destroying the gain). ≤ −0.010 ⇒ retire SNAP and the
 EM-crest story with it: R0's lineament placement beats EM-crest placement and
 the response surface should be rebuilt from DEM/lineament structure instead.
+---
+
+# Part IV — `CONCENTRATION` axis (`cat10` · `cat20` · `cat10away`)
+
+## Premise: what the metric rewards, and what R0 does instead
+
+`DTI = T / (0.2T + 0.2(S - M) + 0.8|G|)` (brief §2). The mass `S` is a penalty
+in the denominator; a unit dot earns its place only through the kernel credit
+`T` it adds on truth or the mass `M` it gets explained, and at the parent's
+`0.2778` the break-even is `k > 0.0556`. Every one of R0's 37,654 dots costs
+the same 0.2 of denominator; they differ only in where they sit.
+
+**Measured on R0 (5 km blocks, edge-inclusive grid, 2,063 eligible blocks):**
+
+| quantity | value |
+|---|---|
+| blocks containing catalogue pixels | 1,201 of 2,063 |
+| blocks with **zero** catalogued fault | 862 (41.8 %) |
+| R0 dots in those zero-fault blocks | **14,257 = 37.9 %** |
+| R0 dots in the top-prior quartile (519 blocks) | 9,845 = 26.1 % |
+| corr(R0 block density, catalogue block density) | **0.039** |
+
+So block-scale allocation is essentially independent of where faults are known
+to exist. That is the free parameter this axis spends.
+
+**Why this is a new question, not a repeat.** `GEMSDOE84` spent
+`5km-t25-move2400`, `5km-t50-move3765` and `spread5km-move2400` on this axis
+using the *parent's own* per-dot gain surface, averaged per block, as the
+prior. That surface is the one that placed R0's dots, so those arms moved mass
+from blocks the parent already ranks low into blocks it already ranks high --
+nearly a re-shuffle of a self-referential quantity (their own CV moves the
+wrong way against the brief's band). The prior here is **independent**: the
+density of catalogued (USGS/INGENIOUS) faults, the only fault data the
+organizers release, and the data set that the truth is defined against
+("new fault" = any fault pixel not already captured by USGS/INGENIOUS,
+including newly mapped geometry of existing systems:
+https://community.drivendata.org/t/where-do-you-draw-the-line/11536 ;
+new-fault truth can lie within 300 m of known traces:
+https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516).
+
+## The placement rule (identical in all three arms)
+
+R0 saturates its own field: only **201** `h19_5` pixels in the whole grid are
+>= 2.8 px from an R0 dot *and* >= 3 px from the catalogue, so a
+"same-field-same-rules" reallocation cannot be built above 201 dots. Added
+dots are therefore placed on a structural edge score `q` = mean of the
+Sobel gradient magnitudes of RTP magnetics (band 2) and isostatic gravity
+(band 13), each robust-scaled, averaged, then smoothed with a 500 m box mean.
+Candidates are ranked by `q` inside the recipient blocks and accepted greedily
+at Euclidean spacing >= 2.8 px (the parent's own suppression radius).
+
+What `q` is and is not (all MEASURED, all report-only): single-feature AUC
+against catalogue membership **0.548** (the best single band in the stack is
+0.572); 11.1 % of the top 1 % of `q` lies on or within 1 px of the corroborated
+`h19_5` ridge field against a 7.2 % base rate; the top 1 % is spread over 484
+of the 2,063 blocks (largest single-block share 3.0 %), so it is not a handful
+of survey seams. R0's own dots sit at `q = 0.201` against a footprint mean of
+0.180, while the added dots land at 0.49-0.70. **The added dots are on a
+different structural class than R0's dots** -- that is the confound this axis
+carries and it is why the sign-control arm exists.
 
 ---
 
-# Part IV — `CONCENTRATION` axis (`12p8km-int10` · `12p8km-int20` · `12p8km-geod15`) — session GEMSDOE89 (branch `arena/6e810001-gemsdoe89`, 2026-10-23)
+## Card C1 — `cat10` (`h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377`) — PRIMARY
+
+**Hypothesis.** At 5 km scale, the density of *new* fault truth tracks the
+density of *known* faults, so mass moved out of blocks with no catalogued
+fault into the top-prior quartile earns more kernel credit than it gives up.
+
+**Mechanism.** A 3,765-dot move (10.0 %; symmetric difference
+20.0 %) at fixed count 37,654. Donors: all 862 zero-catalogue blocks, taking
+the dots with the smallest unique kernel credit `u` (the parent's own
+metric-derived redundancy ranking; removed mean `u = 6.27` vs parent 7.69).
+Recipients: the 519 top-quartile blocks (cut 0.0184 catalogue px per footprint
+px), filled on `q` at 2.8 px spacing, all new dots >= 3.0 px from the
+catalogue (achieved minimum exactly 3.00 px). Zero-fault-block mass falls
+14,257 -> 10,492; top-quartile mass rises 9,845 -> 13,610; 5 km density CV
+0.901 -> 0.949 (1 km: 1.870 -> 1.905); corr(prior, density) 0.039 -> 0.269.
+Mean displacement 128 px (12.8 km), so this is a block-scale move, not a snap.
+
+**The non-fault process that could mimic it.** Catalogue density is a proxy
+for *mapping effort*, not for fault density: well-surveyed corridors have both
+more mapped faults and more published structure, so concentrating into them
+reproduces the map's history rather than the geology. Second mimic: known
+faults in this region include Mesozoic bedrock structures with no Quaternary
+expression, and the truth is a *new-fault* inventory; a high catalogue-density
+block can be systematically *old*-fault terrain. Third: the added dots sit on
+potential-field gradients (AUC 0.548) that also mark lithological contacts,
+volcanic margins and basin fill -- a strong-gradient "win" would be a
+detector effect that the away arm shares, not a prior effect. Fourth: truth
+pixels on the catalogue are masked, so a high-prior block has a larger
+credit-dead ring (dots must sit >= 3 px away, and the mask removes the first
+3 px of any trace); the true upside is smaller than raw fault density implies.
+
+**Predicted sign and size (MODEL).** Central **+0.009**, band **-0.010 …
++0.038**. Derivation: with `S` fixed, `dDTI ~ n * k_bar * (p_recipient -
+p_donor) / D`, `k_bar = 2.5` credit units for a unit dot on a 1-px trace,
+`D = 2.0e4` measured from the lineage's own collar step (removing 2,545
+masked-collar dots bought +0.0070 -> `D = 0.2778 * 509 / 0.0070`), and a hit-rate
+difference of 2 percentage points. At 6 points it is +0.028; at 0 it is 0.
+**The central case sits on the brief's no-evidence line**, so this arm only
+reads out if the prior is real and strong.
+
+**Falsifier.** A live change inside `±0.010` at 10 % *and* at 20 % means the
+known-fault prior carries no usable block-scale signal; the axis closes and
+`cat20`'s receipts become the bound on how much block allocation can be worth.
+A live change <= -0.010 means the allocation actively hurts -- new faults
+avoid known-fault corridors at 5 km scale -- and the away arm becomes the
+candidate.
+
+---
+
+## Card C2 — `cat20` (`h33-h33-2-b2-CONC5kmcat20-20261023-4d229938`) — DOSE
+
+**Hypothesis.** Same as C1; the dose asks whether the effect is monotone in
+the moved count, which separates "allocation matters" from "10 % is inside the
+noise of the public chunks".
+
+**Mechanism.** Identical recipe at 20 %: 7,531 dots moved (symmetric
+difference 40.0 %), donors the same 862 zero-catalogue blocks, same recipient
+quartile, same `q` placement and the same 3.0 px clearance. Zero-fault-block
+mass 14,257 -> 6,726; top-quartile mass 9,845 -> 17,376; 5 km CV 0.901 ->
+1.132; corr(prior, density) 0.039 -> 0.404; mean displacement 108 px.
+
+**The non-fault process that could mimic it.** Everything in C1, plus a
+dose-specific one: at 20 % the arm removes almost a fifth of the parent's
+dots from its own corroborated ridge field, so a null or negative result
+cannot distinguish "prior is uninformative" from "the `q` placement is worse
+than `h19_5`". Read the pair, never this arm alone.
+
+**Predicted sign and size (MODEL).** Central **+0.019**, band **-0.010 …
++0.067** (2x the C1 arithmetic, same `D`, same `k_bar`, same 2-point hit-rate
+difference; the width doubles with `n`).
+
+**Falsifier.** If `cat20` lands within ±0.010 of R0 while `cat10` is also null,
+block allocation is dead at this prior and this placement. If `cat20` lands
+*below* `cat10 - 0.010`, the loss is coming from the placement (mass leaving
+`h19_5`), not from the allocation, and the axis needs a placement fix before
+another slot.
+
+---
+
+## Card C3 — `cat10away` (`h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28`) — SIGN CONTROL
+
+**Hypothesis.** If the mechanism in C1 is the *prior*, then moving the same
+number of dots with the same rule in the opposite direction must lose
+approximately what C1 gains. If direction does not matter, the mechanism is
+the placement or the mere act of moving mass, not the catalogue.
+
+**Mechanism.** Exact mirror of C1: donors are the 519 top-quartile blocks
+(same `u` ranking), recipients are the 862 zero-catalogue blocks, same `q`
+placement, same spacing and clearance, same 3,765 dots. Zero-fault-block mass
+rises 14,257 -> 18,022; corr(prior, density) falls 0.039 -> -0.165; 5 km CV
+0.901 -> 1.049.
+
+**The non-fault process that could mimic it.** Zero-catalogue blocks are not
+fault-free; they are *unmapped* blocks, which in this region include the
+basin interiors and the volcanic fields. If new-fault truth is frontier-heavy
+(new traces drawn where nothing was mapped before), this arm is the winner and
+the "known-fault prior" story is simply wrong.
+
+**Predicted sign and size (MODEL).** Central **-0.009**, band **-0.038 …
++0.010** -- the exact negation of C1 under the same scenario.
+
+**Falsifier.** A *gain* here (>= +0.010) falsifies the known-fault prior at
+block scale and says the frontier is where the remaining truth is; that is a
+decision-changing result worth one slot because it redirects every later arm.
+A loss of the same size as C1's gain is the cleanest confirmation the axis can
+give short of a receipt on the parent itself.
+
+---
+
+## Decision table for this axis (live changes are public-chunk only)
+
+| cat10 | cat20 | cat10away | reading | next |
+|---|---|---|---|---|
+| >= +0.010 | >= +0.010 | <= 0 | known-fault prior works and scales | combine: raise the moved share or add a second, finer prior; keep `q` placement |
+| inside ±0.010 | inside ±0.010 | inside ±0.010 | allocation at 5 km is worth less than 0.01 either way | close CONCENTRATION; spend slots on MASS/SPACING where the ceiling is measurable |
+| <= -0.010 | <= -0.010 | >= +0.010 | the prior is inverted at this scale | submit `cat10away` as the candidate; propose a FRONTIER axis in `SLOT_PLAN.md` |
+| >= +0.010 | inside ±0.010 | inside ±0.010 | effect saturates below 20 % | hold the 10 % dose, do not spend the 20 % |
+
+Any single live change below 0.01 is **no evidence** (brief §5); the table
+reads the three receipts as one experiment, not three independent scores.
+
+---
+
+# Part V — 2 km H19-supported CONCENTRATION (separate session)
+
+The independent `arena/0a75dd63` session added three non-duplicate values:
+`2km-b50-t33-m3765` (`da3a4886`, MODEL central +0.0024),
+`2km-b50-t33-m5648` (`51ba9656`, −0.0028), and
+`2km-b50-t33-m7531` (`1e857586`, −0.0126). They keep every added dot on H19-5
+and use exact sequential DTI marginals rather than Part IV's potential-field
+`q` placement. Their full hypothesis / mechanism / mimic / prediction /
+falsifier cards are in **`ledger/MECHANISM_CARDS_CONCENTRATION.md`**.
+
+These are **not clean scale-only controls** for Part IV: block size and
+placement both differ. Negative H19 coverage and crowding counter-indicators
+hold the 15% and 20% arms; the integrated queue keeps `cat10` as the primary
+allocation probe and the 2 km family as a separate, currently held mechanism.
+
+---
+
+# Part VI — `12.8 km` (`128 px`) structural-interaction & catalogue-free GPS strain `CONCENTRATION` (`12p8km-int10` · `12p8km-int20` · `12p8km-geod15`) — session `arena/6e810001-gemsdoe89` (2026-10-23)
 
 Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically this session via `tools/rebuild_r0.py` (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit-mass dots; live **0.2778 = CLAIM**).
 
-## Structural measurement the `CONCENTRATION` axis rests on
+## Why this `12.8 km` family is structurally orthogonal to Parts IV (`5 km` raw catalogue) and V (`2 km` H19)
 
-1. **R0's 12.8 km (`128 px`) structural misallocation.** Across the `318` interior `12.8 km × 12.8 km` (`128 × 128 px`) blocks (`>= 50%` inside the `5,167,373`-px valid footprint), R0's dot density is **spatially uncorrelated** with mapped fault density (`Spearman(r0_dens, cat_dens) = −0.0019`), whereas physical fault indicators correlate strongly (`Spearman = +0.4758` for `b19_det_elev_slope`, `+0.3957` for `b03_tmi_hg`). Along R0's own winning lineage (`d28` `0.2600` CLAIM → `solo_d28` `0.2708` CLAIM → `R0` `0.2778` CLAIM), `12.8 km` block-density CV climbed monotonically **`0.5181 → 0.5369 → 0.5532`**, sitting squarely inside the `0.51–0.59` reference band where the best Great Basin discrete-dot files reside.
-2. **Accommodation-zone & fault-interaction physics (Faulds & Hinz 2015).** In Great Basin geothermal and extensional structural provinces, unmapped secondary splays, relay ramps, horsetail terminations, and synthetic/antithetic step-over faults cluster in **10–15 km structural complexity blocks** around mapped fault tips, Y-junctions, and multi-strand step-overs rather than inside structurally simple basin interiors (Faulds & Hinz, 2015, *Structural and Stratigraphic Controls of Geothermal Activity in the Great Basin Region*, NBMG/OSTI #1249065: https://www.osti.gov/servlets/purl/1249065; DrivenData organizer guidance on unmapped splay/segment truth and pixel-exact catalogue masking: https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516, https://community.drivendata.org/t/where-do-you-draw-the-line/11536). Across `318` interior `12.8 km` blocks ranked by fault-interaction density (`6,747` skeleton tips, `5,943` junctions, `554,371` multi-strand `<= 1 km` step-over pixels), R0 places **6.96 dots/kpx** in the lowest interaction tercile (`3.07` cat px/kpx: **3.67× over-allocated**) and only **7.18 dots/kpx** in the highest tercile (`22.53` cat px/kpx: **0.52× under-allocated** — a **7.3×** fault-density contrast vs `1.40×` in `RELIEF`).
-3. **Single-variable isolation & proportional block quotas.** Upstream `GEMSDOE84` built only `5 km` (`50 px`) block variants (`5km-t25-move2400`, `5km-t50-move3765`, `spread5km-move2400`). Here we test the **`12.8 km` (`128 px`) structural-domain scale** while holding total count (`37,654`), unit mass (`1.0`), inherited `2.0 < d_cat < 3.0 px` collar count (`1,611` frozen), added-dot clearance (`d_cat >= 3.00 px`), minimum inter-dot spacing (`r_sep >= 2.80 px`, median NN `3.00 → 3.16 px`), and geomorphic relief terciles (`[7692, 15742, 14204] → [7657, 15048, 14909]` on `int10`) tightly controlled. Removals and additions are apportioned **proportionally across the bottom-40% (`151` source blocks) and top-40% (`146` target blocks)** so ~10 steep range blocks cannot hoard the moved budget; within each target block, candidate pixels (`d_cat >= 3.0 px`) are ranked deterministically by an unsupervised strike-coherent corroborated scarp/potential-field ridge operator (`corrob_ridge`, bands `3, 5, 12, 19`; leakage canary max `0.5995 <= 0.90`).
-4. **Out-of-sample 25% connected-strand holdout & shuffled-block control (`MODEL`, never a score).** Pixel-withheld catalogue recall (`PROXY`) is identically `0.038424` (`95% CI [0.0329, 0.0440]`) because `d_cat >= 3.0 px` freezes the 3-pixel DTI collar (`IRREGULARITIES.md` item 4), and `sgmc_faults_control` is `UNVERIFIED` (`item 8`). To price both the km-scale block prior and the within-block placement operator without circularity, we withheld **25% of 8-connected catalogue fault strands** *before* computing `d_cat`, rebuilding R0, or computing `interaction_block_prior`, across 3 seeds (`20261023, 7, 42`; base DTI `0.1063`), alongside a matched **random-block-shuffle control** using the identical `corrob_ridge` operator (`registry/report_only_status.json`):
+1. **Accommodation-zone interaction complexity vs raw fault length, plus a 100% catalogue-free GPS/seismicity arm.** In Great Basin extensional and transtensional provinces, unmapped secondary splays, relay ramps, and horsetail terminations nucleate in **10–15 km fault-interaction zones** around fault tips, branch junctions, and `<= 1 km` multi-strand step-overs rather than along simple mid-segment traces (Faulds & Hinz, 2015, NBMG/OSTI #1249065: https://www.osti.gov/servlets/purl/1249065; organizer truth guidance: https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516, https://community.drivendata.org/t/where-do-you-draw-the-line/11536). Across the `318` interior `12.8 km` (`128 px`) blocks (`>= 50%` inside the `5,167,373`-px footprint), R0 has `Spearman(r0_dens, cat_dens) = −0.0019` (**3.67× over-allocated** in the lowest interaction tercile `T1`, **0.52× under-allocated** in `T3`), while R0's lineage (`d28` `0.2600` → `solo_d28` `0.2708` → `R0` `0.2778` CLAIM) climbed **`0.5181 → 0.5369 → 0.5532`** in `12.8 km` block-density CV. Separately, **`12p8km-geod15` never reads `existing_faults.tif` in its block prior at all**, testing active crustal strain (`b04_geod_2ndinv` + `b07_geod_shearrate` + `b16_ieq_n100a15`; INGENIOUS synthesis: https://www.osti.gov/servlets/purl/1987729) free of historical mapping bias (`Spearman(geod, interact) = +0.2458`).
+2. **Proportional per-block quotas + strike-coherent scarp/potential-field placement (`corrob_ridge`).** Removals (`d_cat >= 3.0 px`, `<3 px` collar frozen at `1,611`) and additions (`d_cat >= 3.00 px`, `r_sep >= 2.80 px`, zero `<2.8 px` crowding) are apportioned **proportionally across bottom-40% and top-40% blocks** so ~10 steep volcanic blocks cannot hoard the moved budget (`IRREGULARITIES.md` item 13), and candidate pixels are ranked deterministically by strike-coherent DEM concavity + slope break + gravity slope + TMI HG (`corrob_ridge`, bands `3, 5, 12, 19`; leakage canary max `0.5995 <= 0.90`).
+3. **Out-of-sample 25% connected-strand holdout + matched random-block-shuffle calibration (`MODEL`, never a score).** Withholding 25% of 8-connected catalogue strands *before* computing `d_cat`, R0, or `interaction_block_prior` across 3 seeds (`20261023, 7, 42`, base DTI `0.1063`) and comparing against a matched random-block shuffle using the identical `corrob_ridge` operator (`registry/report_only_status.json`):
+   - `12p8km-int10` (`bcade136`, `3,765` moved = `10.00%`, `CV_12.8km: 0.5532 → 0.5533`): mean strand-holdout **`+0.0040`** (positive on all 3 seeds), shuffle `−0.0012`, pure block-prior lift **`+0.0052`**.
+   - `12p8km-int20` (`357b4ac4`, `7,531` moved = `20.00%`, `CV_12.8km: 0.5532 → 0.6561`): mean strand-holdout **`+0.0051`** (positive on all 3 seeds), shuffle `−0.0086`, pure block-prior lift **`+0.0136`**.
+   - `12p8km-geod15` (`259ea040`, `5,648` moved = `15.00%`, `CV_12.8km: 0.5532 → 0.6355`, `mean disp = 1020.8 px`): mean strand-holdout **`−0.0004`**, shuffle `−0.0042`, pure block-prior lift **`+0.0038`**.
 
-| Variant | Moved (% R0) | `CV_12.8km` | `CV_5km` | Mean disp | 3-seed strand-holdout `ΔDTI` (`MODEL`) | Matched shuffle `ΔDTI` | Pure block-prior lift |
-|---|---|---|---|---|---|---|---|
-| `12p8km-int10` (`bcade136`) | 3,765 (10.00%) | `0.5532 → 0.5533` | `0.8991 → 0.8874` | 95.5 px | **+0.0040** (`+3.8%`) | −0.0012 | **+0.0052** |
-| `12p8km-int20` (`357b4ac4`) | 7,531 (20.00%) | `0.5532 → 0.6561` | `0.8991 → 0.9782` | 87.5 px | **+0.0051** (`+4.8%`) | −0.0086 | **+0.0136** |
-| `12p8km-geod15` (`259ea040`) | 5,648 (15.00%) | `0.5532 → 0.6355` | `0.8991 → 0.9467` | 1020.8 px | **−0.0004** (`−0.3%`) | −0.0042 | **+0.0038** |
+## Card C6.1 — `12p8km-int10` (`h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136`) — PRIMARY 12.8 km INTERACTION PROBE
+- **Hypothesis:** Moving 10% (`3,765` dots) from bottom-40% (`151` blocks) to top-40% (`146` blocks) `12.8 km` fault-interaction blocks (`6,747` tips, `5,943` junctions, `554,371` `<=1 km` step-over px) — while holding `CV_12.8km` invariant at `0.5533` inside `[0.51, 0.59]` and relief terciles nearly fixed (`[7657, 15048, 14909]`) — raises truth kernel hits `T` at fixed `S = 37,654`.
+- **Mechanism:** Proportional per-block quotas; drops weakest `corrob_ridge` dots (`mean 0.0345`) in bottom-40% blocks and adds strike-coherent `corrob_ridge` dots (`mean 0.1658`, `d_cat >= 3.00 px`, `r_sep >= 2.828 px`, `mean disp = 95.5 px`) in top-40% blocks.
+- **Non-fault mimic:** Welded-tuff cooling joints, caldera margins, and erosional hogbacks in well-exposed Cenozoic ranges co-locate with dense mapped fault junctions without hosting Quaternary slip; or test truth may sample unmapped quiet basins (`T1`).
+- **Predicted sign and size (`MODEL`):** Central **+0.008**, band **−0.006 … +0.018**.
+- **Falsifier:** Receipt inside `±0.010` closes `12.8 km` interaction reallocation (`int20` stays held); `<= −0.010` falsifies map-interaction clustering on the test split and triggers catalogue-free `12p8km-geod15` (or `5km cat10away`).
 
----
+## Card C6.2 — `12p8km-int20` (`h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4`) — 2× DOSE / CV SATURATION TEST
+- **Hypothesis:** Conditional on `12p8km-int10 >= +0.010`, doubling transfer to 20% (`7,531` dots, `CV_12.8km: 0.5532 → 0.6561`) tests whether pushing concentration above `0.59` scales linearly or saturates on secondary ridges.
+- **Mechanism:** Identical `interaction_block_prior`, `40/60` split, and `corrob_ridge` operator at `fraction = 0.20` (`source 14,354 → 6,823`, `target 15,113 → 22,644`, `mean disp = 87.5 px`, `added corrob_ridge = 0.1450`).
+- **Non-fault mimic:** `+50%` target-block dot density recruits second-tier pediment/incision ridges after primary unmapped splays are already covered (`−0.0086` shuffled-block dilution vs `−0.0012` at 10%).
+- **Predicted sign and size (`MODEL`):** Central **+0.009**, band **−0.014 … +0.024** (hold until `12p8km-int10 >= +0.010`).
+- **Falsifier:** Failure to beat `12p8km-int10` by `>= +0.005` when `int10 >= +0.010` confirms secondary-ridge saturation above `CV_12.8km ≈ 0.59`.
 
-## Card C1 — `12p8km-int10` (`h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136`) — PRIMARY
+## Card C6.3 — `12p8km-geod15` (`h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040`) — CATALOGUE-FREE ACTIVE-STRAIN DISCRIMINATOR
+- **Hypothesis:** Active unmapped faults in playaward / Walker Lane / Humboldt basins track **crustal strain rate and seismicity** rather than historical fault-map density (https://www.osti.gov/servlets/purl/1987729); reallocating 15% (`5,648` dots) into top-40% GPS shear/strain + seismicity `12.8 km` blocks captures blind/unmapped active belts without catalogue bias.
+- **Mechanism:** `100%` catalogue-free block score `mean(robust_unit(b04), robust_unit(b07), robust_unit(log1p(b16)))`; proportional transfer `14,102 → 8,454` (`141` low-strain blocks) to `16,699 → 22,347` (`158` high-strain blocks; `CV_12.8km: 0.5532 → 0.6355`, `mean disp = 1020.8 px = 102.1 km`) onto strike-coherent `corrob_ridge` (`mean 0.1610`, `d_cat >= 3.00 px`, `r_sep >= 2.828 px`).
+- **Non-fault mimic:** Smooth `20–50 km` GPS continuum interpolation and off-fault geothermal/mining seismic swarms elevate entire blocks where local `100 m` ridges are non-tectonic volcanic or shoreline landforms.
+- **Predicted sign and size (`MODEL`):** Central **+0.003**, band **−0.015 … +0.021**.
+- **Falsifier:** If catalogue-based concentration (`cat10` / `12p8km-int10`) is `<= 0` while `12p8km-geod15 >= +0.010`, live truth tracks active strain rather than mapped-fault proximity; `<= −0.010` retires continuum geodetic block priors.
 
-**Hypothesis.** Unmapped Great Basin test faults cluster inside `12.8 km` accommodation, relay-ramp, and branch-point domains around known fault systems (Faulds & Hinz 2015: https://www.osti.gov/servlets/purl/1249065), whereas R0 over-allocates 38% of its mass (`14,354` dots) into the lowest-40% fault-interaction blocks (`3.67×` over-allocation in `T1`). Reallocating 10% of R0 (`3,765` dots) from the lowest-40% to the highest-40% `12.8 km` interaction blocks — while holding `CV_12.8km` invariant inside the `0.51–0.59` reference band (`0.5532 → 0.5533`) — increases kernel hits `T` per unit mass at fixed `S = 37,654`.
-
-**Mechanism.** Computes `interaction_block_prior` on `128 × 128 px` (`12.8 km`) blocks as the equal-weight rank-mean of catalogue fault-tip density (`1`-neighbor skeleton endpoints), fault-junction density (`>= 3`-neighbor branch points), and multi-strand `<= 10 px` (`1 km`) step-over zone fraction. Proportionally removes `3,765` weakest-ridge non-collar dots (`d_cat >= 3.0 px`, mean `corrob_ridge = 0.0345`) from the `151` bottom-40% blocks (`14,354 → 10,589` dots) and adds `3,765` strike-coherent corroborated scarp/gravity/magnetic ridge dots (`d_cat >= 3.00 px`, `r_sep >= 2.828 px`, mean `corrob_ridge = 0.1658`) across the `146` top-40% blocks (`15,113 → 18,878` dots; mean displacement `95.5 px`).
-
-**The non-fault process that could mimic it.** Mapped fault tips and junctions are enriched in well-exposed Cenozoic volcanic ranges where erosional hogbacks, welded-tuff cooling joints, caldera-margin scarps, and dike swarms generate dense linear topographic/aeromagnetic ridges (`corrob_ridge`) adjacent to known faults without hosting Quaternary slip; conversely, if the organizer's test split deliberately targeted *previously unmapped* basins (`T1`) rather than under-mapped splays in complex zones (`T3`), shifting 10% out of `T1` sacrifices blind-basin coverage.
-
-**Predicted sign and size (MODEL).** Central **+0.008**, band **−0.006 … +0.018** (anchored to R0 `0.2778` CLAIM: 3-seed 25% strand-holdout delta is `+0.0040` on `0.1063` base = `+3.8%` relative, scaling to `+0.010` at `0.278` before discounting for `h19_5` vs `corrob_ridge` precision; pure block-prior lift over random-block shuffle is `+0.0052`, positive on all 3 seeds: `+0.0042, +0.0028, +0.0050`).
-
-**Falsifier.** Live receipt delta inside `±0.010` (`0.2678 … 0.2878`) counts as **no evidence** and closes 10%-dose catalogue-interaction block reallocation (`int20` stays held unless `int10 >= +0.010`). Live receipt `<= −0.010` (`<= 0.2678`) falsifies the accommodation-zone clustering prior on the test split (proving test truth sits preferentially in quiet/unmapped `T1` basins) and triggers the catalogue-free `12p8km-geod15` arm if km-scale allocation is tested again.
-
----
-
-## Card C2 — `12p8km-int20` (`h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4`) — DOSE
-
-**Hypothesis.** If `12p8km-int10` gains `>= +0.010`, R0's `2.1×` High-tercile deficit (`15,113` parent dots in top-40% blocks vs `22,644` needed to match relative fault concentration) is only half-closed at 10% transfer; doubling the transfer to 20% (`7,531` dots, `symmetric diff = 40.00%`) tests whether pushing `CV_12.8km` (`0.5532 → 0.6561`) **above** the `0.51–0.59` lineage reference band yields continued linear gain or hits secondary-ridge false-positive saturation.
-
-**Mechanism.** Identical `12.8 km` `interaction_block_prior`, `40/60` quantile split, and `corrob_ridge` operator as `12p8km-int10`; only `fraction` doubles (`0.10 → 0.20`, moving `7,531` dots: source `14,354 → 6,823`, target `15,113 → 22,644`, `added_min_dcat = 3.00 px`, `r_sep >= 2.828 px`, mean displacement `87.5 px`). Mean added `corrob_ridge` eases slightly from `0.1658` (`int10`) to `0.1450` (`int20`) as deeper secondary ridges inside top-40% blocks are recruited.
-
-**The non-fault process that could mimic it.** Moving `7,531` dots into `146` blocks raises mean target-block density by `+50%` (`103.5 → 155.1` dots/block), forcing recruitment of second-tier topographic/potential-field lineaments (pediment-fan incision scarps, tilted Tertiary strata, pluton roof contacts) once primary unmapped splays in each block are already covered within `300 m`. Look at the shuffled-block control: moving 20% off `h19_5` onto random blocks costs `−0.0086` DTI vs `−0.0012` at 10%, quantifying exact secondary-ridge dilution (`+0.0136` pure block-prior lift only partially offsets steeper off-`h19_5` cost: net strand-holdout `+0.0051` vs `+0.0040` at 10%).
-
-**Predicted sign and size (MODEL).** Central **+0.009**, band **−0.014 … +0.024** (sub-linear `1.27×` gain over `int10` on strand holdouts: `+0.0051` vs `+0.0040`). Submit **only** if `12p8km-int10` scores `>= +0.010` (`>= 0.2878`).
-
-**Falsifier.** Given `12p8km-int10 >= +0.010`, if `12p8km-int20` fails to beat `12p8km-int10` by `>= +0.005` (or regresses), the `0.51–0.59` `CV_12.8km` ceiling is empirically confirmed as a real saturation boundary (`CV_12.8km = 0.656` over-concentrates mass onto secondary non-fault ridges), locking optimal concentration dose near `10%`.
-
----
-
-## Card C3 — `12p8km-geod15` (`h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040`) — DISCRIMINATOR
-
-**Hypothesis.** The USGS/INGENIOUS fault catalogue under-samples blind and playaward active faults beneath Quaternary basin fill (e.g., Walker Lane transtensional domains, Carson Sink / Humboldt structural belt) where active crustal deformation is nonetheless directly measured by GPS strain rate and microseismicity (Kreemer et al., 2012, Nevada Bureau of Mines and Geology / UNR Geodetic Laboratory strain-rate synthesis reflected in INGENIOUS inputs: https://www.osti.gov/servlets/purl/1987729). A **100% catalogue-free** `12.8 km` block prior built solely from geodetic shear rate (`b07`), second invariant of strain rate (`b04`), and earthquake density (`b16`) reallocates 15% of R0 (`5,648` dots) into actively deforming tectonic belts (`Spearman(geod, interact) = +0.2458`) without inheriting historical mapping bias.
-
-**Mechanism.** Scores each `12.8 km` block by the footprint mean of `(robust_unit(b04_geod_2ndinv) + robust_unit(b07_geod_shearrate) + robust_unit(log1p(b16_ieq_n100a15))) / 3`, completely independent of `existing_faults.tif` (`catalogue_components` never read by the block prior). Proportionally moves `5,648` dots (`15.00%`, `symmetric diff = 30.00%`) from the `141` lowest-strain blocks (`14,102 → 8,454` dots) to the `158` highest-strain/seismicity blocks (`16,699 → 22,347` dots; `CV_12.8km: 0.5532 → 0.6355`; province-scale mean displacement `1020.8 px = 102.1 km`) onto strike-coherent `corrob_ridge` maxima (`mean = 0.1610`, `d_cat >= 3.00 px`, `r_sep >= 2.828 px`).
-
-**The non-fault process that could mimic it.** Geodetic strain-rate grids (`b04, b07`) are smooth continuum interpolations across `20–50 km` GPS station spacing, and `b16_ieq_n100a15` includes diffuse off-fault seismic swarms, geothermal/mining seismicity, and post-seismic relaxation haloes; high regional strain in a `12.8 km` block does not guarantee discrete surface-rupturing or geophysically mappable `100 m` fault traces inside that block, so regional transfers (`102 km` mean jump) can land on non-tectonic volcanic or erosional ridges that happen to sit inside the Walker Lane strain halo.
-
-**Predicted sign and size (MODEL).** Central **+0.003**, band **−0.015 … +0.021**. On catalogue-derived strand holdouts (`−0.0004` mean delta vs `−0.0042` random-block shuffle = `+0.0038` pure block-prior lift), `geod15` is neutral by construction because withheld *catalogue* strands share the catalogue's historical mapping footprint; its upside (`+0.010 … +0.021`) materializes specifically if the organizer's hidden test set prioritizes newly mapped faults in high-strain, historically under-mapped Walker Lane / Humboldt blocks.
-
-**Falsifier.** Paired against `12p8km-int10`: if `int10` is null/negative (`<= 0.000`) while `geod15` gains `>= +0.010`, live test truth follows **active crustal strain rather than existing-map proximity** (mandating catalogue-free strain weighting for the final blind submission). Conversely, if `geod15 <= −0.010`, continuum GPS/seismicity fields are too coarse (`20–50 km`) to guide `100 m` discrete fault emission and regional tectonic priors are retired.
