@@ -1,29 +1,39 @@
-# SUBMIT — GEMSDOE89 (32-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (submission guide and current candidate status)
 
-## ⚠ Encoding rule (fixes “Predicted values must be in range [0, 1]”)
+## Executive status — read before downloading
 
-Always upload the **`-zeros.tif`** twin (0 NaN pixels anywhere; finite
-min 0.0 / max 1.0). The NaN-outside twin is the archive copy; NaN fails
-range checks that do not special-case it. Fleet history scores the two
-encodings identically. **Never upload both twins.** Steps + copy-paste
-name/note blocks: `docs/index.html` (executive summary at the top).
+**Current candidate: DO NOT SUBMIT.** The file below passes the local registry uniqueness and format gates, but its proper spatial holdout result is worse than the visible-only R0 baseline. It is preserved as a negative result. Do not spend a weekly slot on it.
 
-## BSTP session build (2026-10-24) — BUILT, **negative**, no slot
+- **Research TIF:** [`../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif`](../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif)
+- **Run card:** [`../registry/run_card_condedge_20261024.json`](../registry/run_card_condedge_20261024.json)
+- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positives; 95% spatial-tile bootstrap CI): candidate `0.049875` `[0.036830, 0.061751]`; visible-only R0 `0.161230` `[0.142648, 0.180061]`; paired delta `−0.111355` `[−0.133218, −0.087864]`. These are local validation values, not organizer scores.
+- **File-format status:** PASS. One float32 band; EPSG:32611; shape 3730×3292; template transform matched; no NaN inside the footprint; finite predictions in `[0,1]`; NaN outside; exact known-fault pixels masked. Format validity does not override the negative holdout.
+- **Competition name/note (for future selector use only):** `h89-condedge-s2-4-20261024-829cc418-candidate` / `COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate` (99 characters).
 
-| role | file / stem | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | evidence |
-|---|---|---|---|---|
-| **DO NOT SLOT** (format-safe if human overrides) | `releases/gems89-bstp40-20261024-2e7e8a8f.tif` | `2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596` / `4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33` | `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` | HOLDOUT-DTI −0.0254 [−0.0296,−0.0210] (`segment-holdout-v1`, 39,310 px); verdict negative — see `registry/run_card_bstp40.json` |
+## Separate BSTP candidate from the merged upstream lane — NEGATIVE
 
-Siblings `bstp40corr` (`e3b6d3d2`) and `bstp40corrE` (`598993b2`) were
-withdrawn; their TIFs are deleted and they have no ledger row — do not
-re-register those sha8s.
+`releases/gems89-bstp40-20261024-2e7e8a8f.tif` is a separately registered artifact with its own negative `HOLDOUT-DTI` run card (`registry/run_card_bstp40.json`). It is not cleared for a slot and does not replace the COND-EDGE finding above. Do not submit it. See [`docs/index.html`](index.html) and the ledger for additional upstream records.
 
----
+## How to submit a future promoted GeoTIFF
+
+Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. A machine-format PASS alone is insufficient. The current file is explicitly **DO NOT SUBMIT**.
+
+1. Open the DrivenData GEMS Prize page and confirm the rules, current deadline, entity quota, and remaining rolling-week slots: [competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/).
+2. On the submission form choose the promoted single-band GeoTIFF `.tif` (or a zip containing exactly one GeoTIFF). Do not submit a zeros twin and NaN twin as separate attempts.
+3. Copy the promoted filename stem as the submission name, and paste its run-card note (maximum 140 characters) into the optional Note field.
+4. Submit through the user's registered account. This repository never logs in or uploads automatically.
+5. Save the submission-page receipt and exact score. Record it in `ledger/submissions.csv` as `ORGANIZER-CONFIRMED`; do not replace a receipt with a leaderboard screenshot or a projection.
+
+
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
 **Never upload both twins in separate slots.** Submission name = the file stem.
 
-## This session's builds (`SNAP` directional corner, 2026-10-24) — upload as a PAIR
+## Previous unscored build inventory (historical; not a current slot recommendation)
+
+The tables below were inherited from the prior SNAP session. Their predictions are `MODEL`, their entries have no stored organizer receipts, and the old queue order is not a current selector decision. Do not infer that any file is cleared to submit from its appearance below. The present candidate's explicit `DO NOT SUBMIT` status above takes precedence.
+
+### Prior SNAP-directional builds (historical pair; no receipt stored)
 
 | role | file / submission name (stem) | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | predicted (`MODEL`) |
 |---|---|---|---|---|
@@ -52,16 +62,14 @@ This pair reads **selectivity vs dose** (only the gate differs). Gated and gatel
 different MODEL scenario fractions (`IRREGULARITIES.md` item 15): compare the two **receipts**,
 never the central MODELs. `1p0px-g0p01` (`2916ec2d`, +0.0076) is the fixed-gate window control.
 
-## Phase-2 TRACKB products (held off weekly slots unless human decides; Week 5–6 blind-final candidates)
+## Phase-2 TRACKB product (NOT for upload as a scored slot)
 
-Dual-phase R0-consolidating 150-trace builds (`3.76%–4.21%` of R0 changed, preserving Phase 1 DTI while consolidating `150` strike-consistent `>= 1.00 km` continuous fault traces + RFC 7946 WGS84 `LineString` GeoJSON dossiers + per-trace geologist paragraphs in `docs/TRACKB_EVIDENCE.md`; cards in `ledger/MECHANISM_CARDS.md` Part IX):
-
-| role | raster (`.tif`) & dossier (`.geojson`) | sha256 (`.tif` / `-zeros.tif`) | form note (`<= 140` chars) | predicted (`MODEL`) |
-|---|---|---|---|---|
-| **Phase 2 Primary (zero R0 drop)** | `releases/h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.tif`<br>`releases/h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.geojson` | `5a09404ffe905e3a3d809ba0cb1ebcd5dc2ccdb66f9d2911ef9bc6ab2c3034e9` / `f28c74a5d6de08420c123d58e2f63087d4eb0a54f744348d59bf8c660e37bf62` | `R0 h33-h33-2-b2; TRACKB t150add: +1415px (3.8%) 150 >=1km traces, n=39069; P1 +0.000 / P2 +0.012 MODEL` | P1 **+0.000** (`−0.004…+0.004`)<br>P2 **+0.012** (`+0.004…+0.024`) |
-| **Phase 2 Mass-Neutral (`S=37,654`)** | `releases/h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.tif`<br>`releases/h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.geojson` | `8cfcbe4ca7da5c0493020d897c10a771422894b3b7546848215c260e736ba1b9` / `4766d3431c1394f47ec441fa5d5b3e7f3a18d71a79d7edbd21922521600c554d` | `R0 h33-h33-2-b2; TRACKB t150swap: 1415px (3.8%) >=1km traces swap speckles, n=37654; P1 -0.002 / P2 +0.011 MODEL` | P1 **−0.002** (`−0.008…+0.004`)<br>P2 **+0.011** (`+0.002…+0.022`) |
-| **Phase 2 Wash-Bridged (`S=37,654`)** | `releases/h33-h33-2-b2-TRACKBt150link-20261024-eded7713.tif`<br>`releases/h33-h33-2-b2-TRACKBt150link-20261024-eded7713.geojson` | `eded7713a9f65cc95c5049e4742080643ab00accd5c04296f4fd3bd756396b04` / `6a00e101f442a080ba945a471b1df637af453540a57f9a09f635da4158b1f24f` | `R0 h33-h33-2-b2; TRACKB t150link: 1586px (4.2%) wash-bridged >=1km traces swap speckles, n=37654; P1 -0.003 / P2 +0.009 MODEL` | P1 **−0.003** (`−0.010…+0.005`)<br>P2 **+0.009** (`+0.001…+0.021`) |
-| **Review-Only 12-Trace Extract (DO NOT SUBMIT FOR SCORE)** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif`<br>`releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` | `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370` / `2e3c8fa115e096f6b369766323e425f6d313ef9372fa70d7524bfbe0a16b0266` | `R0 h33-h33-2-b2; TRACKB top12: 12 strike-consistent traces >=1km, 145 member dots, GeoJSON; Phase 2 only` | `n/a` (`145` dots only; `ledger/TRACKB_TRACES.md`) |
+| field | value |
+|---|---|
+| **GeoJSON** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` (12 traces, EPSG:32611) |
+| **raster** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif` (145 member dots; sha256 `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370`) |
+| **evidence** | `ledger/TRACKB_TRACES.md` (one paragraph per trace); card `ledger/MECHANISM_CARDS_TRACKB.md` |
+| **warning** | Phase-2 expert-review product only. Scored as-is it would fall far below R0 (145/37,654 dots). Do **not** spend a weekly slot on it. |
 
 ## Rest of the gated queue (`ledger/submissions.csv`, `status = BUILT`)
 
@@ -72,18 +80,17 @@ Dual-phase R0-consolidating 150-trace builds (`3.76%–4.21%` of R0 changed, pre
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
 - **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 62 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 56 files re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×62 files** (`31` `.tif` + `31` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×62 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×31 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/SNAP/CONC/RELIEF/SPACING = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×62 files** |
-| Phase-2 GeoJSON dossiers (`releases/*TRACKB*.geojson`, all traces `>= 1.0 km` + geologist evidence) | **PASS ×4 GeoJSONs** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`146` ledger rows: `31` `GEMSDOE89` + `115` upstream)** |
+| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×56 files** (`28` `.tif` + `28` `-zeros.tif`) |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×56 files** |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×28 pairs** (SNAP / CONC / RELIEF / MASS / SPACING = 37,654; TRACKB = 145) |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×56 files** |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`143` ledger rows: `28` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`, 2026-10-24)** |
-| unit tests (`86 passed`) / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
+| unit tests / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
 
 Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`,
 `registry/build_report_snap_directional.json`, `registry/report_only_status.json`.

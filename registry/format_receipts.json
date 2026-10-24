@@ -4894,5 +4894,79 @@
    }
   ],
   "skipped": []
+ },
+ "h89-condedge-s2-4-20261024-829cc418-candidate.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+  "n_dots": 38897,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h89-condedge-s2-4-20261024-829cc418-candidate.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "nan_outside_footprint",
+    "ok": true,
+    "detail": "0 finite px outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "38897 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 38897 vs mask 38897"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "829cc41856540a93"
+   }
+  ],
+  "skipped": []
  }
 }

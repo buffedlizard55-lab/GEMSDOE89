@@ -1,45 +1,48 @@
-# GEMSDOE89 — start here before every session
+# GEMSDOE89 — executive summary and submission status
 
-Read the [project charter](docs/PROJECT_CHARTER.md) (and the condensed session-prompt charter in `PROMPT.md`) before changing code or evaluating a candidate. Site: `docs/index.html`. Analysis: `docs/ANALYSIS.md` · hypotheses: `docs/HYPOTHESES.md` · review: `docs/REVIEW_AND_HYPOTHESES_20261024.md`.
+> **DOWNLOAD STATUS: DO NOT SUBMIT.** This session generated and format-validated a locally unique candidate GeoTIFF, but its spatial holdout was decisively worse than the visible-only R0 baseline. It is preserved as a negative research result, not a recommended competition entry.
+>
+> [Download the research TIF](releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif) · [Run card](registry/run_card_condedge_20261024.json) · [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
 
-## ⬇ Executive summary — download & submit status (2026-10-24, BSTP session)
+- **Candidate:** `h89-condedge-s2-4-20261024-829cc418-candidate.tif` — SHA-256 `829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d`.
+- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score.
+- **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
+- **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
+- **Format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
+- **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
 
-| | |
-|---|---|
-| **Unique file this session** | `releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif` (site copy: `docs/downloads/`) |
-| **Upload it as** | name `gems89-bstp40-20261024-2e7e8a8f`, note `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` (110/140 chars) |
-| **SHA-256 (zeros / NaN twin)** | `4b86c16d…` / `2e7e8a8f…` (full hashes in `registry/run_card_bstp40.json`) |
-| **✅ Format** | PASS — 3730×3292 float32, EPSG:32611, values {0,1}, **0 NaN anywhere in the zeros file** (the NaN twin is the likely cause of the “Predicted values must be in range [0, 1]” upload error; always upload `-zeros.tif`) |
-| **✅ Unique** | PASS — ≤3 px dot overlap 60.0% vs R0 / 62.4% worst prior raster (< 70%); surface ρ 0.29 (< 0.90); leakage canary max AUC 0.521 (< 0.90) |
-| **⛔ Slot recommendation** | **DO NOT PROMOTE** — HOLDOUT-DTI (segment-holdout-v1, 39,310 withheld px) **−0.0254 [−0.0296, −0.0210]** vs R0-fold; 3/3 experiments negative; verdict **negative** (`registry/run_card_bstp40.json`). Upload only as a deliberate human risk decision; the evidence queue below (`SLOT_PLAN.md`) is unchanged |
-| **Live score** | none (unscored). Parent 0.2778 remains CLAIM; no ORGANIZER-CONFIRMED receipt exists in this ledger |
+## Read first on every session
 
-How-to-submit steps: `docs/index.html` §“How to make a submission” and `docs/SUBMIT.md`.
+The static site is [`index.html`](index.html) with the dedicated [`submit.html`](submit.html) submission guide. Read [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) and the upstream [`docs/PROJECT_CHARTER.md`](docs/PROJECT_CHARTER.md) / [`PROMPT.md`](PROMPT.md) before research or coding, then inspect `README.md`, `IRREGULARITIES.md`, `SLOT_PLAN.md`, `docs/SUBMIT.md`, and the full local ledger. The brief carries the original mission, Arena values (**Maximize P(Win)** and **Own the Outcome**), experiment budget, holdout rules, evidence labels, uniqueness thresholds, submission gates, and trusted source links.
 
-## Downloadable GeoTIFF — status is explicit
+## Why the `0.2778` result is not yet an established target
 
-[Download the existing `dirfw2p0` single-band GeoTIFF](releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif) · SHA-256: `dc578b2f556dfd94cf29da6327ffa8b323166511a76548bf8e49308b74dbf993`
+The local evidence verifies R0's geometry and file identity, not the cause of its live result. R0 is reproduced as a 2.8-pixel-thinned `h19_5` ridge set pruned using the known-fault catalogue, yielding 37,654 unit-mass dots; its reported **0.2778 is CLAIM, not ORGANIZER-CONFIRMED** because no submission-page receipt is stored in this repository. Plausible contributors include multi-layer geophysical ridge continuity, sparse placement, and the recorded catalogue prune, but a single result cannot establish which mechanism caused the score. The request also gives `0.3195` and `0.4413` as different leaderboard snapshots without dates or receipts; neither is independently confirmed here. See the hash-verified recipe in [`gemsdoe/parent.py`](gemsdoe/parent.py), [`registry/parent_verification.json`](registry/parent_verification.json), and official metric rules in the [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
 
-**Download: YES, for inspection only. Upload to DrivenData: NO — duplicate and not cleared.** The local format-gate report passes the documented grid/range checks, but a final-dot audit found 100% of its dots within 3 pixels of the distinct `snap1p0px-g0p00` raster, exceeding the 70% duplicate cutoff. The required pre-placement response-surface check and buffered whole-segment HOLDOUT-DTI are also absent. This is a previously built experimental artifact, **not a new TIFF generated by this review**, not a score, and not selected for a weekly slot. Do not submit it.
+## This session — one COND-EDGE experiment
 
-Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P0`; note `Footwall-directed HG placement; format checked; awaiting segment-holdout and selector clearance.`
+The top-ranked new hypothesis was a multi-scale gradient of band 17 `cond_surf`. Its scientific rationale and three alternatives are registered in [`docs/HYPOTHESIS_REGISTER.md`](docs/HYPOTHESIS_REGISTER.md). It did **not** beat the visible-only R0 comparator under the new spatially blocked, whole-segment hide-and-recover evaluator; the negative TIF remains available for auditing and must not be uploaded. No external raster was needed. One experiment was run, below the three-experiment/two-hour cap.
 
-## CURRENT STATE
+Reproduce (after dependencies and pinned data are available):
+
+```bash
+python tools/fetch_pinned_data.py
+python tools/rebuild_r0.py
+python tools/evaluate_holdout.py
+```
+
+The evaluator rechecks input hashes, tests each feature alone on spatially held-out fault segments, audits the pre-placement signal and final raster against locally available registry rasters, and calls the shared [`tools/submission_writer.py`](tools/submission_writer.py). It does not access DrivenData or upload a file. A valid GeoTIFF is **not** automatically a good submission.
+
+## Existing validated fleet at the previous merge
 
 - **Parent (recipe-rebuilt, byte-verified 2026-10-24):** `h33-h33-2-b2` — 37,654 unit dots;
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **32 pairs / 64 GeoTIFFs + 4 GeoJSON dossiers** (merges the `TRACKB` t150 session's 31 pairs with this session's `BSTP` pair, verdict negative — see executive summary above), all `BUILT` and format/data-gated
+- **Built, unscored:** **28 pairs / 56 GeoTIFFs**, all `BUILT` and format/data-gated
   (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
-  `TRACKB` 4 Phase-2 pairs). No `(parent, axis, value)` repeat anywhere in the ledger.
-- **This session (2026-10-24) — Dual-Phase `TRACKB` 150-trace R0-consolidating arms**
-  (`ledger/MECHANISM_CARDS.md` Part IX, `docs/TRACKB_EVIDENCE.md`; Phase 2 $250k — **not** weekly-slot candidates unless the human decides):
-  - `TRACKBt150add` (`5a09404f`, `+1,415/-0` px = `3.76%`, `39,069` px, `150` unbroken `≥ 1.00 km` traces / `225.7 km` chord + RFC 7946 `.geojson`; `P1 +0.000` / `P2 +0.012 MODEL`),
-  - `TRACKBt150swap` (`8cfcbe4c`, `+1,415/-1,415` px = `3.76%`, `37,654` px, 1-for-1 speckle-funded control; `P1 −0.002` / `P2 +0.011 MODEL`),
-  - `TRACKBt150link` (`eded7713`, `+1,586/-1,586` px = `4.21%`, `37,654` px, `249.1 km` chord with `100` `≤ 620 m` wash/step-over gaps bridged; `P1 −0.003` / `P2 +0.009 MODEL`),
-  plus earlier review-only `TRACKBtop12` (`fb156257`, `145` dots, `12` traces).
-- **Earlier today (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
+  `TRACKB` 1 Phase-2 pair). No `(parent, axis, value)` repeat anywhere in the ledger.
+- **This session (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
   Part VIII): `dirfw2p0` (`dc578b2f`, 20,853 dots moved footwall-only, mean 1.738 px),
   its exact mirror `dirhw2p0` (`5cccfc1d`, 21,399 moved hanging-wall-only, mean 1.737 px),
   and the dose `dirfw1p0` (`373c8fd6`, 16,632 moved, mean 1.000 px). Count fixed at 37,654,
@@ -58,7 +61,9 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
   −0.006…+0.018), `CONC5kmcat10` (`2dc19377`, +0.009) and their away/dose arms;
   `RELIEF` `r10`/`r15`/`r15s`; `MASS` `m10uniq`/`m10rand`/`m20uniq`;
   `SPACING` `alongstrike`/`poisson`/`lattice`; upstream `PRUNE` refills at 1–4 px.
-- **Phase-2 `TRACKB` (held off weekly slots unless human decides):** dual-phase R0-preserving `t150add` (`5a09404f`), `t150swap` (`8cfcbe4c`), and `t150link` (`eded7713`) (`150` traces `≥ 1 km` + `.geojson` dossiers in `docs/TRACKB_EVIDENCE.md`; optional Week-5 confirmation before blind final), plus review-only `top12` (`fb156257`, `ledger/TRACKB_TRACES.md`).
+- **Phase-2 `TRACKB` (not a weekly-slot candidate):** `fb156257` GeoJSON + 145-dot raster,
+  12 strike-consistent traces ≥ 1 km (41.3 km total), per-trace evidence in
+  `ledger/TRACKB_TRACES.md`.
 - **Report only, never gates:** catalogue hide-and-recover CIs overlap R0 for every arm;
   leakage canary `max AUC = 0.665 < 0.90`; SGMC skipped (UNVERIFIED pin).
 - **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other
@@ -67,7 +72,13 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
 - **Deadline:** `2026-12-03` (≈6 weeks, ~17 rolling slots) is **UNVERIFIED**; automated
   competition-page access is barred, so the human confirms it.
 
-## Next 3 slots (details in `SLOT_PLAN.md` and `docs/SUBMIT.md`)
+## Other merged research records (separate lanes; not promoted)
+
+The merged `main` also contains a separately documented BSTP experiment and historical TRACKB/SNAP products (`registry/run_card_bstp40.json`, `docs/index.html`, and `docs/REVIEW_AND_HYPOTHESES_20261024.md`). BSTP's stored verdict is negative; its artifacts and evaluation are distinct from this COND-EDGE run. This README's current download status remains **DO NOT SUBMIT**. See the ledger for the full inventory; do not infer that any listed file is cleared for a slot.
+
+## Previous slot plan (historical, not current selection)
+
+The following plan was inherited from the prior SNAP session. It is not updated to clear any submission; see the current `DO NOT SUBMIT` status above and the separate selector requirement.
 
 | # | file | predicted (`MODEL`) | decision triggered by a receipt |
 |---|---|---|---|

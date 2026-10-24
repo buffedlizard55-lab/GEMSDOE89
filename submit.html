@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How to validate and submit a promoted GeoTIFF to the DOE GEMS Prize." >
+  <title>Submission Guide · GEMSDOE89</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#121d2f;--ink:#ecf2fb;--muted:#9fb0c6;--line:#2b3b53;--cyan:#74d5d1;--amber:#ffc766;--red:#ff8f8b;--green:#8ce0ae}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -20%,#243858 0,transparent 52%),var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main,header,footer{width:min(900px,calc(100% - 36px));margin:auto}header{padding:28px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}a{color:var(--cyan);text-underline-offset:3px}.brand{color:var(--cyan);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px}h1{font-size:clamp(32px,5vw,50px);line-height:1.1;letter-spacing:-.035em;margin:42px 0 14px}.muted{color:var(--muted)}.alert{border:1px solid #824547;background:#351f29;color:#ffd4d2;padding:22px;border-radius:14px;margin:26px 0}.alert strong{display:block;font-size:21px;color:white;margin-bottom:6px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin:16px 0}.panel h2{margin-top:0;font-size:20px}.steps{counter-reset:step;padding:0;list-style:none}.steps li{counter-increment:step;padding:16px 10px 16px 54px;border-bottom:1px solid var(--line);position:relative}.steps li:last-child{border-bottom:0}.steps li:before{content:counter(step);position:absolute;left:8px;top:14px;width:30px;height:30px;border-radius:50%;background:#20334b;color:var(--cyan);display:grid;place-items:center;font-weight:800}.button{display:inline-block;background:var(--cyan);color:#08202a;font-weight:800;border-radius:9px;padding:11px 16px;text-decoration:none}.button:hover{background:#a5fff6}.code{font:13px ui-monospace,Consolas,monospace;overflow-wrap:anywhere;color:#dbe7f8}footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+<header><div class="brand">GEMSDOE89 · Submission guide</div><nav><a href="index.html">← Executive summary</a></nav></header>
+<main>
+  <h1>Submit a GeoTIFF only after it passes both science and format gates.</h1>
+  <p class="muted">This page explains the DrivenData file-submission workflow and the checks performed by this project. It does not log in, handle credentials, or submit files automatically.</p>
+
+  <div class="alert" role="alert"><strong>Current candidate: DO NOT SUBMIT</strong>
+    The linked research TIF is format-valid but failed the spatial holdout against the visible-only parent. It has a negative run-card verdict and must not consume a weekly slot.
+    <p><a class="button" href="releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a></p>
+    <div>HOLDOUT-DTI (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): candidate <b>0.049875</b> [0.036830, 0.061751]; visible-only R0 <b>0.161230</b> [0.142648, 0.180061]; paired delta <b>−0.111355</b> [−0.133218, −0.087864]. This is a local holdout, not an organizer score.</div>
+    <p><a href="registry/run_card_condedge_20261024.json">Full JSON run card</a> · <a href="docs/HYPOTHESIS_REGISTER.md">Hypothesis and source record</a></p>
+  </div>
+
+  <section class="panel">
+    <h2>Separate upstream BSTP result: also DO NOT SUBMIT</h2>
+    <p>The merged repository contains another, distinct negative experiment. Its run card reports paired HOLDOUT-DTI delta −0.025448 [−0.029625, −0.021016] (`segment-holdout-v1`; 39,310 withheld positives). This review did not independently rerun that lane. <a href="releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif" download>Download its research GeoTIFF</a> · <a href="registry/run_card_bstp40.json">read its run card</a>. It is not promoted or slot-cleared.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Before opening the contest form</h2>
+    <ul>
+      <li>The separate selector has marked the exact file <b>OK TO SUBMIT</b>. A format PASS by itself is not enough; the current file above is not cleared.</li>
+      <li>Confirm the competition rules, current deadline, account/entity quota, and available rolling-week slots on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition page</a>.</li>
+      <li>Verify the exact GeoTIFF SHA-256 in the run card and ensure that no other file or twin is selected.</li>
+      <li>Use a single-band GeoTIFF (`.tif`) or a `.zip` containing exactly one GeoTIFF, matching the sample file's CRS, shape and geotransform.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Form workflow for a future promoted file</h2>
+    <ol class="steps">
+      <li>Sign in to the user's own DrivenData account and open the GEMS Prize submission form.</li>
+      <li>Choose the explicitly promoted `.tif` (or a zip containing only that one GeoTIFF). Do not upload both the NaN-outside and zeros-outside twins as separate attempts.</li>
+      <li>Use the promoted file stem as the submission name. For example, a future promoted stem will look like <span class="code">h89-...-&lt;sha8&gt;</span>; use the actual promoted run-card stem, not this placeholder.</li>
+      <li>Paste the run-card note into the optional Note field. The project checks that it is no longer than 140 characters.</li>
+      <li>Review the selected filename and note, then submit. This repo never automates this action.</li>
+      <li>Save the submission-page receipt and copy its exact score and date into the ledger as <b>ORGANIZER-CONFIRMED</b>. Do not substitute a projection, local holdout, or undated leaderboard screenshot.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>What the project validates automatically</h2>
+    <ul>
+      <li>Input SHA-256 pins and reproducible parent identity.</li>
+      <li>Whole-segment spatial holdout with visible-catalogue-only derivations, buffer, exact visible-pixel masking, pooled DTI, and a spatial confidence interval.</li>
+      <li>Single-feature leakage canaries and pre-placement/final-raster registry checks; any correlation or overlap duplicate threshold stops promotion.</li>
+      <li>One band, float32, EPSG:32611, sample-grid shape/transform, no NaN inside footprint, values in [0,1], and exact masking of known catalogue pixels.</li>
+      <li>A unique filename, ledger hash check, short form note, and a machine-readable JSON run card.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Official references</h2>
+    <ul>
+      <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData problem description: metric, rules and submission format</a></li>
+      <li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR / DOE GEMS competition guide (PDF)</a></li>
+      <li><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">DrivenData staff clarification on exact known-fault masking</a></li>
+    </ul>
+  </section>
+</main>
+<footer>Research and validation only · no automated login, credentials, or uploads · <a href="index.html">Back to executive summary</a></footer>
+</body>
+</html>
