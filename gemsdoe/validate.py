@@ -40,6 +40,7 @@ def gate_release(path, contract, footprint=None, dots_mask=None,
     def add(name, ok, detail=""):
         results.append({"gate": name, "ok": bool(ok), "detail": detail})
 
+    path = Path(path)
     arr = None
     try:
         import tifffile
@@ -49,10 +50,20 @@ def gate_release(path, contract, footprint=None, dots_mask=None,
     except Exception as exc:  # noqa: BLE001
         ok = False
         add("readable", False, repr(exc))
+        return False, results
     if arr is not None:
         add("readable", True, f"{path.name}")
 
-    got = read_contract_from_tiff(path)
+    try:
+        got = read_contract_from_tiff(path)
+    except Exception as exc:
+        add("grid_contract", False, repr(exc))
+        return False, results
+    for name, mask in (("footprint", footprint), ("dots_mask", dots_mask),
+                       ("clearance_raster", clearance_raster)):
+        if mask is not None and np.asarray(mask).shape != arr.shape:
+            add("mask_shape", False, f"{name} shape differs from raster")
+            return False, results
     diffs = _contract_equal(got, contract)
     add("grid_contract", not diffs, json.dumps(diffs) if diffs else "matches template")
 
@@ -61,6 +72,7 @@ def gate_release(path, contract, footprint=None, dots_mask=None,
     add("shape", list(arr.shape) == list(contract["shape"]), str(list(arr.shape)))
     add("crs_epsg32611", got.get("geographic_crs") == "EPSG:32611", got.get("geographic_crs"))
 
+    add("no_infinity", not np.isinf(arr).any(), "infinity is never valid nodata")
     finite = np.isfinite(arr)
     inside = arr[finite]
     in_range = bool(inside.size == 0 or ((inside >= 0) & (inside <= 1)).all())
@@ -75,7 +87,7 @@ def gate_release(path, contract, footprint=None, dots_mask=None,
         inside_nan = int((~finite & footprint).sum())
         add("no_nan_inside_footprint", inside_nan == 0, f"{inside_nan} NaN px inside")
         if require_nan_outside is True:
-            outside_finite = int((finite & ~footprint).sum())
+            outside_finite = int((~np.isnan(arr) & ~footprint).sum())
             add("nan_outside_footprint", outside_finite == 0, f"{outside_finite} finite px outside")
         elif require_nan_outside is False:
             outside_zero = bool(np.all(arr[~footprint] == 0))

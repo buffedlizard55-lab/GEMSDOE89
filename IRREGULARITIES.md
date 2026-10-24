@@ -81,3 +81,12 @@ Only items that alter candidate validity, metric interpretation, governance, or 
 20. **First COND-EDGE Re-run Falsely Compared Its Output to Itself (fixed in `tools/evaluate_holdout.py`).**
    - *Fact:* The first evaluator run correctly audited the then-existing registry and passed uniqueness, then wrote the candidate TIF. A subsequent verification rerun included that same candidate file in its own local registry scan, producing a false 100% overlap and aborting before rewriting the run card. No duplicate with a different registry raster was shown by that run.
    - *Decision impact:* the shared registry scanner now excludes only prior outputs with this experiment's own exact candidate-name prefix; the evaluator still compares against the remaining local release geometries, pinned parent/ancestor masks, and every exact SHA-256 value in `ledger/submissions.csv`. The final run card records both pre-placement and disk-reread final-raster checks. Remote public-site rasters absent from this checkout remain an explicit limitation; the candidate is negative in any event and is not eligible for a competition slot.
+
+
+## 2026-10-24 submission-safety follow-up
+
+- Shared candidate writer previously defaulted to NaN despite the reported organizer range error. It now defaults to zeros; NaN research output is explicit. Cause of the original organizer error is not proven without the uploaded file/receipt. No claim that NaN twins are organizer-accepted.
+- Validator now fails closed on corrupt or ungeoreferenced TIFFs and mismatched masks; infinity cannot pass as outside nodata. Uncompressed output no longer requests an incompatible predictor.
+- Evaluator now stops on feature-stack shape/band mismatch and missing pins, performs surface audit before placement, and never calls an absent raster unique or a research verdict permission to submit.
+- Automated readiness additionally blocks incomplete global registry coverage and an unestablished current-best comparator. Existing artifacts remain negative; no old artifact was renamed to claim new science.
+- Initial Pages API status was errored; deployment checked separately. See `docs/AUDIT_20261024.md` for source-access limits, missing lane paragraph, reproduction evidence and unresolved evaluator/registry provenance questions.

@@ -1,5 +1,26 @@
 # GEMSDOE89 — executive summary and submission status
 
+## Latest safety review — 2026-10-24
+
+**OK to download for research; NOT OK to submit.** The existing COND-EDGE experiment was reproduced from hash-pinned features. This is not a new scientific submission. Its negative HOLDOUT-DTI and file hash reproduced; its NaN-outside encoding also fails the new all-finite upload check. No weekly slot was used.
+
+- [Automated readiness report](registry/submission_readiness.json) — fails closed on missing evidence, negative holdout, incomplete registry coverage, stale hash, or unsafe upload values.
+- [Three-pass review, source audit, ranked follow-ups and limitations](docs/AUDIT_20261024.md).
+- Shared writer now defaults to finite zeros outside the footprint; the historical research evaluator explicitly retains NaN encoding. Renaming/re-encoding an existing artifact never establishes novelty.
+- Existing mirror data are obtainable here; “data placement is the only blocker” is no longer accurate. The blocker is evidence of a distinct, better-performing model plus complete uniqueness/provenance checks.
+
+Run the automatic decision (exit **2** = blocked, **0** = eligible for a separate selector, never automatic upload):
+
+```bash
+python tools/submission_readiness.py registry/run_card_condedge_20261024.json --output registry/submission_readiness.json
+```
+
+### Standing user instructions (operative summary, not a verbatim transcript)
+
+Read this README and `PROMPT.md` every session. Prioritize a genuinely unique GeoTIFF and an unmistakable download/submission status at the beginning of the site. Use one assigned method lane, the shared cached feature stack/evaluator/writer, whole-segment buffered hide-and-recover, visible-only catalogue features and exact visible-fault masking, pooled triangular-kernel DTI, feature-by-feature leakage canaries, and surface plus final-dot registry checks. Stop on duplicates. Register and rank three to five geological hypotheses before implementing; test the top candidate against the locked current holdout best. Do not equate projections with scores. Use official sources and label inaccessible or unverified evidence honestly. Stop within three experiments or two hours; no slot selection in research. Finish with a JSON run card, including negative results. Perform implementation, adversarial review, and requirement reconciliation passes; open a PR and merge only after checks. Keep **Maximize P(Win)** and **Own the Outcome** central. The supplied prompt omitted its promised single-method paragraph; do not silently invent a lane. The full verbatim request remains in the conversation; the repo preserves this maintained operational summary and the existing score ledger.
+
+---
+
 > **DOWNLOAD STATUS: DO NOT SUBMIT.** This session generated and format-validated a locally unique candidate GeoTIFF, but its spatial holdout was decisively worse than the visible-only R0 baseline. It is preserved as a negative research result, not a recommended competition entry.
 >
 > [Download the research TIF](releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif) · [Run card](registry/run_card_condedge_20261024.json) · [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
@@ -8,7 +29,7 @@
 - **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score.
 - **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
 - **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
-- **Format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
+- **Historical research-format validator:** PASS (all-finite upload gate FAIL) — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
 - **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
 
 ## Read first on every session

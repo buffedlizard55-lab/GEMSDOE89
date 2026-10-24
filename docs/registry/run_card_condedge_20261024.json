@@ -219,10 +219,12 @@
     "path": "releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif",
     "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
     "validator": {
+      "all_values_finite": false,
       "crs": "EPSG:32611",
       "crs_shape_transform_dtype_match_template": true,
       "dot_count": 38897,
       "dtype": "float32",
+      "encoding": "nan",
       "finite_max": 1.0,
       "finite_min": 0.0,
       "gates": [
@@ -254,6 +256,11 @@
         {
           "detail": "EPSG:32611",
           "gate": "crs_epsg32611",
+          "ok": true
+        },
+        {
+          "detail": "infinity is never valid nodata",
+          "gate": "no_infinity",
           "ok": true
         },
         {
@@ -303,6 +310,66 @@
     }
   },
   "registry_uniqueness": {
+    "before_placement": {
+      "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
+      "duplicate_stop": false,
+      "max_abs_surface_spearman": 0.03868795455191069,
+      "max_dot_overlap_3px": 0.0,
+      "n_reference_geometries": 36,
+      "n_reference_paths": 69,
+      "sample_pixels": 150000,
+      "surface_tested": "before any dot placement",
+      "top_correlations": [
+        {
+          "r_spearman": 0.03868795455191069,
+          "registry_raster": "releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif"
+        },
+        {
+          "r_spearman": -0.005863699106003009,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif"
+        },
+        {
+          "r_spearman": -0.005353175664469088,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p00-20261023-1add5aa6-zeros.tif"
+        },
+        {
+          "r_spearman": -0.00429634231897723,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif"
+        },
+        {
+          "r_spearman": -0.004136197045711244,
+          "registry_raster": "releases/h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6-zeros.tif"
+        }
+      ],
+      "top_overlaps": [
+        {
+          "fraction_dots_within_3px": 0.0,
+          "registry_positive_pixels": 44090,
+          "registry_raster": "data/d28.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.0,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "data/parent_r0_nan.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.0,
+          "registry_positive_pixels": 121131,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.0,
+          "registry_positive_pixels": 40199,
+          "registry_raster": "data/scored_h27_4_solo.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.0,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif"
+        }
+      ]
+    },
+    "complete_registry_coverage": false,
     "duplicate_thresholds": {
       "abs_spearman_gt": 0.9,
       "dot_overlap_within_3px_gt": 0.7

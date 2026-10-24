@@ -11,11 +11,12 @@
 <body>
 <header><div class="brand">GEMSDOE89 · Submission guide</div><nav><a href="index.html">← Executive summary</a></nav></header>
 <main>
+  <p><a href="registry/submission_readiness.json">Read automated readiness audit: DO NOT SUBMIT</a></p>
   <h1>Submit a GeoTIFF only after it passes both science and format gates.</h1>
   <p class="muted">This page explains the DrivenData file-submission workflow and the checks performed by this project. It does not log in, handle credentials, or submit files automatically.</p>
 
   <div class="alert" role="alert"><strong>Current candidate: DO NOT SUBMIT</strong>
-    The linked research TIF is format-valid but failed the spatial holdout against the visible-only parent. It has a negative run-card verdict and must not consume a weekly slot.
+    The linked research TIF passes the historical NaN-aware research validator, but fails the stricter all-finite upload validator and the spatial holdout against the visible-only parent. It has a negative run-card verdict and must not consume a weekly slot.
     <p><a class="button" href="downloads/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a></p>
     <div>HOLDOUT-DTI (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): candidate <b>0.049875</b> [0.036830, 0.061751]; visible-only R0 <b>0.161230</b> [0.142648, 0.180061]; paired delta <b>−0.111355</b> [−0.133218, −0.087864]. This is a local holdout, not an organizer score.</div>
     <p><a href="registry/run_card_condedge_20261024.json">Full JSON run card</a> · <a href="HYPOTHESIS_REGISTER.md">Hypothesis and source record</a></p>
@@ -40,7 +41,7 @@
     <h2>Form workflow for a future promoted file</h2>
     <ol class="steps">
       <li>Sign in to the user's own DrivenData account and open the GEMS Prize submission form.</li>
-      <li>Choose the explicitly promoted `.tif` (or a zip containing only that one GeoTIFF). Do not upload both the NaN-outside and zeros-outside twins as separate attempts.</li>
+      <li>Choose the explicitly promoted `.tif` (or a zip containing only that one GeoTIFF). Use an all-finite zeros-outside file only. Do not upload NaN research twins. Changing encoding is not a new scientific candidate.</li>
       <li>Use the promoted file stem as the submission name. For example, a future promoted stem will look like <span class="code">h89-...-&lt;sha8&gt;</span>; use the actual promoted run-card stem, not this placeholder.</li>
       <li>Paste the run-card note into the optional Note field. The project checks that it is no longer than 140 characters.</li>
       <li>Review the selected filename and note, then submit. This repo never automates this action.</li>
@@ -54,7 +55,7 @@
       <li>Input SHA-256 pins and reproducible parent identity.</li>
       <li>Whole-segment spatial holdout with visible-catalogue-only derivations, buffer, exact visible-pixel masking, pooled DTI, and a spatial confidence interval.</li>
       <li>Single-feature leakage canaries and pre-placement/final-raster registry checks; any correlation or overlap duplicate threshold stops promotion.</li>
-      <li>One band, float32, EPSG:32611, sample-grid shape/transform, no NaN inside footprint, values in [0,1], and exact masking of known catalogue pixels.</li>
+      <li>One band, float32, EPSG:32611, sample-grid shape/transform, no NaN or infinity anywhere in the upload raster, values in [0,1], and exact masking of known catalogue pixels.</li>
       <li>A unique filename, ledger hash check, short form note, and a machine-readable JSON run card.</li>
     </ul>
   </section>

@@ -109,3 +109,44 @@ def test_gate_rejects_dot_on_catalogue(tmp_path, frame):
     )
     assert not ok
     assert any(r["gate"] == "zero_catalogue_mass" and not r["ok"] for r in results)
+
+
+def test_corrupt_file_fails_closed(tmp_path):
+    p = tmp_path / 'broken.tif'
+    p.write_bytes(b'not a tiff')
+    ok, gates = validate.gate_release(p, {})
+    assert not ok and gates[0]['gate'] == 'readable'
+
+
+def test_missing_geotags_fails_closed(tmp_path):
+    import tifffile
+    p = tmp_path / 'plain.tif'
+    tifffile.imwrite(p, np.zeros((8, 8), dtype=np.float32))
+    ok, gates = validate.gate_release(p, {})
+    assert not ok and gates[-1]['gate'] == 'grid_contract'
+
+
+def test_mismatched_mask_fails_closed(tmp_path, frame):
+    footprint, dots = frame
+    p = tmp_path / 'mask.tif'
+    grid.write_submission(p, dots, footprint)
+    ok, gates = validate.gate_release(p, _contract(p), footprint=np.ones((2, 2), bool))
+    assert not ok and gates[-1]['gate'] == 'mask_shape'
+
+
+@pytest.mark.parametrize('bad', [np.inf, -np.inf])
+def test_infinity_outside_never_counts_as_nan(tmp_path, frame, bad):
+    import tifffile
+    footprint, dots = frame
+    p = tmp_path / 'inf.tif'
+    grid.write_submission(p, dots, footprint, compress=None)
+    contract = _contract(p)
+    with tifffile.TiffFile(p) as tf:
+        tags = [(t.code, t.dtype, t.count, t.value, False) for t in tf.pages[0].tags.values()
+                if t.code in (33550, 33922, 34735, 34737)]
+    a = tifffile.imread(p)
+    a[0, 0] = bad
+    tifffile.imwrite(p, a, extratags=tags)
+    ok, gates = validate.gate_release(p, contract, footprint=footprint, require_nan_outside=True)
+    assert not ok
+    assert any(g['gate'] == 'no_infinity' and not g['ok'] for g in gates)
