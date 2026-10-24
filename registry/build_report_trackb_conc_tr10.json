@@ -1,0 +1,257 @@
+{
+ "id": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f",
+ "axis": "TRACKB",
+ "value": "TR10",
+ "spec": {
+  "frac": 0.1,
+  "dose": "10%",
+  "predicted_change_text": "-0.002 (MODEL central at 2.5px cross-strike jitter; band -0.043..+0.001; ridge-locked sigma=0 -0.043, kernel-radius sigma=3 +0.001). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
+ },
+ "git_sha": "d970171f49add2d2de866a68155afcec9c34c0ad",
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "seed": 20261023,
+ "stats": {
+  "n_before": 37654,
+  "n_after": 37654,
+  "n_removed": 3765,
+  "n_added": 3765,
+  "count_preserved": true,
+  "all_dots_inside_footprint": true,
+  "pct_changed": 9.998937695862326,
+  "n_sources": 3765,
+  "added_min_catalogue_clearance_px": 3.0,
+  "added_min_separation_px": 2.8284271247461903,
+  "inherited_collar_dots_frozen": 1611,
+  "collar_dots_moved": 0,
+  "mean_displacement_px": 43.46993041213279,
+  "h19_coverage_before": 0.7302,
+  "h19_coverage_after": 0.67152
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.tif",
+  "zeros": "releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f-zeros.tif",
+  "sha256": "32211f1fa90bc42058bc1dcc6c0f354617e88941fba213097c62bda695b18eb2",
+  "sha256_zeros": "4382350bf76c953a8f0e53e5824d5d90b30f5c185f01245ad67d10b0ec6aaa99",
+  "sha8": "32211f1f"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "32211f1fa90bc420"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "4382350bf76c953a"
+    }
+   ]
+  },
+  "twins_identical_mask": true,
+  "count_preserved": true,
+  "added_dots_dcat_ge_3px": true,
+  "pct_changed_in_1_50": true
+ },
+ "phase2_inventory": {
+  "geojson_full": "releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson",
+  "geojson_per_value": "releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.geojson",
+  "atlas": "evidence/TRACKB_trace_atlas_20261024.md",
+  "n_traces": 1520,
+  "n_receiving_traces": 551
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "jitter_model_sensitivity": {
+   "sigma_0.0px": {
+    "r0_dti": 0.54577,
+    "delta": -0.0427
+   },
+   "sigma_1.0px": {
+    "r0_dti": 0.41525,
+    "delta": -0.02633
+   },
+   "sigma_1.8px": {
+    "r0_dti": 0.32076,
+    "delta": -0.01125
+   },
+   "sigma_2.5px": {
+    "r0_dti": 0.2621,
+    "delta": -0.00211
+   },
+   "sigma_3.0px": {
+    "r0_dti": 0.23759,
+    "delta": 0.00063
+   }
+  }
+ },
+ "form_note": "h33-h33-2-b2; TRACKB tr10: 3765 (10%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.002",
+ "seconds": 6.19
+}

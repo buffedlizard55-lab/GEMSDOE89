@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble ledger/submissions.csv from the recovered upstream history + built
-variants in this repository (SPACING + RELIEF + MASS + SNAP + both
-CONCENTRATION families).
+variants in this repository (SPACING + RELIEF + MASS + SNAP + all three
+CONCENTRATION families + TRACKB Phase-2 trace/concentration family).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
@@ -11,7 +11,10 @@ once, with a repeat count.
 This repository's rows are read from registry/build_reports_spacing.json,
 registry/build_reports.json, and registry/build_mass_reports.json so that the
 ledger never drifts from the files on disk in releases/.  Each new axis/family
-must have a reader here; the 2 km reader uses build_reports_concentration.json.
+must have a reader here; the 2 km reader uses build_reports_concentration.json,
+the 12.8 km reader uses build_reports_concentration_12p8km.json, the TRACKB
+concentration reader uses build_reports_trackb_conc.json (top12 uses
+build_reports_trackb.json).
 """
 
 from __future__ import annotations
@@ -498,6 +501,57 @@ def _concentration_12p8km_rows() -> list[dict]:
     return rows
 
 
+def _trackb_conc_rows() -> list[dict]:
+    """Preserve the TRACKB Phase-2 trace inventory + count-preserving structural
+    concentration family (built 2026-10-24, branch arena/7fd24ce1-gemsdoe89)."""
+    p = ROOT / "registry" / "build_reports_trackb_conc.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_after"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": rep["spec"]["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-24; TRACKB Phase-2 evidence play (NOT a weekly-slot "
+                    f"candidate unless the human decides). GeoJSON+atlas trace inventory: "
+                    f"{rep['phase2_inventory']['n_traces']} strike-consistent >=1km chains "
+                    f"({rep['phase2_inventory'].get('geojson_full', rep['phase2_inventory'].get('geojson',''))}). "
+                    f"per-value GeoJSON {rep['phase2_inventory'].get('geojson_per_value','')} "
+                    f"({rep['phase2_inventory'].get('n_receiving_traces','?')} receiving). Raster: move {s['n_sources']} "
+                    f"({s['pct_changed']:.1f}%) off-trace dots into +-300m trace corridor, "
+                    f"count fixed {s['n_after']}; added dcat>=3.00px, r_sep>="
+                    f"{s['added_min_separation_px']:.2f}px; inherited {s['inherited_collar_dots_frozen']} "
+                    f"collar dots frozen (no PRUNE confound); mean disp {s['mean_displacement_px']:.1f}px; "
+                    f"H19 ridge coverage {s['h19_coverage_before']:.4f}->{s['h19_coverage_after']:.4f}. "
+                    f"MODEL jitter is a coverage-cost floor, not the Phase-2 benefit."
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def _trackb_rows() -> list[dict]:
     """TRACKB (Phase 2) rows. Added 2026-10-24: without a reader here a
     ledger rebuild would drop the TRACKB row while its release files stay
@@ -650,6 +704,7 @@ def main():
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _trackb_rows()
+        + _trackb_conc_rows()
         + _bstp_rows()
         + _trackb_150_rows()
     )

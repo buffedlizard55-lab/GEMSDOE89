@@ -30,39 +30,54 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **32 pairs / 64 GeoTIFFs + 4 GeoJSON dossiers** (merges the `TRACKB` t150 session's 31 pairs with this session's `BSTP` pair, verdict negative — see executive summary above), all `BUILT` and format/data-gated
-  (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
-  `TRACKB` 4 Phase-2 pairs). No `(parent, axis, value)` repeat anywhere in the ledger.
-- **This session (2026-10-24) — Dual-Phase `TRACKB` 150-trace R0-consolidating arms**
-  (`ledger/MECHANISM_CARDS.md` Part IX, `docs/TRACKB_EVIDENCE.md`; Phase 2 $250k — **not** weekly-slot candidates unless the human decides):
-  - `TRACKBt150add` (`5a09404f`, `+1,415/-0` px = `3.76%`, `39,069` px, `150` unbroken `≥ 1.00 km` traces / `225.7 km` chord + RFC 7946 `.geojson`; `P1 +0.000` / `P2 +0.012 MODEL`),
-  - `TRACKBt150swap` (`8cfcbe4c`, `+1,415/-1,415` px = `3.76%`, `37,654` px, 1-for-1 speckle-funded control; `P1 −0.002` / `P2 +0.011 MODEL`),
-  - `TRACKBt150link` (`eded7713`, `+1,586/-1,586` px = `4.21%`, `37,654` px, `249.1 km` chord with `100` `≤ 620 m` wash/step-over gaps bridged; `P1 −0.003` / `P2 +0.009 MODEL`),
-  plus earlier review-only `TRACKBtop12` (`fb156257`, `145` dots, `12` traces).
-- **Earlier today (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
-  Part VIII): `dirfw2p0` (`dc578b2f`, 20,853 dots moved footwall-only, mean 1.738 px),
-  its exact mirror `dirhw2p0` (`5cccfc1d`, 21,399 moved hanging-wall-only, mean 1.737 px),
-  and the dose `dirfw1p0` (`373c8fd6`, 16,632 moved, mean 1.000 px). Count fixed at 37,654,
-  targets `d_cat ≥ 3 px`, zero catalogue mass, no RNG, and a test proving the rule reduces
-  to `snap.snap_dots` when the direction filter is off. **The measurement that re-ordered
-  the queue:** the undirected crest arm `snap2p0px-g0p00` moves **15,585 dots up-slope and
-  15,670 down-slope** — R0 is direction-neutral w.r.t. the HG maximum, so the crest-side
-  question had never been tested. Bands `−0.019…+0.057` (`MODEL`, sign prior weak by
-  design): the pair is read as `fw − hw`, never alone.
-- **`SNAP` state:** the 3-window × 3-gate factorial is **complete** (`1p0px-g0p00`
-  `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00`
-  `e1474851`, `1p4px-g0p01` `afc60a25`, plus upstream `1p4px-g0p02` `0b6a2ab2`,
-  `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`), and the
-  three directional arms sit outside it.
-- **Other axes, no receipts:** `CONCENTRATION` `12p8km-int10` (`bcade136`, +0.008,
-  −0.006…+0.018), `CONC5kmcat10` (`2dc19377`, +0.009) and their away/dose arms;
-  `RELIEF` `r10`/`r15`/`r15s`; `MASS` `m10uniq`/`m10rand`/`m20uniq`;
-  `SPACING` `alongstrike`/`poisson`/`lattice`; upstream `PRUNE` refills at 1–4 px.
-- **Phase-2 `TRACKB` (held off weekly slots unless human decides):** dual-phase R0-preserving `t150add` (`5a09404f`), `t150swap` (`8cfcbe4c`), and `t150link` (`eded7713`) (`150` traces `≥ 1 km` + `.geojson` dossiers in `docs/TRACKB_EVIDENCE.md`; optional Week-5 confirmation before blind final), plus review-only `top12` (`fb156257`, `ledger/TRACKB_TRACES.md`).
+- **Built, unscored:** **35 pairs / 70 GeoTIFFs + 6 GeoJSON dossiers**, all `BUILT` and
+  format/data-gated (`SNAP` 9 factorial + 3 directional, `CONCENTRATION` 9, `SPACING` 3,
+  `RELIEF` 3, drop-`MASS` 3, `TRACKB` 7 Phase-2 pairs across three sub-families, `BSTP` 1
+  basin-lineament pair with a **negative** segment-holdout verdict). No `(parent, axis, value)`
+  repeat anywhere in the ledger.
+- **This session (2026-10-24) — `TRACKB` structural concentration** (`branch
+  arena/7fd24ce1-gemsdoe89`; `ledger/MECHANISM_CARDS_TRACKB_CONC.md`): a Phase-2 trace
+  inventory `releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson` (**1,520** strike-consistent
+  ≥1 km chains, one evidence paragraph each; atlas `evidence/TRACKB_trace_atlas_20261024.md`),
+  plus 3 nested, count-preserving rasters `TR10`/`TR20`/`TR30` (`32211f1f` / `5da46626` /
+  `c8a264b5`) moving 10/20/30 % of off-trace dots into the ±300 m trace corridor at
+  `d_cat ≥ 3 px`, `r_sep ≥ 2.8 px`, collar frozen (per-value `.geojson` of receiving traces).
+  Phase-1 jitter MODEL is a coverage-cost **floor** (central −0.002 / −0.012 / −0.021);
+  **not a weekly-slot candidate unless the human decides**. Distinct from `top12`/`t150*`.
+- **`TRACKB` dual-phase 150-trace arms (merged 2026-10-24, `ledger/MECHANISM_CARDS.md`
+  Part IX, `docs/TRACKB_EVIDENCE.md`; Phase 2 — held off weekly slots):** `t150add`
+  (`5a09404f`, +3.76 % px, `39,069` px, P2 `+0.012 MODEL`), `t150swap` (`8cfcbe4c`,
+  count-fixed control, P2 `+0.011`), `t150link` (`eded7713`, 100 gaps bridged, P2 `+0.009`),
+  plus review-only `top12` (`fb156257`, 145-dot overlay, `ledger/TRACKB_TRACES.md`).
+- **`BSTP` basin-lineament lane (merged 2026-10-24, `gemsoe/bstep.py`):**
+  `gems89-bstp40` (`2e7e8a8f`), whole-segment holdout **NEGATIVE** (not promoted); siblings
+  withdrawn. `gemsdoe/holdout.py` buffered holdout evaluator added (`IRREGULARITIES.md` item 19).
+- **`SNAP` directional corner (merged 2026-10-24, `ledger/MECHANISM_CARDS.md` Part VIII):**
+  `dirfw2p0` (`dc578b2f`) / mirror `dirhw2p0` (`5cccfc1d`) / dose `dirfw1p0` (`373c8fd6`);
+  count fixed 37,654, `d_cat ≥ 3 px`, read as `fw − hw`, never alone. The undirected crest arm
+  moves ~15.6k dots each up- and down-slope, so R0 is crest-direction-neutral.
+  (`dirfw2p0` flagged DUPLICATE/not-cleared by a local overlap audit — see the download
+  banner above and `IRREGULARITIES.md` item 18.)
+- **`SNAP` factorial complete:** 3 windows × 3 gates (`1p0px`/`1p4px`/`2p0px` ×
+  `g0p00`/`g0p01`/`g0p02`); the three directional arms sit outside it.
+- **Other axes, no receipts:** `CONCENTRATION` `12p8km-int10` (`bcade136`, +0.008),
+  `CONC5kmcat10` (`2dc19377`, +0.009) + away/dose arms, `2 km` H19 family; `RELIEF`
+  `r10`/`r15`/`r15s`; `MASS` `m10uniq`/`m10rand`/`m20uniq`; `SPACING`
+  `alongstrike`/`poisson`/`lattice`; upstream `PRUNE` refills at 1–4 px.
+- **Governing-rules conflict (2026-10-24):** the repo `docs/PROJECT_CHARTER.md` (PR #20)
+  imposes a >70 % dot-overlap / >0.90 rank-correlation duplicate cutoff and a required buffered
+  whole-segment holdout; governing brief v2 instead dedupes **only** by exact SHA-256 and
+  repeated `(parent,axis,value)` and treats PROXY/MODEL as never-gating. A buffered holdout
+  evaluator (`gemsdoe/holdout.py`) now exists (PR #22) but brief v2 keeps it report-only here.
+  Overlap is measured report-only in `registry/report_only_status.json::trackb_conc_overlap`
+  (90–96 %, mechanically expected for single-axis edits of a shared parent). See
+  `IRREGULARITIES.md` item 23 — the human must decide which rule governs.
+- **TOP_PUBLIC:** stays `____` — PR #22 flagged conflicting unverified public-top claims
+  (0.4413 vs 0.3195); human must supply value + date (item 19).
 - **Report only, never gates:** catalogue hide-and-recover CIs overlap R0 for every arm;
-  leakage canary `max AUC = 0.665 < 0.90`; SGMC skipped (UNVERIFIED pin).
-- **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other
-  target number is valid. **Slots this week:** `__ / 3` — human supplies used/available
+  leakage canaries all `< 0.90` (19-band + TRACKB composite footprint-masked max `0.569`,
+  composite `0.543`; SNAP-response canary `0.665`); SGMC skipped (UNVERIFIED pin).
+  **Slots this week:** `__ / 3` — human supplies used/available
   (3 per rolling week per entity + 1 blind final).
 - **Deadline:** `2026-12-03` (≈6 weeks, ~17 rolling slots) is **UNVERIFIED**; automated
   competition-page access is barred, so the human confirms it.
@@ -82,3 +97,5 @@ selectivity-vs-dose, not direction. Do **not** run both pairs in one week (4 fil
 **Human must supply:** `TOP_PUBLIC` + date; slots used/available; every uploaded file's
 `receipt_score` + `date`; deadline confirmation; public-mirror review (`IRREGULARITIES.md`
 item 2); optional official-USGS SGMC restoration (item 8); and all upload/final-file choices.
+
+`TRACKB` rasters (top12 and TR10/TR20/TR30) are **held out** of this weekly queue (Phase-2 evidence play; see `SLOT_PLAN.md`). A strong alternative for any Slot 1 is a **REPEAT-CALIBRATION** upload of byte-exact R0 to convert `0.2778` from `CLAIM` → `RECEIPT` before trusting any MODEL delta.
