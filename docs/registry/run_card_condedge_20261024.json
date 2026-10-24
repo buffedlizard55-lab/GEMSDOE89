@@ -1,0 +1,443 @@
+{
+  "experiment": "COND-EDGE",
+  "experiment_budget": {
+    "experiments_run": 1,
+    "maximum": 3
+  },
+  "holdout_protocol": {
+    "alpha": 0.2,
+    "beta": 0.8,
+    "buffer_px": 3.0,
+    "candidate": {
+      "ci95": {
+        "lower_95": 0.03682987943685789,
+        "method": "percentile bootstrap over non-overlapping 512 px spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261024,
+        "upper_95": 0.06175124683937118
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.049875147059355675
+    },
+    "evaluator_version": "GEMSDOE89-spatial-segment-holdout-v1",
+    "evidence_class": "HOLDOUT-DTI",
+    "folds": 5,
+    "hidden_component_fold_memberships": 3350,
+    "historical_12p8km_holdout_note": "registry/report_only_status.json uses a different 25% connected-strand MODEL protocol and is not directly comparable to this evaluator.",
+    "kernel_radius_px": 3.0,
+    "paired_delta_candidate_minus_R0": {
+      "ci95": {
+        "lower_95": -0.13321782566825996,
+        "method": "paired percentile bootstrap over non-overlapping spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261025,
+        "upper_95": -0.08786410002745626
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "value": -0.11135481933466815
+    },
+    "pooled_dti_definition": "exact DTI sufficient statistics summed over disjoint, boundary-guarded spatial tile interiors; spatial-tile percentile bootstrap CI",
+    "spatial_tiles": 56,
+    "tile_interior_guard_px": 3,
+    "tile_size_px": 512,
+    "unique_withheld_components_in_scored_cores": 3179,
+    "visible_only_R0_baseline": {
+      "ci95": {
+        "lower_95": 0.1426483514878838,
+        "method": "percentile bootstrap over non-overlapping 512 px spatial tiles",
+        "n_bootstrap": 2000,
+        "n_spatial_tiles": 56,
+        "seed": 20261024,
+        "upper_95": 0.18006054632169743
+      },
+      "evidence_class": "HOLDOUT-DTI",
+      "n_withheld_positive_pixels": 59168,
+      "value": 0.16122996639402382
+    },
+    "withheld_positive_pixels": 59168
+  },
+  "hypothesis": "Multi-scale conductivity-surface edges may indicate fluid-altered or lithologic boundaries associated with unmapped fault geometry.",
+  "leakage_canary": {
+    "features_tested": {
+      "band_01_mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field": {
+        "auc": 0.4900953512,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5099046488000001
+      },
+      "band_02_rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects": {
+        "auc": 0.4946797492,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5053202508
+      },
+      "band_03_tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction": {
+        "auc": 0.5266559102,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5266559102
+      },
+      "band_04_geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude": {
+        "auc": 0.5697817886,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5697817886
+      },
+      "band_05_iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction": {
+        "auc": 0.5323088076,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5323088076
+      },
+      "band_06_tc - Tilt angle or total curvature - magnetic field derivative for edge detection": {
+        "auc": 0.447843197,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5521568029999999
+      },
+      "band_07_geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR": {
+        "auc": 0.5688227454,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5688227454
+      },
+      "band_08_geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)": {
+        "auc": 0.5272760456,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5272760456
+      },
+      "band_09_tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction": {
+        "auc": 0.487998482,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5120015179999999
+      },
+      "band_10_deq_n100a15 - Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)": {
+        "auc": 0.5518501622,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5518501622
+      },
+      "band_11_iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change": {
+        "auc": 0.5227658386,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5227658386
+      },
+      "band_12_det_elev - Detrended elevation - topography with regional trends removed": {
+        "auc": 0.484679,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5153209999999999
+      },
+      "band_13_iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass": {
+        "auc": 0.461917537,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5380824630000001
+      },
+      "band_14_tmi - Total magnetic intensity - total strength of magnetic field": {
+        "auc": 0.4902525206,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5097474794
+      },
+      "band_15_depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover": {
+        "auc": 0.5135070658,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5135070658
+      },
+      "band_16_ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)": {
+        "auc": 0.568212386,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.568212386
+      },
+      "band_17_cond_surf - Conductivity surface - electrical conductivity of subsurface": {
+        "auc": 0.4862094668,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5137905332
+      },
+      "band_18_iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change": {
+        "auc": 0.5024646824,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5024646824
+      },
+      "band_19_det_elev_slope - Detrended elevation slope - gradient of elevation after detrending": {
+        "auc": 0.5591656994,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.5591656994
+      },
+      "cond_surf_multiscale_edge": {
+        "auc": 0.504362836,
+        "flag_leakage": false,
+        "n_negative": 100000,
+        "n_positive": 25000,
+        "strength": 0.504362836
+      }
+    },
+    "flagged_features": [],
+    "threshold_strength": 0.9,
+    "verdict": "PASS"
+  },
+  "mechanism": "Band 17 cond_surf; max Gaussian gradient magnitude at sigma 2 and 4 pixels; local-maximum selection with 2.8-pixel minimum spacing; fixed candidate mass set by median visible-only R0 fold count.",
+  "non_fault_mimic": "Lithologic contacts, basin-fill/saline groundwater boundaries, interpolation seams, and survey or nodata edges can produce conductivity gradients without a fault.",
+  "official_sources": [
+    "https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and",
+    "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516"
+  ],
+  "raster": {
+    "path": "releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif",
+    "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+    "validator": {
+      "crs": "EPSG:32611",
+      "crs_shape_transform_dtype_match_template": true,
+      "dot_count": 38897,
+      "dtype": "float32",
+      "finite_max": 1.0,
+      "finite_min": 0.0,
+      "gates": [
+        {
+          "detail": "_tmp_condedge_candidate.tif",
+          "gate": "readable",
+          "ok": true
+        },
+        {
+          "detail": "matches template",
+          "gate": "grid_contract",
+          "ok": true
+        },
+        {
+          "detail": "float32",
+          "gate": "dtype_float32",
+          "ok": true
+        },
+        {
+          "detail": "ndim=2",
+          "gate": "single_band",
+          "ok": true
+        },
+        {
+          "detail": "[3730, 3292]",
+          "gate": "shape",
+          "ok": true
+        },
+        {
+          "detail": "EPSG:32611",
+          "gate": "crs_epsg32611",
+          "ok": true
+        },
+        {
+          "detail": "0 out-of-range px; min=0.0, max=1.0",
+          "gate": "values_in_0_1",
+          "ok": true
+        },
+        {
+          "detail": "0 NaN px inside",
+          "gate": "no_nan_inside_footprint",
+          "ok": true
+        },
+        {
+          "detail": "0 finite px outside",
+          "gate": "nan_outside_footprint",
+          "ok": true
+        },
+        {
+          "detail": "38897 dots all == 1.0",
+          "gate": "unit_dots",
+          "ok": true
+        },
+        {
+          "detail": "raster 38897 vs mask 38897",
+          "gate": "dot_count_matches_mask",
+          "ok": true
+        },
+        {
+          "detail": "0 dots on catalogue pixels",
+          "gate": "zero_catalogue_mass",
+          "ok": true
+        },
+        {
+          "detail": "829cc41856540a93",
+          "gate": "sha256_not_in_ledger",
+          "ok": true
+        }
+      ],
+      "nan_inside_footprint": 0,
+      "outside_nan_pixels": 7111787,
+      "passed": true,
+      "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+      "shape": [
+        3730,
+        3292
+      ]
+    }
+  },
+  "registry_uniqueness": {
+    "duplicate_thresholds": {
+      "abs_spearman_gt": 0.9,
+      "dot_overlap_within_3px_gt": 0.7
+    },
+    "exact_sha256_against_ledger": {
+      "candidate_sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+      "checked_ledger_hash_values": 229,
+      "unique": true
+    },
+    "postwrite": {
+      "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
+      "duplicate_stop": false,
+      "max_abs_surface_spearman": 0.012808977551889936,
+      "max_dot_overlap_3px": 0.1950021852585032,
+      "n_reference_geometries": 36,
+      "n_reference_paths": 69,
+      "sample_pixels": 150000,
+      "surface_tested": "disk-reread final prediction raster",
+      "top_correlations": [
+        {
+          "r_spearman": 0.012808977551889936,
+          "registry_raster": "releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257-zeros.tif"
+        },
+        {
+          "r_spearman": 0.004035777970986802,
+          "registry_raster": "releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040-zeros.tif"
+        },
+        {
+          "r_spearman": 0.003723599841897232,
+          "registry_raster": "data/d28.tif"
+        },
+        {
+          "r_spearman": 0.003365877828359586,
+          "registry_raster": "releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce-zeros.tif"
+        },
+        {
+          "r_spearman": 0.003357498578205697,
+          "registry_raster": "releases/h33-h33-2-b2-relief-r10-20261023-366c87ca-zeros.tif"
+        }
+      ],
+      "top_overlaps": [
+        {
+          "fraction_dots_within_3px": 0.1950021852585032,
+          "registry_positive_pixels": 121131,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.17173560943003316,
+          "registry_positive_pixels": 44090,
+          "registry_raster": "data/d28.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.161863382780163,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-relief-r15s-20261023-5f0ae851-zeros.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.15864976733424171,
+          "registry_positive_pixels": 40199,
+          "registry_raster": "data/scored_h27_4_solo.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.15448492171632774,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-spacing-poisson-20261023-ff167173-zeros.tif"
+        }
+      ]
+    },
+    "prewrite": {
+      "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
+      "duplicate_stop": false,
+      "max_abs_surface_spearman": 0.03868795455191069,
+      "max_dot_overlap_3px": 0.1950021852585032,
+      "n_reference_geometries": 36,
+      "n_reference_paths": 69,
+      "sample_pixels": 150000,
+      "surface_tested": "pre-placement conductivity-edge surface",
+      "top_correlations": [
+        {
+          "r_spearman": 0.03868795455191069,
+          "registry_raster": "releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif"
+        },
+        {
+          "r_spearman": -0.005863699106003009,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif"
+        },
+        {
+          "r_spearman": -0.005353175664469088,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p00-20261023-1add5aa6-zeros.tif"
+        },
+        {
+          "r_spearman": -0.00429634231897723,
+          "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif"
+        },
+        {
+          "r_spearman": -0.004136197045711244,
+          "registry_raster": "releases/h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6-zeros.tif"
+        }
+      ],
+      "top_overlaps": [
+        {
+          "fraction_dots_within_3px": 0.1950021852585032,
+          "registry_positive_pixels": 121131,
+          "registry_raster": "data/scored_h19_5.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.17173560943003316,
+          "registry_positive_pixels": 44090,
+          "registry_raster": "data/d28.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.161863382780163,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-relief-r15s-20261023-5f0ae851-zeros.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.15864976733424171,
+          "registry_positive_pixels": 40199,
+          "registry_raster": "data/scored_h27_4_solo.tif"
+        },
+        {
+          "fraction_dots_within_3px": 0.15448492171632774,
+          "registry_positive_pixels": 37654,
+          "registry_raster": "releases/h33-h33-2-b2-spacing-poisson-20261023-ff167173-zeros.tif"
+        }
+      ]
+    }
+  },
+  "schema_version": 1,
+  "submission": {
+    "download_submit_status": "DO_NOT_SUBMIT",
+    "name": "h89-condedge-s2-4-20261024-829cc418-candidate",
+    "note": "COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate",
+    "note_chars": 99,
+    "slot_status": "not selected; selector step is separate"
+  },
+  "verdict": "negative"
+}
