@@ -41,6 +41,6 @@
   "evidence_class": "CLAIM",
   "receipt": "none in this repo"
  },
- "elapsed_seconds": 6.96,
+ "elapsed_seconds": 8.7,
  "note": "Rebuilt bit-for-bit from pinned scored_h19_5.tif via BFS dot_thin(2.8) + B=2 catalogue flank prune, matching both upstream zeros (c55bafc4...) and nan (baeae321...) GeoTIFF sha256 digests."
 }

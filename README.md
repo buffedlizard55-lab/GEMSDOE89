@@ -1,22 +1,54 @@
 # CURRENT STATE
 
-- **Parent (recipe-rebuilt, byte-verified 2026-10-24):** `h33-h33-2-b2` — 37,654 unit dots; `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN). All 10 fetchable manifest pins pass. Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **25 pairs / 50 GeoTIFFs**, all `BUILT` and format/data-gated. The 2026-10-24 SNAP session added exactly the three missing **SNAP** cells, completing the 3-window × 3-gate factorial with prior local/upstream cells; no `(SNAP, value)` repeat.
-- **New SNAP arms (`ledger/MECHANISM_CARDS.md` Part VII):**
-  - `1p4px-g0p01` (`afc60a25`): 6,767 moved (17.972%), mean 1.370 px; **+0.0120 MODEL** (`−0.0060…+0.0301`) — primary new arm.
-  - `1p0px-g0p01` (`2916ec2d`): 4,265 moved (11.327%), mean 1.000 px; **+0.0076 MODEL** (`−0.0038…+0.0190`) — conditional fixed-gate window control.
-  - `1p0px-g0p02` (`384435e6`): 1,245 moved (3.306%), mean 1.000 px; **+0.0022 MODEL** (`−0.0011…+0.0055`) — held high-gate boundary.
-- **Phase-2 TRACKB (not a weekly-slot candidate):** `fb156257` GeoJSON + 145-dot raster contains 12 strike-consistent traces ≥1 km (41.3 km total); per-trace evidence is in `ledger/TRACKB_TRACES.md`. PRUNE was not rebuilt because upstream already covers the brief collars (`IRREGULARITIES.md` item 14).
-- **Report only:** catalogue hide-and-recover CIs overlap R0; SNAP-response leakage canary `max AUC=0.66538 < 0.90`; SGMC remains skipped/UNVERIFIED. None gates a release or is a live score.
-- **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other target number is valid. **Slots this week:** `__ / 3` — human supplies used/available.
-- **Deadline:** `2026-12-03` is **UNVERIFIED** because automated competition-page access is barred; human confirms.
+- **Parent (recipe-rebuilt, byte-verified 2026-10-24):** `h33-h33-2-b2` — 37,654 unit dots;
+  `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
+  All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
+  Live **0.2778 = CLAIM**; **best receipt: none**.
+- **Built, unscored:** **28 pairs / 56 GeoTIFFs**, all `BUILT` and format/data-gated
+  (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
+  `TRACKB` 1 Phase-2 pair). No `(parent, axis, value)` repeat anywhere in the ledger.
+- **This session (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
+  Part VIII): `dirfw2p0` (`dc578b2f`, 20,853 dots moved footwall-only, mean 1.738 px),
+  its exact mirror `dirhw2p0` (`5cccfc1d`, 21,399 moved hanging-wall-only, mean 1.737 px),
+  and the dose `dirfw1p0` (`373c8fd6`, 16,632 moved, mean 1.000 px). Count fixed at 37,654,
+  targets `d_cat ≥ 3 px`, zero catalogue mass, no RNG, and a test proving the rule reduces
+  to `snap.snap_dots` when the direction filter is off. **The measurement that re-ordered
+  the queue:** the undirected crest arm `snap2p0px-g0p00` moves **15,585 dots up-slope and
+  15,670 down-slope** — R0 is direction-neutral w.r.t. the HG maximum, so the crest-side
+  question had never been tested. Bands `−0.019…+0.057` (`MODEL`, sign prior weak by
+  design): the pair is read as `fw − hw`, never alone.
+- **`SNAP` state:** the 3-window × 3-gate factorial is **complete** (`1p0px-g0p00`
+  `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00`
+  `e1474851`, `1p4px-g0p01` `afc60a25`, plus upstream `1p4px-g0p02` `0b6a2ab2`,
+  `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`), and the
+  three directional arms sit outside it.
+- **Other axes, no receipts:** `CONCENTRATION` `12p8km-int10` (`bcade136`, +0.008,
+  −0.006…+0.018), `CONC5kmcat10` (`2dc19377`, +0.009) and their away/dose arms;
+  `RELIEF` `r10`/`r15`/`r15s`; `MASS` `m10uniq`/`m10rand`/`m20uniq`;
+  `SPACING` `alongstrike`/`poisson`/`lattice`; upstream `PRUNE` refills at 1–4 px.
+- **Phase-2 `TRACKB` (not a weekly-slot candidate):** `fb156257` GeoJSON + 145-dot raster,
+  12 strike-consistent traces ≥ 1 km (41.3 km total), per-trace evidence in
+  `ledger/TRACKB_TRACES.md`.
+- **Report only, never gates:** catalogue hide-and-recover CIs overlap R0 for every arm;
+  leakage canary `max AUC = 0.665 < 0.90`; SGMC skipped (UNVERIFIED pin).
+- **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other
+  target number is valid. **Slots this week:** `__ / 3` — human supplies used/available
+  (3 per rolling week per entity + 1 blind final).
+- **Deadline:** `2026-12-03` (≈6 weeks, ~17 rolling slots) is **UNVERIFIED**; automated
+  competition-page access is barred, so the human confirms it.
 
 ## Next 3 slots (details in `SLOT_PLAN.md` and `docs/SUBMIT.md`)
 
-| # | file | predicted (`MODEL`) | decision triggered by receipts |
+| # | file | predicted (`MODEL`) | decision triggered by a receipt |
 |---|---|---|---|
-| 1 | `releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif` | +0.0120 (`−0.0060…+0.0301`) | `>=0.2878` supports SNAP; `<=0.2678` rejects this gated correction; otherwise no evidence. |
-| 2 | `releases/h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851.tif` | +0.0278 (`−0.0278…+0.0834`) | Matched gateless control. Slot 1 beating it by `>=0.010` supports selectivity; the reverse supports dose. |
-| 3 | conditional: `1p0px-g0p01` (`2916ec2d`) after a gated win; else `2p0px-g0p00` (`69db3aae`) after any SNAP signal; else `CONC5kmcat20` (`4d229938`) or **HOLD** | +0.0076 / +0.0278 / +0.019 | Tests fixed-gate window, gateless window dose, or pivots after two null SNAP receipts. |
+| 1 | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak by design) | half of a matched pair — unreadable alone |
+| 2 | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | mirror: `fw − hw ≥ +0.010` ⇒ truth is footwall-side of the crest; reverse ⇒ hanging-wall side; both ≤ R0−0.010 ⇒ the crest is right and SNAP position work stops |
+| 3 | conditional: `dirfw1p0` (`373c8fd6`) if `fw − hw ≥ +0.010`; else the gate pair head `1p4px-g0p01` (`afc60a25`, +0.0120) or the block fork `conc-12p8km-int10` (`bcade136`, +0.008); else **hold** | +0.015 / +0.012 / +0.008 | dose vs direction; or selectivity; or the first independent block-prior test |
 
-**Human must supply:** `TOP_PUBLIC` + date; slots used/available; every uploaded file's `receipt_score` + `date`; deadline confirmation; public-mirror review (`IRREGULARITIES.md` item 2); optional official-USGS SGMC restoration (item 8); and all upload/final-file choices. Upload only one twin per slot; the human submits manually.
+**Alternative week (equally cheap, same two slots):** the gate pair `1p4px-g0p01`
+(`afc60a25`) against its matched gateless control `1p4px-g0p00` (`e1474851`) — reads
+selectivity-vs-dose, not direction. Do **not** run both pairs in one week (4 files > quota).
+
+**Human must supply:** `TOP_PUBLIC` + date; slots used/available; every uploaded file's
+`receipt_score` + `date`; deadline confirmation; public-mirror review (`IRREGULARITIES.md`
+item 2); optional official-USGS SGMC restoration (item 8); and all upload/final-file choices.

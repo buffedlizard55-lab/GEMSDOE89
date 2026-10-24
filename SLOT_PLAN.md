@@ -1,37 +1,39 @@
-# SLOT PLAN — GEMSDOE89 / SNAP factorial + TRACKB Phase-2 product (2026-10-24)
+# SLOT PLAN — GEMSDOE89 / directional SNAP pair + completed SNAP factorial (2026-10-24)
 
 - **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final. Slots used/left this week: `__ / 3` (human supplies). **TOP_PUBLIC:** `____` (date `____`).
-- **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, byte-verified; live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**; human confirms.
-- **TRACKB (Phase 2 only — never a weekly slot):** `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` + 145-dot raster: 12 traces ≥1 km (41.3 km), with evidence in `ledger/TRACKB_TRACES.md`. PRUNE was not rebuilt; upstream covers the brief collars (item 14).
-- **Decision rule:** only live `|Δ| >= 0.010` is evidence. Central values below are **MODEL**, not scores; gated/gateless MODEL assumptions differ (`IRREGULARITIES.md` item 15), so use matched receipts, not central-model subtraction. PROXY/canary/SGMC never gate.
+- **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, rebuilt byte-exactly again today (`c55bafc4…` / `baeae321…`); live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**.
+- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; gated and gateless arms use different MODEL assumptions (`IRREGULARITIES.md` item 15), so compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
+- **Queue state:** every weekly axis now holds ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, upstream `PRUNE` 1–4 px, `TRACKB` Phase-2 pair) and **none has a live receipt**, so the scarce good is no longer files but *readable pairs*.
+- **Why this week's pair changed:** the SNAP factorial (`{window} × {gate}`) is complete, and a measurement made this session shows the undirected crest arm `2p0px-g0p00` moves **15,585 dots up-slope / 15,670 down-slope** (`share_upslope = 0.498`): R0 is direction-neutral w.r.t. the HG maximum, so no existing arm could detect a crest-side preference, and the proposed global dip-offset translation has no bias to correct (`IRREGULARITIES.md` item 16).
 
-## Next 3 slots, in order
+## Next 3 slots, in order (primary week)
 
-| # | File | Predicted change | What the result changes |
+| # | File | Predicted (`MODEL`) | What the receipt changes |
 |---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif` | **+0.0120** (`−0.0060…+0.0301`) | Intermediate-gate, diagonal-window probe. `>=0.2878` supports SNAP; `<=0.2678` rejects this gated correction; between them is no evidence. |
-| **2** | `releases/h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851.tif` | **+0.0278** (`−0.0278…+0.0834`) | Exact matched gateless control: same parent, response and 1.42 px window; only gate changes. Compare receipts directly with Slot 1. |
-| **3** | **Conditional:** `…-snap1p0px-g0p01-20261024-2916ec2d.tif` if Slot 1 beats Slot 2 by `>=0.010`; otherwise `…-snap2p0px-g0p00-20261023-69db3aae.tif` if either SNAP arm is `>=0.2878`; otherwise `…-CONC5kmcat20-20261023-4d229938.tif` **or HOLD** | `+0.0076` / `+0.0278` / `+0.019` | Gated win → fixed-gate 1 px window control. Any SNAP signal without a gated win → 2 px gateless dose. Two null SNAP receipts → stop spending on SNAP and take one orthogonal large-effect concentration probe (or preserve quota). |
+| **1** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak **by design**) | Half of a matched pair; alone it is unreadable. |
+| **2** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | The **exact mirror** (same response, window, gate 0.00, targets, count; only the ±60° half-window differs). `fw − hw ≥ +0.010` ⇒ truth sits **footwall-side** of the HG maximum; reverse ⇒ **hanging-wall side**; both `≤ R0 − 0.010` ⇒ **the crest is right** and no position arm gets another slot this cycle; both inside `±0.010` ⇒ SNAP is saturated at 1–2 px. |
+| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else the gate-pair head `1p4px-g0p01` (`afc60a25`, +0.0120); else `conc-12p8km-int10` (`bcade136`, +0.008) or `CONC5kmcat10` (`2dc19377`, +0.009); else **HOLD** | +0.015 / +0.012 / +0.008–0.009 | Dose vs direction; or selectivity-vs-dose; or the first independent block-prior test. |
 
-**Held:** `1p0px-g0p02` (`384435e6`, central `+0.0022`) is a minimum-dose boundary/control, not a default slot. Do not submit both twins; `-zeros.tif` is fallback only. Record every upload's receipt and date.
+**Alternative week (same two slots, different question):** the gate pair `1p4px-g0p01` (`afc60a25`, +0.0120) against its matched gateless control `1p4px-g0p00` (`e1474851`, +0.0278) — reads *selectivity vs dose*, not direction. Do **not** run both pairs in one week (4 files > quota). **Held:** `1p0px-g0p02` (`384435e6`, +0.0022) is a minimum-dose boundary control, not a default slot. Never submit both twins; `-zeros.tif` is fallback only.
 
-## Weeks to deadline (assuming human confirms 2026-12-03)
+## Weeks to the deadline
 
 | Window | Action |
 |---|---|
-| 10-24 → 10-30 | Slots 1–2; reserve Slot 3 until both receipts are recorded. |
-| 10-31 → 11-06 | Conditional Slot 3; update parent/axis decisions only on `>=0.010` changes. |
-| 11-07 → 11-20 | Combine only the two best axes with live `>=+0.010` evidence; change one factor from a named parent at a time. |
-| 11-21 → 11-27 | Confirm the composite against its direct parent; freeze primary and fallback. |
-| 11-28 → 12-03 | Re-validate both final twins' hashes/format; human chooses one final file blind. |
+| 10-24 → 10-30 | Slots 1–2 as a pair; reserve Slot 3 until both receipts are recorded. |
+| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair); record every `receipt_score` + `date`. |
+| 11-07 → 11-20 | Combine **only** axes with live `≥ +0.010` receipts, one factor at a time from a named parent. |
+| 11-21 → 11-27 | Confirm the composite against its direct parent; freeze primary + fallback. |
+| 11-28 → 12-03 | Re-validate both final twins; human chooses **1 blind final**. If nothing beats R0, submit R0 (`baeae321…`). |
 
-## Proposed better axes — not built in the SNAP session
+## Proposed better axes (mechanism · confounder · falsifier) — **not** built this session
 
-| Axis | Mechanism | Confounder / mimic | Falsifier |
+| Axis | Structural mechanism | Non-fault confounder / mimic | Falsifier |
 |---|---|---|---|
-| **SIGNED-SCARP SNAP** | Basin-facing signed elevation scarps reject unsigned TMI/gravity contacts that lack normal-fault topography. | Fan channels/shorelines share the sign; DEM smoothing hides low scarps. | Does not beat matched unsigned SNAP by `>=0.010`, or loses a strand-holdout to unsigned control. |
-| **RELAY-BRIDGE** | Connect en-echelon tips `<=12 px` with strike difference `<=20°` where breaching faults form (https://www.osti.gov/servlets/purl/1249065). | Streams/dikes bridge the same tips; added mass may earn no truth credit. | Live `<R0+0.010`, or strand-holdout loses to random tip pairs. |
-| **TRACKB-DIP-OFFSET** | Basinward normal-fault dip shifts potential-field crests into the hanging wall relative to surface scarps. | Strike-slip faults/volcanic contacts have near-zero dip offset. | Loses to symmetric SNAP by `>=0.010`. |
-| **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while constraining H19 `ΔT≈0`, separating block prior from centerline retention. | Joint optimization silently changes spacing/local alignment. | Fails to beat matched CONC by `>=0.005`. |
-| **TRACKB-EXTEND** | Deliver remaining qualifying traces for expert review, ordered by strand credit. | Reviewer attention favours long traces. | Confirmation of traces 13–19 no better than length-matched random R0 strands. |
-| **REPEAT-CALIBRATION** | Submit byte-exact R0 once to convert `0.2778` from CLAIM to RECEIPT. | Burns a slot with zero expected leaderboard climb. | Receipt differs from `0.2778` by `>0.005`, invalidating CLAIM-anchored deltas. |
+| **SIGNED-SCARP resp (residual of the old proposal)** | Use a *DEM-signed* scarp response instead of an unsigned HG contact, so basin-facing scarps only | Fan channels, shorelines and roads share the sign; 2 px DEM smoothing hides low scarps | Does not beat the matched unsigned arm by `≥ 0.010` |
+| **RELIEF basin residual (`0→1`, `2→0`)** | Catalogue records *surface-mapped* faults, which cluster at range fronts (R0 lift vs catalogue: range 1.30, piedmont 1.03, basin 0.67); new-fault truth is the residual, so it should be enriched where exposure is worst | Basinal gravity/magnetic anomalies are closed bodies and basement steps: pure mass | `≤ R0 − 0.010`, or the matched `2→0` arm beating `0→1` |
+| **Redundancy prune (geometric MASS)** | Two dots 2.8 px apart cannot both be the argmax under a 3 px kernel: the loser is pure mass. Rank by union coverage lost if removed — label-free | Redundant dots sit on the thickest, best-located ridges | Fails to beat `MASSm10uniq` (`beed130f`) by `≥ 0.005`, or loses to `m10rand` |
+| **Anisotropic SPACING** | Error budget is anisotropic: 400 m flight lines smear *across* strike, so along-strike stations can be wider at fixed count | Strike estimated from R0's own strands is circular | Loses to isotropic `poisson` / `lattice` at matched count |
+| **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
+| **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
+| **TRACKB-EXTEND / REPEAT-CALIBRATION** | Deliver the remaining qualifying traces for expert review; or submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT | Reviewer attention favours long traces; the calibration slot buys no climb | Traces 13–19 no better than length-matched random strands; receipt differs from `0.2778` by `> 0.005` |
