@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md",
+      "retrieval": "GitHub API",
+      "retrieved_date": "2026-10-24",
+      "sha256_retrieved_bytes": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239"
+    },
+    {
+      "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb",
+      "retrieval": "GitHub API",
+      "retrieved_date": "2026-10-24",
+      "sha256_retrieved_bytes": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0"
+    }
+  ],
+  "verified_statements": [
+    "README supports CPU-only installation; GPU accelerates training but is not required.",
+    "Notebook uses random patch train/test splits and TverskyLoss alpha=0.2 beta=0.8.",
+    "Notebook is a reference model, not proof of this repositories spatial holdout or official distance-tolerant scoring implementation."
+  ],
+  "not_verified": [
+    "live leaderboard",
+    "submission-page receipt",
+    "current weekly cap",
+    "organizer authentication of mirrored input data",
+    "official PDF"
+  ]
+}

@@ -360,7 +360,7 @@ def _hero_download_block(rc: dict, rep: dict, *, docs_prefix: str, repo_prefix: 
 
     tif_href = f"{docs_prefix}downloads/{Path(sub['download_path']).name}"
     zip_href = f"{docs_prefix}downloads/{Path(sub['zip_path']).name}"
-    rc_href = f"{repo_prefix}registry/h89_run_card.json"
+    rc_href = f"{docs_prefix}registry/h89_run_card.json"
     tif_kb = (ROOT / sub["download_path"]).stat().st_size / 1024.0
 
     sub_btn = (
@@ -435,7 +435,7 @@ def _hero_download_block(rc: dict, rep: dict, *, docs_prefix: str, repo_prefix: 
           <div class="k-sub">95% CI [+{hd['paired_delta_ci95'][0]:.4f}, +{hd['paired_delta_ci95'][1]:.4f}] · Wins 4 / 4 quadrants</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Registry Uniqueness (84 Unique Rasters)</div>
+          <div class="k-label">Registry Uniqueness (91 Unique Rasters)</div>
           <div class="k-val">{uq['max_dot_overlap_3px']*100:.1f}% / {uq['max_abs_surface_spearman']:.3f}</div>
           <div class="k-sub">Max 3-px overlap ≤ 70% · Max |ρ| ≤ 0.90 · <b>73.0% new vs R0</b></div>
         </div>
@@ -444,6 +444,12 @@ def _hero_download_block(rc: dict, rep: dict, *, docs_prefix: str, repo_prefix: 
           <div class="k-val" style="color:#34d399;">0.7829 PASS</div>
           <div class="k-sub">0 / 42 features flagged (strict ceiling ≤ 0.90 symmetric AUC)</div>
         </div>
+      </div>
+      <div style="margin-top:14px;padding:10px 14px;border-radius:9px;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.4);font-size:12.5px;color:#fecdd3;">
+        <b>⚠️ Negative Sibling Research Baselines — DO NOT SUBMIT:</b> Earlier single-factor research artifacts
+        (<code>condedge</code>, <code>bstp40</code>, <code>annulus-splay</code>, <code>pfpeaks</code>, <code>tcunion</code>; see <code>{docs_prefix}registry/submission_readiness.json</code>)
+        scored negative vs <code>R0</code> on holdout and are blocked (<b>DO NOT SUBMIT</b>).
+        Only <b><code>{html.escape(sub['name'])}</code></b> above cleared <code>ELIGIBLE_FOR_SELECTOR</code> (<code>0</code> blockers, <code>+0.0642</code> <span class="badge-tag tag-holdout">HOLDOUT-DTI</span>).
       </div>
     </div>
     """
@@ -965,7 +971,26 @@ def build_exec_summary_html(rc: dict, rep: dict, *, docs_prefix: str, repo_prefi
 """
 
 
+def render_docs_index(source: str) -> str:
+    """Deterministically transform root-level portal HTML into docs/-relative HTML."""
+    return (
+        source
+        .replace('href="docs/', 'href="')
+        .replace('src="docs/', 'src="')
+        .replace('href="README.md"', 'href="../README.md"')
+        .replace('href="SLOT_PLAN.md"', 'href="../SLOT_PLAN.md"')
+        .replace('href="IRREGULARITIES.md"', 'href="../IRREGULARITIES.md"')
+    )
+
+
+def render_docs_submit(source: str) -> str:
+    """Deterministically transform root-level submit/executive HTML into docs/-relative HTML."""
+    return render_docs_index(source)
+
+
 def main() -> int:
+    import shutil
+
     rc = json.loads((ROOT / "registry" / "h89_run_card.json").read_text(encoding="utf-8"))
     rep = json.loads((ROOT / "registry" / "h89_discovery_report.json").read_text(encoding="utf-8"))
     canary = json.loads((ROOT / "registry" / "leakage_canary_h89.json").read_text(encoding="utf-8"))
@@ -973,51 +998,70 @@ def main() -> int:
     (ROOT / ".nojekyll").write_text("", encoding="utf-8")
     (ROOT / "docs" / ".nojekyll").write_text("", encoding="utf-8")
 
+    # Mirror registry cards & negative research downloads into docs/ for self-contained Pages serving
+    docs_dl = ROOT / "docs" / "downloads"
+    docs_dl.mkdir(parents=True, exist_ok=True)
+    for rel_name in (
+        "h89-condedge-s2-4-20261024-829cc418-candidate.tif",
+        "gems89-bstp40-20261024-2e7e8a8f-zeros.tif",
+        "h89-annulus-splay-20261024-e9b2bec1-candidate.tif",
+        "h89-pfpeaks-20261024-18f0316a-candidate.tif",
+    ):
+        src_tif = ROOT / "releases" / rel_name
+        if src_tif.exists():
+            shutil.copy2(src_tif, docs_dl / rel_name)
+
+    docs_reg = ROOT / "docs" / "registry"
+    docs_reg.mkdir(parents=True, exist_ok=True)
+    for reg_name in (
+        "h89_run_card.json",
+        "h89_discovery_report.json",
+        "leakage_canary_h89.json",
+        "submission_readiness_h89.json",
+        "run_card_condedge_20261024.json",
+        "run_card_bstp40.json",
+        "run_card_annulus_20261024.json",
+        "run_card_pfpeaks_20261024.json",
+        "run_card_tcunion_20261024.json",
+        "submission_readiness.json",
+    ):
+        src_reg = ROOT / "registry" / reg_name
+        if src_reg.exists():
+            shutil.copy2(src_reg, docs_reg / reg_name)
+
     # 1. Root pages (served at https://buffedlizard55-lab.github.io/GEMSDOE89/)
-    (ROOT / "index.html").write_text(
-        build_index_html(
-            rc, rep, canary,
-            docs_prefix="docs/",
-            repo_prefix="",
-            exec_href="executive-summary.html",
-            home_href="index.html",
-        ),
-        encoding="utf-8",
+    root_index = build_index_html(
+        rc, rep, canary,
+        docs_prefix="docs/",
+        repo_prefix="",
+        exec_href="executive-summary.html",
+        home_href="index.html",
     )
-    (ROOT / "executive-summary.html").write_text(
-        build_exec_summary_html(
-            rc, rep,
-            docs_prefix="docs/",
-            repo_prefix="",
-            exec_href="executive-summary.html",
-            home_href="index.html",
-        ),
-        encoding="utf-8",
+    root_exec = build_exec_summary_html(
+        rc, rep,
+        docs_prefix="docs/",
+        repo_prefix="",
+        exec_href="executive-summary.html",
+        home_href="index.html",
     )
-
-    # 2. /docs pages (served at https://buffedlizard55-lab.github.io/GEMSDOE89/docs/)
-    (ROOT / "docs" / "index.html").write_text(
-        build_index_html(
-            rc, rep, canary,
-            docs_prefix="",
-            repo_prefix="../",
-            exec_href="executive-summary.html",
-            home_href="index.html",
-        ),
-        encoding="utf-8",
-    )
-    (ROOT / "docs" / "executive-summary.html").write_text(
-        build_exec_summary_html(
-            rc, rep,
-            docs_prefix="",
-            repo_prefix="../",
-            exec_href="executive-summary.html",
-            home_href="index.html",
-        ),
-        encoding="utf-8",
+    root_submit = build_exec_summary_html(
+        rc, rep,
+        docs_prefix="docs/",
+        repo_prefix="",
+        exec_href="submit.html",
+        home_href="index.html",
     )
 
-    print("Built .nojekyll, index.html, executive-summary.html, docs/index.html, docs/executive-summary.html")
+    (ROOT / "index.html").write_text(root_index, encoding="utf-8")
+    (ROOT / "executive-summary.html").write_text(root_exec, encoding="utf-8")
+    (ROOT / "submit.html").write_text(root_submit, encoding="utf-8")
+
+    # 2. /docs pages (exact render_docs_* mirrors for https://buffedlizard55-lab.github.io/GEMSDOE89/docs/)
+    (ROOT / "docs" / "index.html").write_text(render_docs_index(root_index), encoding="utf-8")
+    (ROOT / "docs" / "executive-summary.html").write_text(render_docs_index(root_exec), encoding="utf-8")
+    (ROOT / "docs" / "submit.html").write_text(render_docs_submit(root_submit), encoding="utf-8")
+
+    print("Built .nojekyll, index.html, executive-summary.html, submit.html, and docs/ mirrors")
     return 0
 
 

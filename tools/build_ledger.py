@@ -558,7 +558,7 @@ def _h89_discovery_rows() -> list[dict]:
             "site": "GEMSDOE89",
             "name": pkg["stem"],
             "score": "",
-            "evidence_class": "BUILT (unscored)",
+            "evidence_class": "HOLDOUT-DTI",
             "encoding": "nan+zeros",
             "n_dots": pkg["n_dots"],
             "pct_changed": f"{pkg['pct_changed_vs_r0']:.2f}",
@@ -568,7 +568,7 @@ def _h89_discovery_rows() -> list[dict]:
             "parent": "training_features+existing_faults (from-scratch H89)",
             "axis": "DISCOVERY_H89",
             "value": "bh-rtp-habc",
-            "status": "BUILT",
+            "status": "ELIGIBLE_FOR_SELECTOR (unscored)",
             "receipt": "N",
             "receipt_score": "",
             "predicted_change": (
@@ -581,12 +581,141 @@ def _h89_discovery_rows() -> list[dict]:
                 f"built {rep['date_utc']}; H89 BH-RTP-HABC dual-expert LOQO HistGBDT (30 zero-cat phys + 12 self-masked net) "
                 f"+ Dinkelbach CELF 300m allocation ({pkg['n_dots']} dots, min dcat {pkg['min_dcat_px']:.2f}px); "
                 f"regime shares bedrock/piedmont/basin={reg['bedrock_le_80m_share']:.1%}/{reg['piedmont_80_400m_share']:.1%}/{reg['concealed_basin_gt_400m_share']:.1%}; "
-                f"3px overlap vs R0={pkg['dot_overlap_3px_vs_r0']:.3f}, max across 84 refs={uq['max_dot_overlap_3px_forward']:.4f} (<=0.70), "
+                f"3px overlap vs R0={pkg['dot_overlap_3px_vs_r0']:.3f}, max across 91 refs={uq['max_dot_overlap_3px_forward']:.4f} (<=0.70), "
                 f"max |Spearman rho|={uq['max_abs_surface_spearman']:.4f} (<=0.90); primary download in docs/downloads/{pkg['submission_name']}.tif (sha256 {pkg['primary_download_tif_sha256'][:12]})."
             ),
             "source": "GEMSDOE89",
         }
     ]
+
+
+def _bstp_rows() -> list[dict]:
+    """BSTP rows. Added 2026-10-24 (bstp40 session): without a reader here a
+    ledger rebuild would drop the BSTP row while its release files stay on
+    disk (the SNAP failure mode, IRREGULARITIES item 11).  The two sibling
+    variants (bstp40corr e3b6d3d2, bstp40corrE 598993b2) were withdrawn and
+    their TIFs deleted; they intentionally have no ledger row."""
+    p = ROOT / "registry" / "build_report_bstp40.json"
+    if not p.exists():
+        return []
+    rep = json.loads(p.read_text())
+    d = rep["build_diag"]
+    return [{
+        "id": rep["stem"], "site": "GEMSDOE89", "name": rep["stem"],
+        "score": "", "evidence_class": "BUILT (unscored)",
+        "encoding": "nan+zeros", "n_dots": rep["n_dots"],
+        "pct_changed": f"{100.0 * d['n_new'] / d['n_parent']:.2f}",
+        "sha8": rep["sha256_nan"][:8], "sha256": rep["sha256_nan"],
+        "sha256_zeros": rep["sha256_zeros"], "parent": rep["parent"],
+        "axis": "BSTP", "value": rep["value"], "status": "BUILT",
+        "receipt": "N", "receipt_score": "",
+        "predicted_change": ("MODEL only, no central estimate: HOLDOUT-DTI "
+                             "-0.0254 [-0.0296,-0.0210] vs R0-fold "
+                             "(segment-holdout-v1); verdict NEGATIVE, not promoted"),
+        "date": "2026-10-24",
+        "form_note": "gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG",
+        "notes": (
+            "built 2026-10-24; 15062/37654 new-support dots (d_parent>3px, "
+            "d_cat>=3px, 2.8px suppression) ranked by geomean(|grad b15 "
+            "depth_to_base|, |grad b17 cond|, max(b03,b18) HG); retained "
+            "22592 by mass.unique_credit. Canary max AUC 0.521<0.90; dot "
+            "overlap<=3px vs R0 60.0%; segment holdout (911 segs, 39310 px) "
+            "parent 0.0914 cand 0.0660 diff -0.0254 CI excl. 0. Verdict "
+            "NEGATIVE (registry/run_card_bstp40.json); zeros twin is the "
+            "upload-safe encoding (no NaN anywhere)."
+        ),
+        "source": "GEMSDOE89",
+    }]
+
+
+def _trackb_150_rows() -> list[dict]:
+    """R0-consolidating 150-trace TRACKB arms (t150add, t150swap, t150link)."""
+    p = ROOT / "registry" / "build_reports_trackb_150.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": rep["spec"]["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-24 (Phase 2 TRACKB); {s['n_traces_emitted']} strike-consistent traces >=1.0km "
+                    f"({s['total_trace_chord_km']:.1f}km chord, {s['n_bridged_traces']} wash-bridged); "
+                    f"add {s['n_added']}/drop {s['n_removed']} ({s['pct_changed']:.2f}%, symdiff {s['pct_symmetric_diff']:.2f}%); "
+                    f"n={s['n_dots']}; dcat_added>=3.00px (collar<3px frozen at 1611); "
+                    f"CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f}; "
+                    f"GeoJSON={rep['files']['geojson']}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _negative_card_rows() -> list[dict]:
+    """Register the three negative research candidate TIFs (condedge, annulus, pfpeaks)."""
+    specs = [
+        ("run_card_condedge_20261024.json", "COND-EDGE", "cond17-sigma2-4"),
+        ("run_card_annulus_20261024.json", "ANNULUS", "splay-200-800m"),
+        ("run_card_pfpeaks_20261024.json", "PFPEAKS", "pf-ridge-peaks"),
+    ]
+    rows: list[dict] = []
+    for fname, axis_name, val_name in specs:
+        card_path = ROOT / "registry" / fname
+        if not card_path.exists():
+            continue
+        card = json.loads(card_path.read_text(encoding="utf-8"))
+        raster = card.get("raster", {})
+        if not raster.get("path") or not raster.get("sha256"):
+            continue
+        holdout = card["holdout_protocol"]
+        candidate = holdout["candidate"]
+        base = holdout["visible_only_R0_baseline"]
+        delta = holdout["paired_delta_candidate_minus_R0"]
+        sha = raster["sha256"]
+        name = Path(raster["path"]).stem
+        note = card["submission"]["note"]
+        rows.append({
+            "id": name, "site": "GEMSDOE89", "name": name, "score": "",
+            "evidence_class": "HOLDOUT-DTI", "encoding": "zeros",
+            "n_dots": raster["validator"]["dot_count"], "pct_changed": "",
+            "sha8": sha[:8], "sha256": sha, "sha256_zeros": sha,
+            "parent": "h33-h33-2-b2", "axis": axis_name, "value": val_name,
+            "status": "NEGATIVE (do not submit)", "receipt": "N", "receipt_score": "",
+            "predicted_change": (
+                f"{delta['value']:+.6f} HOLDOUT-DTI {holdout['evaluator_version']}; "
+                f"{candidate['n_withheld_positive_pixels']} withheld positives; "
+                f"delta 95% CI [{delta['ci95']['lower_95']:+.6f}, {delta['ci95']['upper_95']:+.6f}]"
+            ),
+            "date": "2026-10-24", "form_note": note,
+            "notes": (
+                f"Negative research artifact; candidate HOLDOUT-DTI {candidate['value']:.6f} "
+                f"95% CI [{candidate['ci95']['lower_95']:.6f}, {candidate['ci95']['upper_95']:.6f}]; "
+                f"visible-only R0 HOLDOUT-DTI {base['value']:.6f}; unique local hash and format PASS; DO NOT SUBMIT."
+            ),
+            "source": "GEMSDOE89",
+        })
+    return rows
 
 
 def main():
@@ -614,6 +743,9 @@ def main():
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _trackb_rows()
+        + _bstp_rows()
+        + _trackb_150_rows()
+        + _negative_card_rows()
         + _h89_discovery_rows()
     )
     for r in new_rows:

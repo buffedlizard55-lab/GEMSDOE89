@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "ELIGIBLE_FOR_SELECTOR",
+  "safe_to_submit": false,
+  "slot_selected": false,
+  "explanation": "Eligibility never selects a weekly slot or confirms organizer acceptance.",
+  "blockers": [],
+  "raster_sha256": "33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3",
+  "format_gates": [
+    {
+      "gate": "readable",
+      "ok": true,
+      "detail": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif"
+    },
+    {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+    },
+    {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+    },
+    {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+    },
+    {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+    },
+    {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+    },
+    {
+      "gate": "no_infinity",
+      "ok": true,
+      "detail": "infinity is never valid nodata"
+    },
+    {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+      "gate": "no_nan_anywhere",
+      "ok": true,
+      "detail": "0 NaN px"
+    },
+    {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "33372a75e04f486b"
+    }
+  ]
+}

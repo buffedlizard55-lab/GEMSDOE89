@@ -363,7 +363,7 @@ footer {
               📦 Download .ZIP Bundle + Receipt
             </a>
             <a class="btn-secondary" href="executive-summary.html">📋 Executive Summary &amp; DrivenData Step-by-Step Guide →</a>
-            <a class="btn-secondary" href="registry/h89_run_card.json">🧾 JSON Run Card</a>
+            <a class="btn-secondary" href="docs/registry/h89_run_card.json">🧾 JSON Run Card</a>
           </div>
           <div style="font-size:12.5px;color:#94a3b8;">
             <b>Weekly Quota Discipline:</b> DrivenData allows <b>3 scored submissions per rolling 7-day window + 1 blind final</b> (<span class="badge-tag tag-org">ORGANIZER-CONFIRMED</span>). This portal prepares &amp; validates the artifact; human selector performs the live upload.
@@ -406,7 +406,7 @@ footer {
           <div class="k-sub">95% CI [+0.0493, +0.0803] · Wins 4 / 4 quadrants</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Registry Uniqueness (84 Unique Rasters)</div>
+          <div class="k-label">Registry Uniqueness (91 Unique Rasters)</div>
           <div class="k-val">58.7% / 0.112</div>
           <div class="k-sub">Max 3-px overlap ≤ 70% · Max |ρ| ≤ 0.90 · <b>73.0% new vs R0</b></div>
         </div>
@@ -415,6 +415,12 @@ footer {
           <div class="k-val" style="color:#34d399;">0.7829 PASS</div>
           <div class="k-sub">0 / 42 features flagged (strict ceiling ≤ 0.90 symmetric AUC)</div>
         </div>
+      </div>
+      <div style="margin-top:14px;padding:10px 14px;border-radius:9px;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.4);font-size:12.5px;color:#fecdd3;">
+        <b>⚠️ Negative Sibling Research Baselines — DO NOT SUBMIT:</b> Earlier single-factor research artifacts
+        (<code>condedge</code>, <code>bstp40</code>, <code>annulus-splay</code>, <code>pfpeaks</code>, <code>tcunion</code>; see <code>docs/registry/submission_readiness.json</code>)
+        scored negative vs <code>R0</code> on holdout and are blocked (<b>DO NOT SUBMIT</b>).
+        Only <b><code>gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros</code></b> above cleared <code>ELIGIBLE_FOR_SELECTOR</code> (<code>0</code> blockers, <code>+0.0642</code> <span class="badge-tag tag-holdout">HOLDOUT-DTI</span>).
       </div>
     </div>
     
@@ -737,14 +743,185 @@ footer {
     ]
   },
   &quot;leakage_canary&quot;: {
-    &quot;features_tested&quot;: 42,
+    &quot;features_tested&quot;: {
+      &quot;f01_log_cover_depth&quot;: {
+        &quot;strength&quot;: 0.525224,
+        &quot;auc&quot;: 0.525224
+      },
+      &quot;f02_basement_grad_150m&quot;: {
+        &quot;strength&quot;: 0.538875,
+        &quot;auc&quot;: 0.538875
+      },
+      &quot;f03_basement_grad_350m&quot;: {
+        &quot;strength&quot;: 0.539324,
+        &quot;auc&quot;: 0.539324
+      },
+      &quot;f04_basement_hinge_inflection&quot;: {
+        &quot;strength&quot;: 0.532673,
+        &quot;auc&quot;: 0.532673
+      },
+      &quot;f05_basement_ridge_aniso&quot;: {
+        &quot;strength&quot;: 0.53709,
+        &quot;auc&quot;: 0.53709
+      },
+      &quot;f06_verduzco_grav_tilt_zero&quot;: {
+        &quot;strength&quot;: 0.506659,
+        &quot;auc&quot;: 0.506659
+      },
+      &quot;f07_grav_abs_b18_corr&quot;: {
+        &quot;strength&quot;: 0.506376,
+        &quot;auc&quot;: 0.506376
+      },
+      &quot;f08_grav_slope_b05&quot;: {
+        &quot;strength&quot;: 0.524186,
+        &quot;auc&quot;: 0.524186
+      },
+      &quot;f09_grav_vg_abs_b11&quot;: {
+        &quot;strength&quot;: 0.508638,
+        &quot;auc&quot;: 0.508638
+      },
+      &quot;f10_rtp_hg_120m&quot;: {
+        &quot;strength&quot;: 0.533492,
+        &quot;auc&quot;: 0.533492
+      },
+      &quot;f11_rtp_hg_300m&quot;: {
+        &quot;strength&quot;: 0.535465,
+        &quot;auc&quot;: 0.535465
+      },
+      &quot;f12_rtp_tilt_zero&quot;: {
+        &quot;strength&quot;: 0.502992,
+        &quot;auc&quot;: 0.502992
+      },
+      &quot;f13_tmi_verduzco_tilt_zero&quot;: {
+        &quot;strength&quot;: 0.506979,
+        &quot;auc&quot;: 0.506979
+      },
+      &quot;f14_mag_tc_b06&quot;: {
+        &quot;strength&quot;: 0.528598,
+        &quot;auc&quot;: 0.471402
+      },
+      &quot;f15_gallardo_meju_rtp_grav_parallel&quot;: {
+        &quot;strength&quot;: 0.535415,
+        &quot;auc&quot;: 0.535415
+      },
+      &quot;f16_flightline_seam_clean_rtp&quot;: {
+        &quot;strength&quot;: 0.526801,
+        &quot;auc&quot;: 0.526801
+      },
+      &quot;f17_cond_surf_b17&quot;: {
+        &quot;strength&quot;: 0.521347,
+        &quot;auc&quot;: 0.478653
+      },
+      &quot;f18_cond_lateral_grad&quot;: {
+        &quot;strength&quot;: 0.523154,
+        &quot;auc&quot;: 0.523154
+      },
+      &quot;f19_hydrothermal_demag_conduit&quot;: {
+        &quot;strength&quot;: 0.512105,
+        &quot;auc&quot;: 0.487895
+      },
+      &quot;f20_transtensional_releasing_index&quot;: {
+        &quot;strength&quot;: 0.525112,
+        &quot;auc&quot;: 0.525112
+      },
+      &quot;f21_geod_strain_2ndinv_b04&quot;: {
+        &quot;strength&quot;: 0.5666,
+        &quot;auc&quot;: 0.5666
+      },
+      &quot;f22_geod_dilaterate_b08&quot;: {
+        &quot;strength&quot;: 0.516532,
+        &quot;auc&quot;: 0.516532
+      },
+      &quot;f23_seismic_proximity_log_b10&quot;: {
+        &quot;strength&quot;: 0.537006,
+        &quot;auc&quot;: 0.462994
+      },
+      &quot;f24_seismic_intensity_log_b16&quot;: {
+        &quot;strength&quot;: 0.542543,
+        &quot;auc&quot;: 0.542543
+      },
+      &quot;f25_piedmont_toe_concavity&quot;: {
+        &quot;strength&quot;: 0.581657,
+        &quot;auc&quot;: 0.581657
+      },
+      &quot;f26_scarp_crest_convexity&quot;: {
+        &quot;strength&quot;: 0.531239,
+        &quot;auc&quot;: 0.531239
+      },
+      &quot;f27_strike_coherence_600m&quot;: {
+        &quot;strength&quot;: 0.528651,
+        &quot;auc&quot;: 0.528651
+      },
+      &quot;f28_lrm_elev_500m&quot;: {
+        &quot;strength&quot;: 0.537793,
+        &quot;auc&quot;: 0.537793
+      },
+      &quot;f29_cover_deconfounded_slope&quot;: {
+        &quot;strength&quot;: 0.588314,
+        &quot;auc&quot;: 0.588314
+      },
+      &quot;f30_cover_deconfounded_rtp_grav&quot;: {
+        &quot;strength&quot;: 0.522659,
+        &quot;auc&quot;: 0.522659
+      },
+      &quot;f31_tip_beam_short_1p2km&quot;: {
+        &quot;strength&quot;: 0.78288,
+        &quot;auc&quot;: 0.78288
+      },
+      &quot;f32_tip_beam_long_3p0km&quot;: {
+        &quot;strength&quot;: 0.781655,
+        &quot;auc&quot;: 0.781655
+      },
+      &quot;f33_wingcrack_horsetail_lobe&quot;: {
+        &quot;strength&quot;: 0.76548,
+        &quot;auc&quot;: 0.76548
+      },
+      &quot;f34_relay_breach_bridge&quot;: {
+        &quot;strength&quot;: 0.684688,
+        &quot;auc&quot;: 0.684688
+      },
+      &quot;f35_aniso_axial_corridor_2km&quot;: {
+        &quot;strength&quot;: 0.756661,
+        &quot;auc&quot;: 0.756661
+      },
+      &quot;f36_aniso_axial_corridor_4p5km&quot;: {
+        &quot;strength&quot;: 0.755039,
+        &quot;auc&quot;: 0.755039
+      },
+      &quot;f37_dist_vis_clamped_log&quot;: {
+        &quot;strength&quot;: 0.74279,
+        &quot;auc&quot;: 0.25721
+      },
+      &quot;f38_district_fault_density_5km&quot;: {
+        &quot;strength&quot;: 0.69884,
+        &quot;auc&quot;: 0.69884
+      },
+      &quot;f39_district_tip_junc_density_10km&quot;: {
+        &quot;strength&quot;: 0.609849,
+        &quot;auc&quot;: 0.609849
+      },
+      &quot;f40_phys_x_tip_corrob&quot;: {
+        &quot;strength&quot;: 0.782335,
+        &quot;auc&quot;: 0.782335
+      },
+      &quot;f41_phys_x_relay_corrob&quot;: {
+        &quot;strength&quot;: 0.684929,
+        &quot;auc&quot;: 0.684929
+      },
+      &quot;f42_strike_alignment_cos2&quot;: {
+        &quot;strength&quot;: 0.548343,
+        &quot;auc&quot;: 0.548343
+      }
+    },
     &quot;threshold&quot;: 0.9,
     &quot;max_symmetric_auc&quot;: 0.78288,
-    &quot;passed&quot;: true
+    &quot;passed&quot;: true,
+    &quot;verdict&quot;: &quot;PASS&quot;,
+    &quot;features_tested_count&quot;: 42
   },
   &quot;registry_uniqueness&quot;: {
-    &quot;reference_files_scanned&quot;: 88,
-    &quot;unique_reference_rasters_checked&quot;: 84,
+    &quot;reference_files_scanned&quot;: 99,
+    &quot;unique_reference_rasters_checked&quot;: 91,
     &quot;max_abs_surface_spearman&quot;: 0.11175,
     &quot;max_abs_surface_spearman_ref&quot;: &quot;fleet:GEMSDOE85__gems85-h85a-foldproper-hgb-maxcov-37654-20261022T221031Z-bf96e456-zeros.tif&quot;,
     &quot;max_abs_emitted_spearman&quot;: 0.0543,
@@ -754,7 +931,31 @@ footer {
     &quot;max_dot_overlap_3px_ref&quot;: &quot;fleet:GEMSDOE83__gems83-h83-gvcd-dink300-37654dots-20261021-1a373694-zeros.tif&quot;,
     &quot;max_dot_overlap_3px_symmetric&quot;: 0.7161,
     &quot;dot_overlap_3px_limit&quot;: 0.7,
-    &quot;passed&quot;: true
+    &quot;passed&quot;: true,
+    &quot;before_placement&quot;: {
+      &quot;n_reference_geometries&quot;: 91,
+      &quot;max_abs_surface_spearman&quot;: 0.11175,
+      &quot;max_dot_overlap_3px&quot;: 0.5866,
+      &quot;duplicate_stop&quot;: false
+    },
+    &quot;prewrite&quot;: {
+      &quot;n_reference_geometries&quot;: 91,
+      &quot;max_abs_surface_spearman&quot;: 0.11175,
+      &quot;max_dot_overlap_3px&quot;: 0.5866,
+      &quot;duplicate_stop&quot;: false
+    },
+    &quot;postwrite&quot;: {
+      &quot;n_reference_geometries&quot;: 91,
+      &quot;max_abs_surface_spearman&quot;: 0.0543,
+      &quot;max_dot_overlap_3px&quot;: 0.5866,
+      &quot;duplicate_stop&quot;: false
+    },
+    &quot;complete_registry_coverage&quot;: true,
+    &quot;coverage_scope&quot;: &quot;All 69 local releases/*.tif + 10 pinned manifest rasters + 25 cross-repo scored GEMSDOE fleet rasters (91 unique SHA-256 geometries) + all 151 ledger/submissions.csv hashes&quot;,
+    &quot;exact_sha256_against_ledger&quot;: {
+      &quot;unique&quot;: true,
+      &quot;checked_rows&quot;: 151
+    }
   },
   &quot;submission&quot;: {
     &quot;name&quot;: &quot;gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros&quot;,
@@ -771,7 +972,8 @@ footer {
     &quot;n_dots&quot;: 37654,
     &quot;pct_changed_vs_r0&quot;: 98.06,
     &quot;dot_overlap_3px_vs_r0&quot;: 0.26993,
-    &quot;min_dcat_px&quot;: 3.0
+    &quot;min_dcat_px&quot;: 3.0,
+    &quot;note&quot;: &quot;H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat&gt;=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)&quot;
   },
   &quot;validator&quot;: {
     &quot;gems57_15_of_15_ok&quot;: true,
@@ -809,7 +1011,48 @@ footer {
     &quot;safe_to_download_and_submit&quot;: true
   },
   &quot;live_submission_slots_used&quot;: 0,
-  &quot;verdict&quot;: &quot;promote&quot;
+  &quot;verdict&quot;: &quot;promote&quot;,
+  &quot;schema_version&quot;: 1,
+  &quot;raster&quot;: {
+    &quot;path&quot;: &quot;releases/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif&quot;,
+    &quot;sha256&quot;: &quot;33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3&quot;,
+    &quot;primary_download_path&quot;: &quot;docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif&quot;,
+    &quot;primary_download_sha256&quot;: &quot;715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361&quot;,
+    &quot;decoded_float32_sha256&quot;: &quot;d7e1507cdffd900dc9bac4bd355eeb32116b0629e070b721dde7cf64f70e7f59&quot;
+  },
+  &quot;holdout_protocol&quot;: {
+    &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+    &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+    &quot;withheld_positive_pixels&quot;: 11321,
+    &quot;comparator_is_locked_current_best&quot;: true,
+    &quot;comparator_note&quot;: &quot;Locked GEMSDOE89 incumbent parent R0 (h33-h33-2-b2) rebuilt fold-fairly on visible faults per fold (0.096086), plus D2.8 ancestor control (0.091888).&quot;,
+    &quot;candidate&quot;: {
+      &quot;value&quot;: 0.160269,
+      &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+      &quot;n_withheld_positive_pixels&quot;: 11321,
+      &quot;ci95&quot;: {
+        &quot;lower_95&quot;: 0.144976,
+        &quot;upper_95&quot;: 0.17553
+      }
+    },
+    &quot;visible_only_R0_baseline&quot;: {
+      &quot;value&quot;: 0.096086,
+      &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+      &quot;n_withheld_positive_pixels&quot;: 11321,
+      &quot;ci95&quot;: {
+        &quot;lower_95&quot;: 0.08334,
+        &quot;upper_95&quot;: 0.109335
+      }
+    },
+    &quot;paired_delta_candidate_minus_R0&quot;: {
+      &quot;value&quot;: 0.064183,
+      &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+      &quot;ci95&quot;: {
+        &quot;lower_95&quot;: 0.049275,
+        &quot;upper_95&quot;: 0.080332
+      }
+    }
+  }
 }</pre>
     </section>
 

@@ -361,7 +361,7 @@ footer {
               📦 Download .ZIP Bundle + Receipt
             </a>
             <a class="btn-secondary" href="index.html">← Full Technical Portal &amp; Fleet Audit</a>
-            <a class="btn-secondary" href="registry/h89_run_card.json">🧾 JSON Run Card</a>
+            <a class="btn-secondary" href="docs/registry/h89_run_card.json">🧾 JSON Run Card</a>
           </div>
           <div style="font-size:12.5px;color:#94a3b8;">
             <b>Weekly Quota Discipline:</b> DrivenData allows <b>3 scored submissions per rolling 7-day window + 1 blind final</b> (<span class="badge-tag tag-org">ORGANIZER-CONFIRMED</span>). This portal prepares &amp; validates the artifact; human selector performs the live upload.
@@ -404,7 +404,7 @@ footer {
           <div class="k-sub">95% CI [+0.0493, +0.0803] · Wins 4 / 4 quadrants</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Registry Uniqueness (84 Unique Rasters)</div>
+          <div class="k-label">Registry Uniqueness (91 Unique Rasters)</div>
           <div class="k-val">58.7% / 0.112</div>
           <div class="k-sub">Max 3-px overlap ≤ 70% · Max |ρ| ≤ 0.90 · <b>73.0% new vs R0</b></div>
         </div>
@@ -413,6 +413,12 @@ footer {
           <div class="k-val" style="color:#34d399;">0.7829 PASS</div>
           <div class="k-sub">0 / 42 features flagged (strict ceiling ≤ 0.90 symmetric AUC)</div>
         </div>
+      </div>
+      <div style="margin-top:14px;padding:10px 14px;border-radius:9px;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.4);font-size:12.5px;color:#fecdd3;">
+        <b>⚠️ Negative Sibling Research Baselines — DO NOT SUBMIT:</b> Earlier single-factor research artifacts
+        (<code>condedge</code>, <code>bstp40</code>, <code>annulus-splay</code>, <code>pfpeaks</code>, <code>tcunion</code>; see <code>docs/registry/submission_readiness.json</code>)
+        scored negative vs <code>R0</code> on holdout and are blocked (<b>DO NOT SUBMIT</b>).
+        Only <b><code>gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros</code></b> above cleared <code>ELIGIBLE_FOR_SELECTOR</code> (<code>0</code> blockers, <code>+0.0642</code> <span class="badge-tag tag-holdout">HOLDOUT-DTI</span>).
       </div>
     </div>
     

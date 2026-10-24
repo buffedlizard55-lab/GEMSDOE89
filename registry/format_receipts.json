@@ -1,4 +1,143 @@
 {
+ "gems89-bstp40-20261024-2e7e8a8f-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "gems89-bstp40-20261024-2e7e8a8f-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "4b86c16d11f13ff0"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "gems89-bstp40-20261024-2e7e8a8f.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "gems89-bstp40-20261024-2e7e8a8f.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "2e7e8a8f52ccf46d"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
  "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif": {
   "ok": true,
   "encoding": "zeros",
@@ -36,6 +175,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -44,16 +188,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -66,17 +200,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "33372a75e04f486b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "gemsdoe89-bh-rtp-habc-20261024-d7e1507c.tif": {
   "ok": true,
@@ -115,19 +247,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -140,17 +267,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "68768801a9a6a48a"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377-zeros.tif": {
   "ok": true,
@@ -189,6 +314,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -197,16 +327,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -219,17 +339,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "a42e5d1a160c2429"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif": {
   "ok": true,
@@ -268,19 +386,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -293,17 +406,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "2dc19377e7592f40"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28-zeros.tif": {
   "ok": true,
@@ -342,6 +453,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -350,16 +466,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -372,17 +478,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "131990f1ffa09068"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat10away-20261023-f7b8aa28.tif": {
   "ok": true,
@@ -421,19 +525,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -446,17 +545,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "f7b8aa2888bbe320"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat20-20261023-4d229938-zeros.tif": {
   "ok": true,
@@ -495,6 +592,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -503,16 +605,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -525,17 +617,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "6b53f30555557271"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-CONC5kmcat20-20261023-4d229938.tif": {
   "ok": true,
@@ -574,19 +664,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -599,17 +684,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "4d2299386c1bfd8f"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6-zeros.tif": {
   "ok": true,
@@ -648,6 +731,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -656,16 +744,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -678,17 +756,15 @@
     "detail": "raster 33889 vs mask 33889"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "4cb61fd574b78407"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm10rand-20261023-7a4c49b6.tif": {
   "ok": true,
@@ -727,19 +803,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -752,17 +823,15 @@
     "detail": "raster 33889 vs mask 33889"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "7a4c49b6999421b1"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm10uniq-20261023-beed130f-zeros.tif": {
   "ok": true,
@@ -801,6 +870,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -809,16 +883,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -831,17 +895,15 @@
     "detail": "raster 33889 vs mask 33889"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "312c7ab47c3a1a02"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif": {
   "ok": true,
@@ -880,19 +942,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -905,17 +962,15 @@
     "detail": "raster 33889 vs mask 33889"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "beed130f09a9c7e2"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213-zeros.tif": {
   "ok": true,
@@ -954,6 +1009,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -962,16 +1022,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -984,17 +1034,15 @@
     "detail": "raster 30123 vs mask 30123"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e00a58e58194574b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-MASSm20uniq-20261023-87ec6213.tif": {
   "ok": true,
@@ -1033,19 +1081,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1058,17 +1101,432 @@
     "detail": "raster 30123 vs mask 30123"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "87ec62139e777711"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150add-20261024-5a09404f-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "301a2b1303e604b050ec33819475542f1191bc0a007eb33a9556269e38f67783",
+  "n_dots": 39069,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150add-20261024-5a09404f-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "39069 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 39069 vs mask 39069"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "301a2b1303e604b0"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "5a09404fa69f4dd938fdd0926e55c8862754378ed1e35319d293979bed850846",
+  "n_dots": 39069,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "39069 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 39069 vs mask 39069"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "5a09404fa69f4dd9"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150link-20261024-eded7713-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "07b6ff8def29cb4ac7256c6bd08f3cc38f89ebfbc34a5797dd94badfad072eea",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150link-20261024-eded7713-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "07b6ff8def29cb4a"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150link-20261024-eded7713.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "eded7713caeece97eb18f26c7c16649d0a4d1ee2d1e459875b92c69b431a9559",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150link-20261024-eded7713.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "eded7713caeece97"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "8eeabdac2280f89a0da14f2e3b3dfcadc702a896ae6b789a3afcee909e92f992",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "8eeabdac2280f89a"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "8cfcbe4cf2b8696df7dda3726757cc0f9d5757b6016019f41ff2832a304d48ca",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "8cfcbe4cf2b8696d"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-TRACKBtop12-20261024-fb156257-zeros.tif": {
   "ok": true,
@@ -1107,6 +1565,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1115,16 +1578,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1137,17 +1590,15 @@
     "detail": "raster 145 vs mask 145"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "62e512d6b4b2da28"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif": {
   "ok": true,
@@ -1186,19 +1637,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1211,17 +1657,15 @@
     "detail": "raster 145 vs mask 145"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "fb15625714547a19"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040-zeros.tif": {
   "ok": true,
@@ -1260,6 +1704,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1268,16 +1717,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1290,17 +1729,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "d914868666c45707"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif": {
   "ok": true,
@@ -1339,19 +1776,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1364,17 +1796,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "259ea040c818a26a"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136-zeros.tif": {
   "ok": true,
@@ -1413,6 +1843,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1421,16 +1856,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1443,17 +1868,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "b1cde6898bf225de"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif": {
   "ok": true,
@@ -1492,19 +1915,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1517,17 +1935,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "bcade136bc98295f"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4-zeros.tif": {
   "ok": true,
@@ -1566,6 +1982,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1574,16 +1995,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1596,17 +2007,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "050572eb870694aa"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4.tif": {
   "ok": true,
@@ -1645,19 +2054,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1670,17 +2074,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "357b4ac4f3384e3b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m3765-20261023-da3a4886-zeros.tif": {
   "ok": true,
@@ -1719,6 +2121,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1727,16 +2134,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1749,17 +2146,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "a45ab1e7935e5a44"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m3765-20261023-da3a4886.tif": {
   "ok": true,
@@ -1798,19 +2193,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1823,17 +2213,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "da3a488620e9f443"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m5648-20261023-51ba9656-zeros.tif": {
   "ok": true,
@@ -1872,6 +2260,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1880,16 +2273,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -1902,17 +2285,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "139ebb93cf8f072e"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m5648-20261023-51ba9656.tif": {
   "ok": true,
@@ -1951,19 +2332,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -1976,17 +2352,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "51ba9656e1126af8"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m7531-20261023-1e857586-zeros.tif": {
   "ok": true,
@@ -2025,6 +2399,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2033,16 +2412,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2055,17 +2424,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "0834d27552179a78"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-conc2km-b50-t33-m7531-20261023-1e857586.tif": {
   "ok": true,
@@ -2104,19 +2471,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2129,17 +2491,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "1e8575866a39b8e7"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r10-20261023-366c87ca-zeros.tif": {
   "ok": true,
@@ -2178,6 +2538,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2186,16 +2551,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2208,17 +2563,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e776fc20873321f7"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r10-20261023-366c87ca.tif": {
   "ok": true,
@@ -2257,19 +2610,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2282,17 +2630,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "366c87ca62040215"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15-20261023-6aa774ce-zeros.tif": {
   "ok": true,
@@ -2331,6 +2677,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2339,16 +2690,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2361,17 +2702,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e3b6c2ecfb65c109"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15-20261023-6aa774ce.tif": {
   "ok": true,
@@ -2410,19 +2749,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2435,17 +2769,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "6aa774ce21fe10b3"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15s-20261023-5f0ae851-zeros.tif": {
   "ok": true,
@@ -2484,6 +2816,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2492,16 +2829,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2514,17 +2841,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "3b2cbfd13dd4d3fa"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-relief-r15s-20261023-5f0ae851.tif": {
   "ok": true,
@@ -2563,19 +2888,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2588,17 +2908,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "5f0ae8512e44940b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p00-20261023-1add5aa6-zeros.tif": {
   "ok": true,
@@ -2637,6 +2955,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2645,16 +2968,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2667,17 +2980,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "25e17d968ef49833"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p00-20261023-1add5aa6.tif": {
   "ok": true,
@@ -2716,19 +3027,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2741,17 +3047,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "1add5aa60487c529"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif": {
   "ok": true,
@@ -2790,6 +3094,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2798,16 +3107,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2820,17 +3119,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "0b4fad309e26eb49"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif": {
   "ok": true,
@@ -2869,19 +3166,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -2894,17 +3186,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "2916ec2d31ebc9c2"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif": {
   "ok": true,
@@ -2943,6 +3233,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2951,16 +3246,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -2973,17 +3258,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "8592f23b22a29f72"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif": {
   "ok": true,
@@ -3022,19 +3305,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3047,17 +3325,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "384435e608fdc6b4"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851-zeros.tif": {
   "ok": true,
@@ -3096,6 +3372,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3104,16 +3385,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3126,17 +3397,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "3a6e19251013126e"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851.tif": {
   "ok": true,
@@ -3175,19 +3444,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3200,17 +3464,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e14748519b3fb35c"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25-zeros.tif": {
   "ok": true,
@@ -3249,6 +3511,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3257,16 +3524,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3279,17 +3536,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "0695a30587b9805b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif": {
   "ok": true,
@@ -3328,19 +3583,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3353,17 +3603,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "afc60a25d0ceb282"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae-zeros.tif": {
   "ok": true,
@@ -3402,6 +3650,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3410,16 +3663,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3432,17 +3675,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "0fe545f9de5723e2"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif": {
   "ok": true,
@@ -3481,19 +3722,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3506,17 +3742,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "69db3aae7da2311d"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6-zeros.tif": {
   "ok": true,
@@ -3555,6 +3789,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3563,16 +3802,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3585,17 +3814,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "938aee5bc705ff5e"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6.tif": {
   "ok": true,
@@ -3634,19 +3861,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3659,17 +3881,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "373c8fd67ec46421"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f-zeros.tif": {
   "ok": true,
@@ -3708,6 +3928,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3716,16 +3941,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3738,17 +3953,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "91bed5aad415fb95"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif": {
   "ok": true,
@@ -3787,19 +4000,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3812,17 +4020,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "dc578b2f556dfd94"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d-zeros.tif": {
   "ok": true,
@@ -3861,6 +4067,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3869,16 +4080,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -3891,17 +4092,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "fd75dd4be8f193f1"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif": {
   "ok": true,
@@ -3940,19 +4139,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -3965,17 +4159,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "5cccfc1d2174677b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a-zeros.tif": {
   "ok": true,
@@ -4014,6 +4206,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4022,16 +4219,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -4044,17 +4231,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "d18297a5192f0590"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-alongstrike-20261023-3b263c7a.tif": {
   "ok": true,
@@ -4093,19 +4278,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -4118,17 +4298,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "3b263c7aa90ee092"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-lattice-20261023-454c9098-zeros.tif": {
   "ok": true,
@@ -4167,6 +4345,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4175,16 +4358,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -4197,17 +4370,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "56c77db28955ebaa"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-lattice-20261023-454c9098.tif": {
   "ok": true,
@@ -4246,19 +4417,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -4271,17 +4437,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "454c909877ddd82b"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-poisson-20261023-ff167173-zeros.tif": {
   "ok": true,
@@ -4320,6 +4484,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4328,16 +4497,6 @@
     "gate": "no_nan_anywhere",
     "ok": true,
     "detail": "0 NaN px"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "zeros_outside_footprint",
-    "ok": true,
-    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -4350,17 +4509,15 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "f04da689f1da475c"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  },
  "h33-h33-2-b2-spacing-poisson-20261023-ff167173.tif": {
   "ok": true,
@@ -4399,19 +4556,14 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
-   },
-   {
-    "gate": "no_nan_inside_footprint",
-    "ok": true,
-    "detail": "0 NaN px inside"
-   },
-   {
-    "gate": "nan_outside_footprint",
-    "ok": true,
-    "detail": "0 finite px outside"
    },
    {
     "gate": "unit_dots",
@@ -4424,16 +4576,215 @@
     "detail": "raster 37654 vs mask 37654"
    },
    {
-    "gate": "zero_catalogue_mass",
-    "ok": true,
-    "detail": "0 dots on catalogue pixels"
-   },
-   {
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "ff167173aa2b8e45"
    }
   ],
-  "skipped": []
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h89-annulus-splay-20261024-e9b2bec1-candidate.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "e9b2bec11c2c60cdb674e8d322d8083c2c28fd14dd6a6824eb7e747b629a632a",
+  "n_dots": 38897,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h89-annulus-splay-20261024-e9b2bec1-candidate.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "38897 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 38897 vs mask 38897"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "e9b2bec11c2c60cd"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h89-condedge-s2-4-20261024-829cc418-candidate.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+  "n_dots": 38897,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h89-condedge-s2-4-20261024-829cc418-candidate.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "38897 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 38897 vs mask 38897"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "829cc41856540a93"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
+ },
+ "h89-pfpeaks-20261024-18f0316a-candidate.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "18f0316a457fb3af49f1383c68f3687f9727bea0f7e97b6cdb598f1ac3c91edd",
+  "n_dots": 38897,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h89-pfpeaks-20261024-18f0316a-candidate.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "38897 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 38897 vs mask 38897"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "18f0316a457fb3af"
+   }
+  ],
+  "skipped": [
+   "zero_catalogue_mass",
+   "catalogue_clearance"
+  ]
  }
 }
