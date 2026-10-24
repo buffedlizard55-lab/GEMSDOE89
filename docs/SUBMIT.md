@@ -1,4 +1,4 @@
-# SUBMIT — GEMSDOE89 (28-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (31-pair queue, 2026-10-24)
 
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
@@ -33,14 +33,16 @@ This pair reads **selectivity vs dose** (only the gate differs). Gated and gatel
 different MODEL scenario fractions (`IRREGULARITIES.md` item 15): compare the two **receipts**,
 never the central MODELs. `1p0px-g0p01` (`2916ec2d`, +0.0076) is the fixed-gate window control.
 
-## Phase-2 TRACKB product (NOT for upload as a scored slot)
+## Phase-2 TRACKB products (held off weekly slots unless human decides; Week 5–6 blind-final candidates)
 
-| field | value |
-|---|---|
-| **GeoJSON** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` (12 traces, EPSG:32611) |
-| **raster** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif` (145 member dots; sha256 `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370`) |
-| **evidence** | `ledger/TRACKB_TRACES.md` (one paragraph per trace); card `ledger/MECHANISM_CARDS_TRACKB.md` |
-| **warning** | Phase-2 expert-review product only. Scored as-is it would fall far below R0 (145/37,654 dots). Do **not** spend a weekly slot on it. |
+Dual-phase R0-consolidating 150-trace builds (`3.76%–4.21%` of R0 changed, preserving Phase 1 DTI while consolidating `150` strike-consistent `>= 1.00 km` continuous fault traces + RFC 7946 WGS84 `LineString` GeoJSON dossiers + per-trace geologist paragraphs in `docs/TRACKB_EVIDENCE.md`; cards in `ledger/MECHANISM_CARDS.md` Part IX):
+
+| role | raster (`.tif`) & dossier (`.geojson`) | sha256 (`.tif` / `-zeros.tif`) | form note (`<= 140` chars) | predicted (`MODEL`) |
+|---|---|---|---|---|
+| **Phase 2 Primary (zero R0 drop)** | `releases/h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.tif`<br>`releases/h33-h33-2-b2-TRACKBt150add-20261024-5a09404f.geojson` | `5a09404ffe905e3a3d809ba0cb1ebcd5dc2ccdb66f9d2911ef9bc6ab2c3034e9` / `f28c74a5d6de08420c123d58e2f63087d4eb0a54f744348d59bf8c660e37bf62` | `R0 h33-h33-2-b2; TRACKB t150add: +1415px (3.8%) 150 >=1km traces, n=39069; P1 +0.000 / P2 +0.012 MODEL` | P1 **+0.000** (`−0.004…+0.004`)<br>P2 **+0.012** (`+0.004…+0.024`) |
+| **Phase 2 Mass-Neutral (`S=37,654`)** | `releases/h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.tif`<br>`releases/h33-h33-2-b2-TRACKBt150swap-20261024-8cfcbe4c.geojson` | `8cfcbe4ca7da5c0493020d897c10a771422894b3b7546848215c260e736ba1b9` / `4766d3431c1394f47ec441fa5d5b3e7f3a18d71a79d7edbd21922521600c554d` | `R0 h33-h33-2-b2; TRACKB t150swap: 1415px (3.8%) >=1km traces swap speckles, n=37654; P1 -0.002 / P2 +0.011 MODEL` | P1 **−0.002** (`−0.008…+0.004`)<br>P2 **+0.011** (`+0.002…+0.022`) |
+| **Phase 2 Wash-Bridged (`S=37,654`)** | `releases/h33-h33-2-b2-TRACKBt150link-20261024-eded7713.tif`<br>`releases/h33-h33-2-b2-TRACKBt150link-20261024-eded7713.geojson` | `eded7713a9f65cc95c5049e4742080643ab00accd5c04296f4fd3bd756396b04` / `6a00e101f442a080ba945a471b1df637af453540a57f9a09f635da4158b1f24f` | `R0 h33-h33-2-b2; TRACKB t150link: 1586px (4.2%) wash-bridged >=1km traces swap speckles, n=37654; P1 -0.003 / P2 +0.009 MODEL` | P1 **−0.003** (`−0.010…+0.005`)<br>P2 **+0.009** (`+0.001…+0.021`) |
+| **Review-Only 12-Trace Extract (DO NOT SUBMIT FOR SCORE)** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif`<br>`releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` | `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370` / `2e3c8fa115e096f6b369766323e425f6d313ef9372fa70d7524bfbe0a16b0266` | `R0 h33-h33-2-b2; TRACKB top12: 12 strike-consistent traces >=1km, 145 member dots, GeoJSON; Phase 2 only` | `n/a` (`145` dots only; `ledger/TRACKB_TRACES.md`) |
 
 ## Rest of the gated queue (`ledger/submissions.csv`, `status = BUILT`)
 
@@ -51,17 +53,18 @@ never the central MODELs. `1p0px-g0p01` (`2916ec2d`, +0.0076) is the fixed-gate 
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
 - **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 56 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 62 files re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×56 files** (`28` `.tif` + `28` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×56 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×28 pairs** (SNAP / CONC / RELIEF / MASS / SPACING = 37,654; TRACKB = 145) |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×56 files** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`143` ledger rows: `28` `GEMSDOE89` + `115` upstream)** |
+| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×62 files** (`31` `.tif` + `31` `-zeros.tif`) |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×62 files** |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×31 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/SNAP/CONC/RELIEF/SPACING = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×62 files** |
+| Phase-2 GeoJSON dossiers (`releases/*TRACKB*.geojson`, all traces `>= 1.0 km` + geologist evidence) | **PASS ×4 GeoJSONs** |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`146` ledger rows: `31` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`, 2026-10-24)** |
-| unit tests / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
+| unit tests (`86 passed`) / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
 
 Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`,
 `registry/build_report_snap_directional.json`, `registry/report_only_status.json`.

@@ -4,10 +4,16 @@
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **28 pairs / 56 GeoTIFFs**, all `BUILT` and format/data-gated
+- **Built, unscored:** **31 pairs / 62 GeoTIFFs + 4 GeoJSON dossiers**, all `BUILT` and format/data-gated
   (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
-  `TRACKB` 1 Phase-2 pair). No `(parent, axis, value)` repeat anywhere in the ledger.
-- **This session (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
+  `TRACKB` 4 Phase-2 pairs). No `(parent, axis, value)` repeat anywhere in the ledger.
+- **This session (2026-10-24) — Dual-Phase `TRACKB` 150-trace R0-consolidating arms**
+  (`ledger/MECHANISM_CARDS.md` Part IX, `docs/TRACKB_EVIDENCE.md`; Phase 2 $250k — **not** weekly-slot candidates unless the human decides):
+  - `TRACKBt150add` (`5a09404f`, `+1,415/-0` px = `3.76%`, `39,069` px, `150` unbroken `≥ 1.00 km` traces / `225.7 km` chord + RFC 7946 `.geojson`; `P1 +0.000` / `P2 +0.012 MODEL`),
+  - `TRACKBt150swap` (`8cfcbe4c`, `+1,415/-1,415` px = `3.76%`, `37,654` px, 1-for-1 speckle-funded control; `P1 −0.002` / `P2 +0.011 MODEL`),
+  - `TRACKBt150link` (`eded7713`, `+1,586/-1,586` px = `4.21%`, `37,654` px, `249.1 km` chord with `100` `≤ 620 m` wash/step-over gaps bridged; `P1 −0.003` / `P2 +0.009 MODEL`),
+  plus earlier review-only `TRACKBtop12` (`fb156257`, `145` dots, `12` traces).
+- **Earlier today (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
   Part VIII): `dirfw2p0` (`dc578b2f`, 20,853 dots moved footwall-only, mean 1.738 px),
   its exact mirror `dirhw2p0` (`5cccfc1d`, 21,399 moved hanging-wall-only, mean 1.737 px),
   and the dose `dirfw1p0` (`373c8fd6`, 16,632 moved, mean 1.000 px). Count fixed at 37,654,
@@ -26,9 +32,7 @@
   −0.006…+0.018), `CONC5kmcat10` (`2dc19377`, +0.009) and their away/dose arms;
   `RELIEF` `r10`/`r15`/`r15s`; `MASS` `m10uniq`/`m10rand`/`m20uniq`;
   `SPACING` `alongstrike`/`poisson`/`lattice`; upstream `PRUNE` refills at 1–4 px.
-- **Phase-2 `TRACKB` (not a weekly-slot candidate):** `fb156257` GeoJSON + 145-dot raster,
-  12 strike-consistent traces ≥ 1 km (41.3 km total), per-trace evidence in
-  `ledger/TRACKB_TRACES.md`.
+- **Phase-2 `TRACKB` (held off weekly slots unless human decides):** dual-phase R0-preserving `t150add` (`5a09404f`), `t150swap` (`8cfcbe4c`), and `t150link` (`eded7713`) (`150` traces `≥ 1 km` + `.geojson` dossiers in `docs/TRACKB_EVIDENCE.md`; optional Week-5 confirmation before blind final), plus review-only `top12` (`fb156257`, `ledger/TRACKB_TRACES.md`).
 - **Report only, never gates:** catalogue hide-and-recover CIs overlap R0 for every arm;
   leakage canary `max AUC = 0.665 < 0.90`; SGMC skipped (UNVERIFIED pin).
 - **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date; no other
