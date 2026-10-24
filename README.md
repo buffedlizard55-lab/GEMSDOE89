@@ -25,8 +25,8 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 
 ---
 
-> **DOWNLOAD STATUS: ALL SESSION CANDIDATES DO NOT SUBMIT.** This session ran three holdout experiments
-> (ANNULUS, PF-PEAKS, TC-UNION) against the spatially blocked segment holdout. Every candidate scored far
+> **DOWNLOAD STATUS: ALL CANDIDATES DO NOT SUBMIT.** The project includes three holdout experiments
+> (ANNULUS, PF-PEAKS, TC-UNION) plus a v3 re-evaluation of the existing COND-EDGE lane. Every candidate scored far
 > below the visible-only R0 baseline (HOLDOUT-DTI 0.161230 [0.142648, 0.180061]); none is cleared for a
 > competition slot. All GeoTIFFs below are format-validated research artifacts with verdict `negative` —
 > **do not upload them to DrivenData**. No organizer submission receipt exists for any file in this repo,
@@ -41,7 +41,7 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 >
 > Run cards: `registry/run_card_annulus_20261024.json`, `registry/run_card_pfpeaks_20261024.json`,
 > `registry/run_card_tcunion_20261024.json`, `registry/run_card_condedge_20261024.json`.
-> Local format gates pass for the emitted TIFs; encodings vary. The current COND-EDGE artifact is all-finite `[0,1]` with zero outside and no nodata tag. This does not prove organizer acceptance. Its uniqueness comparison is local only (36 geometries / 69 paths); public remote registry coverage and current-best evidence remain incomplete.
+> Local format gates pass for the emitted TIFs; encodings vary. The current COND-EDGE artifact is all-finite `[0,1]` with zero outside and no nodata tag. This does not prove organizer acceptance. Its uniqueness comparison is local only (38 geometries / 71 paths; 233 ledger hashes checked); public remote registry coverage and current-best evidence remain incomplete.
 > [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
 
 - **Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live **0.2778 = CLAIM** (no organizer receipt in this repo). Its spatial holdout on this data is 0.161230 [0.142648, 0.180061], the best local comparator this session could beat — no candidate did.
@@ -49,7 +49,7 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 - **Candidate:** `h89-condedge-s2-4-20261024-b5e502f0-zeros.tif` — SHA-256 `b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45`.
 - **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v3`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score. v3 corrects tile-cropped distance transforms by scoring disjoint tile cores using full-map distance context.
 - **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
-- **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
+- **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 233 other ledger hash values. No duplicate-stop. Geometry comparison covers 38 locally available registry masks / 71 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
 - **Local format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, all cells finite in `[0,1]`, zero-filled outside the sample's finite footprint with no nodata tag, and zero dots on exact known-fault pixels. Organizer acceptance remains unverified.
 - **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
 
@@ -66,20 +66,21 @@ The local evidence verifies R0's geometry and file identity, not the cause of it
 ## Project experiment cap — three new lanes, all negative; existing COND-EDGE was re-evaluated (budget: 3 experiments / 2 hours)
 
 The three new lanes were tested in order, each reusing the shared stacked holdout (`gemsdoe/holdout.py`) and writer
-(`tools/submission_writer.py`) on pinned, SHA-256-verified inputs. COND-EDGE is a previously run method re-evaluated after fixing the holdout distance-transform pooling; the re-encoding is not a new experiment:
+(`tools/submission_writer.py`) on pinned, SHA-256-verified inputs. Their historical numbers are local HOLDOUT-DTI,
+evaluator v1, 59,168 withheld-positive pixels, 95% spatial-tile bootstrap CIs (not organizer scores). COND-EDGE is a previously run method re-evaluated after fixing the holdout distance-transform pooling; the re-encoding is not a new experiment:
 
 1. **COND-EDGE** (existing lane, re-evaluated with corrected v3): band-17 `cond_surf` multi-scale conductivity edges.
    HOLDOUT-DTI **0.049875 [0.036830, 0.061751]** vs R0 **0.161230 [0.142648, 0.180061]** — negative; current file is finite-zero encoded, format-only correction.
-2. **ANNULUS** (this session): potential-field ridge peaks (bands 3 `tmi_hg` + 18 `iso_grav_anom_hg`,
+2. **ANNULUS** (prior merged run, evaluator v1): potential-field ridge peaks (bands 3 `tmi_hg` + 18 `iso_grav_anom_hg`,
    max multi-scale Gaussian gradient, sigma 2/4 px) restricted to the 200–800 m annulus around visible
-   faults — splay/stepover targeting. Holdout **0.001202 [0.000455, 0.002061]** — negative. Diagnostics
+   faults — splay/stepover targeting. HOLDOUT-DTI **0.001202 [0.000455, 0.002061]** — negative. Diagnostics
    showed held-out truth sits 8–12 km from visible faults, so local annulus gating placed dots too far
    from held-out segments.
-3. **PF-PEAKS** (this session): same ridge surface, fixed-mass spaced peaks across the whole visible-eligible
-   image with R0's > 2 px visible-fault prune — strength-weighted ridge targeting. Holdout
+3. **PF-PEAKS** (prior merged run, evaluator v1): same ridge surface, fixed-mass spaced peaks across the whole visible-eligible
+   image with R0's > 2 px visible-fault prune — strength-weighted ridge targeting. HOLDOUT-DTI
    **0.068825 [0.042551, 0.095776]** — negative. All single-feature leakage canaries ≤ 0.5365 (< 0.90).
-4. **TC-UNION** (this session): max gradient over bands 3 `tmi_hg`, 6 `tc` (tilt/total curvature) and
-   18 `iso_grav_anom_hg`, same placement constraints. Holdout **0.070181 [0.043417, 0.097668]** —
+4. **TC-UNION** (prior merged run, evaluator v1): max gradient over bands 3 `tmi_hg`, 6 `tc` (tilt/total curvature) and
+   18 `iso_grav_anom_hg`, same placement constraints. HOLDOUT-DTI **0.070181 [0.043417, 0.097668]** —
    negative; additionally blocked by the registry duplicate guard (100% of dots within 3 px of the
    PF-PEAKS raster) so no TIF was emitted.
 
@@ -89,7 +90,7 @@ ORGANIZER-CONFIRMED** — no submission-page receipt is stored in this repositor
 potential-field ridge skeleton (TMI + gravity horizontal gradient), sparse fixed-mass placement
 (37,654 dots), and the catalogue prune (dots > 2 px from known faults); no single result can establish
 the causal mechanism. **We cannot generate a verified submission that beats 0.2778 in this session:** all
-three holdout lanes lost to R0 decisively (paired-delta CIs exclude 0), and the parallel-run protocol
+the three new lanes and corrected COND-EDGE result lost to R0 decisively (paired-delta CIs exclude 0), and the parallel-run protocol
 forbids spending a weekly slot on anything that has not beaten the incumbent on holdout. Negative
 results are the deliverable: no file below is cleared to submit, and no slot was used.
 

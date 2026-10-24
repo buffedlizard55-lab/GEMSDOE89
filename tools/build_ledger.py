@@ -626,6 +626,53 @@ def _trackb_150_rows() -> list[dict]:
 
 
 
+def _negative_run_card_rows() -> list[dict]:
+    """Register emitted negative research artifacts recorded by run cards."""
+    rows: list[dict] = []
+    for lane in ("annulus", "pfpeaks"):
+        card_path = ROOT / "registry" / f"run_card_{lane}_20261024.json"
+        if not card_path.exists():
+            continue
+        card = json.loads(card_path.read_text())
+        raster = card.get("raster") or {}
+        if not raster.get("path") or not raster.get("sha256"):
+            continue
+        holdout = card["holdout_protocol"]
+        candidate = holdout["candidate"]
+        baseline = holdout.get("visible_only_R0_baseline", {})
+        delta = holdout["paired_delta_candidate_minus_R0"]
+        validator = raster.get("validator") or {}
+        gate_names = {gate.get("gate") for gate in validator.get("gates", [])}
+        encoding = ("zeros" if "zeros_outside_footprint" in gate_names else
+                    "nan" if "nan_outside_footprint" in gate_names else "unknown")
+        sha = raster["sha256"]
+        name = Path(raster["path"]).stem
+        note = card["submission"]["note"]
+        rows.append({
+            "id": name, "site": "GEMSDOE89", "name": name, "score": "",
+            "evidence_class": "HOLDOUT-DTI", "encoding": encoding,
+            "n_dots": validator.get("dot_count", ""), "pct_changed": "",
+            "sha8": sha[:8], "sha256": sha, "sha256_zeros": "",
+            "parent": "h33-h33-2-b2", "axis": card.get("experiment", lane.upper()),
+            "value": lane, "status": "NEGATIVE (do not submit)", "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": (
+                f"{delta['value']:+.6f} HOLDOUT-DTI {holdout['evaluator_version']}; "
+                f"{candidate['n_withheld_positive_pixels']} withheld positives; "
+                f"delta 95% CI [{delta['ci95']['lower_95']:+.6f}, "
+                f"{delta['ci95']['upper_95']:+.6f}]"
+            ),
+            "date": "2026-10-24", "form_note": note,
+            "notes": (
+                f"Negative research artifact; candidate HOLDOUT-DTI {candidate['value']:.6f}; "
+                f"visible-only R0 {baseline.get('value', float('nan')):.6f}; "
+                "local format and registry checks only; no organizer receipt; DO NOT SUBMIT."
+            ),
+            "source": "GEMSDOE89",
+        })
+    return rows
+
+
 def _condedge_rows() -> list[dict]:
     """Register the one COND-EDGE TIF without treating holdout as a live score."""
     card_path = ROOT / "registry" / "run_card_condedge_20261024.json"
@@ -693,6 +740,7 @@ def main():
         + _trackb_rows()
         + _bstp_rows()
         + _trackb_150_rows()
+        + _negative_run_card_rows()
         + _condedge_rows()
     )
     for r in new_rows:

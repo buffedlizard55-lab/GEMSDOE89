@@ -321,8 +321,8 @@
       "duplicate_stop": false,
       "max_abs_surface_spearman": 0.03868795455191069,
       "max_dot_overlap_3px": 0.0,
-      "n_reference_geometries": 36,
-      "n_reference_paths": 69,
+      "n_reference_geometries": 38,
+      "n_reference_paths": 71,
       "sample_pixels": 150000,
       "surface_tested": "before any dot placement",
       "top_correlations": [
@@ -382,7 +382,7 @@
     },
     "exact_sha256_against_ledger": {
       "candidate_sha256": "b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45",
-      "checked_ledger_hash_values": 229,
+      "checked_ledger_hash_values": 233,
       "unique": true
     },
     "postwrite": {
@@ -390,8 +390,8 @@
       "duplicate_stop": false,
       "max_abs_surface_spearman": 0.012808977551889936,
       "max_dot_overlap_3px": 0.1950021852585032,
-      "n_reference_geometries": 36,
-      "n_reference_paths": 69,
+      "n_reference_geometries": 38,
+      "n_reference_paths": 71,
       "sample_pixels": 150000,
       "surface_tested": "disk-reread final prediction raster",
       "top_correlations": [
@@ -408,12 +408,12 @@
           "registry_raster": "data/d28.tif"
         },
         {
-          "r_spearman": 0.003365877828359586,
-          "registry_raster": "releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce-zeros.tif"
+          "r_spearman": -0.0035493769078313955,
+          "registry_raster": "releases/h89-pfpeaks-20261024-18f0316a-candidate.tif"
         },
         {
-          "r_spearman": 0.003357498578205697,
-          "registry_raster": "releases/h33-h33-2-b2-relief-r10-20261023-366c87ca-zeros.tif"
+          "r_spearman": 0.003365877828359586,
+          "registry_raster": "releases/h33-h33-2-b2-relief-r15-20261023-6aa774ce-zeros.tif"
         }
       ],
       "top_overlaps": [
@@ -449,8 +449,8 @@
       "duplicate_stop": false,
       "max_abs_surface_spearman": 0.03868795455191069,
       "max_dot_overlap_3px": 0.1950021852585032,
-      "n_reference_geometries": 36,
-      "n_reference_paths": 69,
+      "n_reference_geometries": 38,
+      "n_reference_paths": 71,
       "sample_pixels": 150000,
       "surface_tested": "pre-placement conductivity-edge surface",
       "top_correlations": [

@@ -3,8 +3,9 @@
 
 The root HTML is authoritative. Some older Pages settings use ``main/docs``;
 others use ``main/root``. This generator keeps both entry points equivalent
-without manually maintaining divergent HTML. It also copies only the two
-research TIFs and their run cards needed by the docs-based deployment.
+without manually maintaining divergent HTML. It copies the current COND-EDGE
+research TIF plus the separately registered research assets and run cards needed
+by the docs-based deployment.
 """
 from __future__ import annotations
 

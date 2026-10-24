@@ -2,7 +2,7 @@
 
 ## Executive status — read before downloading
 
-**All candidates: DO NOT SUBMIT.** ANNULUS, PF-PEAKS and TC-UNION have historical v1 HOLDOUT-DTI results; COND-EDGE was re-evaluated with corrected v3. Every experiment is negative against visible-only R0 (`0.161230 [0.142648, 0.180061]`). No candidate is cleared for a slot. Local format PASS is not organizer acceptance; the current COND-EDGE zeros encoding has no portal receipt, and global registry/current-best evidence is incomplete.
+**All candidates: DO NOT SUBMIT.** ANNULUS, PF-PEAKS and TC-UNION have historical `GEMSDOE89-spatial-segment-holdout-v1` HOLDOUT-DTI results; COND-EDGE was re-evaluated with corrected `GEMSDOE89-spatial-segment-holdout-v3`. Both use 59,168 withheld positives and 95% spatial-tile CIs; visible-only R0 is HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`. Every experiment is negative. No candidate is cleared for a slot. Local format PASS is not organizer acceptance; the current COND-EDGE zeros encoding has no portal receipt, and global registry/current-best evidence is incomplete.
 
 | candidate | run card | holdout DTI (95% CI) vs R0 | format | download / submit status |
 |---|---|---|---|---|
@@ -84,7 +84,11 @@ never the central MODELs. `1p0px-g0p01` (`2916ec2d`, +0.0076) is the fixed-gate 
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
 - **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 56 files re-read from disk)
+## Current local validation (2026-10-24)
+
+`tools/validate_raster.py` re-read all **67 release TIFs** and passed local grid/value/catalogue gates; `tools/check_ledger.py` reports **150 rows** (35 GEMSDOE89, 115 collapsed upstream) consistent. The current COND-EDGE file is an all-finite zeros encoding. These are local file/ledger checks only, not organizer acceptance or a submission receipt. `registry/submission_readiness.json` remains **DO NOT SUBMIT**.
+
+## Historical format-receipt snapshot (superseded by the current 67-file validator run)
 
 | gate | result |
 |---|---|

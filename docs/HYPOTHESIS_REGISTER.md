@@ -31,6 +31,8 @@ leakage canaries max at 0.5698 (<0.90). Local uniqueness checks do not cover rem
 | PF-PEAKS | b3 + b18 gradient ridges, fixed-mass spaced peaks, R0's >2 px visible-fault prune | 0.068825 [0.042551, 0.095776] | −0.092405 [−0.136201, −0.049139] | `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | negative, DO NOT SUBMIT |
 | TC-UNION | b3 `tmi_hg` + b6 `tc` (tilt/total curvature) + b18 `iso_grav_anom_hg` gradient ridges, same prune | 0.070181 [0.043417, 0.097668] | −0.091049 [−0.135214, −0.047593] | none emitted — blocked as duplicate of PF-PEAKS (100% of dots within 3 px) | negative |
 
+COND-EDGE v3 registry/format audit: pre-placement surface max |Spearman ρ| 0.0387; disk-reread raster max 0.0128; highest final-dot overlap within 3 px 19.50%. It covers 38 local geometries / 71 paths, not every remote public raster. The current TIF passes local gates (one float32 band, EPSG:32611, 3730×3292, template grid, all finite [0,1], zeros outside footprint, no nodata tag, exact known-fault mask). This is not organizer acceptance; global coverage and current-best comparison are incomplete. Run card: `registry/run_card_condedge_20261024.json`.
+
 Interpretation: held-out truth sits 8–12 km from visible faults, so only the geophysical ridge surface
 carries usable local signal; R0's skeleton placement is the strongest local baseline and none of the
 tested surfaces improved on it. Per the parallel-run protocol, promotion to a weekly slot requires a
