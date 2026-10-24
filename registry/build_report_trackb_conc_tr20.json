@@ -7,7 +7,7 @@
   "dose": "20%",
   "predicted_change_text": "-0.012 (MODEL central at 2.5px cross-strike jitter; band -0.091..-0.005; ridge-locked sigma=0 -0.091, kernel-radius sigma=3 -0.005). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
  },
- "git_sha": "af000c6c39c34bd880285b79e3cf4869f326f21a",
+ "git_sha": "d970171f49add2d2de866a68155afcec9c34c0ad",
  "parent": "h33-h33-2-b2",
  "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
  "seed": 20261023,
@@ -187,9 +187,11 @@
   "pct_changed_in_1_50": true
  },
  "phase2_inventory": {
-  "geojson": "releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson",
+  "geojson_full": "releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson",
+  "geojson_per_value": "releases/h33-h33-2-b2-TRACKB-TR20-20261024-5da46626.geojson",
   "atlas": "evidence/TRACKB_trace_atlas_20261024.md",
-  "n_traces": 1520
+  "n_traces": 1520,
+  "n_receiving_traces": 734
  },
  "report_only": {
   "proxy_variant": {
@@ -251,5 +253,5 @@
   }
  },
  "form_note": "h33-h33-2-b2; TRACKB tr20: 7531 (20%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.012",
- "seconds": 4.69
+ "seconds": 6.71
 }

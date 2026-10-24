@@ -255,6 +255,72 @@ def build_geojson(traces, r0, d_cat, bands_comp, footprint, out_path: Path, atla
     return len(features)
 
 
+def variant_geojson(rid, traces, r0, d_cat, comp_bands, added, out_dir):
+    """Emit releases/<rid>.geojson: the qualifying >=1 km strike-consistent traces
+    whose +-300 m corridor actually received >=1 relocated dot in this variant.
+    Satisfies tools/check_ledger.py's TRACKB GeoJSON gate (LineStrings >= 1 km,
+    one evidence paragraph per trace). Returns (n_features, path).
+    """
+    from gemsdoe.mass import unique_credit
+    pts = np.argwhere(r0)
+    d_added = ndi.distance_transform_edt(~added)
+    u, _ = unique_credit(r0)
+    order = np.argsort(u)
+    pct = np.empty(len(u), dtype=float)
+    pct[order] = np.linspace(0, 100, len(u))
+    features = []
+    for tr in traces:
+        p = pts[tr.dot_idx]
+        if d_added[p[:, 0], p[:, 1]].min() > trackb.CORRIDOR_PX + 1e-6:
+            continue
+        rows, cols = p[:, 0], p[:, 1]
+        spts = pts[tr.spine] if len(tr.spine) >= 2 else p
+        lons, lats = trackb.utm_to_lonlat(spts[:, 0].astype(float), spts[:, 1].astype(float))
+        comp_strengths = {
+            "tmi_hg": float(np.nanmean(comp_bands["b03_tmi_hg"][rows, cols])),
+            "grav_slope": float(np.nanmean(comp_bands["b05_iso_grav_anom_slope"][rows, cols])),
+            "elev_slope": float(np.nanmean(comp_bands["b19_det_elev_slope"][rows, cols])),
+        }
+        ev = evidence_paragraph(tr, r0, pts, d_cat, comp_strengths,
+                                float(np.mean(pct[tr.dot_idx])))
+        dmin = float(d_cat[rows, cols].min()) * trackb.PIXEL_M
+        features.append({
+            "type": "Feature",
+            "geometry": {"type": "LineString",
+                         "coordinates": [[float(round(lo, 6)), float(round(la, 6))]
+                                         for lo, la in zip(lons, lats)]},
+            "properties": {
+                "trace_id": f"T-{tr.rank:04d}", "rank": tr.rank,
+                "length_km": round(tr.arc_px * 0.1, 3),
+                "sinuosity": round(tr.sinuosity, 3),
+                "strike_azimuth_deg": round(trackb.strike_azimuth(tr, r0, pts), 1),
+                "n_r0_dots": tr.n_dots,
+                "nearest_catalogue_fault_m": round(dmin, 1),
+                "band_strength": {k: round(x, 3) for k, x in comp_strengths.items()},
+                "evidence": ev,
+            },
+        })
+    fc = {
+        "type": "FeatureCollection",
+        "name": rid,
+        "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
+        "metadata": {
+            "parent": parent.PARENT_ID, "axis": "TRACKB",
+            "value": "TR" + rid.split("TRACKB-TR")[1][:1],
+            "meaning": "qualifying >=1 km strike-consistent traces whose +-300 m corridor "
+                       "received >=1 relocated off-trace dot in this variant",
+            "n_traces": len(features),
+            "crs_note": "geometry WGS84 lon/lat (CRS84); source EPSG:32611, 100 m",
+            "disclaimer": "hypotheses for a structural geologist, NOT confirmed faults; "
+                          "Phase-2 evidence, not a weekly-slot candidate.",
+        },
+        "features": features,
+    }
+    out = Path(out_dir) / f"{rid}.geojson"
+    out.write_text(json.dumps(fc, indent=1) + "\n")
+    return len(features), str(out)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--value", choices=sorted(VARIANTS), default=None)
@@ -463,6 +529,14 @@ def main() -> int:
             return 2
         ledger_hashes.update({sha_nan, sha_zeros})
 
+        # per-value TRACKB GeoJSON (receiving traces) — required by check_ledger.py's
+        # TRACKB gate introduced in PR #18 (LineStrings >= 1 km, evidence each).
+        n_gj, gj_path = variant_geojson(rid, traces, r0, d_cat, comp_bands, added,
+                                        ROOT / "releases")
+        if n_gj == 0:
+            print(f"STOP: {value} produced no receiving-trace GeoJSON features")
+            return 2
+
         # report-only
         v_proxy = proxy.hide_and_recover(v_mask, cat_mask)
         v_surrogate = proxy.surrogate_dti(v_mask, cat_mask)
@@ -503,9 +577,11 @@ def main() -> int:
                       "count_preserved": stats["count_preserved"],
                       "added_dots_dcat_ge_3px": True,
                       "pct_changed_in_1_50": True},
-            "phase2_inventory": {"geojson": str(geojson_path.relative_to(ROOT)),
+            "phase2_inventory": {"geojson_full": str(geojson_path.relative_to(ROOT)),
+                                 "geojson_per_value": str(Path(gj_path).relative_to(ROOT)),
                                  "atlas": str(atlas_path.relative_to(ROOT)),
-                                 "n_traces": n_feat},
+                                 "n_traces": n_feat,
+                                 "n_receiving_traces": n_gj},
             "report_only": {
                 "proxy_variant": v_proxy, "proxy_parent": parent_proxy,
                 "proxy_random_null": null_proxy,
@@ -515,7 +591,8 @@ def main() -> int:
             "seconds": round(time.time() - t0, 2),
         })
         print(f"[{value}] {rid}  gates=PASS  moved={n_move} ({pct_changed:.1f}%)  "
-              f"minsep={min_sep:.2f}px  disp={disp:.1f}px  h19cov {cov_before:.4f}->{cov_after:.4f}  {reports[-1]['seconds']}s")
+              f"geojson_traces={n_gj}  minsep={min_sep:.2f}px  disp={disp:.1f}px  "
+              f"h19cov {cov_before:.4f}->{cov_after:.4f}  {reports[-1]['seconds']}s")
 
     # Mechanism-matched cross-strike jitter MODEL. The brief states GeoDAWN
     # lineaments are uncertain by ~the kernel radius (3 px), so the central
