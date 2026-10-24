@@ -2,7 +2,7 @@
  "id": "h33-h33-2-b2",
  "rebuilt_from_recipe": true,
  "recipe": "r0 = dot_thin(scored_h19_5, r_min=2.8) & (d_cat > 2.0) & footprint & ~catalogue",
- "git_sha": "cd7e97017aacf9ad1ba70d3afa5f0046c9c97ca5",
+ "git_sha": "089857a277181abd534d48cb5254690674821ae5",
  "h19_5_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
  "h19_5_pixels": 121131,
  "d28_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
@@ -41,6 +41,6 @@
   "evidence_class": "CLAIM",
   "receipt": "none in this repo"
  },
- "elapsed_seconds": 7.15,
+ "elapsed_seconds": 8.7,
  "note": "Rebuilt bit-for-bit from pinned scored_h19_5.tif via BFS dot_thin(2.8) + B=2 catalogue flank prune, matching both upstream zeros (c55bafc4...) and nan (baeae321...) GeoTIFF sha256 digests."
 }
