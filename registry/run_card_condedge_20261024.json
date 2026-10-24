@@ -309,7 +309,7 @@
     },
     "exact_sha256_against_ledger": {
       "candidate_sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
-      "checked_ledger_hash_values": 217,
+      "checked_ledger_hash_values": 229,
       "unique": true
     },
     "postwrite": {
@@ -317,8 +317,8 @@
       "duplicate_stop": false,
       "max_abs_surface_spearman": 0.012808977551889936,
       "max_dot_overlap_3px": 0.1950021852585032,
-      "n_reference_geometries": 32,
-      "n_reference_paths": 61,
+      "n_reference_geometries": 36,
+      "n_reference_paths": 69,
       "sample_pixels": 150000,
       "surface_tested": "disk-reread final prediction raster",
       "top_correlations": [
@@ -374,13 +374,17 @@
     "prewrite": {
       "audit_scope": "all existing releases/*.tif plus pinned parent/ancestor rasters; remote site rasters absent from this checkout are not inferred",
       "duplicate_stop": false,
-      "max_abs_surface_spearman": 0.005863699106003009,
+      "max_abs_surface_spearman": 0.03868795455191069,
       "max_dot_overlap_3px": 0.1950021852585032,
-      "n_reference_geometries": 32,
-      "n_reference_paths": 61,
+      "n_reference_geometries": 36,
+      "n_reference_paths": 69,
       "sample_pixels": 150000,
       "surface_tested": "pre-placement conductivity-edge surface",
       "top_correlations": [
+        {
+          "r_spearman": 0.03868795455191069,
+          "registry_raster": "releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif"
+        },
         {
           "r_spearman": -0.005863699106003009,
           "registry_raster": "releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif"
@@ -396,10 +400,6 @@
         {
           "r_spearman": -0.004136197045711244,
           "registry_raster": "releases/h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6-zeros.tif"
-        },
-        {
-          "r_spearman": -0.0037079943456885768,
-          "registry_raster": "data/d28.tif"
         }
       ],
       "top_overlaps": [

@@ -24,8 +24,8 @@
     <p>We build auditable, geologically motivated GeoTIFF candidates on the competition grid. Every candidate must pass an independent spatial holdout, leakage and registry-uniqueness checks, and the format validator before a separate selector can consider it.</p>
     <div class="status" role="alert">
       <div class="icon" aria-hidden="true">⛔</div>
-      <div><strong>Current candidate: DO NOT SUBMIT</strong>
-        The conductivity-edge experiment is a valid GeoTIFF but performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. The file is downloadable for review only; do not spend a competition slot on it.
+      <div><strong>COND-EDGE experiment: DO NOT SUBMIT</strong>
+        This valid GeoTIFF performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. The file is downloadable for review only; do not spend a competition slot on it.
       </div>
     </div>
     <a class="button" href="releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a>
@@ -46,6 +46,12 @@
       <p class="small">Evaluator: <span class="mono">GEMSDOE89-spatial-segment-holdout-v1</span> · withheld positives: <b>59,168</b> · alpha 0.2 / beta 0.8 · 300 m triangular kernel. The old 12.8 km holdout report used a different protocol and is not directly comparable.</p>
       <p><a href="registry/run_card_condedge_20261024.json">Read the complete JSON run card</a> · <a href="docs/HYPOTHESIS_REGISTER.md">Read the hypothesis and source register</a></p>
     </article>
+    <article class="card wide">
+      <div class="label">Other recent repository record · separate experiment</div>
+      <h2>BSTP is also marked negative</h2>
+      <p>The upstream BSTP run card records a paired <b>HOLDOUT-DTI delta</b> (candidate minus fold-specific parent) of <b>−0.025448</b> [−0.029625, −0.021016], with evaluator <span class="mono">segment-holdout-v1</span> and <b>39,310 withheld positives</b>. This is a different lane and CI protocol; it was not independently rerun as part of the COND-EDGE review. It is not cleared for submission.</p>
+      <p><a href="releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif" download>Download BSTP zeros GeoTIFF · DO NOT SUBMIT</a> · <a href="registry/run_card_bstp40.json">BSTP run card</a> · <a href="docs/index.html">Complete legacy experiment summary</a></p>
+    </article>
     <article class="card">
       <div class="label">Format and integrity</div>
       <h2>File validation passed</h2>
@@ -61,7 +67,7 @@
       <div class="label">Uniqueness and leakage</div>
       <h2>Local registry checks passed</h2>
       <ul>
-        <li>Pre-placement max |Spearman ρ|: 0.0059</li>
+        <li>Pre-placement max |Spearman ρ|: 0.0387</li>
         <li>Final raster max |Spearman ρ|: 0.0128</li>
         <li>Most final dots within 3 px of one reference: 19.50%</li>
         <li>20 holdout feature canaries; maximum strength AUC: 0.5698</li>

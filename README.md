@@ -7,13 +7,13 @@
 - **Candidate:** `h89-condedge-s2-4-20261024-829cc418-candidate.tif` — SHA-256 `829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d`.
 - **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score.
 - **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
-- **Local registry check:** pre-placement score-surface maximum absolute Spearman `0.0059`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 217 other ledger hash values. No duplicate-stop. Geometry comparison covers 32 locally available registry masks / 61 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
+- **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
 - **Format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
 - **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
 
 ## Read first on every session
 
-The static site is [`index.html`](index.html) with the dedicated [`submit.html`](submit.html) submission guide. Read [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) before research or coding, then inspect `README.md`, `IRREGULARITIES.md`, `SLOT_PLAN.md`, `docs/SUBMIT.md`, and the full local ledger. The brief carries the original mission, Arena values (**Maximize P(Win)** and **Own the Outcome**), experiment budget, holdout rules, evidence labels, uniqueness thresholds, submission gates, and trusted source links.
+The static site is [`index.html`](index.html) with the dedicated [`submit.html`](submit.html) submission guide. Read [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) and the upstream [`docs/PROJECT_CHARTER.md`](docs/PROJECT_CHARTER.md) / [`PROMPT.md`](PROMPT.md) before research or coding, then inspect `README.md`, `IRREGULARITIES.md`, `SLOT_PLAN.md`, `docs/SUBMIT.md`, and the full local ledger. The brief carries the original mission, Arena values (**Maximize P(Win)** and **Own the Outcome**), experiment budget, holdout rules, evidence labels, uniqueness thresholds, submission gates, and trusted source links.
 
 ## Why the `0.2778` result is not yet an established target
 
@@ -71,6 +71,10 @@ The evaluator rechecks input hashes, tests each feature alone on spatially held-
   (3 per rolling week per entity + 1 blind final).
 - **Deadline:** `2026-12-03` (≈6 weeks, ~17 rolling slots) is **UNVERIFIED**; automated
   competition-page access is barred, so the human confirms it.
+
+## Other merged research records (separate lanes; not promoted)
+
+The merged `main` also contains a separately documented BSTP experiment and historical TRACKB/SNAP products (`registry/run_card_bstp40.json`, `docs/index.html`, and `docs/REVIEW_AND_HYPOTHESES_20261024.md`). BSTP's stored verdict is negative; its artifacts and evaluation are distinct from this COND-EDGE run. This README's current download status remains **DO NOT SUBMIT**. See the ledger for the full inventory; do not infer that any listed file is cleared for a slot.
 
 ## Previous slot plan (historical, not current selection)
 

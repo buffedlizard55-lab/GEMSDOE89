@@ -10,6 +10,10 @@
 - **File-format status:** PASS. One float32 band; EPSG:32611; shape 3730×3292; template transform matched; no NaN inside the footprint; finite predictions in `[0,1]`; NaN outside; exact known-fault pixels masked. Format validity does not override the negative holdout.
 - **Competition name/note (for future selector use only):** `h89-condedge-s2-4-20261024-829cc418-candidate` / `COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate` (99 characters).
 
+## Separate BSTP candidate from the merged upstream lane — NEGATIVE
+
+`releases/gems89-bstp40-20261024-2e7e8a8f.tif` is a separately registered artifact with its own negative `HOLDOUT-DTI` run card (`registry/run_card_bstp40.json`). It is not cleared for a slot and does not replace the COND-EDGE finding above. Do not submit it. See [`docs/index.html`](index.html) and the ledger for additional upstream records.
+
 ## How to submit a future promoted GeoTIFF
 
 Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. A machine-format PASS alone is insufficient. The current file is explicitly **DO NOT SUBMIT**.

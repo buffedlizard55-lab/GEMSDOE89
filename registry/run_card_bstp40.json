@@ -1,0 +1,62 @@
+{
+ "run_card_version": "parallel-run-protocol item 5",
+ "session": "GEMSDOE89",
+ "date": "2026-10-24",
+ "lane": "BSTP (single method): fixed-mass replacement of the lowest unique-credit 40% of parent R0 dots with surface-ranked dots on the geometric-mean corroboration of |grad depth_to_base_surf| (b15) x |grad cond_surf| (b17) x max(tmi_hg b03, iso_grav_anom_hg b18), new dots >3px from every parent dot, >=3px from catalogue, 2.8px suppression, n=37654",
+ "hypothesis": "Blind basin faults missing from the USGS/INGENIOUS surface-mapped catalogue still offset basement (step in depth-to-basement) and host conductive fault-zone alteration/fluids, so triple-corroborated basement-step x conductivity x potential-field-edge lineaments contain true fault length that R0's ridge habitat misses.",
+ "mechanism": "Normal faulting offsets the basement-cover interface under basin fill where no scarp survives; the same offset juxtaposes magnetic/dense basement lithologies (HG edge) and the permeable damage zone alters to conductive clays / hosts saline (geothermal) fluids.",
+ "named_non_fault_mimic": "Non-fault basement lithologic contacts (step without faulting), paleochannel and playa-margin conductivity edges, volcanic flow margins. Triple corroboration suppresses single-family mimics, not coincident ones.",
+ "experiments_used": "3 of 3 (budget exhausted)",
+ "holdout": {
+  "label": "HOLDOUT-DTI",
+  "evaluator": "segment-holdout-v1 (gemsdoe/holdout.py; metric DTI a=0.2 b=0.8 R=3px)",
+  "design": "911 whole catalogue segments >=20px withheld in 5 size-stratified folds, 10px buffer removed from visible catalogue, all catalogue features (d_cat, parent prune) rebuilt from visible only per fold (parent.rebuild_r0_mask), visible faults masked pixel-exactly, pooled DTI",
+  "n_withheld_positives_px": 39310,
+  "pooled_parent": 0.09143220780619153,
+  "pooled_candidate_bstp40": 0.06598390524997802,
+  "diff": -0.025448302556213512,
+  "diff_ci95_segment_bootstrap": [-0.029624640159043317, -0.021015595667204113],
+  "siblings_withdrawn": {
+   "bstp40corr_e3b6d3d2": {"diff": -0.0220, "ci95": [-0.02619699170077657, -0.017827192804463998], "tifs_deleted": true},
+   "bstp40corrE_598993b2": {"diff": -0.0269, "ci95": [-0.03369328668668429, -0.02036531017199699], "tifs_deleted": true}
+  },
+  "interpretation": "All three variants lose to the per-fold parent with CIs excluding 0. Holdout truth is drawn from the surface-mapped population that R0's habitat already matches; moving mass to blind-basin lineaments is penalised by construction. This holdout can falsify catalogue-habitat improvements but cannot validate blind-fault discovery (IRREGULARITIES item 17). No live score is claimed or projected as a score."
+ },
+ "leakage_canary": {
+  "label": "REPORT-ONLY unless >0.90 (protocol item 4)",
+  "bstep_grad_depth_to_base_auc": 0.5208734532846869,
+  "cond_grad_cond_surf_auc": 0.5056706647585075,
+  "edge_max_tmiHG_gravHG_auc": 0.5193085038264578,
+  "surface_geomean_auc": 0.5167487649810006,
+  "verdict": "PASS: max single-feature AUC 0.5209 < 0.90"
+ },
+ "uniqueness_vs_registry": {
+  "surface_spearman_vs_edge_only": 0.2949,
+  "dot_fraction_within_3px_of_parent_R0": 0.6000,
+  "worst_prior_registry_file": "h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae-zeros.tif",
+  "worst_prior_registry_dot_fraction_within_3px": 0.6241,
+  "density_spearman_5km_blocks_vs_R0": 0.6202,
+  "verdict": "PASS: rank-correlation < 0.90 and <=3px overlap < 70% vs every prior registry raster, on the surface and on the final dots (protocol item 1)"
+ },
+ "raster": {
+  "submission_name_stem": "gems89-bstp40-20261024-2e7e8a8f",
+  "sha256_nan_twin": "2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596",
+  "sha256_zeros_twin_primary": "4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33",
+  "n_dots": 37654,
+  "deterministic_rebuild_verified": "tools/build_bstep.py bstp40 0.60 re-run reproduced stem sha8 2e7e8a8f byte-identically"
+ },
+ "validator_output": {
+  "tool": "gemsdoe/validate.py gate_release + independent tifffile re-read",
+  "shape_dtype": "3730x3292 float32 single band: PASS",
+  "crs_transform": "EPSG:32611, 100m, tiepoint (243350, 4508550): PASS (matches sample_submission contract)",
+  "values_in_0_1": "PASS: finite min 0.0 max 1.0, dots exactly 1.0",
+  "nan_inside_footprint": "PASS: 0",
+  "zeros_twin_nan_anywhere": "PASS: 0 NaN px in the whole raster (upload-safe encoding; the reported 'Predicted values must be in range [0, 1]' error is consistent with a NaN-outside file failing the range check)",
+  "dots_outside_footprint": "PASS: 0",
+  "dots_on_catalogue_px": "PASS: 0",
+  "sha256_not_in_ledger_before_build": "PASS (now ledger row 29, axis BSTP)"
+ },
+ "submission_note_110_chars": "gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG",
+ "verdict": "negative",
+ "promotion": "NOT PROMOTED. Do not spend a weekly slot on holdout evidence. The zeros twin is format-validated and upload-safe if (and only if) the human deliberately accepts MODEL-level risk that live blind-basin truth rewards what the catalogue holdout cannot see; the evidence-based slot queue remains SLOT_PLAN.md (SNAP directional pair first). Negative result is the deliverable of this lane (protocol item 5)."
+}
