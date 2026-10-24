@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble ledger/submissions.csv from the recovered upstream history + built
 variants in this repository (SPACING + RELIEF + MASS + SNAP + both
-CONCENTRATION families).
+CONCENTRATION families + TRACKB + negative holdout candidates).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
@@ -542,6 +542,45 @@ def _trackb_rows() -> list[dict]:
     return rows
 
 
+def _condedge_rows() -> list[dict]:
+    """Register the one COND-EDGE TIF without treating holdout as a live score."""
+    card_path = ROOT / "registry" / "run_card_condedge_20261024.json"
+    if not card_path.exists():
+        return []
+    card = json.loads(card_path.read_text())
+    raster = card.get("raster", {})
+    if not raster.get("path") or not raster.get("sha256"):
+        return []
+    holdout = card["holdout_protocol"]
+    candidate = holdout["candidate"]
+    base = holdout["visible_only_R0_baseline"]
+    delta = holdout["paired_delta_candidate_minus_R0"]
+    sha = raster["sha256"]
+    name = Path(raster["path"]).stem
+    note = card["submission"]["note"]
+    return [{
+        "id": name, "site": "GEMSDOE89", "name": name, "score": "",
+        "evidence_class": "HOLDOUT-DTI", "encoding": "nan",
+        "n_dots": raster["validator"]["dot_count"], "pct_changed": "",
+        "sha8": sha[:8], "sha256": sha, "sha256_zeros": "",
+        "parent": "h33-h33-2-b2", "axis": "COND-EDGE", "value": "cond17-sigma2-4",
+        "status": "NEGATIVE (do not submit)", "receipt": "N", "receipt_score": "",
+        "predicted_change": (
+            f"{delta['value']:+.6f} HOLDOUT-DTI {holdout['evaluator_version']}; "
+            f"{candidate['n_withheld_positive_pixels']} withheld positives; "
+            f"delta 95% CI [{delta['ci95']['lower_95']:+.6f}, {delta['ci95']['upper_95']:+.6f}]"
+        ),
+        "date": "2026-10-24", "form_note": note,
+        "notes": (
+            f"Negative research artifact; candidate HOLDOUT-DTI {candidate['value']:.6f} "
+            f"95% CI [{candidate['ci95']['lower_95']:.6f}, {candidate['ci95']['upper_95']:.6f}]; "
+            f"visible-only R0 HOLDOUT-DTI {base['value']:.6f}; unique local hash and format PASS; "
+            "remote site geometry not exhaustively audited; DO NOT SUBMIT."
+        ),
+        "source": "GEMSDOE89",
+    }]
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -567,6 +606,7 @@ def main():
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _trackb_rows()
+        + _condedge_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

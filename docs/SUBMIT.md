@@ -1,10 +1,35 @@
-# SUBMIT — GEMSDOE89 (28-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (submission guide and current candidate status)
+
+## Executive status — read before downloading
+
+**Current candidate: DO NOT SUBMIT.** The file below passes the local registry uniqueness and format gates, but its proper spatial holdout result is worse than the visible-only R0 baseline. It is preserved as a negative result. Do not spend a weekly slot on it.
+
+- **Research TIF:** [`../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif`](../releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif)
+- **Run card:** [`../registry/run_card_condedge_20261024.json`](../registry/run_card_condedge_20261024.json)
+- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positives; 95% spatial-tile bootstrap CI): candidate `0.049875` `[0.036830, 0.061751]`; visible-only R0 `0.161230` `[0.142648, 0.180061]`; paired delta `−0.111355` `[−0.133218, −0.087864]`. These are local validation values, not organizer scores.
+- **File-format status:** PASS. One float32 band; EPSG:32611; shape 3730×3292; template transform matched; no NaN inside the footprint; finite predictions in `[0,1]`; NaN outside; exact known-fault pixels masked. Format validity does not override the negative holdout.
+- **Competition name/note (for future selector use only):** `h89-condedge-s2-4-20261024-829cc418-candidate` / `COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate` (99 characters).
+
+## How to submit a future promoted GeoTIFF
+
+Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. A machine-format PASS alone is insufficient. The current file is explicitly **DO NOT SUBMIT**.
+
+1. Open the DrivenData GEMS Prize page and confirm the rules, current deadline, entity quota, and remaining rolling-week slots: [competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/).
+2. On the submission form choose the promoted single-band GeoTIFF `.tif` (or a zip containing exactly one GeoTIFF). Do not submit a zeros twin and NaN twin as separate attempts.
+3. Copy the promoted filename stem as the submission name, and paste its run-card note (maximum 140 characters) into the optional Note field.
+4. Submit through the user's registered account. This repository never logs in or uploads automatically.
+5. Save the submission-page receipt and exact score. Record it in `ledger/submissions.csv` as `ORGANIZER-CONFIRMED`; do not replace a receipt with a leaderboard screenshot or a projection.
+
 
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
 **Never upload both twins in separate slots.** Submission name = the file stem.
 
-## This session's builds (`SNAP` directional corner, 2026-10-24) — upload as a PAIR
+## Previous unscored build inventory (historical; not a current slot recommendation)
+
+The tables below were inherited from the prior SNAP session. Their predictions are `MODEL`, their entries have no stored organizer receipts, and the old queue order is not a current selector decision. Do not infer that any file is cleared to submit from its appearance below. The present candidate's explicit `DO NOT SUBMIT` status above takes precedence.
+
+### Prior SNAP-directional builds (historical pair; no receipt stored)
 
 | role | file / submission name (stem) | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | predicted (`MODEL`) |
 |---|---|---|---|---|
