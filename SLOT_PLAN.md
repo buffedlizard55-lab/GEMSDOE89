@@ -1,35 +1,42 @@
-# SLOT PLAN — GEMSDOE89 (2026-10-24, after TRACKB session)
+# SLOT PLAN — GEMSDOE89 / directional SNAP pair + completed SNAP factorial (2026-10-24)
 
-- **Baseline:** Parent R0 `h33-h33-2-b2`, byte-exact (`c55bafc4…` zeros / `baeae321…` NaN; 37,654 unit dots), live **0.2778 = CLAIM** (no receipt here). **TOP_PUBLIC = ____** (date ____). **Slots this week: __ / 3** (human fills). Deadline **2026-12-03 UNVERIFIED** (pages barred; human confirms) → ≈6 weeks ≈ 18 rolling slots + 1 blind final.
-- **Evidence rule:** `|Δlive| < 0.01` is no evidence. `PROXY`/`MODEL`/canary never gate and are never scores.
-- **This session built TRACKB** (Phase-2 trace inventory + 3 held structural-concentration rasters, `ledger/MECHANISM_CARDS_TRACKB_CONC.md`). It is **not a weekly-slot candidate unless the human decides**; its Phase-1 jitter MODEL is a coverage-cost floor (−0.002 / −0.012 / −0.021 central). **The 21 scored-axis pairs remain `BUILT (unscored)` — live receipts are the bottleneck, not more files.**
+- **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final. Slots used/left this week: `__ / 3` (human supplies). **TOP_PUBLIC:** `____` (date `____`).
+- **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, rebuilt byte-exactly again today (`c55bafc4…` / `baeae321…`); live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**.
+- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; gated and gateless arms use different MODEL assumptions (`IRREGULARITIES.md` item 15), so compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
+- **Queue state:** every weekly axis now holds ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, upstream `PRUNE` 1–4 px, `TRACKB` Phase-2 pair) and **none has a live receipt**, so the scarce good is no longer files but *readable pairs*.
+- **TRACKB-conc (this branch, 2026-10-24):** a Phase-2 trace inventory (1,520 traces, `releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson`) + 3 held count-preserving concentration rasters `TR10/TR20/TR30` (`ledger/MECHANISM_CARDS_TRACKB_CONC.md`); **held out** of the weekly queue, distinct from the merged `top12` overlay. Phase-1 jitter MODEL is a coverage-cost floor (−0.002/−0.012/−0.021), not a live score.
+- **Why this week's pair changed:** the SNAP factorial (`{window} × {gate}`) is complete, and a measurement made this session shows the undirected crest arm `2p0px-g0p00` moves **15,585 dots up-slope / 15,670 down-slope** (`share_upslope = 0.498`): R0 is direction-neutral w.r.t. the HG maximum, so no existing arm could detect a crest-side preference, and the proposed global dip-offset translation has no bias to correct (`IRREGULARITIES.md` item 16).
 
-## Next 3 slots, in order (scored axes; TRACKB held out)
+## Next 3 slots, in order (primary week)
 
-| # | File | Predicted (MODEL) | What the result changes |
+| # | File | Predicted (`MODEL`) | What the receipt changes |
 |---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif` *(alt `…-CONC5kmcat10-…-2dc19377.tif`)* | **+0.008** (−0.006…+0.018) *(alt +0.009)* | Spatial-prior fork. `≥ 0.2878` → matched 20 % dose (`12p8km-int20` / `cat20`) in Slot 3. `≤ 0.2678` → catalogue-free `12p8km-geod15` / sign-control `cat10away`. |
-| **2** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` | **+0.028** (−0.028…+0.084) | Orthogonal local-placement fork (≤2 px EM-crest snap, fixed count). `≥ 0.2878` → snap live, earn `snap1p4px`; `≤ 0.2678` → retire SNAP. |
-| **3** | conditional: dose/control from Slot 1; else `snap1p4px` if Slot 2 `≥ 0.2878`; else `MASSm10uniq` / `relief-r10` or **HOLD** | +0.009 / +0.003 / +0.028 / +0.002 | Confirm concentration dose, active-strain vs map bias, or SNAP dose; if both Week-1 forks are inside ±0.010, pivot to count/geomorphology or hold quota. |
+| **1** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak **by design**) | Half of a matched pair; alone it is unreadable. |
+| **2** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | The **exact mirror** (same response, window, gate 0.00, targets, count; only the ±60° half-window differs). `fw − hw ≥ +0.010` ⇒ truth sits **footwall-side** of the HG maximum; reverse ⇒ **hanging-wall side**; both `≤ R0 − 0.010` ⇒ **the crest is right** and no position arm gets another slot this cycle; both inside `±0.010` ⇒ SNAP is saturated at 1–2 px. |
+| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else the gate-pair head `1p4px-g0p01` (`afc60a25`, +0.0120); else `conc-12p8km-int10` (`bcade136`, +0.008) or `CONC5kmcat10` (`2dc19377`, +0.009); else **HOLD** | +0.015 / +0.012 / +0.008–0.009 | Dose vs direction; or selectivity-vs-dose; or the first independent block-prior test. |
 
-**Strong alternative for any Slot 1:** submit byte-exact rebuilt R0 (`baeae321…`) once to convert `0.2778` from **CLAIM → RECEIPT**. It de-risks every MODEL delta anchored to 0.2778 (see "better axes" below); costs one slot with zero expected climb. The human decides.
+**Alternative week (same two slots, different question):** the gate pair `1p4px-g0p01` (`afc60a25`, +0.0120) against its matched gateless control `1p4px-g0p00` (`e1474851`, +0.0278) — reads *selectivity vs dose*, not direction. Do **not** run both pairs in one week (4 files > quota). **Held:** `1p0px-g0p02` (`384435e6`, +0.0022) is a minimum-dose boundary control, not a default slot. Never submit both twins; `-zeros.tif` is fallback only.
 
-## Weeks to the deadline (2026-12-03)
+## Weeks to the deadline
 
-| Week | Plan |
+| Window | Action |
 |---|---|
-| 1 (10-24→10-29) | Slots 1 + 2 (one prior fork + one placement fork); keep 1 spare for receipts. Record every `receipt_score`+`date`. |
-| 2 (10-30→11-05) | Conditional Slot 3; if all ±0.010, prioritize a REPEAT-CALIBRATION receipt before spending more. |
-| 3–4 (11-06→11-19) | Combine **only** axes with live receipts `≥ +0.010`, one factor at a time; decide whether any TRACKB trace earns a Phase-2-oriented submission. |
-| 5 (11-20→11-26) | Confirm composite child vs its direct parent; freeze primary + `-zeros.tif` fallback. |
-| 6 (11-27→12-03) | Re-validate format/hashes of both final twins; choose **1 blind final**. |
+| 10-24 → 10-30 | Slots 1–2 as a pair; reserve Slot 3 until both receipts are recorded. |
+| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair); record every `receipt_score` + `date`. |
+| 11-07 → 11-20 | Combine **only** axes with live `≥ +0.010` receipts, one factor at a time from a named parent. |
+| 11-21 → 11-27 | Confirm the composite against its direct parent; freeze primary + fallback. |
+| 11-28 → 12-03 | Re-validate both final twins; human chooses **1 blind final**. If nothing beats R0, submit R0 (`baeae321…`). |
 
-## Proposed better axes (mechanism · confounder · falsifier) — not built
+## Proposed better axes (mechanism · confounder · falsifier) — **not** built this session
 
-| Axis | Mechanism | Confounder / mimic | Falsifier |
+| Axis | Structural mechanism | Non-fault confounder / mimic | Falsifier |
 |---|---|---|---|
-| **REPEAT-CALIBRATION** | Resubmit byte-exact R0 to verify the 0.2778 anchor that all MODELs use | Burns a slot; if the true leaderboard differs, deltas were mis-anchored | Receipt differs from 0.2778 by > 0.005 → re-anchor all predictions |
-| **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (≤ 12 px, strike diff ≤ 20°) across step-over ramps where breaching faults nucleate (https://www.osti.gov/servlets/purl/1249065) | Bridges stream scarps / dike swarms (P with zero T) | Live receipt < R0 + 0.010, or loses to random tip pairs on a 25 % strand holdout |
-| **TRACKB-DIP-OFFSET** | Normal range-front faults dip 45–60° basinward, offsetting gravity/magnetic crests 2–5 px into the hanging wall | Strike-slip / volcanic contacts have ~zero dip offset | Drops ≥ 0.010 vs R0, or loses to symmetric SNAP |
-| **COVERAGE-NEUTRAL CONC** | Shift block mass while holding H19 `ΔT ≈ 0` so the prior gain never trades centerline retention | Joint optimization also alters local spacing | Fails to beat `conc-12p8km-int10` / `cat10` by ≥ 0.005 |
-| **TRACKB-NULL (control)** | Move the same 10 % of dots to random legal corridor pixels (matched count) to isolate structure from "any relocation" | Legality/collar effects | TRACKB-`tr10` fails to beat the null → the structure, not the move, is unproven |
+| **SIGNED-SCARP resp (residual of the old proposal)** | Use a *DEM-signed* scarp response instead of an unsigned HG contact, so basin-facing scarps only | Fan channels, shorelines and roads share the sign; 2 px DEM smoothing hides low scarps | Does not beat the matched unsigned arm by `≥ 0.010` |
+| **RELIEF basin residual (`0→1`, `2→0`)** | Catalogue records *surface-mapped* faults, which cluster at range fronts (R0 lift vs catalogue: range 1.30, piedmont 1.03, basin 0.67); new-fault truth is the residual, so it should be enriched where exposure is worst | Basinal gravity/magnetic anomalies are closed bodies and basement steps: pure mass | `≤ R0 − 0.010`, or the matched `2→0` arm beating `0→1` |
+| **Redundancy prune (geometric MASS)** | Two dots 2.8 px apart cannot both be the argmax under a 3 px kernel: the loser is pure mass. Rank by union coverage lost if removed — label-free | Redundant dots sit on the thickest, best-located ridges | Fails to beat `MASSm10uniq` (`beed130f`) by `≥ 0.005`, or loses to `m10rand` |
+| **Anisotropic SPACING** | Error budget is anisotropic: 400 m flight lines smear *across* strike, so along-strike stations can be wider at fixed count | Strike estimated from R0's own strands is circular | Loses to isotropic `poisson` / `lattice` at matched count |
+| **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
+| **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
+| **TRACKB-EXTEND / REPEAT-CALIBRATION** | Deliver the remaining qualifying traces for expert review; or submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT | Reviewer attention favours long traces; the calibration slot buys no climb | Traces 13–19 no better than length-matched random strands; receipt differs from `0.2778` by `> 0.005` |
+| **TRACKB-NULL (control)** | Move the same 10 % of dots to random legal corridor pixels (matched count) to isolate structure from any relocation | Legality/collar effects | `tr10` fails to beat the null ⇒ structure, not the move, is unproven |
+| **REPEAT-CALIBRATION** | Submit byte-exact R0 once to convert `0.2778` CLAIM→RECEIPT, re-anchoring every MODEL delta | Burns a slot, zero expected climb | Receipt differs from `0.2778` by > 0.005 → re-anchor all predictions |

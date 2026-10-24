@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""Build the gateless SNAP variants of the verified R0 parent.
+"""Build SNAP factorial cells from the verified R0 parent.
 
 Usage:
-    python tools/build_snap_gateless.py --value 2p0px-g0p00
+    python tools/build_snap_gateless.py --value 1p4px-g0p01
     python tools/build_snap_gateless.py --all
+
+The 2026-10-23 session built the three gate-0 cells.  The 2026-10-24 session
+adds exactly the three cells absent across the ledger (1.0 px/gate 0.01,
+1.0 px/gate 0.02, 1.42 px/gate 0.01), completing the 3-window x 3-gate
+factorial with the three upstream gated cells.  Existing values are skipped;
+their per-value reports are retained when the aggregate report is rewritten.
 
 Start gates first (brief sec.5):
   1. every pinned input in registry/data_manifest.json re-hashed,
@@ -19,8 +25,9 @@ then, per variant (one controlled edit each):
 
 The response recipe is replicated exactly from the upstream recorded SNAP
 recipe (bands 3 tmi_hg + 18 iso_grav_anom_hg, median-fill, gaussian sigma 1,
-robust_unit at p99.5, pixel-wise max), so a cross-session comparison against
-the upstream gated arms isolates the gate and nothing else.
+robust_unit at p99.5, pixel-wise max), so receipt comparisons isolate window
+and gate rather than response-surface changes.  The filename is retained for
+lineage compatibility although the driver now also builds gated cells.
 """
 
 from __future__ import annotations
@@ -42,7 +49,7 @@ from gemsdoe import grid, proxy, relief, snap, validate  # noqa: E402
 
 PARENT_ID = "h33-h33-2-b2"
 PARENT_SHA256 = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
-DATE = "20261023"
+DATE = "20261024"
 EXPECTED_DOTS = 37654
 
 # Recorded live-anchor MODEL inversion (upstream evidence/h33_validation.json,
@@ -51,15 +58,27 @@ EXPECTED_DOTS = 37654
 ANCHOR_D = 18734.44
 ANCHOR_T = 5073.29
 # Scenario fractions of moved dots that NET-close one full pixel (kernel gain
-# 1/3 each); negative side prices the mimic (snapping onto non-fault crests).
+# 1/3 each); the negative side prices snapping onto non-fault crests.  Gated
+# central/high scenarios are the upstream gated arms' documented +0.10/+0.25
+# coupling assumptions; gateless scenarios remain unchanged.  These are
+# explicit MODEL assumptions, not measurements or fitted live-score effects.
 SCEN_FRAC = {"lo": -0.05, "central": 0.05, "hi": 0.15}
+SCEN_FRAC_GATED = {"lo": -0.05, "central": 0.10, "hi": 0.25}
 
+# Every spec carries its original build date so old cells remain reproducible.
+# The three 20261024 values are precisely the cells absent across all sessions.
 VARIANTS = {
-    "1p0px-g0p00": dict(window_px=1.0, margin=0.0,
+    "1p0px-g0p00": dict(window_px=1.0, margin=0.0, date="20261023",
                         note="edge-neighbour window: minimum decisive snap"),
-    "1p4px-g0p00": dict(window_px=1.42, margin=0.0,
+    "1p0px-g0p01": dict(window_px=1.0, margin=0.01, date="20261024",
+                        note="4-neighbour window at the intermediate selectivity gate"),
+    "1p0px-g0p02": dict(window_px=1.0, margin=0.02, date="20261024",
+                        note="4-neighbour window at the high selectivity gate"),
+    "1p4px-g0p00": dict(window_px=1.42, margin=0.0, date="20261023",
                         note="8-neighbour window; gate ablation of upstream 1p4px-g0p02"),
-    "2p0px-g0p00": dict(window_px=2.0, margin=0.0,
+    "1p4px-g0p01": dict(window_px=1.42, margin=0.01, date="20261024",
+                        note="8-neighbour window; missing intermediate-gate factorial cell"),
+    "2p0px-g0p00": dict(window_px=2.0, margin=0.0, date="20261023",
                         note="full 2 px disc; gate ablation of upstream 2p0px-g0p01/g0p02"),
 }
 
@@ -149,11 +168,17 @@ def git_sha():
         return "unknown"
 
 
-def predict(moved):
+def scenario_fractions(margin):
+    """Return the explicit net-close scenarios for this gate (MODEL only)."""
+    return SCEN_FRAC_GATED if margin > 0 else SCEN_FRAC
+
+
+def predict(moved, margin=0.0):
     """MODEL projection from the recorded live anchor; not a score."""
-    lo = SCEN_FRAC["lo"] * moved / 3.0 / ANCHOR_D
-    mid = SCEN_FRAC["central"] * moved / 3.0 / ANCHOR_D
-    hi = SCEN_FRAC["hi"] * moved / 3.0 / ANCHOR_D
+    scen = scenario_fractions(margin)
+    lo = scen["lo"] * moved / 3.0 / ANCHOR_D
+    mid = scen["central"] * moved / 3.0 / ANCHOR_D
+    hi = scen["hi"] * moved / 3.0 / ANCHOR_D
     return lo, mid, hi
 
 
@@ -225,7 +250,14 @@ def main():
     values = sorted(VARIANTS) if args.all else [args.value]
     ledger_path = ROOT / "ledger" / "submissions.csv"
     new_rows = []
-    reports = []
+    # Preserve skipped/existing cells when regenerating the aggregate.  The
+    # previous implementation replaced it with only the cells built in this
+    # invocation, which could silently drop SNAP rows on the next ledger build.
+    reports_by_value = {}
+    for known_value in VARIANTS:
+        report_path = ROOT / "registry" / f"build_report_snap_{known_value}.json"
+        if report_path.exists():
+            reports_by_value[known_value] = json.loads(report_path.read_text())
 
     for value in values:
         spec = VARIANTS[value]
@@ -272,7 +304,8 @@ def main():
         sha_nan = grid.sha256_file(tmp_nan)
         sha_zeros = grid.sha256_file(tmp_zeros)
         sha8 = sha_nan[:8]
-        rid = f"{PARENT_ID}-snap{value}-{DATE}-{sha8}"
+        build_date = spec.get("date", DATE)
+        rid = f"{PARENT_ID}-snap{value}-{build_date}-{sha8}"
         final_nan = ROOT / "releases" / f"{rid}.tif"
         final_zeros = ROOT / "releases" / f"{rid}-zeros.tif"
         tmp_nan.replace(final_nan)
@@ -300,7 +333,8 @@ def main():
 
         # ---- parent-diff statistics + MODEL prediction ----------------------
         moved = stats["dots_moved"]
-        pred_lo, pred_mid, pred_hi = predict(moved)
+        pred_lo, pred_mid, pred_hi = predict(moved, spec["margin"])
+        scen = scenario_fractions(spec["margin"])
         d_cat_parent = d_cat[parent_dots]
         d_cat_var = d_cat[mask]
         added = mask & ~parent_dots
@@ -337,6 +371,7 @@ def main():
         rep = {
             "id": rid,
             "value": value,
+            "build_date": build_date,
             "spec": spec,
             "parent": PARENT_ID,
             "parent_sha256": PARENT_SHA256,
@@ -361,10 +396,15 @@ def main():
                 "basis": (f"pure position change dDTI ~= dT/D; D={ANCHOR_D}, "
                           f"T={ANCHOR_T} from the recorded live-anchor inversion "
                           "(upstream evidence/h33_validation.json, live pair 0.2600->0.2708); "
-                          f"scenario: {SCEN_FRAC['lo']:+.2f}..{SCEN_FRAC['hi']:+.2f} net "
+                          f"scenario: {scen['lo']:+.2f}..{scen['hi']:+.2f} net "
                           f"fraction of moved dots close (or open) one full pixel, "
-                          f"kernel gain 1/3; central {SCEN_FRAC['central']:+.2f}. "
-                          "Evidence class MODEL, not a score."),
+                          f"kernel gain 1/3; central {scen['central']:+.2f}. "
+                          + ("Gated central/high reuse the upstream gated arms' "
+                             "+0.10/+0.25 coupling assumptions; low prices non-fault mimics. "
+                             if spec["margin"] > 0 else
+                             "Gateless scenarios are unchanged from 2026-10-23. ")
+                          + "Evidence class MODEL, not a score."),
+                "scenario_fractions": scen,
                 "no_evidence_threshold": 0.01,
             },
             "files": {
@@ -392,7 +432,7 @@ def main():
         }
         (ROOT / "registry" / f"build_report_snap_{value}.json").write_text(
             json.dumps(rep, indent=1) + "\n")
-        reports.append(rep)
+        reports_by_value[value] = rep
 
         row = {
             "id": rid, "site": "GEMSDOE89", "name": rid, "score": "",
@@ -405,8 +445,8 @@ def main():
             "receipt": "N", "receipt_score": "",
             "predicted_change": (f"{pred_lo:+.4f}..{pred_hi:+.4f} "
                                  f"(MODEL central {pred_mid:+.4f}; band prices the mimic)"),
-            "date": DATE, "form_note": note,
-            "notes": (f"window {spec['window_px']} px, gate 0.00, {moved:,} dots moved, "
+            "date": build_date, "form_note": note,
+            "notes": (f"window {spec['window_px']} px, gate {spec['margin']:.2f}, {moved:,} dots moved, "
                       f"mean displacement {stats['mean_displacement_px']:.3f} px, "
                       f"moved-target min dcat {targets_min_dcat:.2f} px, "
                       f"cv1km {diff_stats['block_cv_1km_before']:.3f}->"
@@ -434,9 +474,10 @@ def main():
                 w.writerow(row)
         print(f"[ok] appended {len(new_rows)} ledger row(s)")
 
+    ordered_reports = [reports_by_value[v] for v in VARIANTS if v in reports_by_value]
     (ROOT / "registry" / "build_reports_snap.json").write_text(
-        json.dumps(reports, indent=1) + "\n")
-    print("[done]")
+        json.dumps(ordered_reports, indent=1) + "\n")
+    print(f"[done] aggregate retains {len(ordered_reports)} SNAP cells")
 
 
 if __name__ == "__main__":

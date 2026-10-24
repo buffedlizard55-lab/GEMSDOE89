@@ -579,3 +579,142 @@ Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically this se
 - **Predicted sign and size (`MODEL`):** Central **+0.003**, band **−0.015 … +0.021**.
 - **Falsifier:** If catalogue-based concentration (`cat10` / `12p8km-int10`) is `<= 0` while `12p8km-geod15 >= +0.010`, live truth tracks active strain rather than mapped-fault proximity; `<= −0.010` retires continuum geodetic block priors.
 
+---
+
+# Part VII — SNAP factorial completion (`1p0px-g0p01` · `1p0px-g0p02` · `1p4px-g0p01`) — session `arena/fb0c15d6-gemsdoe89` (2026-10-24)
+
+Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically at the start gate (`c55bafc4…` zeros and `baeae321…` NaN; `37,654` unit dots; `0.2778` remains **CLAIM**). These are exactly the three missing cells in the ledger's 3-window × 3-gate design; no prior `(SNAP, value)` was rebuilt. All use the same TMI-HG / isostatic-gravity-HG response as Part III, fixed count and deterministic row-major placement. Every moved target has `d_cat >= 3.00 px`; inherited collar dots can only stay or move outward.
+
+| value | moved / changed | mean displacement | mean response gain | inherited `<3 px` collar before → after | central MODEL (band) |
+|---|---:|---:|---:|---:|---:|
+| `1p0px-g0p01` (`2916ec2d`) | 4,265 / 11.327% | 1.000 px | 0.01933 | 1,611 → 1,556 | +0.0076 (−0.0038…+0.0190) |
+| `1p0px-g0p02` (`384435e6`) | 1,245 / 3.306% | 1.000 px | 0.03304 | 1,611 → 1,595 | +0.0022 (−0.0011…+0.0055) |
+| `1p4px-g0p01` (`afc60a25`) | 6,767 / 17.972% | 1.370 px | 0.02136 | 1,611 → 1,497 | +0.0120 (−0.0060…+0.0301) |
+
+**Shared MODEL arithmetic and caution.** Pure relocation gives `ΔDTI ≈ ΔT/D`, with the previously recorded anchor `D=18,734.44`. Each moved dot is assumed to close (or open) one pixel with net fractions `−0.05 / +0.10 / +0.25` for low/central/high scenarios and triangular-kernel gain `1/3`. The positive gated scenarios reuse the upstream gated arms' assumptions; they are not fitted effects. The negative scenario prices non-fault crests. Gateless cells retain their different `−0.05 / +0.05 / +0.15` scenarios, so central MODELs across gates are not measurements and must not substitute for the matched live comparisons. A live `|Δ| < 0.01` is no evidence.
+
+**Shared report-only diagnostics.** Withheld-catalogue recall (`n=18,296`, 95% Wilson CI) is `0.03810 [0.03255,0.04365]`, `0.03826 [0.03270,0.04382]`, and `0.03646 [0.03102,0.04189]`, respectively, versus parent `0.03842 [0.03285,0.04400]`. These are **PROXY**, overlap the parent, and never gate. The SNAP-response leakage canary passes (`max AUC=0.66538 < 0.90`). SGMC is skipped because its raster pin is UNVERIFIED.
+
+## Card SN4 — `1p0px-g0p01` (`h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d`)
+- **Hypothesis:** A four-neighbour, `>=0.01` response-gain gate repairs genuine off-by-one BFS placements while rejecting the micro-noise that moved 80.83% of dots in the gateless arm.
+- **Mechanism:** Move 4,265 dots exactly 100 m onto the strongest qualifying TMI/gravity edge; fixed mass, spacing median `3.0→3.0 px`, and 1 km CV `1.88341→1.88198` isolate local position rather than concentration.
+- **Non-fault mimic:** Fan-head rills, lithologic contacts, and aeromagnetic tie-line seams can all exceed the same unsigned-gradient gate without being faults.
+- **Predicted sign and size (MODEL):** Positive central **+0.0076**, band **−0.0038…+0.0190**; a no-evidence live result is entirely plausible.
+- **Falsifier:** Against `1p0px-g0p00`, a `>=0.010` loss means the gate removes useful dose; a `>=0.010` gain over both R0 and that matched gateless cell supports selectivity. Inside `±0.010`, spend no further slot on this cell.
+
+## Card SN5 — `1p0px-g0p02` (`h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6`)
+- **Hypothesis:** The highest-gain four-neighbour corrections are the cleanest subset: if fault edges nominate R0 lineaments, these 1,245 moves should carry the highest precision per moved dot.
+- **Mechanism:** Require `>=0.02` fused-response improvement and move only 3.306% of R0 by 100 m; the larger mean gain (`0.03304`) tests selectivity at minimum dose, not a new response surface.
+- **Non-fault mimic:** Sharp dike margins, welded-tuff contacts, and survey-processing steps often have stronger gradients than diffuse fault scarps, so the high gate can preferentially select non-faults.
+- **Predicted sign and size (MODEL):** Positive central **+0.0022**, band **−0.0011…+0.0055**; the central expectation is below the live no-evidence threshold, so this is a held boundary/control, not a default weekly slot.
+- **Falsifier:** A `>=0.010` gain would reject the dose-scaled MODEL and justify high-gate investigation; a `<=−0.010` loss despite only 1,245 moves would strongly implicate sharp non-fault contacts. Anything smaller teaches no live lesson.
+
+## Card SN6 — `1p4px-g0p01` (`h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25`) — PRIMARY NEW ARM
+- **Hypothesis:** At 400 m GeoDAWN line spacing (USGS: https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7), diagonal as well as cardinal neighbours contain real edge corrections; an intermediate gate retains that dose while rejecting weak crest noise.
+- **Mechanism:** Move 6,767 dots (17.972%) within the eight-neighbour `<=1.42 px` window, mean `1.370 px`, with the same `>=0.01` gate as SN4. This is the exact missing intermediate-gate counterpart to local `1p4px-g0p00` and upstream `1p4px-g0p02`.
+- **Non-fault mimic:** Oblique fan distributaries, shoreline terraces, and pluton contacts become available when diagonals are added; unsigned max-fusion cannot distinguish them from fault scarps.
+- **Predicted sign and size (MODEL):** Positive central **+0.0120**, band **−0.0060…+0.0301**, the only new arm whose central assumption exceeds the `0.01` evidence threshold.
+- **Falsifier:** Submit against matched `1p4px-g0p00`: gated lower by `>=0.010` falsifies selectivity-over-dose; gated higher by `>=0.010` supports it and earns the fixed-gate window control SN4. A result within `±0.010` of R0 is no evidence, not validation.
+
+
+---
+
+# Part VIII — `SNAP` directional corner (`dirfw2p0` · `dirhw2p0` · `dirfw1p0`) — session `arena/a641bd79-gemsdoe89` (2026-10-24)
+
+## The gap this session fills, and the measurement that opened it
+
+Every `SNAP` arm in the ledger is a cell of a `{window} x {gain-gate}` factorial on one
+response surface — bands 3 `tmi_hg` + 18 `iso_grav_anom_hg`, median-fill, gaussian
+`sigma = 1.0 px`, `robust_unit` at `p99.5`, fused by pixel-wise max (`gemsdoe/snap.py`):
+
+| window | gate 0.00 (this repo) | gate 0.01 / 0.02 (upstream `GEMSDOE84`) |
+|---|---|---|
+| 1.0 px | `1p0px-g0p00` `1add5aa6` | `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6` |
+| 1.42 px | `1p4px-g0p00` `e1474851` | `1p4px-g0p01` `afc60a25`, `1p4px-g0p02` `0b6a2ab2` |
+| 2.0 px | `2p0px-g0p00` `69db3aae` | `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55` |
+
+All nine cells (the factorial was completed the same day, Part VII) allow a dot to move in
+**any** direction inside the window and all nine land it on the local maximum of a
+horizontal-gradient (HG) field. None of them can say **which side
+of that maximum the surface trace sits on**, which is the first question a potential-field
+worker asks about an HG maximum.
+
+The obvious correction — "the HG maximum over a dipping contact is displaced toward the
+hanging wall by roughly `depth / tan(dip)`, so subtract that displacement" — turns out to
+be *unnecessary in the mean*: **measured here**, the undirected `2p0px-g0p00` arm's 31,287
+moves split **15,585 up-slope / 15,670 down-slope / 32 flat** (`share_upslope = 0.498`,
+`gemsdoe/snap_directional.py::upslope_share`). R0's dots are **direction-neutral** with
+respect to the HG crest, so the undirected snap is not a biased arm and the dip-offset
+correction (proposed as `TRACKB-DIP-OFFSET` in `SLOT_PLAN.md`) is **not** what a 2 px
+correction should do.
+
+What remains open, and is cheap to settle: conditional on a dot snapping to the crest at
+all, is truth more often **up-slope (footwall)** of the crest, **down-slope (hanging
+wall)**, or **on** it? Three arms, one predicate apart from `69db3aae`, answer it.
+
+**Design invariant.** Each arm below reproduces `snap.snap_dots` exactly when the direction
+filter is switched off (`tests/test_snap_directional.py::test_parity_with_snap_dots`, and
+at every released window): same response recipe, same offsets and ordering
+`(dist, dy, dx)`, same tie-breaking, same claim/no-fallback rule, same allowed targets
+(footprint, `d_cat >= 3.00 px`), same count `n = 37,654`, no RNG. The single changed
+predicate: a candidate displacement must have `cos >= +0.5` with the local up-slope unit
+vector (footwall arm) or `cos <= -0.5` (hanging-wall arm), where up-slope is the Sobel
+gradient of pinned band 12 `det_elev` after `sigma = 2.0 px` smoothing
+(`gemsdoe/snap_directional.py::uphill_field`). Ground flatter than `2.0 m/px` (2 % grade)
+is a deadband — the dot does not move — and only **36** of R0's dots fall in it (slope at
+parent dots: p10 5.71, p50 11.01, p90 19.62 m/px), so the deadband cannot carry the result.
+
+**Why the pair, not the arm.** The sign prior of this hypothesis is weak (≈50/50: the
+basin-side case and the range-side case are both geologically ordinary), so a single arm's
+`MODEL` band (`−0.019…+0.057`) is unreadable. `dirfw2p0` and `dirhw2p0` are exact mirrors
+with near-identical displacement statistics (20,853 vs 21,399 moves, mean displacement
+1.738 vs 1.737 px, mean directional cosine 0.815 vs 0.813) — their **difference** isolates
+the sign, and their **sum** isolates "any local re-shuffle off the crest" (the null that
+the existing SNAP arms cannot exclude).
+
+## Card D1 — `dirfw2p0` (`h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f`) — MECHANISM ARM
+
+- **Hypothesis:** Where R0's dots are pulled onto a fused TMI/gravity HG maximum, the mapped surface trace sits **up-slope** (footwall / range side) of that maximum; snapping only up-slope therefore raises credit per unit mass.
+- **Mechanism:** Normal faults in the Basin & Range dip 45–60° basinward, so the potential-field contact edge sits in the hanging wall, displaced from the surface outcrop by `depth / tan(dip)` — for a 200–500 m deep basement contact that is 170–420 m = **1.7–4.2 px**, i.e. the 2 px window. Supportive geometry measured here: the up-slope moves gain **+23.89 m** mean elevation (median +20.2, p10/p90 +6.2/+47.3) while the mirrored down-slope moves lose only **−13.28 m** (median −11.95) — the HG crest sits on the *basin-side toe* of a steep rise, not on its shoulder, which is the asymmetry H_dip predicts.
+- **Rule:** 20,853 of 37,654 dots (55.4 %) moved, mean displacement 1.738 px, mean response gain 0.0091, mean directional cosine 0.815; up-slope share of the moves **1.000** by construction (audited, not assumed).
+- **Non-fault mimic:** Alluvial-fan and basin-floor gradients carry no fault: the direction filter is satisfied by any regional slope, so a share of these moves lands on fan-head channels or bedrock contacts that happen to sit up-slope of a magnetic edge. Strike-slip faults have no dip offset, so for them the up-slope restriction is arbitrary (it dilutes, not flips, the effect).
+- **Predicted sign and size (`MODEL`):** band **−0.019 … +0.057**, central **+0.019** — but the *sign prior is weak*; the arm is built to be read against its mirror, not on its own. Evidence class `MODEL`, never a score.
+- **Falsifier:** `dirfw2p0 − dirhw2p0 < +0.010` ⇒ no measurable crest-side bias at 2 px; retire the directional corner and the dip-offset story with the rest of SNAP. Receipt `<= −0.010` **while the mirror is also `<= −0.010`** ⇒ moving off the crest is what hurts, i.e. R0's crest placement is already right and neither side is favoured.
+
+## Card D2 — `dirhw2p0` (`h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d`) — EXACT MIRROR / CONTROL
+
+- **Hypothesis:** The mirror of D1: if the trace sits on the hanging-wall side of the HG maximum, snapping down-slope should gain and the footwall arm should lose by a similar amount.
+- **Mechanism:** Identical rule with `cos <= −0.5`; 21,399 moves (56.8 %), mean displacement 1.737 px, mean response gain 0.0066, mean directional cosine 0.813, up-slope share **0.000**; mean elevation change **−13.28 m**.
+- **Why it is a control and not a dose repeat:** same window, same gate, same response surface, same count, same allowed targets, same offset set — only the half of the window differs. Its job is to convert D1's receipt from an unreadable absolute number into a signed comparison, and to price "any 2 px re-shuffle off the crest" (both arms carry that cost).
+- **Non-fault mimic:** Mirror-image of D1's; it is the arm that snaps *toward* the basin fill, where alluvial and playa edges and basement-top steps produce HG maxima with no surface fault.
+- **Predicted sign and size (`MODEL`):** band **−0.019 … +0.057** (same construction, same anchor), central **+0.019** by formula only — declaration in advance: if H_dip is right this arm must land **below** `dirfw2p0` by `>= 0.010`.
+- **Falsifier:** `dirhw2p0 > dirfw2p0 + 0.010` reverses the sign of the dip story (trace on the hanging-wall side) — informative, not a failure of the design; it would immediately re-aim the direction filter and be the basis of the next session's dose.
+
+## Card D3 — `dirfw1p0` (`h33-h33-2-b2-snapdirfw1p0-20261024-373c8fd6`) — DOSE
+
+- **Hypothesis:** Half the correction distance (1.0 px instead of 2.0 px) should retain most of D1's gain if the effect is a monotone function of distance from the crest, and should beat D1 if 2 px overshoots onto the steep footwall slope.
+- **Mechanism:** Identical rule at window 1.0 px (4-neighbour): 16,632 moves (44.2 %), mean displacement exactly 1.000 px, mean response gain 0.0051, mean directional cosine 0.852, up-slope share **1.000**, mean elevation change **+13.30 m**.
+- **Non-fault mimic:** As D1, with less reach; its 1 px step is smaller than GeoDAWN's own ±1 px positional noise (400 m line spacing), so a null here does not clear the 2 px mechanism.
+- **Predicted sign and size (`MODEL`):** band **−0.015 … +0.044**, central **+0.015**; conditional arm — spend the slot only if the D1−D2 difference is `>= +0.010`.
+- **Falsifier:** `dirfw1p0 >= dirfw2p0` while both are positive ⇒ the gain is a *sign* effect, not a distance effect, and larger windows are wasted mass; `dirfw1p0 ≈ dirhw2p0` ⇒ the effect is dose, not direction, and the whole corner collapses back to the `{window} x {gate}` factorial.
+
+## Pre-registered read-out (public chunks only; `|Δ| < 0.01` is no evidence)
+
+| receipts | reading | next action |
+|---|---|---|
+| `fw2p0 − hw2p0 >= +0.010` | surface trace is on the **footwall** side of the HG crest | run the matched 4 px arm and re-aim every future placement rule up-slope |
+| `hw2p0 − fw2p0 >= +0.010` | trace on the **hanging-wall** side | same, mirrored; the dip-offset axis is confirmed with the opposite sign and becomes the slot-1 candidate |
+| both `<= R0 − 0.010` | **crest is right**; leaving it in either direction costs credit | retire the directional corner and the dip-offset proposal; SNAP keeps only the `{window} x {gate}` arms |
+| both inside `±0.010`, `fw − hw` inside `±0.010` | no measurable crest-side bias at 1–2 px | SNAP is saturated at this scale; move the slots to the block-concentration fork (`SLOT_PLAN.md`) |
+
+**Report-only instruments (never gates, never scores).** Catalogue hide-and-recover `PROXY`
+(30 % seeded holdout, `n ≈ 18.3k`): parent `0.0384`; `dirfw2p0` `0.0316`, `dirhw2p0`
+`0.0237`, `dirfw1p0` `0.0357`, undirected `2p0px-g0p00` `0.0152` — the ordering follows the
+mechanism, but the proxy's correlation with live scores is `−0.87…+0.54`, so this is a
+consistency check, **not** evidence. Leakage canary: `tmi_hg` AUC `0.665`,
+`iso_grav_anom_hg` AUC `0.647` — both below the `0.90` stop line. Surrogate (catalogue-as-
+truth, counterfactual) DTI: parent `0.00671` → `0.00529` / `0.00433` / `0.00627`; every
+directional arm trades catalogue-fitted coverage for off-catalogue position, exactly as
+the mechanism implies. SGMC control: **not run** (pin UNVERIFIED, `IRREGULARITIES.md`
+item 8). Block density CV: `1 km` `1.883 → 1.904 / 1.893 / 1.889`, `5 km` `0.899 → 0.906 /
+0.894 / 0.902` — a position-only axis, as required.
