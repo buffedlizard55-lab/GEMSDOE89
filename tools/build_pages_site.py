@@ -68,6 +68,7 @@ def mirror() -> None:
     for name in (
         "run_card_condedge_20261024.json",
         "run_card_bstp40.json",
+        "submission_readiness.json",
     ):
         shutil.copy2(ROOT / "registry" / name, registry / name)
     (DOCS / ".nojekyll").touch()

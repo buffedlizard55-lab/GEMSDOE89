@@ -113,7 +113,7 @@ def write_submission(path, dots_mask, footprint, encoding="nan", compress="zlib"
         compression=compress,
         compressionargs={"level": 6} if compress in ("zlib", "deflate") else None,
         tile=(256, 256),
-        predictor=3,
+        predictor=3 if compress else None,
         extratags=extratags,
         metadata=None,
         software=None,

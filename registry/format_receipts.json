@@ -36,6 +36,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -115,6 +120,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -187,6 +197,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -268,6 +283,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -340,6 +360,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -421,6 +446,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -493,6 +523,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -574,6 +609,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -646,6 +686,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -727,6 +772,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -799,6 +849,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -880,6 +935,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -952,6 +1012,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1033,6 +1098,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1105,6 +1175,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1186,6 +1261,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1258,6 +1338,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1339,6 +1424,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1411,6 +1501,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1492,6 +1587,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1564,6 +1664,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1645,6 +1750,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1717,6 +1827,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1798,6 +1913,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -1870,6 +1990,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -1951,6 +2076,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2023,6 +2153,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2104,6 +2239,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2176,6 +2316,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2257,6 +2402,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2329,6 +2479,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2410,6 +2565,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2482,6 +2642,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2563,6 +2728,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2635,6 +2805,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2716,6 +2891,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2788,6 +2968,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -2869,6 +3054,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -2941,6 +3131,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3022,6 +3217,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3094,6 +3294,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3175,6 +3380,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3247,6 +3457,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3328,6 +3543,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3400,6 +3620,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3481,6 +3706,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3553,6 +3783,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3634,6 +3869,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3706,6 +3946,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3787,6 +4032,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -3859,6 +4109,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -3940,6 +4195,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4012,6 +4272,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4093,6 +4358,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4165,6 +4435,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4246,6 +4521,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4318,6 +4598,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4399,6 +4684,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4471,6 +4761,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4552,6 +4847,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4624,6 +4924,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4705,6 +5010,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4777,6 +5087,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
@@ -4858,6 +5173,11 @@
     "detail": "EPSG:32611"
    },
    {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
+   },
+   {
     "gate": "values_in_0_1",
     "ok": true,
     "detail": "0 out-of-range px; min=0.0, max=1.0"
@@ -4930,6 +5250,11 @@
     "gate": "crs_epsg32611",
     "ok": true,
     "detail": "EPSG:32611"
+   },
+   {
+    "gate": "no_infinity",
+    "ok": true,
+    "detail": "infinity is never valid nodata"
    },
    {
     "gate": "values_in_0_1",
