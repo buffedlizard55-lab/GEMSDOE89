@@ -2447,6 +2447,312 @@
   ],
   "skipped": []
  },
+ "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "0b4fad309e26eb49e0ca2707cd5a58f8f675acfbdfff0f0c6192945dcbe163ea",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "zeros_outside_footprint",
+    "ok": true,
+    "detail": "0 outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "0b4fad309e26eb49"
+   }
+  ],
+  "skipped": []
+ },
+ "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "2916ec2d31ebc9c25164686a9dec63f781604cad927869e8aec836143c78652c",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "nan_outside_footprint",
+    "ok": true,
+    "detail": "0 finite px outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "2916ec2d31ebc9c2"
+   }
+  ],
+  "skipped": []
+ },
+ "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "8592f23b22a29f72bbab714d296b4f14c04276803063d553f2e44d0a41a5511d",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "zeros_outside_footprint",
+    "ok": true,
+    "detail": "0 outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "8592f23b22a29f72"
+   }
+  ],
+  "skipped": []
+ },
+ "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "384435e608fdc6b4a1e8218ef7c3454d6970b4f5149cd3e945082f666761d6ae",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "nan_outside_footprint",
+    "ok": true,
+    "detail": "0 finite px outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "384435e608fdc6b4"
+   }
+  ],
+  "skipped": []
+ },
  "h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851-zeros.tif": {
   "ok": true,
   "encoding": "zeros",
@@ -2596,6 +2902,159 @@
     "gate": "sha256_not_in_ledger",
     "ok": true,
     "detail": "e14748519b3fb35c"
+   }
+  ],
+  "skipped": []
+ },
+ "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "0695a30587b9805b76ccc31d3e54312c061cfdc40055f71351b3a56c9a02d17f",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "zeros_outside_footprint",
+    "ok": true,
+    "detail": "0 outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "0695a30587b9805b"
+   }
+  ],
+  "skipped": []
+ },
+ "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "afc60a25d0ceb28295139fb0ad403132da32f07b1da845565326f3db39eb5b01",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "nan_outside_footprint",
+    "ok": true,
+    "detail": "0 finite px outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "afc60a25d0ceb282"
    }
   ],
   "skipped": []

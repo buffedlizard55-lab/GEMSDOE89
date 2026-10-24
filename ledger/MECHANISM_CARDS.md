@@ -579,3 +579,40 @@ Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically this se
 - **Predicted sign and size (`MODEL`):** Central **+0.003**, band **−0.015 … +0.021**.
 - **Falsifier:** If catalogue-based concentration (`cat10` / `12p8km-int10`) is `<= 0` while `12p8km-geod15 >= +0.010`, live truth tracks active strain rather than mapped-fault proximity; `<= −0.010` retires continuum geodetic block priors.
 
+---
+
+# Part VII — SNAP factorial completion (`1p0px-g0p01` · `1p0px-g0p02` · `1p4px-g0p01`) — session `arena/fb0c15d6-gemsdoe89` (2026-10-24)
+
+Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically at the start gate (`c55bafc4…` zeros and `baeae321…` NaN; `37,654` unit dots; `0.2778` remains **CLAIM**). These are exactly the three missing cells in the ledger's 3-window × 3-gate design; no prior `(SNAP, value)` was rebuilt. All use the same TMI-HG / isostatic-gravity-HG response as Part III, fixed count and deterministic row-major placement. Every moved target has `d_cat >= 3.00 px`; inherited collar dots can only stay or move outward.
+
+| value | moved / changed | mean displacement | mean response gain | inherited `<3 px` collar before → after | central MODEL (band) |
+|---|---:|---:|---:|---:|---:|
+| `1p0px-g0p01` (`2916ec2d`) | 4,265 / 11.327% | 1.000 px | 0.01933 | 1,611 → 1,556 | +0.0076 (−0.0038…+0.0190) |
+| `1p0px-g0p02` (`384435e6`) | 1,245 / 3.306% | 1.000 px | 0.03304 | 1,611 → 1,595 | +0.0022 (−0.0011…+0.0055) |
+| `1p4px-g0p01` (`afc60a25`) | 6,767 / 17.972% | 1.370 px | 0.02136 | 1,611 → 1,497 | +0.0120 (−0.0060…+0.0301) |
+
+**Shared MODEL arithmetic and caution.** Pure relocation gives `ΔDTI ≈ ΔT/D`, with the previously recorded anchor `D=18,734.44`. Each moved dot is assumed to close (or open) one pixel with net fractions `−0.05 / +0.10 / +0.25` for low/central/high scenarios and triangular-kernel gain `1/3`. The positive gated scenarios reuse the upstream gated arms' assumptions; they are not fitted effects. The negative scenario prices non-fault crests. Gateless cells retain their different `−0.05 / +0.05 / +0.15` scenarios, so central MODELs across gates are not measurements and must not substitute for the matched live comparisons. A live `|Δ| < 0.01` is no evidence.
+
+**Shared report-only diagnostics.** Withheld-catalogue recall (`n=18,296`, 95% Wilson CI) is `0.03810 [0.03255,0.04365]`, `0.03826 [0.03270,0.04382]`, and `0.03646 [0.03102,0.04189]`, respectively, versus parent `0.03842 [0.03285,0.04400]`. These are **PROXY**, overlap the parent, and never gate. The SNAP-response leakage canary passes (`max AUC=0.66538 < 0.90`). SGMC is skipped because its raster pin is UNVERIFIED.
+
+## Card SN4 — `1p0px-g0p01` (`h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d`)
+- **Hypothesis:** A four-neighbour, `>=0.01` response-gain gate repairs genuine off-by-one BFS placements while rejecting the micro-noise that moved 80.83% of dots in the gateless arm.
+- **Mechanism:** Move 4,265 dots exactly 100 m onto the strongest qualifying TMI/gravity edge; fixed mass, spacing median `3.0→3.0 px`, and 1 km CV `1.88341→1.88198` isolate local position rather than concentration.
+- **Non-fault mimic:** Fan-head rills, lithologic contacts, and aeromagnetic tie-line seams can all exceed the same unsigned-gradient gate without being faults.
+- **Predicted sign and size (MODEL):** Positive central **+0.0076**, band **−0.0038…+0.0190**; a no-evidence live result is entirely plausible.
+- **Falsifier:** Against `1p0px-g0p00`, a `>=0.010` loss means the gate removes useful dose; a `>=0.010` gain over both R0 and that matched gateless cell supports selectivity. Inside `±0.010`, spend no further slot on this cell.
+
+## Card SN5 — `1p0px-g0p02` (`h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6`)
+- **Hypothesis:** The highest-gain four-neighbour corrections are the cleanest subset: if fault edges nominate R0 lineaments, these 1,245 moves should carry the highest precision per moved dot.
+- **Mechanism:** Require `>=0.02` fused-response improvement and move only 3.306% of R0 by 100 m; the larger mean gain (`0.03304`) tests selectivity at minimum dose, not a new response surface.
+- **Non-fault mimic:** Sharp dike margins, welded-tuff contacts, and survey-processing steps often have stronger gradients than diffuse fault scarps, so the high gate can preferentially select non-faults.
+- **Predicted sign and size (MODEL):** Positive central **+0.0022**, band **−0.0011…+0.0055**; the central expectation is below the live no-evidence threshold, so this is a held boundary/control, not a default weekly slot.
+- **Falsifier:** A `>=0.010` gain would reject the dose-scaled MODEL and justify high-gate investigation; a `<=−0.010` loss despite only 1,245 moves would strongly implicate sharp non-fault contacts. Anything smaller teaches no live lesson.
+
+## Card SN6 — `1p4px-g0p01` (`h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25`) — PRIMARY NEW ARM
+- **Hypothesis:** At 400 m GeoDAWN line spacing (USGS: https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7), diagonal as well as cardinal neighbours contain real edge corrections; an intermediate gate retains that dose while rejecting weak crest noise.
+- **Mechanism:** Move 6,767 dots (17.972%) within the eight-neighbour `<=1.42 px` window, mean `1.370 px`, with the same `>=0.01` gate as SN4. This is the exact missing intermediate-gate counterpart to local `1p4px-g0p00` and upstream `1p4px-g0p02`.
+- **Non-fault mimic:** Oblique fan distributaries, shoreline terraces, and pluton contacts become available when diagonals are added; unsigned max-fusion cannot distinguish them from fault scarps.
+- **Predicted sign and size (MODEL):** Positive central **+0.0120**, band **−0.0060…+0.0301**, the only new arm whose central assumption exceeds the `0.01` evidence threshold.
+- **Falsifier:** Submit against matched `1p4px-g0p00`: gated lower by `>=0.010` falsifies selectivity-over-dose; gated higher by `>=0.010` supports it and earns the fixed-gate window control SN4. A result within `±0.010` of R0 is no evidence, not validation.
+

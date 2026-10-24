@@ -34,6 +34,11 @@ This repository was developed with an autonomous coding agent on Arena.ai Agent 
    - Integrated cleanly with PRs #12 (`5 km`) and #13 (`2 km`) with zero byte changes to any pre-existing release raster: all **21** `GEMSDOE89` pairs (**42 `.tif` files**, 136 ledger rows, 63 unit tests) pass every format, data, and ledger gate.
    - **Reversible human choices:** choosing between `CONC5kmcat10` (`+0.009 MODEL`, raw catalogue density, wider band `−0.010…+0.038`) and `conc-12p8km-int10` (`+0.008 MODEL`, Faulds tip/junction/step-over interaction, tighter band `−0.006…+0.018`, `CV_12.8km = 0.5533`) for Slot 1, and between `CONC5kmcat10away` (frontier sign control) and `conc-12p8km-geod15` (catalogue-free active crustal strain) if catalogue priors fail.
 
+8. **SNAP factorial completion (2026-10-24, branch `arena/fb0c15d6-gemsdoe89`):**
+   - Re-verified all 10 fetchable manifest hashes and rebuilt R0 byte-identically before choosing the axis. AI selected SNAP without prompting, as directed, after auditing the ledger: `1p0px-g0p01`, `1p0px-g0p02`, and `1p4px-g0p01` were exactly the three unbuilt cells in the existing 3-window × 3-gate design.
+   - Extended `tools/build_snap_gateless.py` while preserving old per-value reports, added a margin-selection regression test, built three deterministic NaN/zeros pairs, and wrote their hashes, parent diffs, MODEL scenarios, mechanism cards, report-only diagnostics, and manual-submit instructions. Final local totals: 24 pairs / 48 rasters; 64 tests and every raster gate pass.
+   - **Human decisions preserved:** whether to spend slots on the new intermediate-gate arm and its matched gateless control, the conditional third slot, all uploads/final choice, `TOP_PUBLIC`, weekly slot use, receipts, and deadline confirmation. AI did not submit or access DrivenData/Dropbox.
+
 ## Guardrails Enforced
 
 - Zero automated access to `drivendata.org` or `dropbox.com`; zero submissions executed; zero credentials accessed or stored.
