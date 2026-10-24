@@ -1,5 +1,24 @@
-# SUBMIT — GEMSDOE89 (31-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (32-pair queue, 2026-10-24)
 
+## ⚠ Encoding rule (fixes “Predicted values must be in range [0, 1]”)
+
+Always upload the **`-zeros.tif`** twin (0 NaN pixels anywhere; finite
+min 0.0 / max 1.0). The NaN-outside twin is the archive copy; NaN fails
+range checks that do not special-case it. Fleet history scores the two
+encodings identically. **Never upload both twins.** Steps + copy-paste
+name/note blocks: `docs/index.html` (executive summary at the top).
+
+## BSTP session build (2026-10-24) — BUILT, **negative**, no slot
+
+| role | file / stem | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | evidence |
+|---|---|---|---|---|
+| **DO NOT SLOT** (format-safe if human overrides) | `releases/gems89-bstp40-20261024-2e7e8a8f.tif` | `2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596` / `4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33` | `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` | HOLDOUT-DTI −0.0254 [−0.0296,−0.0210] (`segment-holdout-v1`, 39,310 px); verdict negative — see `registry/run_card_bstp40.json` |
+
+Siblings `bstp40corr` (`e3b6d3d2`) and `bstp40corrE` (`598993b2`) were
+withdrawn; their TIFs are deleted and they have no ledger row — do not
+re-register those sha8s.
+
+---
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
 **Never upload both twins in separate slots.** Submission name = the file stem.

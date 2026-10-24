@@ -36,5 +36,14 @@
 | **Anisotropic SPACING** | Error budget is anisotropic: 400 m flight lines smear *across* strike, so along-strike stations can be wider at fixed count | Strike estimated from R0's own strands is circular | Loses to isotropic `poisson` / `lattice` at matched count |
 | **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
 | **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
+| **TRACKB-EXTEND / REPEAT-CALIBRATION** | Deliver the remaining qualifying traces for expert review; or submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT | Reviewer attention favours long traces; the calibration slot buys no climb | Traces 13–19 no better than length-matched random strands; receipt differs from `0.2778` by `> 0.005` |
 | **COMPOSITE-WINNER+TRACKB** *(gate: ≥1 weekly `RECEIPT ≥ +0.010`)* | Layer `TRACKBt150add`'s zero-drop continuous `≥ 1 km` trace infill (`+1,415 px`, `k = 1.00`) directly onto the best live-confirmed weekly variant for the single blind final ($50k P1 + $250k P2) | Linear shoreline/volcanic mimics in target blocks could add `~9.4` `S − M` pixels per mimic trace | Confirmation-slot receipt `< parent_winner − 0.005` retires trace infill and freezes the pure weekly winner |
 | **REPEAT-CALIBRATION (R0 receipt)** | Submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT before freezing composites | Spends 1 of ~17 remaining public slots without advancing climb | Receipt differs from `0.2778` by `> 0.005` (invalidates upstream baseline anchor) |
+## Addendum 2026-10-24 (BSTP session) — queue unchanged
+
+`gems89-bstp40-20261024-2e7e8a8f` (axis `BSTP`, 147-row merged ledger) is **BUILT /
+NEGATIVE**: format- and uniqueness-gated, but HOLDOUT-DTI −0.0254
+[−0.0296, −0.0210] vs the per-fold parent (`segment-holdout-v1`), so it
+takes **no slot** and does not displace the SNAP directional pair above.
+Its two sibling variants were withdrawn (TIFs deleted). Full record:
+`registry/run_card_bstp40.json`, `ledger/MECHANISM_CARDS_BSTP.md`.

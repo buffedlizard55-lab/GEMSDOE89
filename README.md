@@ -1,6 +1,20 @@
 # GEMSDOE89 — start here before every session
 
-Read the [project charter](docs/PROJECT_CHARTER.md) before changing code or evaluating a candidate. It captures the scientific goal, lane/duplicate rules, required holdout, evidence labels, weekly-slot budget, official sources, and current limitations. The [review and ranked hypothesis slate](docs/REVIEW_AND_HYPOTHESES_20261024.md) records this review and why it stopped before an unvalidated submission.
+Read the [project charter](docs/PROJECT_CHARTER.md) (and the condensed session-prompt charter in `PROMPT.md`) before changing code or evaluating a candidate. Site: `docs/index.html`. Analysis: `docs/ANALYSIS.md` · hypotheses: `docs/HYPOTHESES.md` · review: `docs/REVIEW_AND_HYPOTHESES_20261024.md`.
+
+## ⬇ Executive summary — download & submit status (2026-10-24, BSTP session)
+
+| | |
+|---|---|
+| **Unique file this session** | `releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif` (site copy: `docs/downloads/`) |
+| **Upload it as** | name `gems89-bstp40-20261024-2e7e8a8f`, note `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` (110/140 chars) |
+| **SHA-256 (zeros / NaN twin)** | `4b86c16d…` / `2e7e8a8f…` (full hashes in `registry/run_card_bstp40.json`) |
+| **✅ Format** | PASS — 3730×3292 float32, EPSG:32611, values {0,1}, **0 NaN anywhere in the zeros file** (the NaN twin is the likely cause of the “Predicted values must be in range [0, 1]” upload error; always upload `-zeros.tif`) |
+| **✅ Unique** | PASS — ≤3 px dot overlap 60.0% vs R0 / 62.4% worst prior raster (< 70%); surface ρ 0.29 (< 0.90); leakage canary max AUC 0.521 (< 0.90) |
+| **⛔ Slot recommendation** | **DO NOT PROMOTE** — HOLDOUT-DTI (segment-holdout-v1, 39,310 withheld px) **−0.0254 [−0.0296, −0.0210]** vs R0-fold; 3/3 experiments negative; verdict **negative** (`registry/run_card_bstp40.json`). Upload only as a deliberate human risk decision; the evidence queue below (`SLOT_PLAN.md`) is unchanged |
+| **Live score** | none (unscored). Parent 0.2778 remains CLAIM; no ORGANIZER-CONFIRMED receipt exists in this ledger |
+
+How-to-submit steps: `docs/index.html` §“How to make a submission” and `docs/SUBMIT.md`.
 
 ## Downloadable GeoTIFF — status is explicit
 
@@ -16,7 +30,7 @@ Draft form metadata only (not upload authorization): name `GEMSDOE89-H33-DIRFW2P
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **31 pairs / 62 GeoTIFFs + 4 GeoJSON dossiers**, all `BUILT` and format/data-gated
+- **Built, unscored:** **32 pairs / 64 GeoTIFFs + 4 GeoJSON dossiers** (merges the `TRACKB` t150 session's 31 pairs with this session's `BSTP` pair, verdict negative — see executive summary above), all `BUILT` and format/data-gated
   (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
   `TRACKB` 4 Phase-2 pairs). No `(parent, axis, value)` repeat anywhere in the ledger.
 - **This session (2026-10-24) — Dual-Phase `TRACKB` 150-trace R0-consolidating arms**
