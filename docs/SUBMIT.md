@@ -1,16 +1,14 @@
-# SUBMIT — GEMSDOE89 (integrated 21-pair queue, 2026-10-23)
+# SUBMIT — GEMSDOE89 / SNAP factorial completion (2026-10-24)
 
-The human submits manually from their own registered account. Nothing in this
-repository logs in, scrapes, or uploads. Upload one file per slot; use the
-NaN-outside `.tif` primary file (`-zeros.tif` is the byte-verified fallback).
+The human submits manually from their own registered account. Nothing here logs in, scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback. **Never upload both twins in separate slots.** Submission name = the file stem.
 
-## This session's builds (`12.8 km` fault-interaction + catalogue-free GPS strain `CONCENTRATION`)
+## This session's three new builds
 
-| role | file | name | sha256 (`.tif` / `-zeros.tif`) | form note (123 chars each) | predicted (`MODEL`) |
-|---|---|---|---|---|---|
-| **PRIMARY (Slot 1)** | `releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif` | `h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136` | `bcade136bc98295f142eed015f88b2b913ab94dbcafcc5d8400eb1508b143167` / `b1cde6898bf225de6ea77c77a2d169b125489f131458b410276624253586cc92` | `R0 h33-h33-2-b2; CONC 12p8km-int10: move 3765/37654 (10%) low->high interaction 12.8km blocks, CV 0.553->0.553; pred +0.008` | **+0.008** (`−0.006…+0.018`) |
-| **DOSE (cond. Slot 3)** | `releases/h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4.tif` | `h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4` | `357b4ac4f3384e3b567c6abd1d9013713f8d037f8dbd62d1af615f4449c0e44f` / `050572eb870694aa5648fc4c3fc51b01d224addaa4b3c397b421369ce3cf3e6e` | `R0 h33-h33-2-b2; CONC 12p8km-int20: move 7531/37654 (20%) low->high interaction 12.8km blocks, CV 0.553->0.656; pred +0.009` | **+0.009** (`−0.014…+0.024`) |
-| **DISCRIMINATOR** | `releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif` | `h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040` | `259ea040c818a26add94d1a356b0c75b180292bc8c67bcf2cec5776e047f5e45` / `d914868666c45707ccfe570eda343ae3b3774845058c7e02c46cf35f0f3820c3` | `R0 h33-h33-2-b2; CONC 12p8km-geod15: move 5648/37654 (15%) low->high GPS-strain 12.8km blocks, CV 0.553->0.635; pred +0.003` | **+0.003** (`−0.015…+0.021`) |
+| role | file / submission name (stem) | sha256 (`.tif` / `-zeros.tif`) | form note (104 chars) |
+|---|---|---|---|
+| **PRIMARY NEW** | `releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif` | `afc60a25d0ceb28295139fb0ad403132da32f07b1da845565326f3db39eb5b01` / `0695a30587b9805b76ccc31d3e54312c061cfdc40055f71351b3a56c9a02d17f` | `R0 h33-h33-2-b2 + SNAP 1p4px-g0p01: 6,767/37654 dots moved, mean 1.37 px, targets dcat>=3px; pred +0.012` |
+| **CONDITIONAL WINDOW CONTROL** | `releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif` | `2916ec2d31ebc9c25164686a9dec63f781604cad927869e8aec836143c78652c` / `0b4fad309e26eb49e0ca2707cd5a58f8f675acfbdfff0f0c6192945dcbe163ea` | `R0 h33-h33-2-b2 + SNAP 1p0px-g0p01: 4,265/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.008` |
+| **HELD HIGH-GATE BOUNDARY** | `releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif` | `384435e608fdc6b4a1e8218ef7c3454d6970b4f5149cd3e945082f666761d6ae` / `8592f23b22a29f72bbab714d296b4f14c04276803063d553f2e44d0a41a5511d` | `R0 h33-h33-2-b2 + SNAP 1p0px-g0p02: 1,245/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.002` |
 
 ## Phase-2 TRACKB product (2026-10-24 — NOT for upload as a scored slot)
 
@@ -21,54 +19,33 @@ NaN-outside `.tif` primary file (`-zeros.tif` is the byte-verified fallback).
 | **evidence** | `ledger/TRACKB_TRACES.md` (one paragraph per trace); card `ledger/MECHANISM_CARDS_TRACKB.md` |
 | **warning** | Phase-2 expert-review product only. Scored as-is it would fall far below R0 (145/37,654 dots). Do **not** spend a weekly slot on it. |
 
-## Integrated Next-3 Slot Queue
+## Next 3 slots
 
-### Slot 1 — CONCENTRATION allocation fork (choose ONE 10% arm; never both in Week 1)
+1. **Slot 1 — `afc60a25` primary above.** Prediction `+0.0120 MODEL` (`−0.0060…+0.0301`).
+2. **Slot 2 — matched gateless control:**
+   - file/name: `releases/h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851.tif` / stem
+   - fallback: `releases/h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851-zeros.tif`
+   - sha256: `e14748519b3fb35c7998d8d4da12014c27374cd13455e1a79730e86fd2e07ab9`
+   - form note: `R0 h33-h33-2-b2 + SNAP 1p4px-g0p00: 31,233/37654 dots moved, mean 1.35 px, targets dcat>=3px; pred +0.028`
+   - prediction: `+0.0278 MODEL` (`−0.0278…+0.0834`). Compare its receipt directly with Slot 1; only gate differs.
+3. **Slot 3 — conditional after Slots 1–2 receipts:**
+   - Slot 1 beats Slot 2 by `>=0.010` → `2916ec2d` above (fixed gate, smaller window).
+   - Otherwise either SNAP receipt is `>=0.2878` → `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif`; name = stem; note: `R0 h33-h33-2-b2 + SNAP 2p0px-g0p00: 31,287/37654 dots moved, mean 1.86 px, targets dcat>=3px; pred +0.028`.
+   - Otherwise both SNAP results are null → `releases/h33-h33-2-b2-CONC5kmcat20-20261023-4d229938.tif` **or HOLD**; name = stem; note: `R0 h33-h33-2-b2; CONC 5km cat-prior t20: 7531/37654 (20%) zero->top25% fault blocks, n37654; pred +0.019`.
 
-| option | file | name | sha256 | form note | predicted (`MODEL`) |
-|---|---|---|---|---|---|
-| **1A (12.8 km Faulds interaction, tighter band)** | `releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif` | `h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136` | `bcade136bc98295f142eed015f88b2b913ab94dbcafcc5d8400eb1508b143167` | `R0 h33-h33-2-b2; CONC 12p8km-int10: move 3765/37654 (10%) low->high interaction 12.8km blocks, CV 0.553->0.553; pred +0.008` | `+0.008` (`−0.006…+0.018`, Part VI) |
-| **1B (5 km raw catalogue prior)** | `releases/h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377.tif` | `h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377` | `2dc19377e7592f408bf3d3bc67d49bb86b640deedaf2744de12db68f3cc2db52` | `R0 h33-h33-2-b2; CONC 5km cat-prior t10: 3765/37654 (10%) zero->top25% fault blocks, n37654; pred +0.009` | `+0.009` (`−0.010…+0.038`, Part IV) |
-
-### Slot 2 — Orthogonal SNAP local-placement fork
-
-| field | value |
-|---|---|
-| **file** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` |
-| **fallback** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae-zeros.tif` (`0fe545f9de5723e2…`) |
-| **name** | `h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae` |
-| **sha256** | `69db3aae7da2311d43a621d0c4d2ab423a3cd39acfea9cf13f666def10fd5c54` |
-| **form note** | `R0 h33-h33-2-b2 + SNAP 2p0px-g0p00: 31,287/37654 dots moved, mean 1.86 px, targets dcat>=3px; pred +0.028` |
-| **predicted** | `+0.028 MODEL` (`−0.028 … +0.084`; Part III) |
-
-### Slot 3 — Conditional priority (choose at most one after Week 1 receipts, or HOLD)
-
-| condition vs R0 `0.2778` (`CLAIM`) | file (`name` = stem) | predicted (`MODEL`) |
-|---|---|---|
-| Slot 1 `≥ 0.2878` (`+0.010`) | matched 20% dose: `releases/h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4.tif` (if 1A) or `…-CONC5kmcat20-20261023-4d229938.tif` (if 1B) | `+0.009` (`−0.014…+0.024`) / `+0.019` (`−0.010…+0.067`) |
-| else Slot 1 `≤ 0.2678` (`−0.010`) | catalogue-free active strain `releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif` or sign control `…-CONC5kmcat10away-20261023-f7b8aa28.tif` | `+0.003` (`−0.015…+0.021`) / `−0.009` (`−0.038…+0.010`) |
-| else Slot 2 `≥ 0.2878` (`+0.010`) | `releases/h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851.tif` | `+0.028` (`−0.028…+0.083`) |
-| else | `releases/h33-h33-2-b2-MASSm10uniq-20261023-beed130f.tif` or `…-relief-r10-20261023-366c87ca.tif` **or HOLD** | `+0.002` / `+0.003` |
-
-## Rest of the gated queue (`ledger/submissions.csv`, `status = BUILT`)
-
-- **CONC 2 km (`da3a4886` / `51ba9656` / `1e857586`):** held separate on-H19 mechanism (`+0.0024` / `−0.0028` / `−0.0126`).
-- **RELIEF (`r10` `366c87ca`, `r15` `6aa774ce`, `r15s` `5f0ae851`):** geomorphic elevation/slope tercile probes.
-- **MASS (`m10uniq` `beed130f`, `m20uniq` `87ec6213`, `m10rand` `7a4c49b6`):** drop-only denominator probes + random null.
-- **SPACING (`alongstrike` `3b263c7a`, held `poisson` `ff167173` / `lattice` `454c9098`):** strand stationing & lateral corridor probes.
-- **SNAP (`1p0px-g0p00` `1add5aa6`):** saturated window point; hold unless two gate-0 receipts both fire.
-
-## Format receipt (`registry/format_receipts.json` — all 42 files re-read from disk)
+## Format receipt — re-read from disk
 
 | gate | result |
 |---|---|
-| grid vs `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×42 files** (`21` `.tif` + `21` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×42 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×21 pairs** |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); all new CONC additions `d_cat >= 3.00 px` | **PASS ×42 files** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`136` ledger rows: `21` `GEMSDOE89` + `115` upstream)** |
-| R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`)** |
-| unit tests / leakage canary | **63 passed** / **PASS** (`max <= 0.5995 < 0.90`) |
+| Grid vs pinned `sample_submission.tif`: `3730×3292`, 100 m, EPSG:32611, float32, one band | **PASS ×50 files** |
+| Values `[0,1]`; unit dots; no NaN inside footprint; NaN/0 outside by twin | **PASS ×50 files** |
+| Dot counts and identical NaN/zeros masks | **PASS ×25 pairs**; all three new SNAP pairs = 37,654; TRACKB = 145 |
+| Zero catalogue mass; new SNAP moved targets `d_cat>=3.00 px` | **PASS** |
+| Exact-hash and `(parent,axis,value)` dedupe; form notes `<=140` chars | **PASS** (`140` ledger rows, `25` local + `115` collapsed upstream) |
+| R0 recipe rebuild vs both SHA-256 pins | **PASS** |
+| Unit tests / leakage canary | **68 passed** / **PASS** (`SNAP max AUC 0.66538 < 0.90`) |
+
+Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`, and `registry/report_only_status.json`. PROXY/MODEL diagnostics never gate an upload.
 
 ## Pre-upload verification
 
@@ -80,7 +57,7 @@ python -m pytest tests -q
 python tools/build_ledger.py
 python tools/validate_raster.py
 python tools/check_ledger.py
-sha256sum releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif   # must start bcade136
+sha256sum releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif  # must start afc60a25
 ```
 
-After each upload, record `receipt_score` and `date` in `ledger/submissions.csv` (`receipt=Y`, `status=SUBMITTED`).
+After each upload, the human records `receipt_score` and `date` in `ledger/submissions.csv` (`receipt=Y`, `status=SUBMITTED`).

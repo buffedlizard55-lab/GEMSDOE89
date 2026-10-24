@@ -94,6 +94,22 @@ def test_snap_gate_blocks_everything_when_margin_huge():
     assert np.array_equal(res.mask, dots)
 
 
+def test_snap_intermediate_gate_selects_only_qualified_gain():
+    dots = np.zeros((5, 5), bool)
+    dots[2, 2] = True
+    resp = np.full((5, 5), 0.5, np.float32)
+    resp[2, 1] = 0.515  # stronger, but below the 0.02 gate
+    resp[2, 3] = 0.530  # strongest pixel and above the gate
+    allowed = np.ones((5, 5), bool)
+    res = snap_dots(dots, resp, allowed, max_shift=1.0, margin=0.02)
+    assert res.stats["dots_moved"] == 1
+    assert res.mask[2, 3] and not res.mask[2, 2]
+    assert res.moves[0][6] == pytest.approx(1.0)
+    blocked = snap_dots(dots, resp, allowed, max_shift=1.0, margin=0.031)
+    assert blocked.stats["dots_moved"] == 0
+    assert np.array_equal(blocked.mask, dots)
+
+
 def test_snap_respects_allowed_mask():
     dots, resp, allowed = _setup()
     allowed[21, 22] = False  # forbid the strongest pixel in reach
