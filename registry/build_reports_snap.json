@@ -301,6 +301,622 @@
   "seconds": 3.9
  },
  {
+  "id": "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d",
+  "value": "1p0px-g0p01",
+  "build_date": "20261024",
+  "spec": {
+   "window_px": 1.0,
+   "margin": 0.01,
+   "date": "20261024",
+   "note": "4-neighbour window at the intermediate selectivity gate"
+  },
+  "parent": "h33-h33-2-b2",
+  "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "parent_rebuild_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "seed": null,
+  "determinism": "no RNG; row-major dots; offsets by (dist, dy, dx)",
+  "git_sha": "ff0112b0a11d2d8d47508f6f9453ccf17da62352",
+  "recipe": {
+   "inputs": [
+    "parent_r0_zeros.tif (sha256 c55bafc47005\u2026)",
+    "training_features.tif bands 3 tmi_hg + 18 iso_grav_anom_hg (identities via registry/data_manifest.json band_identity_source)"
+   ],
+   "response": "per-band: footprint-median fill -> gaussian sigma=1.0 px -> robust_unit (median/IQR z, 1.0 = 99.5th pct, clip 6) -> max fusion",
+   "window_px": 1.0,
+   "margin": 0.01,
+   "allowed_targets": "footprint & d_cat >= 3.0 px"
+  },
+  "stats": {
+   "max_shift_px": 1.0,
+   "margin": 0.01,
+   "min_gain_applied": 0.01,
+   "candidate_offsets": 4,
+   "dots_in": 37654,
+   "dots_out": 37654,
+   "count_preserved": true,
+   "dots_moved": 4265,
+   "pct_dots_moved": 11.327,
+   "mean_displacement_px": 1.0,
+   "median_displacement_px": 1.0,
+   "max_displacement_px": 1.0,
+   "mean_response_gain": 0.01932551266663637,
+   "median_response_gain": 0.015079379081726074,
+   "candidate_pixels_rejected_infeasible": 6890,
+   "candidate_pixels_rejected_already_claimed": 0,
+   "moved_targets_min_dcat_enforced_by_mask": true,
+   "pct_of_parent_dots_moved": 11.327,
+   "moved_targets_min_dcat_px": 3.0,
+   "collar_lt3px_before": 1611,
+   "collar_lt3px_after": 1556,
+   "pixels_added_vs_parent": 4265,
+   "pixels_removed_vs_parent": 4265,
+   "min_dcat_parent_px": 2.23606797749979,
+   "min_dcat_variant_px": 2.23606797749979,
+   "median_dcat_parent_px": 19.6468827043885,
+   "median_dcat_variant_px": 19.6468827043885,
+   "nn_median_before_px": 3.0,
+   "nn_median_after_px": 3.0,
+   "block_cv_1km_before": 1.8834056250795637,
+   "block_cv_1km_after": 1.8819830855156154,
+   "block_cv_5km_before": 0.8990629317740834,
+   "block_cv_5km_after": 0.8990929394440362
+  },
+  "model_prediction": {
+   "band": [
+    -0.0037942598408777276,
+    0.007588519681755455,
+    0.01897129920438864
+   ],
+   "central": 0.007588519681755455,
+   "basis": "pure position change dDTI ~= dT/D; D=18734.44, T=5073.29 from the recorded live-anchor inversion (upstream evidence/h33_validation.json, live pair 0.2600->0.2708); scenario: -0.05..+0.25 net fraction of moved dots close (or open) one full pixel, kernel gain 1/3; central +0.10. Gated central/high reuse the upstream gated arms' +0.10/+0.25 coupling assumptions; low prices non-fault mimics. Evidence class MODEL, not a score.",
+   "scenario_fractions": {
+    "lo": -0.05,
+    "central": 0.1,
+    "hi": 0.25
+   },
+   "no_evidence_threshold": 0.01
+  },
+  "files": {
+   "nan": {
+    "path": "releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif",
+    "sha256": "2916ec2d31ebc9c25164686a9dec63f781604cad927869e8aec836143c78652c",
+    "bytes": 380522
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif",
+    "sha256": "0b4fad309e26eb49e0ca2707cd5a58f8f675acfbdfff0f0c6192945dcbe163ea",
+    "bytes": 233609
+   },
+   "sha8": "2916ec2d"
+  },
+  "gates": {
+   "mask": {
+    "count_preserved": true,
+    "zero_catalogue_mass": true,
+    "inside_footprint": true,
+    "moved_targets_ge_3px": true,
+    "collar_not_increased": true,
+    "differs_from_parent": true
+   },
+   "nan": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "nan_outside_footprint",
+      "ok": true,
+      "detail": "0 finite px outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "2916ec2d31ebc9c2"
+     }
+    ]
+   },
+   "zeros": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d-zeros.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_anywhere",
+      "ok": true,
+      "detail": "0 NaN px"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "zeros_outside_footprint",
+      "ok": true,
+      "detail": "0 outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "0b4fad309e26eb49"
+     }
+    ]
+   },
+   "twins_identical_mask": true,
+   "all_passed": true
+  },
+  "report_only": {
+   "proxy_variant": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.038095758635767384,
+    "ci95_halfwidth": 0.005550497113025854,
+    "ci95": [
+     0.03254526152274153,
+     0.04364625574879324
+    ]
+   },
+   "proxy_parent": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.03842369916921731,
+    "ci95_halfwidth": 0.005573353171446999,
+    "ci95": [
+     0.032850345997770314,
+     0.04399705234066431
+    ]
+   },
+   "surrogate_variant": 0.006585596783855718,
+   "surrogate_parent": 0.006709118968955279,
+   "leakage_canary": {
+    "tmi_hg": {
+     "auc": 0.6653773420484407,
+     "flag": false
+    },
+    "iso_grav_anom_hg": {
+     "auc": 0.647420489743843,
+     "flag": false
+    }
+   },
+   "leakage_canary_pass": true,
+   "sgmc_control": "NOT RUN - control raster not in manifest (deferred, report-only, cannot gate)"
+  },
+  "response_surface": {
+   "bands": [
+    {
+     "index": 3,
+     "name": "tmi_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.012773808091878891,
+     "p99_in_footprint": 0.12818479537963867
+    },
+    {
+     "index": 18,
+     "name": "iso_grav_anom_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.019909732043743134,
+     "p99_in_footprint": 0.14271411299705505
+    }
+   ],
+   "sigma_px": 1.0,
+   "robust_pct": 99.5,
+   "fused_mean_in_footprint": 0.029426103457808495
+  },
+  "form_note": "R0 h33-h33-2-b2 + SNAP 1p0px-g0p01: 4,265/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.008",
+  "seconds": 3.4
+ },
+ {
+  "id": "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6",
+  "value": "1p0px-g0p02",
+  "build_date": "20261024",
+  "spec": {
+   "window_px": 1.0,
+   "margin": 0.02,
+   "date": "20261024",
+   "note": "4-neighbour window at the high selectivity gate"
+  },
+  "parent": "h33-h33-2-b2",
+  "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "parent_rebuild_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "seed": null,
+  "determinism": "no RNG; row-major dots; offsets by (dist, dy, dx)",
+  "git_sha": "ff0112b0a11d2d8d47508f6f9453ccf17da62352",
+  "recipe": {
+   "inputs": [
+    "parent_r0_zeros.tif (sha256 c55bafc47005\u2026)",
+    "training_features.tif bands 3 tmi_hg + 18 iso_grav_anom_hg (identities via registry/data_manifest.json band_identity_source)"
+   ],
+   "response": "per-band: footprint-median fill -> gaussian sigma=1.0 px -> robust_unit (median/IQR z, 1.0 = 99.5th pct, clip 6) -> max fusion",
+   "window_px": 1.0,
+   "margin": 0.02,
+   "allowed_targets": "footprint & d_cat >= 3.0 px"
+  },
+  "stats": {
+   "max_shift_px": 1.0,
+   "margin": 0.02,
+   "min_gain_applied": 0.02,
+   "candidate_offsets": 4,
+   "dots_in": 37654,
+   "dots_out": 37654,
+   "count_preserved": true,
+   "dots_moved": 1245,
+   "pct_dots_moved": 3.306,
+   "mean_displacement_px": 1.0,
+   "median_displacement_px": 1.0,
+   "max_displacement_px": 1.0,
+   "mean_response_gain": 0.03303746977357201,
+   "median_response_gain": 0.026873186230659485,
+   "candidate_pixels_rejected_infeasible": 6890,
+   "candidate_pixels_rejected_already_claimed": 0,
+   "moved_targets_min_dcat_enforced_by_mask": true,
+   "pct_of_parent_dots_moved": 3.306,
+   "moved_targets_min_dcat_px": 3.0,
+   "collar_lt3px_before": 1611,
+   "collar_lt3px_after": 1595,
+   "pixels_added_vs_parent": 1245,
+   "pixels_removed_vs_parent": 1245,
+   "min_dcat_parent_px": 2.23606797749979,
+   "min_dcat_variant_px": 2.23606797749979,
+   "median_dcat_parent_px": 19.6468827043885,
+   "median_dcat_variant_px": 19.6468827043885,
+   "nn_median_before_px": 3.0,
+   "nn_median_after_px": 3.0,
+   "block_cv_1km_before": 1.8834056250795637,
+   "block_cv_1km_after": 1.882547739145329,
+   "block_cv_5km_before": 0.8990629317740834,
+   "block_cv_5km_after": 0.8988605474846912
+  },
+  "model_prediction": {
+   "band": [
+    -0.0011075858152151867,
+    0.0022151716304303734,
+    0.005537929076075933
+   ],
+   "central": 0.0022151716304303734,
+   "basis": "pure position change dDTI ~= dT/D; D=18734.44, T=5073.29 from the recorded live-anchor inversion (upstream evidence/h33_validation.json, live pair 0.2600->0.2708); scenario: -0.05..+0.25 net fraction of moved dots close (or open) one full pixel, kernel gain 1/3; central +0.10. Gated central/high reuse the upstream gated arms' +0.10/+0.25 coupling assumptions; low prices non-fault mimics. Evidence class MODEL, not a score.",
+   "scenario_fractions": {
+    "lo": -0.05,
+    "central": 0.1,
+    "hi": 0.25
+   },
+   "no_evidence_threshold": 0.01
+  },
+  "files": {
+   "nan": {
+    "path": "releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif",
+    "sha256": "384435e608fdc6b4a1e8218ef7c3454d6970b4f5149cd3e945082f666761d6ae",
+    "bytes": 380341
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif",
+    "sha256": "8592f23b22a29f72bbab714d296b4f14c04276803063d553f2e44d0a41a5511d",
+    "bytes": 233470
+   },
+   "sha8": "384435e6"
+  },
+  "gates": {
+   "mask": {
+    "count_preserved": true,
+    "zero_catalogue_mass": true,
+    "inside_footprint": true,
+    "moved_targets_ge_3px": true,
+    "collar_not_increased": true,
+    "differs_from_parent": true
+   },
+   "nan": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "nan_outside_footprint",
+      "ok": true,
+      "detail": "0 finite px outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "384435e608fdc6b4"
+     }
+    ]
+   },
+   "zeros": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6-zeros.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_anywhere",
+      "ok": true,
+      "detail": "0 NaN px"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "zeros_outside_footprint",
+      "ok": true,
+      "detail": "0 outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "8592f23b22a29f72"
+     }
+    ]
+   },
+   "twins_identical_mask": true,
+   "all_passed": true
+  },
+  "report_only": {
+   "proxy_variant": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.03825972890249235,
+    "ci95_halfwidth": 0.005561938911869721,
+    "ci95": [
+     0.03269778999062263,
+     0.04382166781436207
+    ]
+   },
+   "proxy_parent": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.03842369916921731,
+    "ci95_halfwidth": 0.005573353171446999,
+    "ci95": [
+     0.032850345997770314,
+     0.04399705234066431
+    ]
+   },
+   "surrogate_variant": 0.0066663180423935054,
+   "surrogate_parent": 0.006709118968955279,
+   "leakage_canary": {
+    "tmi_hg": {
+     "auc": 0.6653773420484407,
+     "flag": false
+    },
+    "iso_grav_anom_hg": {
+     "auc": 0.647420489743843,
+     "flag": false
+    }
+   },
+   "leakage_canary_pass": true,
+   "sgmc_control": "NOT RUN - control raster not in manifest (deferred, report-only, cannot gate)"
+  },
+  "response_surface": {
+   "bands": [
+    {
+     "index": 3,
+     "name": "tmi_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.012773808091878891,
+     "p99_in_footprint": 0.12818479537963867
+    },
+    {
+     "index": 18,
+     "name": "iso_grav_anom_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.019909732043743134,
+     "p99_in_footprint": 0.14271411299705505
+    }
+   ],
+   "sigma_px": 1.0,
+   "robust_pct": 99.5,
+   "fused_mean_in_footprint": 0.029426103457808495
+  },
+  "form_note": "R0 h33-h33-2-b2 + SNAP 1p0px-g0p02: 1,245/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.002",
+  "seconds": 3.4
+ },
+ {
   "id": "h33-h33-2-b2-snap1p4px-g0p00-20261023-e1474851",
   "value": "1p4px-g0p00",
   "spec": {
@@ -600,6 +1216,314 @@
   },
   "form_note": "R0 h33-h33-2-b2 + SNAP 1p4px-g0p00: 31,233/37654 dots moved, mean 1.35 px, targets dcat>=3px; pred +0.028",
   "seconds": 4.0
+ },
+ {
+  "id": "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25",
+  "value": "1p4px-g0p01",
+  "build_date": "20261024",
+  "spec": {
+   "window_px": 1.42,
+   "margin": 0.01,
+   "date": "20261024",
+   "note": "8-neighbour window; missing intermediate-gate factorial cell"
+  },
+  "parent": "h33-h33-2-b2",
+  "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "parent_rebuild_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "seed": null,
+  "determinism": "no RNG; row-major dots; offsets by (dist, dy, dx)",
+  "git_sha": "ff0112b0a11d2d8d47508f6f9453ccf17da62352",
+  "recipe": {
+   "inputs": [
+    "parent_r0_zeros.tif (sha256 c55bafc47005\u2026)",
+    "training_features.tif bands 3 tmi_hg + 18 iso_grav_anom_hg (identities via registry/data_manifest.json band_identity_source)"
+   ],
+   "response": "per-band: footprint-median fill -> gaussian sigma=1.0 px -> robust_unit (median/IQR z, 1.0 = 99.5th pct, clip 6) -> max fusion",
+   "window_px": 1.42,
+   "margin": 0.01,
+   "allowed_targets": "footprint & d_cat >= 3.0 px"
+  },
+  "stats": {
+   "max_shift_px": 1.42,
+   "margin": 0.01,
+   "min_gain_applied": 0.01,
+   "candidate_offsets": 8,
+   "dots_in": 37654,
+   "dots_out": 37654,
+   "count_preserved": true,
+   "dots_moved": 6767,
+   "pct_dots_moved": 17.972,
+   "mean_displacement_px": 1.3699581455568182,
+   "median_displacement_px": 1.4142135623730951,
+   "max_displacement_px": 1.4142135623730951,
+   "mean_response_gain": 0.021356382308629938,
+   "median_response_gain": 0.0160609083250165,
+   "candidate_pixels_rejected_infeasible": 14362,
+   "candidate_pixels_rejected_already_claimed": 6,
+   "moved_targets_min_dcat_enforced_by_mask": true,
+   "pct_of_parent_dots_moved": 17.972,
+   "moved_targets_min_dcat_px": 3.0,
+   "collar_lt3px_before": 1611,
+   "collar_lt3px_after": 1497,
+   "pixels_added_vs_parent": 6767,
+   "pixels_removed_vs_parent": 6767,
+   "min_dcat_parent_px": 2.23606797749979,
+   "min_dcat_variant_px": 2.23606797749979,
+   "median_dcat_parent_px": 19.6468827043885,
+   "median_dcat_variant_px": 19.4164878389476,
+   "nn_median_before_px": 3.0,
+   "nn_median_after_px": 3.0,
+   "block_cv_1km_before": 1.8834056250795637,
+   "block_cv_1km_after": 1.8812177830615406,
+   "block_cv_5km_before": 0.8990629317740834,
+   "block_cv_5km_after": 0.8999097867730435
+  },
+  "model_prediction": {
+   "band": [
+    -0.006020106997237887,
+    0.012040213994475774,
+    0.030100534986189427
+   ],
+   "central": 0.012040213994475774,
+   "basis": "pure position change dDTI ~= dT/D; D=18734.44, T=5073.29 from the recorded live-anchor inversion (upstream evidence/h33_validation.json, live pair 0.2600->0.2708); scenario: -0.05..+0.25 net fraction of moved dots close (or open) one full pixel, kernel gain 1/3; central +0.10. Gated central/high reuse the upstream gated arms' +0.10/+0.25 coupling assumptions; low prices non-fault mimics. Evidence class MODEL, not a score.",
+   "scenario_fractions": {
+    "lo": -0.05,
+    "central": 0.1,
+    "hi": 0.25
+   },
+   "no_evidence_threshold": 0.01
+  },
+  "files": {
+   "nan": {
+    "path": "releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif",
+    "sha256": "afc60a25d0ceb28295139fb0ad403132da32f07b1da845565326f3db39eb5b01",
+    "bytes": 380794
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25-zeros.tif",
+    "sha256": "0695a30587b9805b76ccc31d3e54312c061cfdc40055f71351b3a56c9a02d17f",
+    "bytes": 233904
+   },
+   "sha8": "afc60a25"
+  },
+  "gates": {
+   "mask": {
+    "count_preserved": true,
+    "zero_catalogue_mass": true,
+    "inside_footprint": true,
+    "moved_targets_ge_3px": true,
+    "collar_not_increased": true,
+    "differs_from_parent": true
+   },
+   "nan": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "nan_outside_footprint",
+      "ok": true,
+      "detail": "0 finite px outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "afc60a25d0ceb282"
+     }
+    ]
+   },
+   "zeros": {
+    "ok": true,
+    "results": [
+     {
+      "gate": "readable",
+      "ok": true,
+      "detail": "h33-h33-2-b2-snap1p4px-g0p01-20261024-afc60a25-zeros.tif"
+     },
+     {
+      "gate": "grid_contract",
+      "ok": true,
+      "detail": "matches template"
+     },
+     {
+      "gate": "dtype_float32",
+      "ok": true,
+      "detail": "float32"
+     },
+     {
+      "gate": "single_band",
+      "ok": true,
+      "detail": "ndim=2"
+     },
+     {
+      "gate": "shape",
+      "ok": true,
+      "detail": "[3730, 3292]"
+     },
+     {
+      "gate": "crs_epsg32611",
+      "ok": true,
+      "detail": "EPSG:32611"
+     },
+     {
+      "gate": "values_in_0_1",
+      "ok": true,
+      "detail": "0 out-of-range px; min=0.0, max=1.0"
+     },
+     {
+      "gate": "no_nan_anywhere",
+      "ok": true,
+      "detail": "0 NaN px"
+     },
+     {
+      "gate": "no_nan_inside_footprint",
+      "ok": true,
+      "detail": "0 NaN px inside"
+     },
+     {
+      "gate": "zeros_outside_footprint",
+      "ok": true,
+      "detail": "0 outside"
+     },
+     {
+      "gate": "unit_dots",
+      "ok": true,
+      "detail": "37654 dots all == 1.0"
+     },
+     {
+      "gate": "dot_count_matches_mask",
+      "ok": true,
+      "detail": "raster 37654 vs mask 37654"
+     },
+     {
+      "gate": "zero_catalogue_mass",
+      "ok": true,
+      "detail": "0 dots on catalogue pixels"
+     },
+     {
+      "gate": "sha256_not_in_ledger",
+      "ok": true,
+      "detail": "0695a30587b9805b"
+     }
+    ]
+   },
+   "twins_identical_mask": true,
+   "all_passed": true
+  },
+  "report_only": {
+   "proxy_variant": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.03645605596851771,
+    "ci95_halfwidth": 0.005434525990424072,
+    "ci95": [
+     0.03102152997809364,
+     0.04189058195894178
+    ]
+   },
+   "proxy_parent": {
+    "n_withheld": 18296,
+    "seed": 20261023,
+    "holdout_fraction": 0.3,
+    "recall": 0.03842369916921731,
+    "ci95_halfwidth": 0.005573353171446999,
+    "ci95": [
+     0.032850345997770314,
+     0.04399705234066431
+    ]
+   },
+   "surrogate_variant": 0.006299092732135318,
+   "surrogate_parent": 0.006709118968955279,
+   "leakage_canary": {
+    "tmi_hg": {
+     "auc": 0.6653773420484407,
+     "flag": false
+    },
+    "iso_grav_anom_hg": {
+     "auc": 0.647420489743843,
+     "flag": false
+    }
+   },
+   "leakage_canary_pass": true,
+   "sgmc_control": "NOT RUN - control raster not in manifest (deferred, report-only, cannot gate)"
+  },
+  "response_surface": {
+   "bands": [
+    {
+     "index": 3,
+     "name": "tmi_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.012773808091878891,
+     "p99_in_footprint": 0.12818479537963867
+    },
+    {
+     "index": 18,
+     "name": "iso_grav_anom_hg",
+     "nodata_fraction": 0.000592370630105421,
+     "mean_in_footprint": 0.019909732043743134,
+     "p99_in_footprint": 0.14271411299705505
+    }
+   ],
+   "sigma_px": 1.0,
+   "robust_pct": 99.5,
+   "fused_mean_in_footprint": 0.029426103457808495
+  },
+  "form_note": "R0 h33-h33-2-b2 + SNAP 1p4px-g0p01: 6,767/37654 dots moved, mean 1.37 px, targets dcat>=3px; pred +0.012",
+  "seconds": 3.4
  },
  {
   "id": "h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae",

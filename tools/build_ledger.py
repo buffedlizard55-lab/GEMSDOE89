@@ -224,7 +224,7 @@ def _snap_rows() -> list[dict]:
                     f"{band[0]:+.4f}..{band[2]:+.4f} "
                     f"(MODEL central {m['central']:+.4f}; band prices the mimic)"
                 ),
-                "date": "20261023",
+                "date": rep.get("build_date", "20261023"),
                 "form_note": rep["form_note"],
                 "notes": (
                     f"window {round(rep['spec']['window_px'], 2)} px, gate {rep['spec']['margin']:.2f}, "
@@ -498,6 +498,50 @@ def _concentration_12p8km_rows() -> list[dict]:
     return rows
 
 
+def _trackb_rows() -> list[dict]:
+    """TRACKB (Phase 2) rows. Added 2026-10-24: without a reader here a
+    ledger rebuild would drop the TRACKB row while its release files stay
+    on disk (the SNAP failure mode, IRREGULARITIES item 11)."""
+    p = ROOT / "registry" / "build_reports_trackb.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": "n/a (Phase 2 trace product; not a weekly-slot candidate; do not submit for score)",
+                "date": "2026-10-24",
+                "form_note": "R0 h33-h33-2-b2; TRACKB top12: 12 strike-consistent traces >=1km, 145 member dots, GeoJSON; Phase 2 only",
+                "notes": (
+                    f"built 2026-10-24; {s['n_traces']} traces, {s['total_length_km']:.1f} km total, "
+                    f"{s['n_dots']} member dots (all R0 dots, zero catalogue mass); "
+                    "strand-credit top-2/3 dots linked 4.5px, R>=0.85, straightness>=0.60; "
+                    "evidence paragraphs in ledger/TRACKB_TRACES.md; GeoJSON EPSG:32611 in releases/."
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -522,6 +566,7 @@ def main():
         + _concentration_rows()
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
+        + _trackb_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])
