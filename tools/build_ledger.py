@@ -542,6 +542,53 @@ def _trackb_rows() -> list[dict]:
     return rows
 
 
+def _h89_discovery_rows() -> list[dict]:
+    p = ROOT / "registry" / "h89_discovery_report.json"
+    if not p.exists():
+        return []
+    rep = json.loads(p.read_text(encoding="utf-8"))
+    pkg = rep["packaging"]
+    cand = rep["pooled_holdout"]["scores"][rep["selected_experiment"]]
+    diff_r0 = rep["pooled_holdout"]["paired_differences"]["r0_fold_fair"]
+    uq = rep["uniqueness_audit"]
+    reg = rep["regime_allocation"]["candidate"]
+    return [
+        {
+            "id": pkg["stem"],
+            "site": "GEMSDOE89",
+            "name": pkg["stem"],
+            "score": "",
+            "evidence_class": "BUILT (unscored)",
+            "encoding": "nan+zeros",
+            "n_dots": pkg["n_dots"],
+            "pct_changed": f"{pkg['pct_changed_vs_r0']:.2f}",
+            "sha8": pkg["sha8"],
+            "sha256": pkg["release_nan_sha256"],
+            "sha256_zeros": pkg["release_zeros_sha256"],
+            "parent": "training_features+existing_faults (from-scratch H89)",
+            "axis": "DISCOVERY_H89",
+            "value": "bh-rtp-habc",
+            "status": "BUILT",
+            "receipt": "N",
+            "receipt_score": "",
+            "predicted_change": (
+                f"HOLDOUT-DTI {cand['dti']:.5f} 95% CI [{cand['ci95'][0]:.5f}, {cand['ci95'][1]:.5f}] "
+                f"(+{diff_r0['delta']:.5f} vs R0 fold-fair on gems57-pooled-hide-v2, K=11321; not a live projection)"
+            ),
+            "date": rep["date_utc"],
+            "form_note": pkg["form_note"],
+            "notes": (
+                f"built {rep['date_utc']}; H89 BH-RTP-HABC dual-expert LOQO HistGBDT (30 zero-cat phys + 12 self-masked net) "
+                f"+ Dinkelbach CELF 300m allocation ({pkg['n_dots']} dots, min dcat {pkg['min_dcat_px']:.2f}px); "
+                f"regime shares bedrock/piedmont/basin={reg['bedrock_le_80m_share']:.1%}/{reg['piedmont_80_400m_share']:.1%}/{reg['concealed_basin_gt_400m_share']:.1%}; "
+                f"3px overlap vs R0={pkg['dot_overlap_3px_vs_r0']:.3f}, max across 84 refs={uq['max_dot_overlap_3px_forward']:.4f} (<=0.70), "
+                f"max |Spearman rho|={uq['max_abs_surface_spearman']:.4f} (<=0.90); primary download in docs/downloads/{pkg['submission_name']}.tif (sha256 {pkg['primary_download_tif_sha256'][:12]})."
+            ),
+            "source": "GEMSDOE89",
+        }
+    ]
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -567,6 +614,7 @@ def main():
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _trackb_rows()
+        + _h89_discovery_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

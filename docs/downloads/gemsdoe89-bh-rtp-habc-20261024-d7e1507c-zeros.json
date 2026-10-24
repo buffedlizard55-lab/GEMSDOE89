@@ -1,0 +1,138 @@
+{
+  "file": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+  "sha256": "715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361",
+  "bytes": 140693,
+  "submission_name": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros",
+  "note": "H89 BH-RTP-HABC dual-LOQO+CELF300m: 37654 dots, dcat>=3px; HOLDOUT-DTI 0.1603 (+0.0642 vs R0 fair)",
+  "note_chars": 98,
+  "validator": {
+    "file": "/home/user/GEMSDOE89/docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "bytes": 140693,
+    "sha256": "715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "template_report": {
+    "path": "/home/user/GEMSDOE89/docs/downloads/gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif",
+    "bytes": 140693,
+    "sha256": "715c8b862c50af4218cdfb201869f743e9b85585b840180486f947bbd64d8361",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "n_nonzero": 37654,
+    "mass": 37654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.zip",
+  "zip_sha256": "dddefd1c21bf4ab02acf0aeb5215bd237748c41d647dbe7401144e90f8c97d64",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+  "metadata": {
+    "lane": "H89 (BH-RTP-HABC)",
+    "selected_experiment": "E89_2_dual_global_celf",
+    "holdout_evaluator": "gems57-pooled-hide-v2",
+    "withheld_positive_pixels": 11321,
+    "holdout_dti": 0.160269,
+    "holdout_ci95": [
+      0.144976,
+      0.17553
+    ],
+    "delta_vs_r0_fold_fair": 0.064183,
+    "delta_vs_r0_fold_fair_ci95": [
+      0.049275,
+      0.080332
+    ],
+    "max_surface_spearman_86_refs": 0.11175,
+    "max_dot_overlap_3px_86_refs": 0.5866,
+    "decoded_sha256": "d7e1507cdffd900dc9bac4bd355eeb32116b0629e070b721dde7cf64f70e7f59"
+  }
+}

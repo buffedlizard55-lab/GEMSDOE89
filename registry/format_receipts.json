@@ -1,4 +1,157 @@
 {
+ "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif": {
+  "ok": true,
+  "encoding": "zeros",
+  "sha256": "33372a75e04f486bdd7ef9dd51b39d99c385c51df53fc521de8c24f1cb1064c3",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "zeros_outside_footprint",
+    "ok": true,
+    "detail": "0 outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "33372a75e04f486b"
+   }
+  ],
+  "skipped": []
+ },
+ "gemsdoe89-bh-rtp-habc-20261024-d7e1507c.tif": {
+  "ok": true,
+  "encoding": "nan",
+  "sha256": "68768801a9a6a48a03f0719e623649ad5028b694638a3d57231eec15242544e4",
+  "n_dots": 37654,
+  "gates": [
+   {
+    "gate": "readable",
+    "ok": true,
+    "detail": "gemsdoe89-bh-rtp-habc-20261024-d7e1507c.tif"
+   },
+   {
+    "gate": "grid_contract",
+    "ok": true,
+    "detail": "matches template"
+   },
+   {
+    "gate": "dtype_float32",
+    "ok": true,
+    "detail": "float32"
+   },
+   {
+    "gate": "single_band",
+    "ok": true,
+    "detail": "ndim=2"
+   },
+   {
+    "gate": "shape",
+    "ok": true,
+    "detail": "[3730, 3292]"
+   },
+   {
+    "gate": "crs_epsg32611",
+    "ok": true,
+    "detail": "EPSG:32611"
+   },
+   {
+    "gate": "values_in_0_1",
+    "ok": true,
+    "detail": "0 out-of-range px; min=0.0, max=1.0"
+   },
+   {
+    "gate": "no_nan_inside_footprint",
+    "ok": true,
+    "detail": "0 NaN px inside"
+   },
+   {
+    "gate": "nan_outside_footprint",
+    "ok": true,
+    "detail": "0 finite px outside"
+   },
+   {
+    "gate": "unit_dots",
+    "ok": true,
+    "detail": "37654 dots all == 1.0"
+   },
+   {
+    "gate": "dot_count_matches_mask",
+    "ok": true,
+    "detail": "raster 37654 vs mask 37654"
+   },
+   {
+    "gate": "zero_catalogue_mass",
+    "ok": true,
+    "detail": "0 dots on catalogue pixels"
+   },
+   {
+    "gate": "sha256_not_in_ledger",
+    "ok": true,
+    "detail": "68768801a9a6a48a"
+   }
+  ],
+  "skipped": []
+ },
  "h33-h33-2-b2-CONC5kmcat10-20261023-2dc19377-zeros.tif": {
   "ok": true,
   "encoding": "zeros",

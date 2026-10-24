@@ -1,4 +1,4 @@
-# Mechanism cards — session GEMSDOE89 (`SPACING` + `RELIEF` + `SNAP`)
+# Mechanism cards — session GEMSDOE89 (`H89 BH-RTP-HABC` + `SPACING` + `RELIEF` + `SNAP`)
 
 Parent for every card: **R0 = `h33-h33-2-b2`** (`GEMSDOE32` lineage; 37,654 unit-mass
 dots, zero on catalogue and zero at `d_cat <= 2.0 px`; rebuilt byte-identically from
@@ -718,3 +718,30 @@ directional arm trades catalogue-fitted coverage for off-catalogue position, exa
 the mechanism implies. SGMC control: **not run** (pin UNVERIFIED, `IRREGULARITIES.md`
 item 8). Block density CV: `1 km` `1.883 → 1.904 / 1.893 / 1.889`, `5 km` `0.899 → 0.906 /
 0.894 / 0.902` — a position-only axis, as required.
+
+---
+
+# Part IV — `H89` (`BH-RTP-HABC`) — Genuine Concealed-Basin & Step-Over Discovery
+
+## Card H89 — `gemsdoe89-bh-rtp-habc-20261024-d7e1507c-zeros` — PROMOTED CANDIDATE
+
+- **Hypothesis (`H89-A + H89-B + H89-C`).** Unmapped Basin-and-Range / Walker Lane geothermal conduit faults missed by USGS Qfaults and INGENIOUS concentrate in three structural settings where `R0` (`h33-h33-2-b2`, `0.2778` `CLAIM`) is blind or systematically misallocated:
+  1. **Concealed alluvial-basin basement-hinge & magnetic-tilt corridors (`B15 depth_to_base_surf > 400 m`, `47.23%` of footprint > `350 m`):** Quaternary alluvium erases surface scarps (`dem_slope -> 0`), causing surface field mapping and `R0`'s slope/gravity threshold to miss buried master faults while wasting `22.56%` of `R0`'s dots on unfaulted steep bedrock slopes (`B15 <= 80 m`). Across buried normal/transtensional faults,basement-step curvature `∇² B15`, CBA/isostatic horizontal gravity gradient (`B05`/`B03`), magnetic zero-tilt (`atan(|∇_h RTP| / max(|∂RTP/∂z|, ε))`), and deeper basement-depth-normalized `1/e`-width Euler deconvolution (`N = 0.5, 1.0`) remain coherent through hundreds of meters of basin fill.
+  2. **En-echelon fault-tip relay bridges & Riedel step-overs (`H89-A`):** Hydrothermal upflow and newly mapped fault continuations preferentially link open fault terminations (`1-px` skeleton tips) along local regional strike (`cos 2Δθ`, `sin 2Δθ`) across `0.3–8 km` step-overs. Training on intact visible faults creates **training-inference covariate shift** (`IR-89-SHIFT`): models learn `d_vis ≈ 0` collar proximity while real unmapped discovery lies kilometers from catalogued traces. Self-masking `22%` of visible training fault strands (`>= 800 m` buffer) during training forces the visible-network expert to learn genuine long-range tip-projection and relay physics.
+  3. **Hydrothermal magnetics-quiet / K-Th-U radiometric alteration corridors (`H89-C`):** Epithermal and geothermal fluids oxidize magnetite to hematite/pyrite (depressing `B07`/`B08` RTP amplitude along gravity/basement edges) and mobilize potassium/uranium relative to immobile thorium (`K/Th` enrichment and radioelement ternary entropy along drainage-receiving fault zones).
+- **Mechanism (`BH-RTP-HABC`).**
+  1. Computes **30 zero-catalogue physical features** (`f01`–`f30`: cover-depth-deconfounded basement-hinge curvature, FFT upward-continued RTP tilt angle & analytic signal, basement-normalized Euler depth ratio, multi-scale Frangi/Hessian lineament eigenvalues across gravity/magnetics/DEM/basement, NNE/NNW Walker Lane directional derivatives, hydrothermal demagnetization index, and K/Th/U alteration ratios — repairing `IR-89-17` where `B18` is a signed E–W derivative) plus **12 fold-safe visible-catalogue features** (`f31`–`f42`: log distance, oriented tip-cone projection at `σ_∥ ∈ {1.8, 4.5} km`, bilateral relay-bridge potential, strike coherence, and density deficit).
+  2. Trains a Leave-One-Quadrant-Out (**LOQO**) dual-expert ensemble: **Expert A** (`30` physical features only, immune to catalogue completeness bias) and **Expert B** (`42` features trained on `2` independent self-masked sub-catalogues with `36 px` quadrant boundary erosion so `d_vis` matches hidden-fault test distances). Fuses OOF calibrated posteriors via cover-depth-adaptive weighting (`w_phys = 0.35 + 0.30 · clip(B15 / 600 m, 0, 1)`) plus `1.4 km` oriented anisotropic structural smoothing (`0.68 · p + 0.32 · p_aniso`).
+  3. Allocates **37,654 discrete `1.0` dots** (`min_spacing = 2.5 px`, strict `d_cat >= 3.0 px` safety exclusion) via submodular **Dinkelbach + CELF** fractional programming on the exact `R = 300 m` (`3.0 px`) triangular DTI kernel (`α = 0.2, β = 0.8`), repairing `IR-78-EMIT-JENSEN` with the analytical conditional expected self-credit `self_credit(i) = E[m(i) | y_i = 1] = expected_credit_i / μ_strand` (`μ_strand = 5.425`).
+- **The non-fault process that could mimic it.** Buried paleochannels, caldera ring-margin contacts, tilted volcanic flow edges, and alluvial-fan potash wash from granitic ranges can co-produce basement/potential-field gradients and K/Th enrichment without Quaternary brittle slip. The dual-expert architecture suppresses isolated lithologic contacts via strike-anisotropy coherence, basement-depth normalization, and hydrothermal/gravity co-location, shifting `3,467` dots (`+9.21%` of total budget) out of unfaulted steep bedrock slopes (`22.56% -> 17.54%`) and into concealed basins (`35.09% -> 44.30%`, matching the `47.23%` deep-cover footprint).
+- **Holdout measurement (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `K = 11,321` withheld positive pixels across 4 quadrants, `1,000` paired spatial-block bootstrap draws — NOT a live leaderboard score).**
+  - **Promoted `E89-2` (`BH-RTP-HABC`):** **`0.16027`** (`95% CI [0.14498, 0.17553]`; `NW = 0.16172`, `NE = 0.14134`, `SW = 0.17395`, `SE = 0.16043` — wins **4 / 4** quadrants).
+  - **Parent `R0` fold-fair control:** `0.09609` (`95% CI [0.08334, 0.10934]`; `NW = 0.08832`, `NE = 0.11120`, `SW = 0.08292`, `SE = 0.10442`).
+  - **Paired gain (`E89-2 − R0 fold-fair`):** **`+0.06418`** (`95% CI [+0.04928, +0.08033]`, **`+66.8%` relative lift**).
+  - **Ablation `E89-1` (30-feature zero-catalogue physics only):** `0.08580` (`95% CI [0.06963, 0.10132]`; beats `R0` fold-fair in `NW` and `SE` using zero fault-catalogue inputs).
+  - **Ablation `E89-3` (3-regime stratified CELF):** `0.15120` (`95% CI [0.13700, 0.16603]`, `+57.4%` over `R0` fold-fair; global CELF `E89-2` promoted by `+0.00907`).
+- **Leakage canary & uniqueness audit.**
+  - **42-feature symmetric AUC canary (`registry/leakage_canary_h89.json`):** `max = 0.78288 <= 0.90` (**PASS**, `0 / 42` flagged).
+  - **84-raster uniqueness audit (`registry/h89_discovery_report.json`):** `max |Spearman ρ| = 0.11175 <= 0.90` (surface) / `0.05430 <= 0.90` (emitted); `max forward 3-px dot overlap = 0.58660 <= 0.70`; `3-px overlap vs parent R0 = 0.26993` (`73.01%` genuinely new conduit discovery outside `R0` halos; `98.06%` dot positions changed vs `R0`).
+- **Falsifier.** If live public-chunk DTI lands `<= 0.2778 − 0.010` (`<= 0.2678`) despite `+66.8%` pooled LOQO lift across all 4 quadrants, then organizer withheld test faults do not follow basin-concealed / tip-relay structural continuations of the public USGS/INGENIOUS network (e.g., if held-out mapping was restricted exclusively to exposed range-block interiors), falsifying `H89-A/B` on the public-chunk subset.
+

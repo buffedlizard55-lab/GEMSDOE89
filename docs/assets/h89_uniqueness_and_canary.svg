@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif">
+<rect width="100%" height="100%" rx="14" fill="#0f172a"/>
+<text x="30" y="36" fill="#f8fafc" font-size="17" font-weight="700">Automated Leakage Canary (42 Features) · Fleet Uniqueness (84 Unique Rasters) · Cover-Depth Deconfounding</text>
+<rect x="28" y="56" width="305" height="318" rx="10" fill="#1e293b" stroke="#334155"/>
+<text x="44" y="82" fill="#f8fafc" font-size="13" font-weight="700">1. Leakage Canary (Max = 0.783 &lt;= 0.90)</text>
+<text x="44" y="99" fill="#94a3b8" font-size="10.5">Top 8 of 42 features (all 42 PASS)</text>
+<text x="44" y="132" fill="#cbd5e1" font-size="10">f31_tip_beam_short_1p2</text>
+<rect x="165" y="122" width="110.0" height="12" rx="3" fill="#38bdf8"/>
+<text x="280.0" y="132" fill="#e2e8f0" font-size="10">0.783</text>
+<text x="44" y="160" fill="#cbd5e1" font-size="10">phys_x_tip_corrob</text>
+<rect x="165" y="150" width="109.8" height="12" rx="3" fill="#38bdf8"/>
+<text x="279.8" y="160" fill="#e2e8f0" font-size="10">0.782</text>
+<text x="44" y="188" fill="#cbd5e1" font-size="10">tip_beam_long_3p0km</text>
+<rect x="165" y="178" width="109.5" height="12" rx="3" fill="#38bdf8"/>
+<text x="279.5" y="188" fill="#e2e8f0" font-size="10">0.782</text>
+<text x="44" y="216" fill="#cbd5e1" font-size="10">f33_wingcrack_horsetai</text>
+<rect x="165" y="206" width="103.2" height="12" rx="3" fill="#38bdf8"/>
+<text x="273.2" y="216" fill="#e2e8f0" font-size="10">0.765</text>
+<text x="44" y="244" fill="#cbd5e1" font-size="10">aniso_axial_corridor_2</text>
+<rect x="165" y="234" width="99.8" height="12" rx="3" fill="#38bdf8"/>
+<text x="269.8" y="244" fill="#e2e8f0" font-size="10">0.757</text>
+<text x="44" y="272" fill="#cbd5e1" font-size="10">aniso_axial_corridor_4</text>
+<rect x="165" y="262" width="99.2" height="12" rx="3" fill="#38bdf8"/>
+<text x="269.2" y="272" fill="#e2e8f0" font-size="10">0.755</text>
+<text x="44" y="300" fill="#cbd5e1" font-size="10">dist_vis_clamped_log</text>
+<rect x="165" y="290" width="94.4" height="12" rx="3" fill="#38bdf8"/>
+<text x="264.4" y="300" fill="#e2e8f0" font-size="10">0.743</text>
+<text x="44" y="328" fill="#cbd5e1" font-size="10">district_fault_density</text>
+<rect x="165" y="318" width="77.3" height="12" rx="3" fill="#38bdf8"/>
+<text x="247.3" y="328" fill="#e2e8f0" font-size="10">0.699</text>
+<line x1="320.6" y1="114" x2="320.6" y2="352" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="316.6" y="364" fill="#f87171" font-size="10" text-anchor="end">0.90 leak limit</text>
+<rect x="348" y="56" width="305" height="318" rx="10" fill="#1e293b" stroke="#334155"/>
+<text x="364" y="82" fill="#f8fafc" font-size="13" font-weight="700">2. Registry Uniqueness (84 Rasters)</text>
+<text x="364" y="99" fill="#94a3b8" font-size="10.5">Forward 3-px overlap &lt;= 0.70 · |rho| &lt;= 0.90</text>
+<text x="364" y="128" fill="#cbd5e1" font-size="11" font-weight="600">Max Surface |Spearman|: <tspan fill="#f8fafc">0.1118</tspan> (limit 0.90)</text>
+<rect x="364" y="135" width="240" height="12" rx="3" fill="#0f172a"/>
+<rect x="364" y="135" width="26.8" height="12" rx="3" fill="#10b981"/>
+<line x1="580.0" y1="132" x2="580.0" y2="150" stroke="#ef4444" stroke-width="1.5"/>
+<text x="364" y="174" fill="#cbd5e1" font-size="11" font-weight="600">Max Emitted |Spearman|: <tspan fill="#f8fafc">0.0543</tspan> (limit 0.90)</text>
+<rect x="364" y="181" width="240" height="12" rx="3" fill="#0f172a"/>
+<rect x="364" y="181" width="13.0" height="12" rx="3" fill="#10b981"/>
+<line x1="580.0" y1="178" x2="580.0" y2="196" stroke="#ef4444" stroke-width="1.5"/>
+<text x="364" y="220" fill="#cbd5e1" font-size="11" font-weight="600">Max 3-px Overlap (84 refs): <tspan fill="#f8fafc">0.5866</tspan> (limit 0.70)</text>
+<rect x="364" y="227" width="240" height="12" rx="3" fill="#0f172a"/>
+<rect x="364" y="227" width="140.8" height="12" rx="3" fill="#14b8a6"/>
+<line x1="532.0" y1="224" x2="532.0" y2="242" stroke="#ef4444" stroke-width="1.5"/>
+<text x="364" y="266" fill="#cbd5e1" font-size="11" font-weight="600">3-px Overlap vs Parent R0: <tspan fill="#f8fafc">0.2699</tspan> (limit 0.70)</text>
+<rect x="364" y="273" width="240" height="12" rx="3" fill="#0f172a"/>
+<rect x="364" y="273" width="64.8" height="12" rx="3" fill="#f59e0b"/>
+<line x1="532.0" y1="270" x2="532.0" y2="288" stroke="#ef4444" stroke-width="1.5"/>
+<text x="364" y="312" fill="#cbd5e1" font-size="11" font-weight="600">3-px Overlap vs h19-5: <tspan fill="#f8fafc">0.3522</tspan> (limit 0.70)</text>
+<rect x="364" y="319" width="240" height="12" rx="3" fill="#0f172a"/>
+<rect x="364" y="319" width="84.5" height="12" rx="3" fill="#38bdf8"/>
+<line x1="532.0" y1="316" x2="532.0" y2="334" stroke="#ef4444" stroke-width="1.5"/>
+<rect x="668" y="56" width="284" height="318" rx="10" fill="#1e293b" stroke="#334155"/>
+<text x="684" y="82" fill="#f8fafc" font-size="13" font-weight="700">3. Cover-Depth Deconfounding</text>
+<text x="684" y="99" fill="#94a3b8" font-size="10.5">Shifts budget from steep rock to buried basins</text>
+<text x="684" y="132" fill="#e2e8f0" font-size="11" font-weight="600">Exposed Bedrock (<=80 m)</text>
+<rect x="684" y="140" width="36.8" height="13" rx="3" fill="#10b981"/>
+<text x="726.8" y="150" fill="#10b981" font-size="10.5" font-weight="700">H89: 17.5%</text>
+<rect x="684" y="156" width="47.4" height="11" rx="3" fill="#f59e0b" fill-opacity="0.8"/>
+<text x="737.4" y="165" fill="#fbbf24" font-size="10">R0: 22.6%</text>
+<text x="684" y="206" fill="#e2e8f0" font-size="11" font-weight="600">Piedmont Hinge (80-400 m)</text>
+<rect x="684" y="214" width="80.1" height="13" rx="3" fill="#10b981"/>
+<text x="770.1" y="224" fill="#10b981" font-size="10.5" font-weight="700">H89: 38.2%</text>
+<rect x="684" y="230" width="88.9" height="11" rx="3" fill="#f59e0b" fill-opacity="0.8"/>
+<text x="778.9" y="239" fill="#fbbf24" font-size="10">R0: 42.4%</text>
+<text x="684" y="280" fill="#e2e8f0" font-size="11" font-weight="600">Concealed Basin (>400 m)</text>
+<rect x="684" y="288" width="93.0" height="13" rx="3" fill="#10b981"/>
+<text x="783.0" y="298" fill="#10b981" font-size="10.5" font-weight="700">H89: 44.3%</text>
+<rect x="684" y="304" width="73.7" height="11" rx="3" fill="#f59e0b" fill-opacity="0.8"/>
+<text x="763.7" y="313" fill="#fbbf24" font-size="10">R0: 35.1%</text>
+</svg>
