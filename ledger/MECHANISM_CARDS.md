@@ -542,3 +542,40 @@ These are **not clean scale-only controls** for Part IV: block size and
 placement both differ. Negative H19 coverage and crowding counter-indicators
 hold the 15% and 20% arms; the integrated queue keeps `cat10` as the primary
 allocation probe and the 2 km family as a separate, currently held mechanism.
+
+---
+
+# Part VI — `12.8 km` (`128 px`) structural-interaction & catalogue-free GPS strain `CONCENTRATION` (`12p8km-int10` · `12p8km-int20` · `12p8km-geod15`) — session `arena/6e810001-gemsdoe89` (2026-10-23)
+
+Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically this session via `tools/rebuild_r0.py` (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit-mass dots; live **0.2778 = CLAIM**).
+
+## Why this `12.8 km` family is structurally orthogonal to Parts IV (`5 km` raw catalogue) and V (`2 km` H19)
+
+1. **Accommodation-zone interaction complexity vs raw fault length, plus a 100% catalogue-free GPS/seismicity arm.** In Great Basin extensional and transtensional provinces, unmapped secondary splays, relay ramps, and horsetail terminations nucleate in **10–15 km fault-interaction zones** around fault tips, branch junctions, and `<= 1 km` multi-strand step-overs rather than along simple mid-segment traces (Faulds & Hinz, 2015, NBMG/OSTI #1249065: https://www.osti.gov/servlets/purl/1249065; organizer truth guidance: https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516, https://community.drivendata.org/t/where-do-you-draw-the-line/11536). Across the `318` interior `12.8 km` (`128 px`) blocks (`>= 50%` inside the `5,167,373`-px footprint), R0 has `Spearman(r0_dens, cat_dens) = −0.0019` (**3.67× over-allocated** in the lowest interaction tercile `T1`, **0.52× under-allocated** in `T3`), while R0's lineage (`d28` `0.2600` → `solo_d28` `0.2708` → `R0` `0.2778` CLAIM) climbed **`0.5181 → 0.5369 → 0.5532`** in `12.8 km` block-density CV. Separately, **`12p8km-geod15` never reads `existing_faults.tif` in its block prior at all**, testing active crustal strain (`b04_geod_2ndinv` + `b07_geod_shearrate` + `b16_ieq_n100a15`; INGENIOUS synthesis: https://www.osti.gov/servlets/purl/1987729) free of historical mapping bias (`Spearman(geod, interact) = +0.2458`).
+2. **Proportional per-block quotas + strike-coherent scarp/potential-field placement (`corrob_ridge`).** Removals (`d_cat >= 3.0 px`, `<3 px` collar frozen at `1,611`) and additions (`d_cat >= 3.00 px`, `r_sep >= 2.80 px`, zero `<2.8 px` crowding) are apportioned **proportionally across bottom-40% and top-40% blocks** so ~10 steep volcanic blocks cannot hoard the moved budget (`IRREGULARITIES.md` item 13), and candidate pixels are ranked deterministically by strike-coherent DEM concavity + slope break + gravity slope + TMI HG (`corrob_ridge`, bands `3, 5, 12, 19`; leakage canary max `0.5995 <= 0.90`).
+3. **Out-of-sample 25% connected-strand holdout + matched random-block-shuffle calibration (`MODEL`, never a score).** Withholding 25% of 8-connected catalogue strands *before* computing `d_cat`, R0, or `interaction_block_prior` across 3 seeds (`20261023, 7, 42`, base DTI `0.1063`) and comparing against a matched random-block shuffle using the identical `corrob_ridge` operator (`registry/report_only_status.json`):
+   - `12p8km-int10` (`bcade136`, `3,765` moved = `10.00%`, `CV_12.8km: 0.5532 → 0.5533`): mean strand-holdout **`+0.0040`** (positive on all 3 seeds), shuffle `−0.0012`, pure block-prior lift **`+0.0052`**.
+   - `12p8km-int20` (`357b4ac4`, `7,531` moved = `20.00%`, `CV_12.8km: 0.5532 → 0.6561`): mean strand-holdout **`+0.0051`** (positive on all 3 seeds), shuffle `−0.0086`, pure block-prior lift **`+0.0136`**.
+   - `12p8km-geod15` (`259ea040`, `5,648` moved = `15.00%`, `CV_12.8km: 0.5532 → 0.6355`, `mean disp = 1020.8 px`): mean strand-holdout **`−0.0004`**, shuffle `−0.0042`, pure block-prior lift **`+0.0038`**.
+
+## Card C6.1 — `12p8km-int10` (`h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136`) — PRIMARY 12.8 km INTERACTION PROBE
+- **Hypothesis:** Moving 10% (`3,765` dots) from bottom-40% (`151` blocks) to top-40% (`146` blocks) `12.8 km` fault-interaction blocks (`6,747` tips, `5,943` junctions, `554,371` `<=1 km` step-over px) — while holding `CV_12.8km` invariant at `0.5533` inside `[0.51, 0.59]` and relief terciles nearly fixed (`[7657, 15048, 14909]`) — raises truth kernel hits `T` at fixed `S = 37,654`.
+- **Mechanism:** Proportional per-block quotas; drops weakest `corrob_ridge` dots (`mean 0.0345`) in bottom-40% blocks and adds strike-coherent `corrob_ridge` dots (`mean 0.1658`, `d_cat >= 3.00 px`, `r_sep >= 2.828 px`, `mean disp = 95.5 px`) in top-40% blocks.
+- **Non-fault mimic:** Welded-tuff cooling joints, caldera margins, and erosional hogbacks in well-exposed Cenozoic ranges co-locate with dense mapped fault junctions without hosting Quaternary slip; or test truth may sample unmapped quiet basins (`T1`).
+- **Predicted sign and size (`MODEL`):** Central **+0.008**, band **−0.006 … +0.018**.
+- **Falsifier:** Receipt inside `±0.010` closes `12.8 km` interaction reallocation (`int20` stays held); `<= −0.010` falsifies map-interaction clustering on the test split and triggers catalogue-free `12p8km-geod15` (or `5km cat10away`).
+
+## Card C6.2 — `12p8km-int20` (`h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4`) — 2× DOSE / CV SATURATION TEST
+- **Hypothesis:** Conditional on `12p8km-int10 >= +0.010`, doubling transfer to 20% (`7,531` dots, `CV_12.8km: 0.5532 → 0.6561`) tests whether pushing concentration above `0.59` scales linearly or saturates on secondary ridges.
+- **Mechanism:** Identical `interaction_block_prior`, `40/60` split, and `corrob_ridge` operator at `fraction = 0.20` (`source 14,354 → 6,823`, `target 15,113 → 22,644`, `mean disp = 87.5 px`, `added corrob_ridge = 0.1450`).
+- **Non-fault mimic:** `+50%` target-block dot density recruits second-tier pediment/incision ridges after primary unmapped splays are already covered (`−0.0086` shuffled-block dilution vs `−0.0012` at 10%).
+- **Predicted sign and size (`MODEL`):** Central **+0.009**, band **−0.014 … +0.024** (hold until `12p8km-int10 >= +0.010`).
+- **Falsifier:** Failure to beat `12p8km-int10` by `>= +0.005` when `int10 >= +0.010` confirms secondary-ridge saturation above `CV_12.8km ≈ 0.59`.
+
+## Card C6.3 — `12p8km-geod15` (`h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040`) — CATALOGUE-FREE ACTIVE-STRAIN DISCRIMINATOR
+- **Hypothesis:** Active unmapped faults in playaward / Walker Lane / Humboldt basins track **crustal strain rate and seismicity** rather than historical fault-map density (https://www.osti.gov/servlets/purl/1987729); reallocating 15% (`5,648` dots) into top-40% GPS shear/strain + seismicity `12.8 km` blocks captures blind/unmapped active belts without catalogue bias.
+- **Mechanism:** `100%` catalogue-free block score `mean(robust_unit(b04), robust_unit(b07), robust_unit(log1p(b16)))`; proportional transfer `14,102 → 8,454` (`141` low-strain blocks) to `16,699 → 22,347` (`158` high-strain blocks; `CV_12.8km: 0.5532 → 0.6355`, `mean disp = 1020.8 px = 102.1 km`) onto strike-coherent `corrob_ridge` (`mean 0.1610`, `d_cat >= 3.00 px`, `r_sep >= 2.828 px`).
+- **Non-fault mimic:** Smooth `20–50 km` GPS continuum interpolation and off-fault geothermal/mining seismic swarms elevate entire blocks where local `100 m` ridges are non-tectonic volcanic or shoreline landforms.
+- **Predicted sign and size (`MODEL`):** Central **+0.003**, band **−0.015 … +0.021**.
+- **Falsifier:** If catalogue-based concentration (`cat10` / `12p8km-int10`) is `<= 0` while `12p8km-geod15 >= +0.010`, live truth tracks active strain rather than mapped-fault proximity; `<= −0.010` retires continuum geodetic block priors.
+

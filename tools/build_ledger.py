@@ -398,13 +398,82 @@ def _mass_rows() -> list[dict]:
     ]
 
 
+def _concentration_12p8km_rows() -> list[dict]:
+    """Preserve the 12.8 km Faulds fault-interaction + catalogue-free GPS strain family."""
+    p = ROOT / "registry" / "build_reports_concentration_12p8km.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        spec = rep["spec"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "CONCENTRATION",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": spec["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-23; 12.8km (128px) blocks; move {s['n_moved']} dots ({s['pct_changed']:.2f}%, "
+                    f"symdiff {s['pct_symmetric_diff']:.2f}%) bot40->top40 {spec['prior']} prior; "
+                    f"count fixed 37,654; dcat_added>=3.00px (collar<3px frozen at 1611); "
+                    f"r_sep>=2.80px; CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f} "
+                    f"(CV5km {s['block_cv_5km_before']:.4f}->{s['block_cv_5km_after']:.4f}); "
+                    f"mean disp {s['mean_displacement_px']:.1f}px"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
+    path = ROOT / "ledger" / "submissions.csv"
+    existing_by_id: dict[str, dict] = {}
+    if path.exists():
+        try:
+            with open(path, newline="") as fh:
+                for r in csv.DictReader(fh):
+                    if r.get("id") and not str(r.get("id")).startswith(("<<<<<<<", "=======", ">>>>>>>")):
+                        existing_by_id[r["id"]] = r
+        except Exception:
+            existing_by_id = {}
+
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    new_rows = (_spacing_rows() + _relief_rows() + _mass_rows()
-                + _snap_rows() + _concentration_rows() + _concentration_2km_rows())
-    path = ROOT / "ledger" / "submissions.csv"
+    new_rows = (
+        _spacing_rows()
+        + _relief_rows()
+        + _mass_rows()
+        + _snap_rows()
+        + _concentration_rows()
+        + _concentration_2km_rows()
+        + _concentration_12p8km_rows()
+    )
+    for r in new_rows:
+        prev = existing_by_id.get(r["id"])
+        if prev:
+            for human_col in ("status", "receipt", "receipt_score", "date", "score"):
+                if prev.get(human_col) and not r.get(human_col):
+                    r[human_col] = prev[human_col]
+
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore", lineterminator="\n")
         w.writeheader()

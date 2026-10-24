@@ -12,6 +12,29 @@
     0.043997
    ]
   },
+  "concentration": {
+   "12p8km-int10": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   },
+   "12p8km-int20": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   },
+   "12p8km-geod15": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   }
+  },
   "spacing": {
    "alongstrike": {
     "recall": 0.038424,
@@ -41,11 +64,34 @@
    "r15s": 0.0341
   },
   "random_null": 0.0,
-  "caveat": "Every relocated dot obeys d_cat >= 3.0 px, and SPACING freezes dots with d_cat < 3.0 px plus short (<6-dot) strands; catalogue recall therefore measures only near-collar spillover at d_cat == 3.0 px."
+  "caveat": "Every relocated dot in CONCENTRATION and SPACING obeys d_cat >= 3.0 px while freezing R0's 1,611 inherited 2.0 < d_cat < 3.0 px collar dots; pixel-withheld catalogue recall therefore stays identically 0.038424 (IRREGULARITIES item 4). For CONCENTRATION, out-of-sample 25% connected-strand holdouts (withheld BEFORE computing d_cat, R0, or the block prior) are reported separately under concentration_strand_holdout_model."
+ },
+ "concentration_strand_holdout_model": {
+  "evidence_class": "MODEL",
+  "protocol": "Withhold 25% of 8-connected catalogue fault strands BEFORE computing d_cat, R0, or the 12.8 km interaction block prior; score exact DTI on withheld strands across seeds (20261023, 7, 42) and compare against a matched random-block-shuffle control using the identical corrob_ridge placement operator.",
+  "mean_base_dti": 0.106297,
+  "mean_variant_delta_dti": {
+   "12p8km-int10": 0.003998,
+   "12p8km-int20": 0.005058,
+   "12p8km-geod15": -0.000391
+  },
+  "mean_random_block_shuffle_delta_dti": {
+   "frac_0.10": -0.00117,
+   "frac_0.15": -0.004233,
+   "frac_0.20": -0.008587
+  },
+  "pure_block_prior_lift_over_shuffle": {
+   "12p8km-int10": 0.005168,
+   "12p8km-int20": 0.013645,
+   "12p8km-geod15": 0.003842
+  }
  },
  "sgmc_off_catalogue_control": {
   "evidence_class": "PROXY",
   "source_url": "https://doi.org/10.3133/ds1052",
+  "provenance_warning": "sgmc_faults_control pin in registry/data_manifest.json is marked unverified: true (IRREGULARITIES item 8). Prior SPACING/RELIEF SGMC entries below are retained from earlier sessions as UNVERIFIED provenance; SNAP and CONCENTRATION skip SGMC evaluation until an official USGS DS-1052 raster is verified.",
+  "concentration": "SKIPPED — sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
+  "snap": "SKIPPED — sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
   "parent": {
    "evidence_class": "PROXY",
    "sgmc_off_catalogue_truth_px": 62122,
@@ -115,7 +161,7 @@
    "sgmc_prevalence_calibrated_dti": 0.049663
   }
  },
- "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature strength 0.5688 across 19 bands + scored_h19_5 (threshold 0.90)",
+ "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature strength 0.5688 across 19 bands + scored_h19_5 (0.5995 including corrob_ridge; threshold 0.90)",
  "jitter_model_sensitivity": {
   "sigma_0.0px": {
    "truth_px": 15987,
