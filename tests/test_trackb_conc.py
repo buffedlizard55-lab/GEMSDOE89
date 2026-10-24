@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 from scipy import ndimage as ndi
 
-from gemsdoe import trackb
+from gemsdoe import trackb_conc as trackb
 
 
 def _synthetic_r0():

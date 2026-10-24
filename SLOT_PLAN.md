@@ -2,7 +2,7 @@
 
 - **Baseline:** Parent R0 `h33-h33-2-b2`, byte-exact (`c55bafc4…` zeros / `baeae321…` NaN; 37,654 unit dots), live **0.2778 = CLAIM** (no receipt here). **TOP_PUBLIC = ____** (date ____). **Slots this week: __ / 3** (human fills). Deadline **2026-12-03 UNVERIFIED** (pages barred; human confirms) → ≈6 weeks ≈ 18 rolling slots + 1 blind final.
 - **Evidence rule:** `|Δlive| < 0.01` is no evidence. `PROXY`/`MODEL`/canary never gate and are never scores.
-- **This session built TRACKB** (Phase-2 trace inventory + 3 held structural-concentration rasters, `ledger/MECHANISM_CARDS_TRACKB.md`). It is **not a weekly-slot candidate unless the human decides**; its Phase-1 jitter MODEL is a coverage-cost floor (−0.002 / −0.012 / −0.021 central). **The 21 scored-axis pairs remain `BUILT (unscored)` — live receipts are the bottleneck, not more files.**
+- **This session built TRACKB** (Phase-2 trace inventory + 3 held structural-concentration rasters, `ledger/MECHANISM_CARDS_TRACKB_CONC.md`). It is **not a weekly-slot candidate unless the human decides**; its Phase-1 jitter MODEL is a coverage-cost floor (−0.002 / −0.012 / −0.021 central). **The 21 scored-axis pairs remain `BUILT (unscored)` — live receipts are the bottleneck, not more files.**
 
 ## Next 3 slots, in order (scored axes; TRACKB held out)
 

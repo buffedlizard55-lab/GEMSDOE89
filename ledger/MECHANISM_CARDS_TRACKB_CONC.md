@@ -51,7 +51,7 @@ MASS effect. **1,611 collar dots frozen; min added-dot separation 2.83 px; added
 
 ## The confounder that sets the prediction: the H19 surrogate can only price the COST
 
-Jitter MODEL (`registry/build_reports_trackb.json`): hold out a seeded 16.5 % of eligible
+Jitter MODEL (`registry/build_reports_trackb_conc.json`): hold out a seeded 16.5 % of eligible
 H19-5 strands as surrogate truth, shift each laterally by σ px (GeoDAWN mislocation), and
 score DTI(variant) − DTI(R0). Because **R0 is itself derived from H19-5**, this surrogate is
 near-optimal for R0 and prices the **on-ridge coverage cost** of moving dots off short

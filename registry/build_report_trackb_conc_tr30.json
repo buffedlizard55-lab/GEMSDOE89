@@ -1,39 +1,39 @@
 {
- "id": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f",
+ "id": "h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5",
  "axis": "TRACKB",
- "value": "TR10",
+ "value": "TR30",
  "spec": {
-  "frac": 0.1,
-  "dose": "10%",
-  "predicted_change_text": "-0.002 (MODEL central at 2.5px cross-strike jitter; band -0.043..+0.001; ridge-locked sigma=0 -0.043, kernel-radius sigma=3 +0.001). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
+  "frac": 0.3,
+  "dose": "30%",
+  "predicted_change_text": "-0.021 (MODEL central at 2.5px cross-strike jitter; band -0.137..-0.013; ridge-locked sigma=0 -0.137, kernel-radius sigma=3 -0.013). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
  },
- "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+ "git_sha": "af000c6c39c34bd880285b79e3cf4869f326f21a",
  "parent": "h33-h33-2-b2",
  "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
  "seed": 20261023,
  "stats": {
   "n_before": 37654,
   "n_after": 37654,
-  "n_removed": 3765,
-  "n_added": 3765,
+  "n_removed": 11296,
+  "n_added": 11296,
   "count_preserved": true,
   "all_dots_inside_footprint": true,
-  "pct_changed": 9.998937695862326,
-  "n_sources": 3765,
+  "pct_changed": 29.999468847931162,
+  "n_sources": 11296,
   "added_min_catalogue_clearance_px": 3.0,
   "added_min_separation_px": 2.8284271247461903,
   "inherited_collar_dots_frozen": 1611,
   "collar_dots_moved": 0,
-  "mean_displacement_px": 43.46993041213279,
+  "mean_displacement_px": 28.761112663465887,
   "h19_coverage_before": 0.7302,
-  "h19_coverage_after": 0.67152
+  "h19_coverage_after": 0.54507
  },
  "files": {
-  "nan": "releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.tif",
-  "zeros": "releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f-zeros.tif",
-  "sha256": "32211f1fa90bc42058bc1dcc6c0f354617e88941fba213097c62bda695b18eb2",
-  "sha256_zeros": "4382350bf76c953a8f0e53e5824d5d90b30f5c185f01245ad67d10b0ec6aaa99",
-  "sha8": "32211f1f"
+  "nan": "releases/h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5.tif",
+  "zeros": "releases/h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5-zeros.tif",
+  "sha256": "c8a264b5a616e4b35e6777f272c5876fe5dcb5f0334fab81805faecc9e9c22cb",
+  "sha256_zeros": "da44be4cf7bde6e13918ace41b36e0c00b23dd83b3bd508751edb4f2c3172301",
+  "sha8": "c8a264b5"
  },
  "gates": {
   "nan": {
@@ -42,7 +42,7 @@
     {
      "gate": "readable",
      "ok": true,
-     "detail": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.tif"
+     "detail": "h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5.tif"
     },
     {
      "gate": "grid_contract",
@@ -102,7 +102,7 @@
     {
      "gate": "sha256_not_in_ledger",
      "ok": true,
-     "detail": "32211f1fa90bc420"
+     "detail": "c8a264b5a616e4b3"
     }
    ]
   },
@@ -112,7 +112,7 @@
     {
      "gate": "readable",
      "ok": true,
-     "detail": "h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f-zeros.tif"
+     "detail": "h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5-zeros.tif"
     },
     {
      "gate": "grid_contract",
@@ -177,7 +177,7 @@
     {
      "gate": "sha256_not_in_ledger",
      "ok": true,
-     "detail": "4382350bf76c953a"
+     "detail": "da44be4cf7bde6e1"
     }
    ]
   },
@@ -230,26 +230,26 @@
   "jitter_model_sensitivity": {
    "sigma_0.0px": {
     "r0_dti": 0.54577,
-    "delta": -0.0427
+    "delta": -0.13748
    },
    "sigma_1.0px": {
     "r0_dti": 0.41525,
-    "delta": -0.02633
+    "delta": -0.08845
    },
    "sigma_1.8px": {
     "r0_dti": 0.32076,
-    "delta": -0.01125
+    "delta": -0.04574
    },
    "sigma_2.5px": {
     "r0_dti": 0.2621,
-    "delta": -0.00211
+    "delta": -0.02126
    },
    "sigma_3.0px": {
     "r0_dti": 0.23759,
-    "delta": 0.00063
+    "delta": -0.01336
    }
   }
  },
- "form_note": "h33-h33-2-b2; TRACKB tr10: 3765 (10%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.002",
- "seconds": 5.05
+ "form_note": "h33-h33-2-b2; TRACKB tr30: 11296 (30%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.021",
+ "seconds": 4.77
 }

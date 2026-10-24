@@ -12,8 +12,9 @@ This repository's rows are read from registry/build_reports_spacing.json,
 registry/build_reports.json, and registry/build_mass_reports.json so that the
 ledger never drifts from the files on disk in releases/.  Each new axis/family
 must have a reader here; the 2 km reader uses build_reports_concentration.json,
-the 12.8 km reader uses build_reports_concentration_12p8km.json, and the TRACKB
-reader uses build_reports_trackb.json.
+the 12.8 km reader uses build_reports_concentration_12p8km.json, the TRACKB
+concentration reader uses build_reports_trackb_conc.json (top12 uses
+build_reports_trackb.json).
 """
 
 from __future__ import annotations
@@ -445,10 +446,10 @@ def _concentration_12p8km_rows() -> list[dict]:
     return rows
 
 
-def _trackb_rows() -> list[dict]:
+def _trackb_conc_rows() -> list[dict]:
     """Preserve the TRACKB Phase-2 trace inventory + count-preserving structural
     concentration family (built 2026-10-24, branch arena/7fd24ce1-gemsdoe89)."""
-    p = ROOT / "registry" / "build_reports_trackb.json"
+    p = ROOT / "registry" / "build_reports_trackb_conc.json"
     if not p.exists():
         return []
     rows = []
@@ -517,7 +518,7 @@ def main():
         + _concentration_rows()
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
-        + _trackb_rows()
+        + _trackb_conc_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

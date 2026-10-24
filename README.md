@@ -16,7 +16,7 @@
   (`32211f1f` / `5da46626` / `c8a264b5`), moving 10/20/30 % of off-trace dots into the
   ±300 m trace corridor at `d_cat ≥ 3 px`, `r_sep ≥ 2.8 px`, collar frozen. Phase-1 jitter
   MODEL is a coverage-cost **floor** (central −0.002 / −0.012 / −0.021); **not a weekly-slot
-  candidate unless the human decides** (`ledger/MECHANISM_CARDS_TRACKB.md`).
+  candidate unless the human decides** (`ledger/MECHANISM_CARDS_TRACKB_CONC.md`).
 - **TOP_PUBLIC:** `____` — human must supply from the leaderboard with a date;
   no other target number is valid. **Slots this week:** `__ / 3` — human
   supplies used/available (3 per rolling week per entity + 1 blind final).

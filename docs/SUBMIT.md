@@ -23,7 +23,7 @@ rasters are a nested, count-preserving Phase-1 probe of the same prior, offered 
 | dose | `releases/h33-h33-2-b2-TRACKB-TR20-20261024-5da46626.tif` | `h33-h33-2-b2-TRACKB-TR20-20261024-5da46626` | `…-5da46626-zeros.tif` | `5da466262dc7…` | `…tr20: 7531 (20%)… pred -0.012` | −0.012 (−0.091…−0.005) |
 | high dose / held | `releases/h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5.tif` | `h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5` | `…-c8a264b5-zeros.tif` | `c8a264b5a616…` | `…tr30: 11296 (30%)… pred -0.021` | −0.021 (−0.137…−0.013) |
 
-**Format receipt (this session, `registry/format_receipts.json` + per-arm `registry/build_report_trackb_*.json`):**
+**Format receipt (this session, `registry/format_receipts.json` + per-arm `registry/build_report_trackb_conc_*.json`):**
 all 3 `.tif` + 3 `-zeros.tif` re-read from disk after writing → grid `3730×3292`, 100 m,
 EPSG:32611, float32, 1 band; values in [0,1]; unit dots `== 1.0`; NaN / 0 outside footprint
 per twin; **zero catalogue mass**; count preserved `37,654`; added dots `d_cat ≥ 3 px`,

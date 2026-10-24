@@ -8,7 +8,7 @@
    "dose": "10%",
    "predicted_change_text": "-0.002 (MODEL central at 2.5px cross-strike jitter; band -0.043..+0.001; ridge-locked sigma=0 -0.043, kernel-radius sigma=3 +0.001). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
   },
-  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "git_sha": "af000c6c39c34bd880285b79e3cf4869f326f21a",
   "parent": "h33-h33-2-b2",
   "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
   "seed": 20261023,
@@ -252,7 +252,7 @@
    }
   },
   "form_note": "h33-h33-2-b2; TRACKB tr10: 3765 (10%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.002",
-  "seconds": 5.05
+  "seconds": 4.59
  },
  {
   "id": "h33-h33-2-b2-TRACKB-TR20-20261024-5da46626",
@@ -263,7 +263,7 @@
    "dose": "20%",
    "predicted_change_text": "-0.012 (MODEL central at 2.5px cross-strike jitter; band -0.091..-0.005; ridge-locked sigma=0 -0.091, kernel-radius sigma=3 -0.005). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
   },
-  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "git_sha": "af000c6c39c34bd880285b79e3cf4869f326f21a",
   "parent": "h33-h33-2-b2",
   "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
   "seed": 20261023,
@@ -507,7 +507,7 @@
    }
   },
   "form_note": "h33-h33-2-b2; TRACKB tr20: 7531 (20%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.012",
-  "seconds": 5.0
+  "seconds": 4.69
  },
  {
   "id": "h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5",
@@ -518,7 +518,7 @@
    "dose": "30%",
    "predicted_change_text": "-0.021 (MODEL central at 2.5px cross-strike jitter; band -0.137..-0.013; ridge-locked sigma=0 -0.137, kernel-radius sigma=3 -0.013). Count-preserving structural concentration; H19-surrogate prices only the on-ridge coverage cost, not the Phase-2 expert-expansion benefit \u2014 a floor. Phase-2 evidence play, NOT a weekly-slot candidate unless the human decides. |\u0394|<0.01 = no evidence."
   },
-  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "git_sha": "af000c6c39c34bd880285b79e3cf4869f326f21a",
   "parent": "h33-h33-2-b2",
   "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
   "seed": 20261023,
@@ -762,6 +762,6 @@
    }
   },
   "form_note": "h33-h33-2-b2; TRACKB tr30: 11296 (30%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.021",
-  "seconds": 4.81
+  "seconds": 4.77
  }
 ]

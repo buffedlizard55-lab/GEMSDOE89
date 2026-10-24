@@ -258,5 +258,64 @@
     }
    }
   }
+ },
+ "trackb_conc_phase2_inventory": {
+  "evidence_class": "MODEL/PROXY \u2014 never a live score",
+  "n_traces": 1520,
+  "on_trace_r0_dots": 16407,
+  "off_trace_pool": 20140,
+  "legal_corridor_placements": 19329,
+  "geojson": "releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson"
+ },
+ "trackb_conc_jitter_model": {
+  "evidence_class": "MODEL (cross-strike positional-uncertainty sensitivity)",
+  "note": "at sigma=0 corridor dots can lose (off-ridge); sigma~1-2px hedges GeoDAWN lineament mislocation. Directional only, not a live score.",
+  "deltas": {
+   "sigma_0.0px": {
+    "truth_px": 15987,
+    "r0_dti": 0.54577,
+    "delta_vs_r0": {
+     "tr10": -0.0427,
+     "tr20": -0.09067,
+     "tr30": -0.13748
+    }
+   },
+   "sigma_1.0px": {
+    "truth_px": 15954,
+    "r0_dti": 0.41525,
+    "delta_vs_r0": {
+     "tr10": -0.02633,
+     "tr20": -0.05739,
+     "tr30": -0.08845
+    }
+   },
+   "sigma_1.8px": {
+    "truth_px": 15897,
+    "r0_dti": 0.32076,
+    "delta_vs_r0": {
+     "tr10": -0.01125,
+     "tr20": -0.0291,
+     "tr30": -0.04574
+    }
+   },
+   "sigma_2.5px": {
+    "truth_px": 15837,
+    "r0_dti": 0.2621,
+    "delta_vs_r0": {
+     "tr10": -0.00211,
+     "tr20": -0.01177,
+     "tr30": -0.02126
+    }
+   },
+   "sigma_3.0px": {
+    "truth_px": 15790,
+    "r0_dti": 0.23759,
+    "delta_vs_r0": {
+     "tr10": 0.00063,
+     "tr20": -0.00545,
+     "tr30": -0.01336
+    }
+   }
+  }
  }
 }

@@ -3,8 +3,8 @@
 structural-concentration variants of verified Parent R0 (h33-h33-2-b2).
 
 Usage:
-    python tools/build_trackb.py --all
-    python tools/build_trackb.py --value tr10
+    python tools/build_trackb_conc.py --all
+    python tools/build_trackb_conc.py --value tr10
 
 Start gate (Brief sec.5): verify every fetchable manifest pin by SHA-256 and
 rebuild R0 bit-exactly before doing any work.  Then:
@@ -36,7 +36,7 @@ from scipy import ndimage as ndi
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from gemsdoe import grid, metric, parent, proxy, relief, trackb, validate  # noqa: E402
+from gemsdoe import grid, metric, parent, proxy, relief, trackb_conc as trackb, validate  # noqa: E402
 
 DATE = "20261024"
 SEED = trackb.SEED
@@ -551,14 +551,14 @@ def main() -> int:
             f"n=37654; dcat>=3; Phase-2 GeoJSON; pred {central:+.3f}"
         )
         assert len(rep["form_note"]) <= 140, (v, len(rep["form_note"]), rep["form_note"])
-        (ROOT / "registry" / f"build_report_trackb_{v}.json").write_text(json.dumps(rep, indent=1) + "\n")
-    (ROOT / "registry" / "build_reports_trackb.json").write_text(json.dumps(reports, indent=1) + "\n")
+        (ROOT / "registry" / f"build_report_trackb_conc_{v}.json").write_text(json.dumps(rep, indent=1) + "\n")
+    (ROOT / "registry" / "build_reports_trackb_conc.json").write_text(json.dumps(reports, indent=1) + "\n")
 
     if args.all:
         # extend report_only_status.json (report-only, never a gate)
         status_path = ROOT / "registry" / "report_only_status.json"
         status = json.loads(status_path.read_text()) if status_path.exists() else {}
-        status["trackb_phase2_inventory"] = {
+        status["trackb_conc_phase2_inventory"] = {
             "evidence_class": "MODEL/PROXY — never a live score",
             "n_traces": n_feat,
             "on_trace_r0_dots": n_on,
@@ -566,7 +566,7 @@ def main() -> int:
             "legal_corridor_placements": int(len(placements)),
             "geojson": str(geojson_path.relative_to(ROOT)),
         }
-        status["trackb_jitter_model"] = {
+        status["trackb_conc_jitter_model"] = {
             "evidence_class": "MODEL (cross-strike positional-uncertainty sensitivity)",
             "note": "at sigma=0 corridor dots can lose (off-ridge); sigma~1-2px hedges "
                     "GeoDAWN lineament mislocation. Directional only, not a live score.",
