@@ -34,6 +34,8 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 
 ## Read first on every session
 
+Before each research or implementation session, read [`PROMPT.md`](PROMPT.md) (the durable, condensed charter for the original long-form request), then this README and [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md). The charter is intentionally concise rather than a verbatim copy of the very long prompt; the original prompt asks for a unique, audited submission, but **does not authorize uploading a negative candidate**. Re-check the experiment budget and lane status in the active run card before doing any work.
+
 The static site is [`index.html`](index.html) with the dedicated [`submit.html`](submit.html) submission guide. `docs/index.html` and `docs/submit.html` are generated publishing mirrors (run `python tools/build_pages_site.py`) for GitHub Pages configured to publish the `docs/` folder. Read [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) and the upstream [`docs/PROJECT_CHARTER.md`](docs/PROJECT_CHARTER.md) / [`PROMPT.md`](PROMPT.md) before research or coding, then inspect `README.md`, `IRREGULARITIES.md`, `SLOT_PLAN.md`, `docs/SUBMIT.md`, and the full local ledger. The brief carries the original mission, Arena values (**Maximize P(Win)** and **Own the Outcome**), experiment budget, holdout rules, evidence labels, uniqueness thresholds, submission gates, and trusted source links.
 
 ## Why the `0.2778` result is not yet an established target
@@ -53,6 +55,10 @@ python tools/evaluate_holdout.py
 ```
 
 The evaluator rechecks input hashes, tests each feature alone on spatially held-out fault segments, audits the pre-placement signal and final raster against locally available registry rasters, and calls the shared [`tools/submission_writer.py`](tools/submission_writer.py). It does not access DrivenData or upload a file. A valid GeoTIFF is **not** automatically a good submission.
+
+### Independent code verification (2026-10-24)
+
+Three review passes were completed against the charter: (1) checked the current hypothesis slate, run card, evaluation artifacts and site copy; (2) reviewed the upload gate, [0,1] format constraint, holdout comparison, leakage canary and local-coverage limits; (3) checked implementation syntax and ran the repository test suite. With `requirements.txt` installed in an isolated `.venv`, `PYTHONPATH=. .venv/bin/python -m pytest -q` reports **101 passed**. `python -m compileall -q gemsdoe tools tests` also succeeds. This verifies tests and syntax only; it does not independently rerun the raster experiment because the ignored competition `data/` inputs are not present in this checkout. The checked-in run-card values are the auditable experiment record, not an organizer receipt.
 
 ## Existing validated fleet at the previous merge
 
