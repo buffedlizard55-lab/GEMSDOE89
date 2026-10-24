@@ -10,6 +10,15 @@ The human submits manually from their own registered account. Nothing here logs 
 | **CONDITIONAL WINDOW CONTROL** | `releases/h33-h33-2-b2-snap1p0px-g0p01-20261024-2916ec2d.tif` | `2916ec2d31ebc9c25164686a9dec63f781604cad927869e8aec836143c78652c` / `0b4fad309e26eb49e0ca2707cd5a58f8f675acfbdfff0f0c6192945dcbe163ea` | `R0 h33-h33-2-b2 + SNAP 1p0px-g0p01: 4,265/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.008` |
 | **HELD HIGH-GATE BOUNDARY** | `releases/h33-h33-2-b2-snap1p0px-g0p02-20261024-384435e6.tif` | `384435e608fdc6b4a1e8218ef7c3454d6970b4f5149cd3e945082f666761d6ae` / `8592f23b22a29f72bbab714d296b4f14c04276803063d553f2e44d0a41a5511d` | `R0 h33-h33-2-b2 + SNAP 1p0px-g0p02: 1,245/37654 dots moved, mean 1.00 px, targets dcat>=3px; pred +0.002` |
 
+## Phase-2 TRACKB product (2026-10-24 — NOT for upload as a scored slot)
+
+| field | value |
+|---|---|
+| **GeoJSON** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` (12 traces, EPSG:32611) |
+| **raster** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif` (145 member dots; sha256 `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370`) |
+| **evidence** | `ledger/TRACKB_TRACES.md` (one paragraph per trace); card `ledger/MECHANISM_CARDS_TRACKB.md` |
+| **warning** | Phase-2 expert-review product only. Scored as-is it would fall far below R0 (145/37,654 dots). Do **not** spend a weekly slot on it. |
+
 ## Next 3 slots
 
 1. **Slot 1 — `afc60a25` primary above.** Prediction `+0.0120 MODEL` (`−0.0060…+0.0301`).
@@ -28,13 +37,13 @@ The human submits manually from their own registered account. Nothing here logs 
 
 | gate | result |
 |---|---|
-| Grid vs pinned `sample_submission.tif`: `3730×3292`, 100 m, EPSG:32611, float32, one band | **PASS ×48 files** |
-| Values `[0,1]`; unit dots; no NaN inside footprint; NaN/0 outside by twin | **PASS ×48 files** |
-| Dot counts and identical NaN/zeros masks | **PASS ×24 pairs**; all three new pairs = 37,654 |
+| Grid vs pinned `sample_submission.tif`: `3730×3292`, 100 m, EPSG:32611, float32, one band | **PASS ×50 files** |
+| Values `[0,1]`; unit dots; no NaN inside footprint; NaN/0 outside by twin | **PASS ×50 files** |
+| Dot counts and identical NaN/zeros masks | **PASS ×25 pairs**; all three new SNAP pairs = 37,654; TRACKB = 145 |
 | Zero catalogue mass; new SNAP moved targets `d_cat>=3.00 px` | **PASS** |
-| Exact-hash and `(parent,axis,value)` dedupe; form notes `<=140` chars | **PASS** (`139` ledger rows, `24` local + `115` collapsed upstream) |
+| Exact-hash and `(parent,axis,value)` dedupe; form notes `<=140` chars | **PASS** (`140` ledger rows, `25` local + `115` collapsed upstream) |
 | R0 recipe rebuild vs both SHA-256 pins | **PASS** |
-| Unit tests / leakage canary | **64 passed** / **PASS** (`SNAP max AUC 0.66538 < 0.90`) |
+| Unit tests / leakage canary | **68 passed** / **PASS** (`SNAP max AUC 0.66538 < 0.90`) |
 
 Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`, and `registry/report_only_status.json`. PROXY/MODEL diagnostics never gate an upload.
 
