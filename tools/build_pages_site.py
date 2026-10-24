@@ -73,6 +73,7 @@ def mirror() -> None:
         "run_card_annulus_20261024.json",
         "run_card_pfpeaks_20261024.json",
         "run_card_tcunion_20261024.json",
+        "submission_readiness.json",
     ):
         src = ROOT / "registry" / name
         if src.exists():

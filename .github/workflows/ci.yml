@@ -22,6 +22,15 @@ jobs:
         run: python tools/validate_raster.py
       - name: Ledger consistency
         run: python tools/check_ledger.py
+      - name: Readiness report and publishing mirrors
+        run: |
+          set +e
+          python tools/submission_readiness.py registry/run_card_condedge_20261024.json --output registry/submission_readiness.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python tools/build_pages_site.py
+          git diff --exit-code -- registry/submission_readiness.json docs/index.html docs/submit.html docs/registry
       - name: No conflict markers
         run: |
           if git grep -nE '^(<<<<<<<|=======|>>>>>>>)' -- . ; then

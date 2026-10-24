@@ -108,6 +108,9 @@ def main() -> int:
         if entry.get("unverified"):
             continue
         p = data_root / entry["local"]
+        if not p.exists():
+            print(f"STOP: missing pinned input: {entry['id']}")
+            return 2
         got = grid.sha256_file(p)
         if got != entry["sha256"]:
             print(f"STOP: manifest checksum mismatch for {entry['id']}: {got}")
@@ -124,6 +127,7 @@ def main() -> int:
     with rasterio.open(paths["training_features"]) as ds:
         if ds.count != 19 or ds.shape != footprint.shape:
             print(f"STOP: feature stack contract mismatch: bands={ds.count}, shape={ds.shape}")
+            return 2
         cond = ds.read(17).astype(np.float32, copy=False)
     cond_valid = footprint & np.isfinite(cond) & (cond > NODATA_F32)
     edge_score = conductivity_edge(cond, cond_valid)
@@ -165,6 +169,20 @@ def main() -> int:
         return 3
     print(f"[HOLDOUT] {len(tiles)} spatial tiles; {N_FOLDS} folds; "
           f"{n_withheld} withheld positive pixels; candidate mass={n_points}")
+
+    # Audit the actual surface BEFORE any candidate placement, including folds.
+    refs = registry_paths(data_root)
+    surface_audit = surface_registry_audit(
+        edge_score, footprint, np.zeros_like(footprint), refs,
+        seed=SEED, sample_n=150000, surface_label="before any dot placement")
+    if surface_audit["duplicate_stop"] or not surface_audit["n_reference_geometries"]:
+        stop_card = {"experiment": "COND-EDGE", "verdict": "negative",
+                     "reason": "duplicate surface or empty registry; placement stopped",
+                     "registry_audit": surface_audit, "raster": None}
+        (ROOT / "registry/run_card_condedge_duplicate.json").write_text(
+            json.dumps(stop_card, indent=2) + "\n")
+        print("STOP: pre-placement surface gate; no candidate dots generated")
+        return 4
 
     candidate_by_fold = {}
     for item in holdouts:
@@ -256,7 +274,7 @@ def main() -> int:
         print("STOP: duplicate threshold crossed before writing; no TIF emitted")
     else:
         written_dots, validator = write_candidate(
-            temp_path, proposed, footprint, catalogue, ledger_hashes=known_hashes)
+            temp_path, proposed, footprint, catalogue, ledger_hashes=known_hashes, encoding="nan")
         raster_sha = validator["sha256"]
         with rasterio.open(temp_path) as ds:
             readback = ds.read(1)
@@ -324,11 +342,13 @@ def main() -> int:
         "leakage_canary": {"threshold_strength": 0.90, "features_tested": canary,
                             "flagged_features": canary_flags,
                             "verdict": "FAIL" if canary_flags else "PASS"},
-        "registry_uniqueness": {"prewrite": audit_pre, "postwrite": audit_post,
+        "registry_uniqueness": {"before_placement": surface_audit,
+                                "complete_registry_coverage": False,
+                                "prewrite": audit_pre, "postwrite": audit_post,
                                 "exact_sha256_against_ledger": {
                                     "checked_ledger_hash_values": len(known_hashes),
                                     "candidate_sha256": raster_sha,
-                                    "unique": bool(raster_sha is None or raster_sha not in known_hashes)},
+                                    "unique": bool(raster_sha is not None and raster_sha not in known_hashes)},
                                 "duplicate_thresholds": {"abs_spearman_gt": 0.90,
                                                           "dot_overlap_within_3px_gt": 0.70}},
         "raster": {"path": str(final_path.relative_to(ROOT)) if final_path else None,
@@ -336,7 +356,7 @@ def main() -> int:
         "submission": {"name": final_path.stem if final_path else None,
                        "note": note, "note_chars": len(note),
                        "slot_status": "not selected; selector step is separate",
-                       "download_submit_status": ("OK_TO_SUBMIT" if verdict == "promote" else "DO_NOT_SUBMIT")},
+                       "download_submit_status": ("ELIGIBLE_FOR_SELECTOR" if verdict == "promote" else "DO_NOT_SUBMIT")},
         "verdict": verdict,
         "experiment_budget": {"experiments_run": 1, "maximum": 3},
         "official_sources": [

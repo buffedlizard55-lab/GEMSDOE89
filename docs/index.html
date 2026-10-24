@@ -25,11 +25,12 @@
     <div class="status" role="alert">
       <div class="icon" aria-hidden="true">⛔</div>
       <div><strong>COND-EDGE experiment: DO NOT SUBMIT</strong>
-        This valid GeoTIFF performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. The file is downloadable for review only; do not spend a competition slot on it.
+        This research GeoTIFF performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. The file is downloadable for research only; do not spend a competition slot on it. It also contains outside-footprint NaN values and fails our stricter all-finite upload gate.
       </div>
     </div>
     <a class="button" href="downloads/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a>
     <a class="button secondary" href="submit.html">Read submission guide</a>
+    <p><a href="registry/submission_readiness.json">Automated readiness audit · DO NOT SUBMIT</a> — no human inspection is needed to detect these blockers.</p>
     <p class="small">File: <span class="mono">h89-condedge-s2-4-20261024-829cc418-candidate.tif</span><br>SHA-256: <span class="mono">829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d</span></p>
   </section>
 
@@ -54,14 +55,14 @@
     </article>
     <article class="card">
       <div class="label">Format and integrity</div>
-      <h2>File validation passed</h2>
+      <h2>Research format passes; upload gate fails</h2>
       <ul>
         <li>Single-band float32 GeoTIFF, EPSG:32611</li>
         <li>Shape 3730 × 3292; sample transform matched</li>
         <li>No NaN inside footprint; finite values in [0, 1]</li>
         <li>NaN outside footprint; known-fault pixels masked exactly</li>
       </ul>
-      <p><b style="color:var(--green)">Format PASS does not mean score-ready.</b> The scientific holdout is negative.</p>
+      <p><b style="color:var(--green)">Research format PASS does not mean upload-safe or score-ready.</b> The scientific holdout is negative.</p>
     </article>
     <article class="card">
       <div class="label">Uniqueness and leakage</div>
