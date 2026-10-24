@@ -224,7 +224,7 @@ def _snap_rows() -> list[dict]:
                     f"{band[0]:+.4f}..{band[2]:+.4f} "
                     f"(MODEL central {m['central']:+.4f}; band prices the mimic)"
                 ),
-                "date": "20261023",
+                "date": rep.get("build_date", "20261023"),
                 "form_note": rep["form_note"],
                 "notes": (
                     f"window {round(rep['spec']['window_px'], 2)} px, gate {rep['spec']['margin']:.2f}, "
