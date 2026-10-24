@@ -750,4 +750,3 @@ Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically via `to
 - **The non-fault process that could mimic it:** Sub-parallel bajada channels, aligned volcanic plugs/dikes, or GeoDAWN `400 m` flight-line leveling artifacts can align collinearly across `300–600 m` intervals, bridging unrelated geomorphic scarps.
 - **Predicted sign and size (`MODEL`):** Phase 1 unexpanded central **−0.003** (`−0.010 … +0.005`); Phase 2 expert-expanded central **+0.009** (`+0.001 … +0.021`).
 - **Falsifier:** Losing to `t150swap` by `>= 0.005` on confirmation or expert audit falsifies `<= 620 m` dot-linking across `h19_5` breaks and restricts Phase 2 traces to unbroken `h19_5` trunks.
-
