@@ -82,7 +82,7 @@ def ledger_hashes() -> set[str]:
             # Exclude only that row; all other GEMSDOE89/upstream hashes remain gated.
             if (row.get("id") or "").startswith(own_prefix):
                 continue
-            for field in ("sha256", "sha256_zeros", "sha8"): 
+            for field in ("sha256", "sha256_zeros", "sha8"):
                 value = (row.get(field) or "").strip()
                 if value:
                     out.add(value)
@@ -336,7 +336,7 @@ def main() -> int:
         "submission": {"name": final_path.stem if final_path else None,
                        "note": note, "note_chars": len(note),
                        "slot_status": "not selected; selector step is separate",
-                       "download_submit_status": ("OK_TO_SUBMIT" if verdict == "promote" else "DO_NOT_SUBMIT")}, 
+                       "download_submit_status": ("OK_TO_SUBMIT" if verdict == "promote" else "DO_NOT_SUBMIT")},
         "verdict": verdict,
         "experiment_budget": {"experiments_run": 1, "maximum": 3},
         "official_sources": [
