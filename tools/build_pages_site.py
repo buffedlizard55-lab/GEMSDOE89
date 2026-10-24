@@ -60,6 +60,8 @@ def mirror() -> None:
     for name in (
         "h89-condedge-s2-4-20261024-829cc418-candidate.tif",
         "gems89-bstp40-20261024-2e7e8a8f-zeros.tif",
+        "h89-annulus-splay-20261024-e9b2bec1-candidate.tif",
+        "h89-pfpeaks-20261024-18f0316a-candidate.tif",
     ):
         shutil.copy2(ROOT / "releases" / name, assets / name)
 
@@ -68,8 +70,13 @@ def mirror() -> None:
     for name in (
         "run_card_condedge_20261024.json",
         "run_card_bstp40.json",
+        "run_card_annulus_20261024.json",
+        "run_card_pfpeaks_20261024.json",
+        "run_card_tcunion_20261024.json",
     ):
-        shutil.copy2(ROOT / "registry" / name, registry / name)
+        src = ROOT / "registry" / name
+        if src.exists():
+            shutil.copy2(src, registry / name)
     (DOCS / ".nojekyll").touch()
 
 

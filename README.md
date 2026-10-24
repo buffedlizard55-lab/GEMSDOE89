@@ -1,15 +1,27 @@
 # GEMSDOE89 — executive summary and submission status
 
-> **DOWNLOAD STATUS: DO NOT SUBMIT.** This session generated and format-validated a locally unique candidate GeoTIFF, but its spatial holdout was decisively worse than the visible-only R0 baseline. It is preserved as a negative research result, not a recommended competition entry.
+> **DOWNLOAD STATUS: ALL SESSION CANDIDATES DO NOT SUBMIT.** This session ran three holdout experiments
+> (ANNULUS, PF-PEAKS, TC-UNION) against the spatially blocked segment holdout. Every candidate scored far
+> below the visible-only R0 baseline (HOLDOUT-DTI 0.161230 [0.142648, 0.180061]); none is cleared for a
+> competition slot. All GeoTIFFs below are format-validated research artifacts with verdict `negative` —
+> **do not upload them to DrivenData**. No organizer submission receipt exists for any file in this repo,
+> and no live score (including the fleet's 0.2778) is organizer-confirmed here.
 >
-> [Download the research TIF](releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif) · [Run card](registry/run_card_condedge_20261024.json) · [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
+> | candidate (stem) | sha256 (first 16) | holdout DTI (95% CI) vs R0 baseline 0.161230 [0.142648, 0.180061] | verdict | download |
+> |---|---|---|---|---|
+> | `h89-annulus-splay-20261024-e9b2bec1-candidate` | `e9b2bec11c2c60cd` | 0.001202 [0.000455, 0.002061]; delta −0.160028 [−0.180591, −0.139843] | **negative — DO NOT SUBMIT** | [releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif](releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif) |
+> | `h89-pfpeaks-20261024-18f0316a-candidate` | `18f0316a457fb3af` | 0.068825 [0.042551, 0.095776]; delta −0.092405 [−0.136201, −0.049139] | **negative — DO NOT SUBMIT** | [releases/h89-pfpeaks-20261024-18f0316a-candidate.tif](releases/h89-pfpeaks-20261024-18f0316a-candidate.tif) |
+> | `h89-tcunion-20261024-…` | — | 0.070181 [0.043417, 0.097668]; delta −0.091049 [−0.135214, −0.047593] | **negative — blocked as duplicate** (100% of dots within 3 px of the PF-PEAKS raster; no TIF emitted) | none |
+> | `h89-condedge-s2-4-20261024-829cc418-candidate` | `829cc41856540a93` | 0.049875 [0.036830, 0.061751]; delta −0.111355 [−0.133218, −0.087864] | **negative — DO NOT SUBMIT** (prior session, same holdout) | [releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif](releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif) |
+>
+> Run cards: `registry/run_card_annulus_20261024.json`, `registry/run_card_pfpeaks_20261024.json`,
+> `registry/run_card_tcunion_20261024.json`, `registry/run_card_condedge_20261024.json`.
+> Format gates: PASS for all emitted TIFs (one float32 band, EPSG:32611, 3730×3292, template transform,
+> finite values in [0,1], NaN only outside the footprint, exact known-fault mask, unique SHA-256 vs ledger,
+> rank correlation < 0.90 and < 70% of dots within 3 px of every local registry raster).
+> [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
 
-- **Candidate:** `h89-condedge-s2-4-20261024-829cc418-candidate.tif` — SHA-256 `829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d`.
-- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v1`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score.
-- **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
-- **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
-- **Format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
-- **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
+- **Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live **0.2778 = CLAIM** (no organizer receipt in this repo). Its spatial holdout on this data is 0.161230 [0.142648, 0.180061], the best local comparator this session could beat — no candidate did.
 
 ## Read first on every session
 
@@ -19,19 +31,52 @@ The static site is [`index.html`](index.html) with the dedicated [`submit.html`]
 
 The local evidence verifies R0's geometry and file identity, not the cause of its live result. R0 is reproduced as a 2.8-pixel-thinned `h19_5` ridge set pruned using the known-fault catalogue, yielding 37,654 unit-mass dots; its reported **0.2778 is CLAIM, not ORGANIZER-CONFIRMED** because no submission-page receipt is stored in this repository. Plausible contributors include multi-layer geophysical ridge continuity, sparse placement, and the recorded catalogue prune, but a single result cannot establish which mechanism caused the score. The request also gives `0.3195` and `0.4413` as different leaderboard snapshots without dates or receipts; neither is independently confirmed here. See the hash-verified recipe in [`gemsdoe/parent.py`](gemsdoe/parent.py), [`registry/parent_verification.json`](registry/parent_verification.json), and official metric rules in the [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
 
-## This session — one COND-EDGE experiment
+## This session — three experiments, all negative (budget: 3 experiments / 2 hours)
 
-The top-ranked new hypothesis was a multi-scale gradient of band 17 `cond_surf`. Its scientific rationale and three alternatives are registered in [`docs/HYPOTHESIS_REGISTER.md`](docs/HYPOTHESIS_REGISTER.md). It did **not** beat the visible-only R0 comparator under the new spatially blocked, whole-segment hide-and-recover evaluator; the negative TIF remains available for auditing and must not be uploaded. No external raster was needed. One experiment was run, below the three-experiment/two-hour cap.
+Lanes tested, in order, each reusing the shared stacked holdout (`gemsdoe/holdout.py`) and writer
+(`tools/submission_writer.py`) on the pinned, SHA-256-verified inputs:
+
+1. **COND-EDGE** (prior session, on this checkout): band-17 `cond_surf` multi-scale conductivity edges.
+   Holdout **0.049875 [0.036830, 0.061751]** vs R0 **0.161230 [0.142648, 0.180061]** — negative.
+2. **ANNULUS** (this session): potential-field ridge peaks (bands 3 `tmi_hg` + 18 `iso_grav_anom_hg`,
+   max multi-scale Gaussian gradient, sigma 2/4 px) restricted to the 200–800 m annulus around visible
+   faults — splay/stepover targeting. Holdout **0.001202 [0.000455, 0.002061]** — negative. Diagnostics
+   showed held-out truth sits 8–12 km from visible faults, so local annulus gating placed dots too far
+   from held-out segments.
+3. **PF-PEAKS** (this session): same ridge surface, fixed-mass spaced peaks across the whole visible-eligible
+   image with R0's > 2 px visible-fault prune — strength-weighted ridge targeting. Holdout
+   **0.068825 [0.042551, 0.095776]** — negative. All single-feature leakage canaries ≤ 0.5365 (< 0.90).
+4. **TC-UNION** (this session): max gradient over bands 3 `tmi_hg`, 6 `tc` (tilt/total curvature) and
+   18 `iso_grav_anom_hg`, same placement constraints. Holdout **0.070181 [0.043417, 0.097668]** —
+   negative; additionally blocked by the registry duplicate guard (100% of dots within 3 px of the
+   PF-PEAKS raster) so no TIF was emitted.
+
+**Answer to the opening question:** the fleet's `h33-h33-2-b2-zeros` result of **0.2778 is CLAIM, not
+ORGANIZER-CONFIRMED** — no submission-page receipt is stored in this repository, and the public snapshots
+0.4413 / 0.3195 are conflicting, undated, and unverified. Plausible contributors to R0's result are its
+potential-field ridge skeleton (TMI + gravity horizontal gradient), sparse fixed-mass placement
+(37,654 dots), and the catalogue prune (dots > 2 px from known faults); no single result can establish
+the causal mechanism. **We cannot generate a verified submission that beats 0.2778 in this session:** all
+three holdout lanes lost to R0 decisively (paired-delta CIs exclude 0), and the parallel-run protocol
+forbids spending a weekly slot on anything that has not beaten the incumbent on holdout. Negative
+results are the deliverable: no file below is cleared to submit, and no slot was used.
 
 Reproduce (after dependencies and pinned data are available):
 
 ```bash
 python tools/fetch_pinned_data.py
 python tools/rebuild_r0.py
-python tools/evaluate_holdout.py
+python tools/evaluate_holdout.py        # COND-EDGE lane
+python tools/evaluate_annulus.py        # ANNULUS lane
+python tools/evaluate_pfpeaks.py        # PF-PEAKS lane
+python tools/evaluate_tcunion.py        # TC-UNION lane
 ```
 
-The evaluator rechecks input hashes, tests each feature alone on spatially held-out fault segments, audits the pre-placement signal and final raster against locally available registry rasters, and calls the shared [`tools/submission_writer.py`](tools/submission_writer.py). It does not access DrivenData or upload a file. A valid GeoTIFF is **not** automatically a good submission.
+Each evaluator rechecks input hashes, tests each feature alone on spatially held-out fault segments
+(leakage canary), audits the pre-placement surface and final raster against locally available registry
+rasters (duplicate guard: |Spearman| > 0.90 or > 70% of dots within 3 px), and calls the shared
+[`tools/submission_writer.py`](tools/submission_writer.py). None accesses DrivenData or uploads a file.
+A valid GeoTIFF is **not** automatically a good submission.
 
 ## Existing validated fleet at the previous merge
 

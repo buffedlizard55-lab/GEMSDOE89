@@ -15,6 +15,32 @@
 
 The top candidate is low-cost, uses a different sensor-derived layer than the existing TMI/gravity ridge-placement arms, and is testable with no external-data dependency. The literature supports testing conductivity as one contextual indicator, not treating it as a direct fault label. Before emission, its conductivity edge surface and final dots are checked against locally available registry rasters; correlation above 0.90 or more than 70% of dots within 3 pixels of any one registry raster is an automatic duplicate-stop. Every feature is also tested alone on the spatial holdout as a leakage canary; an AUC above 0.90 is treated as leakage until disproven.
 
+## Executed lanes (this and prior sessions)
+
+All lanes below ran the shared spatially blocked holdout (`GEMSDOE89-spatial-segment-holdout-v1`;
+alpha 0.2, beta 0.8, 300 m triangular kernel; 59,168 withheld positive pixels; 512 px spatial tiles;
+5 folds; 3 px segment buffer) on the pinned, SHA-256-verified inputs, with the visible-only R0
+comparator at HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`. Every lane leaked nothing (max single-feature
+AUC strength ≤ 0.5365 < 0.90) and every emitted raster passed the format gates and the registry
+duplicate guard (|Spearman| < 0.90, < 70% of dots within 3 px of any local registry raster). All
+verdicts are `negative`; no slot was used and no file is cleared to submit.
+
+| lane | layers / transform | holdout DTI (95% CI) | paired delta vs R0 | artifact | status |
+|---|---|---|---|---|---|
+| COND-EDGE (prior session) | b17 `cond_surf`, max Gaussian gradient sigma 2, 4 px | 0.049875 [0.036830, 0.061751] | −0.111355 [−0.133218, −0.087864] | `releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif` | negative, DO NOT SUBMIT |
+| ANNULUS | b3 `tmi_hg` + b18 `iso_grav_anom_hg` gradient ridges, 200–800 m annulus around visible faults (splay/stepover targeting) | 0.001202 [0.000455, 0.002061] | −0.160028 [−0.180591, −0.139843] | `releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif` | negative, DO NOT SUBMIT |
+| PF-PEAKS | b3 + b18 gradient ridges, fixed-mass spaced peaks, R0's >2 px visible-fault prune | 0.068825 [0.042551, 0.095776] | −0.092405 [−0.136201, −0.049139] | `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | negative, DO NOT SUBMIT |
+| TC-UNION | b3 `tmi_hg` + b6 `tc` (tilt/total curvature) + b18 `iso_grav_anom_hg` gradient ridges, same prune | 0.070181 [0.043417, 0.097668] | −0.091049 [−0.135214, −0.047593] | none emitted — blocked as duplicate of PF-PEAKS (100% of dots within 3 px) | negative |
+
+Interpretation: held-out truth sits 8–12 km from visible faults, so only the geophysical ridge surface
+carries usable local signal; R0's skeleton placement is the strongest local baseline and none of the
+tested surfaces improved on it. Per the parallel-run protocol, promotion to a weekly slot requires a
+`promote` holdout verdict first — no lane reached it. Remaining untested hypotheses from this register:
+rank 2 (geodetic strain boundaries, bands 4/7/8), rank 3 (potential-field junction topology, bands 3/6/18),
+rank 4 (topographic scarp curvature, bands 12/19) — each would need its own holdout run before any slot
+decision; note the segment holdout is acknowledged (BSTP run card) as unable to validate blind
+off-catalogue fault discovery, only catalogue-habitat placement.
+
 ## Trusted sources for manual review
 
 | Claim used here | Primary source |
