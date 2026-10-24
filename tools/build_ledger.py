@@ -443,6 +443,52 @@ def _concentration_12p8km_rows() -> list[dict]:
     return rows
 
 
+def _prune_rows() -> list[dict]:
+    """PRUNE variants on Parent R0."""
+    p = ROOT / "registry" / "build_reports_prune.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        spec = rep["spec"]
+        pred = rep["model_prediction"]
+        files = rep["files"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": files["sha8"],
+                "sha256": files["nan"]["sha256"],
+                "sha256_zeros": files["zeros"]["sha256"],
+                "parent": rep["parent"],
+                "axis": "PRUNE",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": pred["predicted_change_text"],
+                "date": rep.get("date", "20261024"),
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-24; collar {s['collar_spec_px']:.1f}px; "
+                    f"move {s['n_moved']} dots ({s['pct_changed']:.2f}%, symdiff {s['pct_symmetric_diff']:.2f}%); "
+                    f"count fixed {s['n_dots']}; min dcat {s['min_catalogue_distance_px']:.2f}px; cat mass 0; "
+                    f"CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f}; "
+                    f"{spec['role']}. {spec['note']}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -466,6 +512,7 @@ def main():
         + _concentration_rows()
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
+        + _prune_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

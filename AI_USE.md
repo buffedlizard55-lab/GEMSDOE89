@@ -34,6 +34,16 @@ This repository was developed with an autonomous coding agent on Arena.ai Agent 
    - Integrated cleanly with PRs #12 (`5 km`) and #13 (`2 km`) with zero byte changes to any pre-existing release raster: all **21** `GEMSDOE89` pairs (**42 `.tif` files**, 136 ledger rows, 63 unit tests) pass every format, data, and ledger gate.
    - **Reversible human choices:** choosing between `CONC5kmcat10` (`+0.009 MODEL`, raw catalogue density, wider band `−0.010…+0.038`) and `conc-12p8km-int10` (`+0.008 MODEL`, Faulds tip/junction/step-over interaction, tighter band `−0.006…+0.018`, `CV_12.8km = 0.5533`) for Slot 1, and between `CONC5kmcat10away` (frontier sign control) and `conc-12p8km-geod15` (catalogue-free active crustal strain) if catalogue priors fail.
 
+8. **`PRUNE` session (2026-10-24, branch `arena/95b10b60-gemsdoe89`):**
+   - Implemented `gemsdoe/prune.py`, `tools/build_prune.py`, and `tests/test_prune.py` (6 unit tests), adding the missing `PRUNE` axis to complete all 6 core experimental axes in `releases/`.
+   - Built three count-preserving (`n=37,654`), zero-catalogue-mass, format-verified variant pairs (6 `.tif` files):
+     - `c3p0` (`7b101829`): 3.0 px collar (300 m full kernel clearance), `+0.003 MODEL` (band `−0.005…+0.012`), 2,171 dots relocated (5.77%), refilled on `h19_5` outside 300 m.
+     - `c1p0` (`85cf176a`): 1.0 px collar (100 m proximal splay probe), `−0.004 MODEL` (band `−0.015…+0.008`), 2,545 dots swapped in from `d28` at $1.0 < d_{cat} \le 2.0$ px with 2,545 lowest unique-credit dots dropped in R0.
+     - `c4p0` (`d681292b`): 4.0 px collar (400 m flight-line smear purge), `−0.001 MODEL` (band `−0.018…+0.015`), 3,825 dots relocated (10.16%).
+   - Integrated with `tools/build_ledger.py` (now generating 24 `GEMSDOE89` rows, 139 total rows in `ledger/submissions.csv`).
+   - Ran `tools/validate_raster.py` (all 48 files pass every MUST gate) and `tools/check_ledger.py` (consistent, 0 repeated triples, all notes $\le 140$ chars). All 69 pytest tests pass.
+   - **What the human decides:** whether to spend an early slot on `prune-c3p0` if the spatial concentration and SNAP forks show no evidence ($|\Delta| < 0.01$); all submission uploads, receipts, and final blind file choice.
+
 ## Guardrails Enforced
 
 - Zero automated access to `drivendata.org` or `dropbox.com`; zero submissions executed; zero credentials accessed or stored.

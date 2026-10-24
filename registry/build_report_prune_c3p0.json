@@ -1,0 +1,84 @@
+{
+ "id": "h33-h33-2-b2-prune-c3p0-20261024-7b101829",
+ "parent": "h33-h33-2-b2",
+ "axis": "PRUNE",
+ "value": "c3p0",
+ "role": "FULL_KERNEL_CLEARANCE",
+ "date": "20261024",
+ "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+ "elapsed_seconds": 9.58,
+ "spec": {
+  "collar_px": 3.0,
+  "role": "FULL_KERNEL_CLEARANCE",
+  "predicted_central": 0.003,
+  "band": [
+   -0.005,
+   0.003,
+   0.012
+  ],
+  "form_note": "h33-h33-2-b2; PRUNE c3p0: collar >3px, prune 2171 ring dots, refill on H19-5, n37654; pred +0.003 (-0.005..+0.012)",
+  "predicted_text": "+0.003 (MODEL; band -0.005..+0.012). Full 300 m kernel clearance eliminates boundary truncation.",
+  "note": "Remove 2171 dots in R0 with 2.0 < d_cat <= 3.0 px, refill 2171 dots onto h19_5 outside 300 m collar; tests whether full kernel clearance eliminates boundary truncation loss."
+ },
+ "form_note": "h33-h33-2-b2; PRUNE c3p0: collar >3px, prune 2171 ring dots, refill on H19-5, n37654; pred +0.003 (-0.005..+0.012)",
+ "files": {
+  "sha8": "7b101829",
+  "nan": {
+   "path": "releases/h33-h33-2-b2-prune-c3p0-20261024-7b101829.tif",
+   "sha256": "7b101829ca5c0c92f91a31a05474da1133e2261fe93e1a6f438f6ee3742f935a",
+   "bytes": 354740
+  },
+  "zeros": {
+   "path": "releases/h33-h33-2-b2-prune-c3p0-20261024-7b101829-zeros.tif",
+   "sha256": "15f212a231bde25f6473d19cd04b9fa938a83d4f6be6fbf0ff1bbff7d7716562",
+   "bytes": 218242
+  }
+ },
+ "stats": {
+  "mode": "c3p0",
+  "collar_spec_px": 3.0,
+  "n_dots": 37654,
+  "n_moved": 2171,
+  "n_removed": 2171,
+  "n_added": 2171,
+  "pct_changed": 5.76565570722898,
+  "pct_symmetric_diff": 11.53131141445796,
+  "min_catalogue_distance_px": 3.1622776601683795,
+  "catalogue_mass": 0,
+  "block_cv_5km_before": 0.8988889502600114,
+  "block_cv_5km_after": 0.9252497129927769,
+  "block_cv_12p8km_before": 0.5532233577727139,
+  "block_cv_12p8km_after": 0.569491130703047,
+  "details": "prune 2171 dots (d_cat <= 3.0 px); refill 2171 dots on h19 (d_cat > 3.0 px)"
+ },
+ "model_prediction": {
+  "central": 0.003,
+  "band": [
+   -0.005,
+   0.003,
+   0.012
+  ],
+  "predicted_change_text": "+0.003 (MODEL; band -0.005..+0.012). Full 300 m kernel clearance eliminates boundary truncation.",
+  "evidence_class": "MODEL"
+ },
+ "report_only": {
+  "parent_hide_and_recover_recall": 0.03842369916921731,
+  "parent_hide_and_recover_ci95": [
+   0.032850345997770314,
+   0.04399705234066431
+  ],
+  "variant_hide_and_recover_recall": 0.0,
+  "variant_hide_and_recover_ci95": [
+   0.0,
+   0.000209925314326218
+  ],
+  "parent_surrogate_dti": 0.006709118968955279,
+  "variant_surrogate_dti": 0.0,
+  "note": "REPORT-ONLY; local proxy holdout correlates -0.87..+0.54 with live scores and never gates a file"
+ },
+ "gates": {
+  "nan_all_ok": true,
+  "zeros_all_ok": true,
+  "sha256_in_ledger_before_build": false
+ }
+}

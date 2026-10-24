@@ -1,0 +1,84 @@
+{
+ "id": "h33-h33-2-b2-prune-c1p0-20261024-85cf176a",
+ "parent": "h33-h33-2-b2",
+ "axis": "PRUNE",
+ "value": "c1p0",
+ "role": "PROXIMAL_SPLAY_PROBE",
+ "date": "20261024",
+ "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+ "elapsed_seconds": 9.09,
+ "spec": {
+  "collar_px": 1.0,
+  "role": "PROXIMAL_SPLAY_PROBE",
+  "predicted_central": -0.004,
+  "band": [
+   -0.015,
+   -0.004,
+   0.008
+  ],
+  "form_note": "h33-h33-2-b2; PRUNE c1p0: collar >1px, swap in 2545 ring dots, drop 2545 low-gain, n37654; pred -0.004 (-0.015..+0.008)",
+  "predicted_text": "-0.004 (MODEL; band -0.015..+0.008). Tests near-fault step-overs / splays vs false-positive mask penalty.",
+  "note": "Swap in 2545 dots from d28 with 1.0 < d_cat <= 2.0 px, drop 2545 lowest unique credit dots in R0; tests whether near-fault step-overs and splays carry new-fault truth."
+ },
+ "form_note": "h33-h33-2-b2; PRUNE c1p0: collar >1px, swap in 2545 ring dots, drop 2545 low-gain, n37654; pred -0.004 (-0.015..+0.008)",
+ "files": {
+  "sha8": "85cf176a",
+  "nan": {
+   "path": "releases/h33-h33-2-b2-prune-c1p0-20261024-85cf176a.tif",
+   "sha256": "85cf176a485997b564dbc372e12f8e63ce983e4664730164ef2af0214a430f37",
+   "bytes": 356843
+  },
+  "zeros": {
+   "path": "releases/h33-h33-2-b2-prune-c1p0-20261024-85cf176a-zeros.tif",
+   "sha256": "a5f846b69cf925b04862a531516f76dc225ee9836a5c0fe804d02304e47928e4",
+   "bytes": 220517
+  }
+ },
+ "stats": {
+  "mode": "c1p0",
+  "collar_spec_px": 1.0,
+  "n_dots": 37654,
+  "n_moved": 2545,
+  "n_removed": 2545,
+  "n_added": 2545,
+  "pct_changed": 6.758910075954746,
+  "pct_symmetric_diff": 13.517820151909492,
+  "min_catalogue_distance_px": 1.4142135623730951,
+  "catalogue_mass": 0,
+  "block_cv_5km_before": 0.8988889502600114,
+  "block_cv_5km_after": 0.856590819117845,
+  "block_cv_12p8km_before": 0.5532233577727139,
+  "block_cv_12p8km_after": 0.5324831615141459,
+  "details": "swap in 2545 dots (1.0 < d_cat <= 2.0 px); drop 2545 lowest-gain R0 dots"
+ },
+ "model_prediction": {
+  "central": -0.004,
+  "band": [
+   -0.015,
+   -0.004,
+   0.008
+  ],
+  "predicted_change_text": "-0.004 (MODEL; band -0.015..+0.008). Tests near-fault step-overs / splays vs false-positive mask penalty.",
+  "evidence_class": "MODEL"
+ },
+ "report_only": {
+  "parent_hide_and_recover_recall": 0.03842369916921731,
+  "parent_hide_and_recover_ci95": [
+   0.032850345997770314,
+   0.04399705234066431
+  ],
+  "variant_hide_and_recover_recall": 0.17134892872759072,
+  "variant_hide_and_recover_ci95": [
+   0.16042890403534082,
+   0.18226895341984062
+  ],
+  "parent_surrogate_dti": 0.006709118968955279,
+  "variant_surrogate_dti": 0.0493438600111201,
+  "note": "REPORT-ONLY; local proxy holdout correlates -0.87..+0.54 with live scores and never gates a file"
+ },
+ "gates": {
+  "nan_all_ok": true,
+  "zeros_all_ok": true,
+  "sha256_in_ledger_before_build": false
+ }
+}
