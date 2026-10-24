@@ -11,6 +11,8 @@ Fails if
 from __future__ import annotations
 
 import csv
+import json
+import math
 import sys
 from pathlib import Path
 
@@ -54,6 +56,43 @@ def main():
         note = r.get("form_note") or ""
         if len(note) > 140:
             problems.append(f"{r['id']} form_note is {len(note)} chars (max 140)")
+        if (r.get("axis") or "").upper() == "TRACKB":
+            gj = ROOT / "releases" / f"{r['id']}.geojson"
+            if not gj.exists():
+                problems.append(f"{r['id']} missing TRACKB GeoJSON {gj.name}")
+            else:
+                doc = json.loads(gj.read_text(encoding="utf-8"))
+                feats = doc.get("features") if isinstance(doc, dict) else None
+                if doc.get("type") != "FeatureCollection" or not feats:
+                    problems.append(f"{r['id']} invalid FeatureCollection in {gj.name}")
+                else:
+                    for idx, feat in enumerate(feats):
+                        geom = feat.get("geometry") or {}
+                        coords = geom.get("coordinates") or []
+                        props = feat.get("properties") or {}
+                        if geom.get("type") != "LineString" or len(coords) < 2:
+                            problems.append(f"{r['id']} feature {idx} invalid LineString")
+                            break
+                        x0 = float(coords[0][0])
+                        is_meters = abs(x0) > 180.0
+                        seg_km = 0.0
+                        for a, b in zip(coords[:-1], coords[1:]):
+                            if is_meters:
+                                seg_km += math.hypot(float(b[0]) - float(a[0]), float(b[1]) - float(a[1])) / 1000.0
+                            else:
+                                latm = math.radians(0.5 * (float(a[1]) + float(b[1])))
+                                km_per_deg_lat = 111.13292 - 0.55982 * math.cos(2.0 * latm) + 0.001175 * math.cos(4.0 * latm)
+                                km_per_deg_lon = 111.41284 * math.cos(latm) - 0.0935 * math.cos(3.0 * latm)
+                                seg_km += math.hypot(
+                                    (float(b[0]) - float(a[0])) * km_per_deg_lon,
+                                    (float(b[1]) - float(a[1])) * km_per_deg_lat,
+                                )
+                        if seg_km < 1.0 - 2e-3:
+                            problems.append(f"{r['id']} feature {idx} arc length {seg_km:.3f} km < 1.0 km")
+                            break
+                        if str(r.get("value") or "").startswith("t150") and not str(props.get("evidence") or "").strip():
+                            problems.append(f"{r['id']} feature {idx} missing geologist evidence")
+                            break
 
     print(f"ledger rows: {len(rows)} ({len(mine)} this session); release files: {len(on_disk)}")
     if problems:

@@ -1,44 +1,39 @@
-# SLOT PLAN — GEMSDOE89 (integrated CONCENTRATION + SNAP + PRUNE + MASS + RELIEF + SPACING, 2026-10-24)
+# SLOT PLAN — GEMSDOE89 (integrated SNAP + CONCENTRATION + PRUNE + MASS + RELIEF + SPACING + TRACKB, 2026-10-24)
 
-- **Timeline:** 2026-10-24 → **2026-12-03** (`UNVERIFIED` deadline; human confirms) ≈ 40 days ≈ **~17 rolling slots** (`1 entity × 3/week`) + **1 blind final**. Slots used: `__ / 3` (human supplies).
-- **Baseline:** Parent R0 `h33-h33-2-b2`, byte-exact (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit dots), live **0.2778 = CLAIM** (no receipt here). `TOP_PUBLIC`: `____` (date `____`).
-- **Evidence rule:** `|Δ| < 0.01` is **no evidence**; report-only instruments (`PROXY` / canary / `SGMC`) never gate a file and are never called scores.
-- **Completed fleet:** 24 variant pairs (48 `.tif` files) spanning all 6 core axes in `releases/`.
+- **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final. Slots used/left this week: `__ / 3` (human supplies). **TOP_PUBLIC:** `____` (date `____`).
+- **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, rebuilt byte-exactly again today (`c55bafc4…` / `baeae321…`); live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**.
+- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
+- **Queue state:** all 7 core axes hold ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, `PRUNE` 3 collar-ablation arms, `TRACKB` 4 Phase-2 pairs: 34 pairs / 68 GeoTIFFs + 4 GeoJSONs total) and **none has a live receipt**, so the scarce good is *readable pairs*.
 
-## Core experimental families in `releases/`
+## Next 3 slots, in order (primary week)
 
-| Axis / Family | Values (`sha8`) | Central `MODEL`s | Mechanism & role |
+| # | File | Predicted (`MODEL`) | What the receipt changes |
 |---|---|---|---|
-| **CONCENTRATION 12.8 km** | `12p8km-int10` (`bcade136`) / `int20` (`357b4ac4`) / `geod15` (`259ea040`) | `+0.008` / `+0.009` / `+0.003` | Faulds accommodation-zone prior (`CV_12.8km = 0.5533`, 3-seed holdout `+0.0040`) + catalogue-free GPS strain (`geod15`) |
-| **CONCENTRATION 5 km & 2 km** | `cat10` (`2dc19377`) / `cat20` (`4d229938`) / `cat10away` (`f7b8aa28`); `m3765`..`m7531` | `+0.009` / `+0.019` / `−0.009`; `+0.002`..`−0.013` | Zero→top25% catalogue blocks + away sign control; independent 2 km sequential H19 marginals |
-| **SNAP (gateless)** | `2p0px-g0p00` (`69db3aae`) / `1p4px` (`e1474851`) / `1p0px` (`1add5aa6`) | `+0.028` / `+0.028` / `+0.027` | Physical EM/gravity HG crest alignment (`1.86 px` displacement, fixed block counts) |
-| **PRUNE (catalogue collar)** | `c3p0` (`7b101829`) / `c1p0` (`85cf176a`) / `c4p0` (`d681292b`) | `+0.003` / `−0.004` / `−0.001` | 300 m full kernel clearance (`c3p0`), 100 m proximal splay swap-in (`c1p0`), 400 m flight-line smear purge (`c4p0`) |
-| **MASS & RELIEF** | `m10uniq` (`beed130f`) / `m20uniq` (`87ec6213`); `r10` (`366c87ca`) / `r15` (`6aa774ce`) | `+0.002` / `+0.004`; `+0.003` / `+0.004` | Prune low-credit far-field mass (`m10uniq`); transfer 10–15% mass from range to piedmont (`r10`/`r15`) |
-| **SPACING** | `alongstrike` (`3b263c7a`) / `poisson` (`ff167173`) / `lattice` (`454c9098`) | `+0.002` / `−0.010` / `−0.007` | On-ridge 1D geodesic equipartition (`alongstrike`); 2D corridor blue noise and hex lattice controls |
+| **1** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak **by design**) | Half of a matched pair; alone it is unreadable. |
+| **2** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | The **exact mirror** (same response, window, gate 0.00, targets, count; only the ±60° half-window differs). `fw − hw ≥ +0.010` ⇒ truth sits **footwall-side** of the HG maximum; reverse ⇒ **hanging-wall side**; both `≤ R0 − 0.010` ⇒ **the crest is right** and no position arm gets another slot this cycle; both inside `±0.010` ⇒ SNAP is saturated at 1–2 px. |
+| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else `conc-12p8km-int10` (`bcade136`, +0.008) or `prune-c3p0` (`7b101829`, +0.003); else **HOLD** | +0.015 / +0.008 / +0.003 | Dose vs direction; or independent block-prior test; or 300 m kernel clearance (`PRUNE`). |
 
-## Next 3 slots, in order
-
-| # | File | Predicted live change (`MODEL`) | What the result changes |
-|---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif` *(or 5 km `…-CONC5kmcat10-…-2dc19377.tif`, `+0.009`)* | **+0.008** (`−0.006…+0.018`) *(alt `+0.009`, `−0.010…+0.038`)* | **Spatial-concentration fork** (pick ONE 10% arm). `≥ 0.2878` (`+0.010`) → run matched 20% dose (`12p8km-int20` or `CONC5kmcat20`) in Slot 3. `≤ 0.2678` (`−0.010`) → catalogue bias inverted → run catalogue-free `12p8km-geod15` (GPS strain) or `CONC5kmcat10away`. |
-| **2** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` | **+0.028** (`−0.028…+0.084`) | **Orthogonal local-placement fork** (`1.86 px` EM-crest snap at fixed block counts). `≥ 0.2878` → snap live, earns `snap1p4px-g0p00` if Slot 1 is null; `≤ 0.2678` → retire EM-crest SNAP. |
-| **3** | conditional: `…-conc-12p8km-int20-…-357b4ac4.tif` if Slot 1 `≥ 0.2878`; `…-conc-12p8km-geod15-…-259ea040.tif` if Slot 1 `≤ 0.2678`; `…-snap1p4px-g0p00-…-e1474851.tif` if Slot 2 `≥ 0.2878`; else **`…-prune-c3p0-20261024-7b101829.tif`** / `…-MASSm10uniq-…-beed130f.tif` **or HOLD** | `+0.009` / `+0.003` / `+0.028` / **+0.003** / `+0.002` | Tests `CV_12.8km > 0.59` saturation (`int20`), active strain vs map bias (`geod15`), or SNAP window dose (`1p4px`); if both Week 1 forks are within `±0.010`, pivots to **300 m full kernel collar clearance (`prune-c3p0`)** or dot count (`MASS`) / quota hold. |
+**Alternative week (same two slots, different question):** the gate pair `1p4px-g0p01` (`afc60a25`, +0.0120) against its matched gateless control `1p4px-g0p00` (`e1474851`, +0.0278) — reads *selectivity vs dose*, not direction. Do **not** run both pairs in one week (4 files > quota). **Held:** `1p0px-g0p02` (`384435e6`, +0.0022) is a minimum-dose boundary control, not a default slot. Never submit both twins; `-zeros.tif` is fallback only.
 
 ## Weeks to the deadline (`2026-12-03`)
 
-| Week | Dates | Plan |
-|---|---|---|
-| 1 | 10-24 → 10-29 | Slots 1 + 2 (one concentration fork + one local-placement fork); keep 1 slot spare for receipts |
-| 2 | 10-30 → 11-05 | Conditional Slot 3 from Week 1 receipts; test PRUNE `c3p0` or MASS `m10uniq` if Week 1 is flat |
-| 3–4 | 11-06 → 11-19 | Combine **only** axes with live receipts `≥ +0.010`, one factor at a time |
-| 5 | 11-20 → 11-26 | Confirm composite child vs its direct parent; freeze primary + `-zeros.tif` fallback |
-| 6 | 11-27 → 12-03 | Re-validate format/hashes of both final twins; submit **1 blind final** choice |
+| Window | Action |
+|---|---|
+| 10-24 → 10-30 | Slots 1–2 as a pair; reserve Slot 3 until both receipts are recorded. |
+| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair / PRUNE `c3p0`); record every `receipt_score` + `date`. |
+| 11-07 → 11-20 | Combine **only** axes with live `≥ +0.010` receipts, one factor at a time from a named parent. |
+| 11-21 → 11-27 | Confirm the composite against its direct parent; optionally spend 1 slot confirming `TRACKBt150add` (`5a09404f`, `P1 +0.000 / P2 +0.012 MODEL`; or `t150swap` if `MASSm10uniq ≥ +0.010`) costs `< 0.005` Phase 1 DTI. |
+| 11-28 → 12-03 | Re-validate both final twins; human chooses **1 blind final** ($50k P1 + $250k P2). If nothing beats R0, submit R0 (`baeae321…`) or `TRACKBt150add` (`5a09404f`). |
 
-## Proposed better axes (mechanism · confounder · falsifier) — not built this session
+## Proposed better axes (mechanism · confounder · falsifier) — **not** built this session
 
 | Axis | Structural mechanism | Non-fault confounder / mimic | Falsifier |
 |---|---|---|---|
-| **RELAY-BRIDGE** | Bridge co-linear / en-echelon strand tips (`≤ 12 px`, strike diff `≤ 20°`) across step-over ramps where breaching faults nucleate (https://www.osti.gov/servlets/purl/1249065) | Bridges aligned stream scarps or dike swarms, adding `P` with zero `T` | Live receipt `< R0 + 0.010`, or 25% strand-holdout loses to random tip pairs |
-| **TRACKB-DIP-OFFSET** | Normal range-front faults dip `45°–60°` basinward, shifting gravity/magnetic HG crests `2–5 px` into the hanging wall relative to surface scarps | Sub-vertical strike-slip faults and volcanic contacts have near-zero dip offset | Live receipt drops `≥ 0.010` vs R0, or loses to symmetric `SNAP` |
-| **COVERAGE-NEUTRAL CONC** | Shift block mass while constraining H19 `ΔT ≈ 0` so km-scale prior gain never trades off centerline retention | Joint optimization simultaneously alters local spacing | Fails to beat `conc-12p8km-int10` / `CONC5kmcat10` by `≥ 0.005` |
-| **REPEAT-CALIBRATION** | Submit byte-exact rebuilt R0 (`baeae321…`) once to convert `0.2778` from `CLAIM` → `RECEIPT` | Burns 1 of ~18 slots with zero expected leaderboard climb | Receipt differs from `0.2778` by `> 0.005`, invalidating `CLAIM`-anchored deltas |
+| **SIGNED-SCARP resp (residual of the old proposal)** | Use a *DEM-signed* scarp response instead of an unsigned HG contact, so basin-facing scarps only | Fan channels, shorelines and roads share the sign; 2 px DEM smoothing hides low scarps | Does not beat the matched unsigned arm by `≥ 0.010` |
+| **RELIEF basin residual (`0→1`, `2→0`)** | Catalogue records *surface-mapped* faults, which cluster at range fronts (R0 lift vs catalogue: range 1.30, piedmont 1.03, basin 0.67); new-fault truth is the residual, so it should be enriched where exposure is worst | Basinal gravity/magnetic anomalies are closed bodies and basement steps: pure mass | `≤ R0 − 0.010`, or the matched `2→0` arm beating `0→1` |
+| **Redundancy prune (geometric MASS)** | Two dots 2.8 px apart cannot both be the argmax under a 3 px kernel: the loser is pure mass. Rank by union coverage lost if removed — label-free | Redundant dots sit on the thickest, best-located ridges | Fails to beat `MASSm10uniq` (`beed130f`) by `≥ 0.005`, or loses to `m10rand` |
+| **Anisotropic SPACING** | Error budget is anisotropic: 400 m flight lines smear *across* strike, so along-strike stations can be wider at fixed count | Strike estimated from R0's own strands is circular | Loses to isotropic `poisson` / `lattice` at matched count |
+| **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
+| **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
+| **COMPOSITE-WINNER+TRACKB** *(gate: ≥1 weekly `RECEIPT ≥ +0.010`)* | Layer `TRACKBt150add`'s zero-drop continuous `≥ 1 km` trace infill (`+1,415 px`, `k = 1.00`) directly onto the best live-confirmed weekly variant for the single blind final ($50k P1 + $250k P2) | Linear shoreline/volcanic mimics in target blocks could add `~9.4` `S − M` pixels per mimic trace | Confirmation-slot receipt `< parent_winner − 0.005` retires trace infill and freezes the pure weekly winner |
+| **REPEAT-CALIBRATION (R0 receipt)** | Submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT before freezing composites | Spends 1 of ~17 remaining public slots without advancing climb | Receipt differs from `0.2778` by `> 0.005` (invalidates upstream baseline anchor) |

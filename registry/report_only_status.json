@@ -64,7 +64,85 @@
    "r15s": 0.0341
   },
   "random_null": 0.0,
-  "caveat": "Every relocated dot in CONCENTRATION and SPACING obeys d_cat >= 3.0 px while freezing R0's 1,611 inherited 2.0 < d_cat < 3.0 px collar dots; pixel-withheld catalogue recall therefore stays identically 0.038424 (IRREGULARITIES item 4). For CONCENTRATION, out-of-sample 25% connected-strand holdouts (withheld BEFORE computing d_cat, R0, or the block prior) are reported separately under concentration_strand_holdout_model."
+  "caveat": "Every relocated dot in CONCENTRATION and SPACING obeys d_cat >= 3.0 px while freezing R0's 1,611 inherited 2.0 < d_cat < 3.0 px collar dots; pixel-withheld catalogue recall therefore stays identically 0.038424 (IRREGULARITIES item 4). For CONCENTRATION, out-of-sample 25% connected-strand holdouts (withheld BEFORE computing d_cat, R0, or the block prior) are reported separately under concentration_strand_holdout_model.",
+  "snap_gated_20261024": {
+   "1p0px-g0p01": {
+    "evidence_class": "PROXY",
+    "recall": 0.038096,
+    "n_withheld": 18296,
+    "ci95": [
+     0.032545,
+     0.043646
+    ]
+   },
+   "1p0px-g0p02": {
+    "evidence_class": "PROXY",
+    "recall": 0.03826,
+    "n_withheld": 18296,
+    "ci95": [
+     0.032698,
+     0.043822
+    ]
+   },
+   "1p4px-g0p01": {
+    "evidence_class": "PROXY",
+    "recall": 0.036456,
+    "n_withheld": 18296,
+    "ci95": [
+     0.031022,
+     0.041891
+    ]
+   }
+  },
+  "trackb_150_20261024": {
+   "t150add": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   },
+   "t150swap": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   },
+   "t150link": {
+    "recall": 0.038424,
+    "ci95": [
+     0.03285,
+     0.043997
+    ]
+   }
+  }
+ },
+ "trackb_strand_holdout_model": {
+  "evidence_class": "MODEL",
+  "protocol": "Withhold 25% of 8-connected catalogue fault strands BEFORE computing d_cat or R0 across seeds (20261023, 7, 42); report Phase-1 unexpanded DTI delta and Phase-2 expert-expanded DTI delta (traces intersecting withheld truth along >=20% of pixels expanded into truth).",
+  "mean_base_dti": 0.106297,
+  "live_dti_scale_factor_approx": 2.613,
+  "mean_phase1_unexpanded_delta_dti": {
+   "t150add": -0.000207,
+   "t150swap": -0.000863,
+   "t150link": -0.001011
+  },
+  "mean_phase2_expanded_delta_dti": {
+   "t150add": 0.004633,
+   "t150swap": 0.004238,
+   "t150link": 0.003868
+  },
+  "mean_phase1_scaled_to_0p278": {
+   "t150add": -0.00054,
+   "t150swap": -0.00226,
+   "t150link": -0.00264
+  },
+  "mean_phase2_scaled_to_0p278": {
+   "t150add": 0.01211,
+   "t150swap": 0.01107,
+   "t150link": 0.01011
+  }
  },
  "concentration_strand_holdout_model": {
   "evidence_class": "MODEL",
@@ -90,8 +168,9 @@
   "evidence_class": "PROXY",
   "source_url": "https://doi.org/10.3133/ds1052",
   "provenance_warning": "sgmc_faults_control pin in registry/data_manifest.json is marked unverified: true (IRREGULARITIES item 8). Prior SPACING/RELIEF SGMC entries below are retained from earlier sessions as UNVERIFIED provenance; SNAP and CONCENTRATION skip SGMC evaluation until an official USGS DS-1052 raster is verified.",
-  "concentration": "SKIPPED — sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
-  "snap": "SKIPPED — sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
+  "concentration": "SKIPPED \u2014 sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
+  "snap": "SKIPPED \u2014 sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
+  "trackb": "SKIPPED \u2014 sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only",
   "parent": {
    "evidence_class": "PROXY",
    "sgmc_off_catalogue_truth_px": 62122,
@@ -161,7 +240,7 @@
    "sgmc_prevalence_calibrated_dti": 0.049663
   }
  },
- "leakage_canary": "see registry/leakage_canary.json - PASS, max single-feature strength 0.5688 across 19 bands + scored_h19_5 (0.5995 including corrob_ridge; threshold 0.90)",
+ "leakage_canary": "see registry/leakage_canary.json - PASS, max raw single-feature strength 0.5688 across 19 bands + scored_h19_5 (0.6037 including corrob_ridge and trackb_score_px; threshold 0.90). The separately normalized SNAP response canary also passes: max AUC 0.665377 (tmi_hg; iso_grav_anom_hg 0.647420), threshold 0.90.",
  "jitter_model_sensitivity": {
   "sigma_0.0px": {
    "truth_px": 15987,

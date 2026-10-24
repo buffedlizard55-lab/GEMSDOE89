@@ -224,7 +224,7 @@ def _snap_rows() -> list[dict]:
                     f"{band[0]:+.4f}..{band[2]:+.4f} "
                     f"(MODEL central {m['central']:+.4f}; band prices the mimic)"
                 ),
-                "date": "20261023",
+                "date": rep.get("build_date", "20261023"),
                 "form_note": rep["form_note"],
                 "notes": (
                     f"window {round(rep['spec']['window_px'], 2)} px, gate {rep['spec']['margin']:.2f}, "
@@ -238,6 +238,61 @@ def _snap_rows() -> list[dict]:
         )
     return rows
 
+
+
+def _snap_directional_rows() -> list[dict]:
+    """Directional SNAP rows (2026-10-24 session). Same failure mode as
+    IRREGULARITIES item 11: an axis without a reader disappears on a rebuild.
+    Field strings are reproduced verbatim from tools/build_snap_directional.py."""
+    p = ROOT / "registry" / "build_reports_snap_directional.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        m = rep["model_prediction"]
+        band = m["band"]
+        rise = s["elevation_rise_per_move_m"]["mean"] or 0.0
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": str(s["dots_out"]),
+                "pct_changed": f"{s['pct_dots_moved']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["nan"]["sha256"],
+                "sha256_zeros": rep["files"]["zeros"]["sha256"],
+                "parent": rep["parent"],
+                "axis": "SNAP",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": (
+                    f"{band[0]:+.4f}..{band[2]:+.4f} "
+                    f"(MODEL central {m['central']:+.4f}; sign prior weak, "
+                    "read the fw-hw difference)"
+                ),
+                "date": "20261024",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"{rep['spec']['direction']} half-window, "
+                    f"{rep['spec']['window_px']} px, gate 0.00, "
+                    f"{s['dots_moved']:,} dots moved, mean displacement "
+                    f"{s['mean_displacement_px']:.3f} px, up-slope share "
+                    f"{s['upslope_audit']['share_upslope']}, moved-target min dcat "
+                    f"{s['moved_targets_min_dcat_px']:.2f} px, mean elevation rise "
+                    f"{rise:+.2f} m, cv1km "
+                    f"{s['block_cv_1km_before']:.3f}->{s['block_cv_1km_after']:.3f}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
 
 def _concentration_rows() -> list[dict]:
     p = ROOT / "registry" / "build_concentration_reports.json"
@@ -489,6 +544,94 @@ def _prune_rows() -> list[dict]:
     return rows
 
 
+def _trackb_rows() -> list[dict]:
+    """TRACKB (Phase 2) rows. Added 2026-10-24: without a reader here a
+    ledger rebuild would drop the TRACKB row while its release files stay
+    on disk (the SNAP failure mode, IRREGULARITIES item 11)."""
+    p = ROOT / "registry" / "build_reports_trackb.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": "n/a (Phase 2 trace product; not a weekly-slot candidate; do not submit for score)",
+                "date": "2026-10-24",
+                "form_note": "R0 h33-h33-2-b2; TRACKB top12: 12 strike-consistent traces >=1km, 145 member dots, GeoJSON; Phase 2 only",
+                "notes": (
+                    f"built 2026-10-24; {s['n_traces']} traces, {s['total_length_km']:.1f} km total, "
+                    f"{s['n_dots']} member dots (all R0 dots, zero catalogue mass); "
+                    "strand-credit top-2/3 dots linked 4.5px, R>=0.85, straightness>=0.60; "
+                    "evidence paragraphs in ledger/TRACKB_TRACES.md; GeoJSON EPSG:32611 in releases/."
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _trackb_150_rows() -> list[dict]:
+    """R0-consolidating 150-trace TRACKB arms (t150add, t150swap, t150link)."""
+    p = ROOT / "registry" / "build_reports_trackb_150.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": rep["spec"]["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-24 (Phase 2 TRACKB); {s['n_traces_emitted']} strike-consistent traces >=1.0km "
+                    f"({s['total_trace_chord_km']:.1f}km chord, {s['n_bridged_traces']} wash-bridged); "
+                    f"add {s['n_added']}/drop {s['n_removed']} ({s['pct_changed']:.2f}%, symdiff {s['pct_symmetric_diff']:.2f}%); "
+                    f"n={s['n_dots']}; dcat_added>=3.00px (collar<3px frozen at 1611); "
+                    f"CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f}; "
+                    f"GeoJSON={rep['files']['geojson']}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -509,10 +652,13 @@ def main():
         + _relief_rows()
         + _mass_rows()
         + _snap_rows()
+        + _snap_directional_rows()
         + _concentration_rows()
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _prune_rows()
+        + _trackb_rows()
+        + _trackb_150_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])
