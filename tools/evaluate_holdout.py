@@ -61,11 +61,19 @@ def core_slice(tile: dict, guard: int = CORE_GUARD_PX):
 
 
 def registry_paths(data_root: Path) -> list[Path]:
-    # Re-running this deterministic experiment must not compare its earlier
-    # output with itself and falsely trip the duplicate guard.
+    # Re-running this deterministic experiment must not compare its currently
+    # registered output with itself. Exclude only that exact registered file;
+    # all other same-prefix files remain real references and are audited.
+    own = None
+    card_path = ROOT / "registry" / "run_card_condedge_20261024.json"
+    if card_path.exists():
+        try:
+            rel = json.loads(card_path.read_text()).get("raster", {}).get("path")
+            own = (ROOT / rel).resolve() if rel else None
+        except (OSError, json.JSONDecodeError):
+            own = None
     paths = [p for p in (ROOT / "releases").glob("*.tif")
-             if not (p.name.startswith("h89-condedge-s2-4-20261024-") and
-                     p.name.endswith("-candidate.tif"))]
+             if own is None or p.resolve() != own]
     for name in ("parent_r0_zeros.tif", "parent_r0_nan.tif", "scored_h19_5.tif",
                  "scored_h27_4_solo.tif", "d28.tif"):
         p = data_root / name
@@ -274,6 +282,14 @@ def main() -> int:
     # artifact. Documentation explicitly says whether it is appropriate to
     # spend a competition slot; no slot selector or upload is performed here.
     temp_path = ROOT / "releases" / "_tmp_condedge_candidate.tif"
+    prior_output = None
+    prior_card = ROOT / "registry" / "run_card_condedge_20261024.json"
+    if prior_card.exists():
+        try:
+            old_rel = json.loads(prior_card.read_text()).get("raster", {}).get("path")
+            prior_output = (ROOT / old_rel).resolve() if old_rel else None
+        except (OSError, json.JSONDecodeError):
+            prior_output = None
     note = "COND-EDGE: band-17 multiscale conductivity edges; exact known-fault mask; spatial holdout candidate"
     note_length(note)
     validator = None
@@ -285,7 +301,7 @@ def main() -> int:
         print("STOP: duplicate threshold crossed before writing; no TIF emitted")
     else:
         written_dots, validator = write_candidate(
-            temp_path, proposed, footprint, catalogue, ledger_hashes=known_hashes, encoding="nan")
+            temp_path, proposed, footprint, catalogue, ledger_hashes=known_hashes, encoding="zeros")
         raster_sha = validator["sha256"]
         with rasterio.open(temp_path) as ds:
             readback = ds.read(1)
@@ -303,9 +319,15 @@ def main() -> int:
             print("STOP: post-write registry drift threshold crossed; duplicate artifact removed")
         else:
             sha8 = raster_sha[:8]
-            final_path = ROOT / "releases" / f"h89-condedge-s2-4-20261024-{sha8}-candidate.tif"
+            final_path = ROOT / "releases" / f"h89-condedge-s2-4-20261024-{sha8}-zeros.tif"
             temp_path.replace(final_path)
-            print(f"[PASS] unique candidate TIF written: {final_path.relative_to(ROOT)}")
+            # The validator ran against the exact bytes at the temporary path;
+            # after the atomic rename, make its human-readable gate refer to
+            # the published candidate name rather than the temporary filename.
+            for gate in validator.get("gates", []):
+                if gate.get("gate") == "readable":
+                    gate["detail"] = final_path.name
+            print(f"[PASS] unique, all-finite research TIF written: {final_path.relative_to(ROOT)}")
 
     # Validate output grid transform/CRS directly from the GeoTIFF, not only
     # from copied tags; compare to the pinned sample template.
@@ -380,6 +402,8 @@ def main() -> int:
     }
     out_json = ROOT / "registry" / "run_card_condedge_20261024.json"
     out_json.write_text(json.dumps(card, indent=2, sort_keys=True) + "\n")
+    if final_path is not None and prior_output and prior_output != final_path.resolve() and prior_output.exists():
+        prior_output.unlink()
     print(f"[RUN CARD] {out_json.relative_to(ROOT)} verdict={verdict}")
     return 0 if final_path is not None and validator and validator["passed"] and grid_match else 4
 

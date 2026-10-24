@@ -44,7 +44,10 @@ def test_docs_pages_mirror_root_site_and_ship_download_assets():
     assert docs_submit == render_docs_submit(root_submit)
     _check_links(ROOT / "docs", "docs/index.html", docs_index)
     _check_links(ROOT / "docs", "docs/submit.html", docs_submit)
-    assert (ROOT / "docs" / "downloads" / "h89-condedge-s2-4-20261024-829cc418-candidate.tif").exists()
+    import json
+    card = json.loads((ROOT / "registry" / "run_card_condedge_20261024.json").read_text())
+    candidate = Path(card["raster"]["path"]).name
+    assert (ROOT / "docs" / "downloads" / candidate).exists()
     assert (ROOT / "docs" / "registry" / "run_card_condedge_20261024.json").exists()
     assert (ROOT / "docs" / "registry" / "run_card_bstp40.json").exists()
     assert (ROOT / "docs" / ".nojekyll").exists()

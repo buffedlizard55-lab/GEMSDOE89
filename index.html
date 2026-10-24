@@ -25,13 +25,13 @@
     <div class="status" role="alert">
       <div class="icon" aria-hidden="true">⛔</div>
       <div><strong>COND-EDGE experiment: DO NOT SUBMIT</strong>
-        This research GeoTIFF performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. The file is downloadable for research only; do not spend a competition slot on it. It also contains outside-footprint NaN values and fails our stricter all-finite upload gate.
+        This research GeoTIFF performed substantially worse than the visible-only R0 comparator on spatially blocked holdout. It is locally format-valid and all-finite, but global uniqueness/current-best gates are incomplete and the run-card verdict is negative. Download for research only; do not spend a competition slot on it.
       </div>
     </div>
-    <a class="button" href="releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a>
+    <a class="button" href="releases/h89-condedge-s2-4-20261024-b5e502f0-zeros.tif" download>Download research TIF · DO NOT SUBMIT</a>
     <a class="button secondary" href="submit.html">Read submission guide</a>
     <p><a href="registry/submission_readiness.json">Automated readiness audit · DO NOT SUBMIT</a> — no human inspection is needed to detect these blockers.</p>
-    <p class="small">File: <span class="mono">h89-condedge-s2-4-20261024-829cc418-candidate.tif</span><br>SHA-256: <span class="mono">829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d</span></p>
+    <p class="small">File: <span class="mono">h89-condedge-s2-4-20261024-b5e502f0-zeros.tif</span><br>SHA-256: <span class="mono">b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45</span></p>
   </section>
 
   <section class="grid" aria-label="Experiment results">
@@ -55,12 +55,12 @@
     </article>
     <article class="card">
       <div class="label">Format and integrity</div>
-      <h2>Research format passes; upload gate fails</h2>
+      <h2>Local format passes; organizer acceptance unverified</h2>
       <ul>
         <li>Single-band float32 GeoTIFF, EPSG:32611</li>
         <li>Shape 3730 × 3292; sample transform matched</li>
-        <li>No NaN inside footprint; finite values in [0, 1]</li>
-        <li>NaN outside footprint; known-fault pixels masked exactly</li>
+        <li>All raster cells finite and in [0, 1]; no nodata tag</li>
+        <li>Zero-filled outside sample footprint; known-fault pixels masked exactly</li>
       </ul>
       <p><b style="color:var(--green)">Research format PASS does not mean upload-safe or score-ready.</b> The scientific holdout is negative.</p>
     </article>

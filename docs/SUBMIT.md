@@ -2,14 +2,14 @@
 
 ## Executive status — read before downloading
 
-**All session candidates: DO NOT SUBMIT.** Three holdout experiments (ANNULUS, PF-PEAKS, TC-UNION) plus the prior COND-EDGE lane were run against the spatially blocked segment holdout; every candidate scored far below the visible-only R0 baseline (HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`). None is cleared for a competition slot. All GeoTIFFs below are format-validated research artifacts with verdict `negative` — **do not upload them to DrivenData**. No organizer submission receipt exists for any file in this repo.
+**All candidates: DO NOT SUBMIT.** ANNULUS, PF-PEAKS and TC-UNION have historical v1 HOLDOUT-DTI results; COND-EDGE was re-evaluated with corrected v3. Every experiment is negative against visible-only R0 (`0.161230 [0.142648, 0.180061]`). No candidate is cleared for a slot. Local format PASS is not organizer acceptance; the current COND-EDGE zeros encoding has no portal receipt, and global registry/current-best evidence is incomplete.
 
 | candidate | run card | holdout DTI (95% CI) vs R0 | format | download / submit status |
 |---|---|---|---|---|
 | `releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif` | `registry/run_card_annulus_20261024.json` | `0.001202 [0.000455, 0.002061]`; delta −0.160028 [−0.180591, −0.139843] | PASS (sha256 `e9b2bec1…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
 | `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | `registry/run_card_pfpeaks_20261024.json` | `0.068825 [0.042551, 0.095776]`; delta −0.092405 [−0.136201, −0.049139] | PASS (sha256 `18f0316a…`, 38,897 dots) | **DO NOT SUBMIT** — negative |
 | `h89-tcunion-20261024-…` (no TIF emitted) | `registry/run_card_tcunion_20261024.json` | `0.070181 [0.043417, 0.097668]`; delta −0.091049 [−0.135214, −0.047593] | blocked by duplicate guard (100% of dots within 3 px of PF-PEAKS raster) | **no file** — negative |
-| `releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif` (prior session) | `registry/run_card_condedge_20261024.json` | `0.049875 [0.036830, 0.061751]`; delta −0.111355 [−0.133218, −0.087864] | PASS (sha256 `829cc418…`) | **DO NOT SUBMIT** — negative |
+| `releases/h89-condedge-s2-4-20261024-b5e502f0-zeros.tif` (existing lane, v3 rerun) | `registry/run_card_condedge_20261024.json` | v3 `0.049875 [0.036830, 0.061751]`; delta −0.111355 [−0.133218, −0.087864] | Local PASS; all-finite zeros outside; SHA-256 `b5e502f0…`; organizer acceptance unverified | **DO NOT SUBMIT** — negative |
 | `releases/gems89-bstp40-20261024-2e7e8a8f.tif` (upstream lane) | `registry/run_card_bstp40.json` | segment-holdout candidate 0.06598 vs parent 0.09143; diff −0.02545 CI excludes 0 | PASS | **DO NOT SUBMIT** — negative |
 
 **Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live `0.2778 = CLAIM` with no organizer receipt in this repo. Its holdout on this data is `0.161230 [0.142648, 0.180061]`, the comparator no session candidate beat.
@@ -20,10 +20,6 @@
 
 Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. No file in this repository currently meets that bar. A machine-format PASS alone is insufficient.
 
-## How to submit a future promoted GeoTIFF
-
-Only use a file that has a `promote` verdict in its run card and is explicitly marked **OK TO SUBMIT** by the separate selector. A machine-format PASS alone is insufficient. The current file is explicitly **DO NOT SUBMIT**.
-
 1. Open the DrivenData GEMS Prize page and confirm the rules, current deadline, entity quota, and remaining rolling-week slots: [competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/).
 2. On the submission form choose the promoted single-band GeoTIFF `.tif` (or a zip containing exactly one GeoTIFF). Do not submit a zeros twin and NaN twin as separate attempts.
 3. Copy the promoted filename stem as the submission name, and paste its run-card note (maximum 140 characters) into the optional Note field.
@@ -31,9 +27,11 @@ Only use a file that has a `promote` verdict in its run card and is explicitly m
 5. Save the submission-page receipt and exact score. Record it in `ledger/submissions.csv` as `ORGANIZER-CONFIRMED`; do not replace a receipt with a leaderboard screenshot or a projection.
 
 
-The human submits manually from their own registered account. Nothing here logs in,
-scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
-**Never upload both twins in separate slots.** Submission name = the file stem.
+The user submits manually from their own registered account. Nothing here logs in,
+scrapes, or uploads. For a future promoted artifact, use exactly the file cleared by
+the selector and the file-level validator; the current COND-EDGE zeros-encoded TIF is
+**DO NOT SUBMIT** and has no organizer acceptance receipt. Do not upload NaN/zeros
+twins as separate attempts. Submission name = the promoted file stem.
 
 ## Previous unscored build inventory (historical; not a current slot recommendation)
 

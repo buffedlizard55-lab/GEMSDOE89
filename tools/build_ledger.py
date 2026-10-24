@@ -644,7 +644,7 @@ def _condedge_rows() -> list[dict]:
     note = card["submission"]["note"]
     return [{
         "id": name, "site": "GEMSDOE89", "name": name, "score": "",
-        "evidence_class": "HOLDOUT-DTI", "encoding": "nan",
+        "evidence_class": "HOLDOUT-DTI", "encoding": raster.get("validator", {}).get("encoding", "unknown"),
         "n_dots": raster["validator"]["dot_count"], "pct_changed": "",
         "sha8": sha[:8], "sha256": sha, "sha256_zeros": "",
         "parent": "h33-h33-2-b2", "axis": "COND-EDGE", "value": "cond17-sigma2-4",

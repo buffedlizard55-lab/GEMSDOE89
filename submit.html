@@ -16,8 +16,8 @@
   <p class="muted">This page explains the DrivenData file-submission workflow and the checks performed by this project. It does not log in, handle credentials, or submit files automatically.</p>
 
   <div class="alert" role="alert"><strong>Current candidate: DO NOT SUBMIT</strong>
-    The linked research TIF passes the historical NaN-aware research validator, but fails the stricter all-finite upload validator and the spatial holdout against the visible-only parent. It has a negative run-card verdict and must not consume a weekly slot.
-    <p><a class="button" href="releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif" download>Download research TIF · DO NOT SUBMIT</a></p>
+    The linked research TIF passes the local all-finite [0,1] format validator, but fails the spatial holdout against the visible-only parent; global uniqueness and current-best gates remain incomplete. It has a negative run-card verdict and must not consume a weekly slot.
+    <p><a class="button" href="releases/h89-condedge-s2-4-20261024-b5e502f0-zeros.tif" download>Download research TIF · DO NOT SUBMIT</a></p>
     <div>HOLDOUT-DTI (`GEMSDOE89-spatial-segment-holdout-v3`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): candidate <b>0.049875</b> [0.036830, 0.061751]; visible-only R0 <b>0.161230</b> [0.142648, 0.180061]; paired delta <b>−0.111355</b> [−0.133218, −0.087864]. This is a local holdout, not an organizer score.</div>
     <p><a href="registry/run_card_condedge_20261024.json">Full JSON run card</a> · <a href="docs/HYPOTHESIS_REGISTER.md">Hypothesis and source record</a></p>
   </div>

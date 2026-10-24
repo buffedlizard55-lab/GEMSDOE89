@@ -2,11 +2,11 @@
 
 ## Latest safety review — 2026-10-24
 
-**OK to download for research; NOT OK to submit.** The existing COND-EDGE experiment was reproduced from hash-pinned features. This is not a new scientific submission. Its negative HOLDOUT-DTI and file hash reproduced; its NaN-outside encoding also fails the new all-finite upload check. No weekly slot was used.
+**OK to download for research; NOT OK to submit.** The existing COND-EDGE method was rerun from hash-pinned features under corrected holdout v3. Its result remains decisively negative against visible-only R0. The current all-finite zeros encoding passes local format checks, but does not establish organizer acceptance; global registry and current-best evidence remain incomplete. No weekly slot was used.
 
 - [Automated readiness report](registry/submission_readiness.json) — fails closed on missing evidence, negative holdout, incomplete registry coverage, stale hash, or unsafe upload values.
 - [Three-pass review, source audit, ranked follow-ups and limitations](docs/AUDIT_20261024.md).
-- Shared writer now defaults to finite zeros outside the footprint; the historical research evaluator explicitly retains NaN encoding. Renaming/re-encoding an existing artifact never establishes novelty.
+- The shared candidate writer supports finite-zero and NaN encodings; the current research evaluator writes finite zeros outside the sample footprint. Local format gates pass, but organizer acceptance is unverified. Renaming/re-encoding an existing artifact never establishes novelty.
 - Existing mirror data are obtainable here; “data placement is the only blocker” is no longer accurate. The blocker is evidence of a distinct, better-performing model plus complete uniqueness/provenance checks.
 
 Run the automatic decision (exit **2** = blocked, **0** = eligible for a separate selector, never automatic upload):
@@ -21,7 +21,7 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 
 ---
 
-> **DOWNLOAD STATUS: DO NOT SUBMIT.** This session generated and format-validated a locally unique candidate GeoTIFF, but its spatial holdout was decisively worse than the visible-only R0 baseline. It is preserved as a negative research result, not a recommended competition entry.
+> **DOWNLOAD STATUS: CURRENT COND-EDGE TIF — DO NOT SUBMIT.** It is a locally format-valid negative research artifact. Its corrected spatial holdout is decisively worse than visible-only R0; global uniqueness and current-best gates remain incomplete, and organizer acceptance is unverified.
 
 ---
 
@@ -37,22 +37,20 @@ Read this README and `PROMPT.md` every session. Prioritize a genuinely unique Ge
 > | `h89-annulus-splay-20261024-e9b2bec1-candidate` | `e9b2bec11c2c60cd` | 0.001202 [0.000455, 0.002061]; delta −0.160028 [−0.180591, −0.139843] | **negative — DO NOT SUBMIT** | [releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif](releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif) |
 > | `h89-pfpeaks-20261024-18f0316a-candidate` | `18f0316a457fb3af` | 0.068825 [0.042551, 0.095776]; delta −0.092405 [−0.136201, −0.049139] | **negative — DO NOT SUBMIT** | [releases/h89-pfpeaks-20261024-18f0316a-candidate.tif](releases/h89-pfpeaks-20261024-18f0316a-candidate.tif) |
 > | `h89-tcunion-20261024-…` | — | 0.070181 [0.043417, 0.097668]; delta −0.091049 [−0.135214, −0.047593] | **negative — blocked as duplicate** (100% of dots within 3 px of the PF-PEAKS raster; no TIF emitted) | none |
-> | `h89-condedge-s2-4-20261024-829cc418-candidate` | `829cc41856540a93` | 0.049875 [0.036830, 0.061751]; delta −0.111355 [−0.133218, −0.087864] | **negative — DO NOT SUBMIT** (prior session, same holdout) | [releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif](releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif) |
+> | `h89-condedge-s2-4-20261024-b5e502f0-zeros` | `b5e502f05cfeb787` | v3 HOLDOUT-DTI 0.049875 [0.036830, 0.061751]; delta −0.111355 [−0.133218, −0.087864] | **negative — DO NOT SUBMIT** (existing lane re-evaluated; format-only re-encoding) | [current research TIF](releases/h89-condedge-s2-4-20261024-b5e502f0-zeros.tif) |
 >
 > Run cards: `registry/run_card_annulus_20261024.json`, `registry/run_card_pfpeaks_20261024.json`,
 > `registry/run_card_tcunion_20261024.json`, `registry/run_card_condedge_20261024.json`.
-> Format gates: PASS for all emitted TIFs (one float32 band, EPSG:32611, 3730×3292, template transform,
-> finite values in [0,1], NaN only outside the footprint, exact known-fault mask, unique SHA-256 vs ledger,
-> rank correlation < 0.90 and < 70% of dots within 3 px of every local registry raster).
+> Local format gates pass for the emitted TIFs; encodings vary. The current COND-EDGE artifact is all-finite `[0,1]` with zero outside and no nodata tag. This does not prove organizer acceptance. Its uniqueness comparison is local only (36 geometries / 69 paths); public remote registry coverage and current-best evidence remain incomplete.
 > [Holdout and uniqueness gates](docs/HYPOTHESIS_REGISTER.md) · [How contest submissions work](docs/SUBMIT.md)
 
 - **Incumbent (parent R0, recipe byte-verified):** `h33-h33-2-b2` — 37,654 unit-mass dots; live **0.2778 = CLAIM** (no organizer receipt in this repo). Its spatial holdout on this data is 0.161230 [0.142648, 0.180061], the best local comparator this session could beat — no candidate did.
 
-- **Candidate:** `h89-condedge-s2-4-20261024-829cc418-candidate.tif` — SHA-256 `829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d`.
-- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v3`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score. The previous scorer cropped each tile before the distance transform, losing eligible predictions in the 3-pixel guard. The final v3 assembles out-of-fold predictions only in disjoint tile interiors, computes whole-map distance transforms, and sums exact T/S/M/G contributions per tile; a regression test checks cross-partition kernel neighbors. These v3 measurements are the current holdout evidence.
+- **Candidate:** `h89-condedge-s2-4-20261024-b5e502f0-zeros.tif` — SHA-256 `b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45`.
+- **HOLDOUT-DTI** (`GEMSDOE89-spatial-segment-holdout-v3`; 59,168 withheld positive pixels; 95% spatial-tile bootstrap CI): COND-EDGE **0.049875** `[0.036830, 0.061751]`; visible-only R0 comparator **0.161230** `[0.142648, 0.180061]`; paired delta **−0.111355** `[−0.133218, −0.087864]`. This is a local holdout, not a leaderboard score. v3 corrects tile-cropped distance transforms by scoring disjoint tile cores using full-map distance context.
 - **Leakage canary:** 20 single-feature tests; maximum AUC strength `0.5698`, below the `0.90` investigation threshold.
 - **Local registry check (rerun after merging upstream main):** pre-placement score-surface maximum absolute Spearman `0.0387`; disk-reread final-raster maximum absolute Spearman `0.0128`; maximum final-dot overlap within 3 px `19.50%`; exact SHA-256 unique against 229 other ledger hash values. No duplicate-stop. Geometry comparison covers 36 locally available registry masks / 69 paths, **not every remote GeoTIFF in every public GEMSDOE site**.
-- **Historical research-format validator:** PASS (all-finite upload gate FAIL) — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, no NaN inside the footprint, finite values 0–1, NaN only outside, zero dots on exact known-fault pixels.
+- **Local format validator:** PASS — one float32 band, EPSG:32611, shape 3730×3292, exact sample-template transform, all cells finite in `[0,1]`, zero-filled outside the sample's finite footprint with no nodata tag, and zero dots on exact known-fault pixels. Organizer acceptance remains unverified.
 - **Decision:** verdict `negative`; no upload, no slot selection. The separate slot selector remains responsible for any future promotion.
 
 ## Read first on every session
@@ -65,13 +63,13 @@ The static site is [`index.html`](index.html) with the dedicated [`submit.html`]
 
 The local evidence verifies R0's geometry and file identity, not the cause of its live result. R0 is reproduced as a 2.8-pixel-thinned `h19_5` ridge set pruned using the known-fault catalogue, yielding 37,654 unit-mass dots; its reported **0.2778 is CLAIM, not ORGANIZER-CONFIRMED** because no submission-page receipt is stored in this repository. Plausible contributors include multi-layer geophysical ridge continuity, sparse placement, and the recorded catalogue prune, but a single result cannot establish which mechanism caused the score. The request also gives `0.3195` and `0.4413` as different leaderboard snapshots without dates or receipts; neither is independently confirmed here. See the hash-verified recipe in [`gemsdoe/parent.py`](gemsdoe/parent.py), [`registry/parent_verification.json`](registry/parent_verification.json), and official metric rules in the [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
 
-## This session — three experiments, all negative (budget: 3 experiments / 2 hours)
+## Project experiment cap — three new lanes, all negative; existing COND-EDGE was re-evaluated (budget: 3 experiments / 2 hours)
 
-Lanes tested, in order, each reusing the shared stacked holdout (`gemsdoe/holdout.py`) and writer
-(`tools/submission_writer.py`) on the pinned, SHA-256-verified inputs:
+The three new lanes were tested in order, each reusing the shared stacked holdout (`gemsdoe/holdout.py`) and writer
+(`tools/submission_writer.py`) on pinned, SHA-256-verified inputs. COND-EDGE is a previously run method re-evaluated after fixing the holdout distance-transform pooling; the re-encoding is not a new experiment:
 
-1. **COND-EDGE** (prior session, on this checkout): band-17 `cond_surf` multi-scale conductivity edges.
-   Holdout **0.049875 [0.036830, 0.061751]** vs R0 **0.161230 [0.142648, 0.180061]** — negative.
+1. **COND-EDGE** (existing lane, re-evaluated with corrected v3): band-17 `cond_surf` multi-scale conductivity edges.
+   HOLDOUT-DTI **0.049875 [0.036830, 0.061751]** vs R0 **0.161230 [0.142648, 0.180061]** — negative; current file is finite-zero encoded, format-only correction.
 2. **ANNULUS** (this session): potential-field ridge peaks (bands 3 `tmi_hg` + 18 `iso_grav_anom_hg`,
    max multi-scale Gaussian gradient, sigma 2/4 px) restricted to the 200–800 m annulus around visible
    faults — splay/stepover targeting. Holdout **0.001202 [0.000455, 0.002061]** — negative. Diagnostics

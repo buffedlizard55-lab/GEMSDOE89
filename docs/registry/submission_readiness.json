@@ -8,15 +8,14 @@
     "No supported paired holdout improvement over comparator",
     "Current-best comparator on identical split is not established",
     "Global registry coverage is incomplete; local uniqueness is not global proof",
-    "Scientific run verdict is negative or missing",
-    "Upload-safe format validation failed"
+    "Scientific run verdict is negative or missing"
   ],
-  "raster_sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+  "raster_sha256": "b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45",
   "format_gates": [
     {
       "gate": "readable",
       "ok": true,
-      "detail": "h89-condedge-s2-4-20261024-829cc418-candidate.tif"
+      "detail": "h89-condedge-s2-4-20261024-b5e502f0-zeros.tif"
     },
     {
       "gate": "grid_contract",
@@ -55,13 +54,13 @@
     },
     {
       "gate": "no_nan_anywhere",
-      "ok": false,
-      "detail": "7111787 NaN px"
+      "ok": true,
+      "detail": "0 NaN px"
     },
     {
       "gate": "sha256_not_in_ledger",
       "ok": true,
-      "detail": "829cc41856540a93"
+      "detail": "b5e502f05cfeb787"
     }
   ]
 }

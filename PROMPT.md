@@ -58,10 +58,13 @@ NaN nodata mask outside its finite footprint. A previous form attempt
 reported “Predicted values must be in range [0, 1]”; that message alone does
 not establish whether NaN, an out-of-range sentinel, or another file issue
 caused the rejection. Never claim the portal accepts a file unless an
-organizer receipt or verified portal validation is recorded. For this run,
-the GeoTIFF validator verifies finite values in [0, 1] inside the footprint,
-no NaN inside, and NaN only outside the footprint. The candidate is still
-**DO NOT SUBMIT** because its HOLDOUT-DTI verdict is negative.
+organizer receipt or verified portal validation is recorded. The current
+research file is written as all-finite float32 values in [0, 1], with zeros
+outside the sample's finite footprint and no nodata tag; its local writer,
+all-finite, and grid gates pass. This corrects the file-level range issue but
+does not prove portal acceptance. The candidate is still **DO NOT SUBMIT**
+because its HOLDOUT-DTI verdict is negative and global uniqueness/current-best
+gates are incomplete.
 
 This charter is the repository's persistent, operative project prompt; the
 README links to it and it must be read at the start of each session. The

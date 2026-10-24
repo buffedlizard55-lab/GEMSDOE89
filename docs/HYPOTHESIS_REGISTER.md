@@ -17,17 +17,16 @@ The top candidate is low-cost, uses a different sensor-derived layer than the ex
 
 ## Executed lanes (this and prior sessions)
 
-All lanes below ran the shared spatially blocked holdout (`GEMSDOE89-spatial-segment-holdout-v1`;
-alpha 0.2, beta 0.8, 300 m triangular kernel; 59,168 withheld positive pixels; 512 px spatial tiles;
-5 folds; 3 px segment buffer) on the pinned, SHA-256-verified inputs, with the visible-only R0
-comparator at HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`. Every lane leaked nothing (max single-feature
-AUC strength ≤ 0.5365 < 0.90) and every emitted raster passed the format gates and the registry
-duplicate guard (|Spearman| < 0.90, < 70% of dots within 3 px of any local registry raster). All
-verdicts are `negative`; no slot was used and no file is cleared to submit.
+ANNULUS, PF-PEAKS and TC-UNION were evaluated with `GEMSDOE89-spatial-segment-holdout-v1`. The existing
+COND-EDGE lane was subsequently re-evaluated with corrected `GEMSDOE89-spatial-segment-holdout-v3`; its
+rounded metrics were unchanged. All use alpha 0.2, beta 0.8, the 300 m triangular kernel and pinned
+SHA-256-verified inputs; the visible-only R0 comparator is HOLDOUT-DTI `0.161230 [0.142648, 0.180061]`.
+All verdicts remain `negative`; no slot was used and no file is cleared to submit. Current COND-EDGE
+leakage canaries max at 0.5698 (<0.90). Local uniqueness checks do not cover remote public registries.
 
 | lane | layers / transform | holdout DTI (95% CI) | paired delta vs R0 | artifact | status |
 |---|---|---|---|---|---|
-| COND-EDGE (prior session) | b17 `cond_surf`, max Gaussian gradient sigma 2, 4 px | 0.049875 [0.036830, 0.061751] | −0.111355 [−0.133218, −0.087864] | `releases/h89-condedge-s2-4-20261024-829cc418-candidate.tif` | negative, DO NOT SUBMIT |
+| COND-EDGE (existing lane, v3 re-evaluation) | b17 `cond_surf`, max Gaussian gradient sigma 2, 4 px | 0.049875 [0.036830, 0.061751] | −0.111355 [−0.133218, −0.087864] | `releases/h89-condedge-s2-4-20261024-b5e502f0-zeros.tif` | negative, DO NOT SUBMIT |
 | ANNULUS | b3 `tmi_hg` + b18 `iso_grav_anom_hg` gradient ridges, 200–800 m annulus around visible faults (splay/stepover targeting) | 0.001202 [0.000455, 0.002061] | −0.160028 [−0.180591, −0.139843] | `releases/h89-annulus-splay-20261024-e9b2bec1-candidate.tif` | negative, DO NOT SUBMIT |
 | PF-PEAKS | b3 + b18 gradient ridges, fixed-mass spaced peaks, R0's >2 px visible-fault prune | 0.068825 [0.042551, 0.095776] | −0.092405 [−0.136201, −0.049139] | `releases/h89-pfpeaks-20261024-18f0316a-candidate.tif` | negative, DO NOT SUBMIT |
 | TC-UNION | b3 `tmi_hg` + b6 `tc` (tilt/total curvature) + b18 `iso_grav_anom_hg` gradient ridges, same prune | 0.070181 [0.043417, 0.097668] | −0.091049 [−0.135214, −0.047593] | none emitted — blocked as duplicate of PF-PEAKS (100% of dots within 3 px) | negative |

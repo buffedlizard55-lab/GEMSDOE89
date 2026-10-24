@@ -5215,16 +5215,16 @@
   ],
   "skipped": []
  },
- "h89-condedge-s2-4-20261024-829cc418-candidate.tif": {
+ "h89-condedge-s2-4-20261024-b5e502f0-zeros.tif": {
   "ok": true,
-  "encoding": "nan",
-  "sha256": "829cc41856540a9361aeaffcba5af9010168b513a332c10a7e92da21c99daa4d",
+  "encoding": "zeros",
+  "sha256": "b5e502f05cfeb7870f2d8999aa986a2ab0575f68825a18a2a93fdc9e33afcb45",
   "n_dots": 38897,
   "gates": [
    {
     "gate": "readable",
     "ok": true,
-    "detail": "h89-condedge-s2-4-20261024-829cc418-candidate.tif"
+    "detail": "h89-condedge-s2-4-20261024-b5e502f0-zeros.tif"
    },
    {
     "gate": "grid_contract",
@@ -5262,14 +5262,19 @@
     "detail": "0 out-of-range px; min=0.0, max=1.0"
    },
    {
+    "gate": "no_nan_anywhere",
+    "ok": true,
+    "detail": "0 NaN px"
+   },
+   {
     "gate": "no_nan_inside_footprint",
     "ok": true,
     "detail": "0 NaN px inside"
    },
    {
-    "gate": "nan_outside_footprint",
+    "gate": "zeros_outside_footprint",
     "ok": true,
-    "detail": "0 finite px outside"
+    "detail": "0 outside"
    },
    {
     "gate": "unit_dots",
@@ -5289,7 +5294,7 @@
    {
     "gate": "sha256_not_in_ledger",
     "ok": true,
-    "detail": "829cc41856540a93"
+    "detail": "b5e502f05cfeb787"
    }
   ],
   "skipped": []

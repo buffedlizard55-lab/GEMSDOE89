@@ -8,6 +8,7 @@ research TIFs and their run cards needed by the docs-based deployment.
 """
 from __future__ import annotations
 
+import json
 import shutil
 from pathlib import Path
 
@@ -57,8 +58,16 @@ def mirror() -> None:
 
     assets = DOCS / "downloads"
     assets.mkdir(parents=True, exist_ok=True)
+    card = json.loads(
+        (ROOT / "registry" / "run_card_condedge_20261024.json").read_text())
+    candidate_name = Path(card["raster"]["path"]).name
+    # Replace only this experiment's superseded encoding; retain separately
+    # registered research artifacts from the upstream lanes.
+    for old in assets.glob("h89-condedge-s2-4-20261024-*.tif"):
+        if old.name != candidate_name:
+            old.unlink()
     for name in (
-        "h89-condedge-s2-4-20261024-829cc418-candidate.tif",
+        candidate_name,
         "gems89-bstp40-20261024-2e7e8a8f-zeros.tif",
         "h89-annulus-splay-20261024-e9b2bec1-candidate.tif",
         "h89-pfpeaks-20261024-18f0316a-candidate.tif",

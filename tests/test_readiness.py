@@ -21,7 +21,8 @@ def test_negative_card_stays_blocked_even_if_status_is_relabelled():
     assert report['status'] == 'DO_NOT_SUBMIT'
     assert any('holdout improvement' in b for b in report['blockers'])
     assert any('registry coverage' in b for b in report['blockers'])
-    assert any('format validation' in b for b in report['blockers'])
+    assert not any('format validation' in b for b in report['blockers'])
+    assert report['format_gates'] and all(g['ok'] for g in report['format_gates'])
     assert report['safe_to_submit'] is False
 
 

@@ -39,10 +39,11 @@ def test_roundtrip_zeros_encoding(tmp_path, frame):
     footprint, dots = frame
     p = tmp_path / "z.tif"
     grid.write_submission(p, dots, footprint, encoding="zeros")
-    arr, _ = grid.read_back(p)
+    arr, contract = grid.read_back(p)
     assert (arr[~footprint] == 0).all()
     assert (arr[dots] == 1.0).all()
     assert not np.isnan(arr).any()
+    assert contract["nodata_tag"] == "None"  # zero is valid probability, not nodata
 
 
 def test_writer_is_byte_deterministic(tmp_path, frame):

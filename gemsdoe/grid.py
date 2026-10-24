@@ -74,9 +74,10 @@ def read_contract_from_tiff(path) -> dict:
 def write_submission(path, dots_mask, footprint, encoding="nan", compress="zlib"):
     """Write a submission raster from a boolean dot mask.
 
-    encoding='nan'   -> NaN outside the footprint (competition spec wording)
-    encoding='zeros' -> 0 outside the footprint (the ledger's scored twin; the
-                        two encodings score identically per ledger history)
+    encoding='nan'   -> NaN outside the footprint (matches the provided template)
+    encoding='zeros' -> finite 0 outside the footprint (no nodata tag; useful
+                        for portals that reject nonfinite values; acceptance
+                        must still be confirmed by the competition platform)
 
     Dots are written as exactly 1.0.  Output is byte-deterministic: fixed tile
     geometry, fixed compression level, no timestamps or free-text metadata.
@@ -97,14 +98,17 @@ def write_submission(path, dots_mask, footprint, encoding="nan", compress="zlib"
 
     geokeys = GRID_TAGS["GeoKeyDirectoryTag"]
     ascii_ = GRID_TAGS["GeoAsciiParamsTag"]
-    nodata_str = "nan" if encoding == "nan" else "0"
     extratags = [
         (33550, "d", 3, GRID_TAGS["ModelPixelScaleTag"], False),
         (33922, "d", 6, GRID_TAGS["ModelTiepointTag"], False),
         (34735, "H", len(geokeys), geokeys, False),
         (34737, "s", len(ascii_) + 1, ascii_, False),
-        (42113, "s", len(nodata_str) + 1, nodata_str, False),
     ]
+    # Zero is a valid probability, not a nodata sentinel. Omit the tag for
+    # the upload-safe all-finite encoding; only NaN output declares NaN nodata.
+    if encoding == "nan":
+        nodata_str = "nan"
+        extratags.append((42113, "s", len(nodata_str) + 1, nodata_str, False))
     tifffile.imwrite(
         path,
         out,
