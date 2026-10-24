@@ -39,3 +39,9 @@ This repository was developed with an autonomous coding agent on Arena.ai Agent 
 - Zero automated access to `drivendata.org` or `dropbox.com`; zero submissions executed; zero credentials accessed or stored.
 - Zero competition input rasters committed to git or `releases/`.
 - Strict separation of `RECEIPT`, `CLAIM`, `PROXY`, and `MODEL` labels throughout code, ledger, and documentation.
+
+8. **`TRACKB` session (2026-10-24, branch `arena/27f1c58c-gemsdoe89`):**
+   - Re-ran the full start gate: all 10 fetchable manifest pins hash-verified (`tools/fetch_pinned_data.py`, SGMC pin skipped as UNVERIFIED) and R0 rebuilt byte-identical (`tools/rebuild_r0.py`, zeros `c55bafc4…`, NaN `baeae321…`).
+   - Chose the session axis itself (human directed no prompt): first picked PRUNE, built three count-fixed collar arms, then found in a full-ledger scan that upstream GEMSDOE84 had already built PRUNE at 1/1.5/2.5/3/4 px at this parent. Withdrew (deleted) the duplicate builds before ledgering them — recorded in `IRREGULARITIES.md` item 14 — and pivoted to TRACKB, the only unbuilt axis.
+   - AI wrote `gemsdoe/trackb.py`, `tools/build_trackb.py`, `tests/test_trackb.py` (4 tests), the mechanism card (`ledger/MECHANISM_CARDS_TRACKB.md`), per-trace evidence paragraphs (`ledger/TRACKB_TRACES.md`, generated from measured trace geometry), and a `_trackb_rows()` ledger reader. AI also made the reversible ranking decision to rank dots by strand credit on the h19_5 ridge after measuring that the MASS flat-prior unique-credit ranking fragments strands (largest component 9 vs 170 dots).
+   - **What the human decides, not the agent:** whether TRACKB traces are ever given to expert reviewers / used in Phase 2, whether the companion raster's 12-trace selection (top by total strand credit) is the right review order, and all slot/final-file choices. TRACKB is explicitly not proposed as a weekly-slot submission.

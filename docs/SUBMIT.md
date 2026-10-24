@@ -12,6 +12,15 @@ NaN-outside `.tif` primary file (`-zeros.tif` is the byte-verified fallback).
 | **DOSE (cond. Slot 3)** | `releases/h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4.tif` | `h33-h33-2-b2-conc-12p8km-int20-20261023-357b4ac4` | `357b4ac4f3384e3b567c6abd1d9013713f8d037f8dbd62d1af615f4449c0e44f` / `050572eb870694aa5648fc4c3fc51b01d224addaa4b3c397b421369ce3cf3e6e` | `R0 h33-h33-2-b2; CONC 12p8km-int20: move 7531/37654 (20%) low->high interaction 12.8km blocks, CV 0.553->0.656; pred +0.009` | **+0.009** (`−0.014…+0.024`) |
 | **DISCRIMINATOR** | `releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif` | `h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040` | `259ea040c818a26add94d1a356b0c75b180292bc8c67bcf2cec5776e047f5e45` / `d914868666c45707ccfe570eda343ae3b3774845058c7e02c46cf35f0f3820c3` | `R0 h33-h33-2-b2; CONC 12p8km-geod15: move 5648/37654 (15%) low->high GPS-strain 12.8km blocks, CV 0.553->0.635; pred +0.003` | **+0.003** (`−0.015…+0.021`) |
 
+## Phase-2 TRACKB product (2026-10-24 — NOT for upload as a scored slot)
+
+| field | value |
+|---|---|
+| **GeoJSON** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` (12 traces, EPSG:32611) |
+| **raster** | `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.tif` (145 member dots; sha256 `fb15625714547a192da792b26466085c5ce849854c8af35206450b5c332bc370`) |
+| **evidence** | `ledger/TRACKB_TRACES.md` (one paragraph per trace); card `ledger/MECHANISM_CARDS_TRACKB.md` |
+| **warning** | Phase-2 expert-review product only. Scored as-is it would fall far below R0 (145/37,654 dots). Do **not** spend a weekly slot on it. |
+
 ## Integrated Next-3 Slot Queue
 
 ### Slot 1 — CONCENTRATION allocation fork (choose ONE 10% arm; never both in Week 1)
