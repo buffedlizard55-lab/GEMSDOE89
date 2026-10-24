@@ -1,0 +1,254 @@
+[
+ {
+  "id": "h33-h33-2-b2-prune-c1p0-20261024-85cf176a",
+  "parent": "h33-h33-2-b2",
+  "axis": "PRUNE",
+  "value": "c1p0",
+  "role": "PROXIMAL_SPLAY_PROBE",
+  "date": "20261024",
+  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "elapsed_seconds": 9.09,
+  "spec": {
+   "collar_px": 1.0,
+   "role": "PROXIMAL_SPLAY_PROBE",
+   "predicted_central": -0.004,
+   "band": [
+    -0.015,
+    -0.004,
+    0.008
+   ],
+   "form_note": "h33-h33-2-b2; PRUNE c1p0: collar >1px, swap in 2545 ring dots, drop 2545 low-gain, n37654; pred -0.004 (-0.015..+0.008)",
+   "predicted_text": "-0.004 (MODEL; band -0.015..+0.008). Tests near-fault step-overs / splays vs false-positive mask penalty.",
+   "note": "Swap in 2545 dots from d28 with 1.0 < d_cat <= 2.0 px, drop 2545 lowest unique credit dots in R0; tests whether near-fault step-overs and splays carry new-fault truth."
+  },
+  "form_note": "h33-h33-2-b2; PRUNE c1p0: collar >1px, swap in 2545 ring dots, drop 2545 low-gain, n37654; pred -0.004 (-0.015..+0.008)",
+  "files": {
+   "sha8": "85cf176a",
+   "nan": {
+    "path": "releases/h33-h33-2-b2-prune-c1p0-20261024-85cf176a.tif",
+    "sha256": "85cf176a485997b564dbc372e12f8e63ce983e4664730164ef2af0214a430f37",
+    "bytes": 356843
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-prune-c1p0-20261024-85cf176a-zeros.tif",
+    "sha256": "a5f846b69cf925b04862a531516f76dc225ee9836a5c0fe804d02304e47928e4",
+    "bytes": 220517
+   }
+  },
+  "stats": {
+   "mode": "c1p0",
+   "collar_spec_px": 1.0,
+   "n_dots": 37654,
+   "n_moved": 2545,
+   "n_removed": 2545,
+   "n_added": 2545,
+   "pct_changed": 6.758910075954746,
+   "pct_symmetric_diff": 13.517820151909492,
+   "min_catalogue_distance_px": 1.4142135623730951,
+   "catalogue_mass": 0,
+   "block_cv_5km_before": 0.8988889502600114,
+   "block_cv_5km_after": 0.856590819117845,
+   "block_cv_12p8km_before": 0.5532233577727139,
+   "block_cv_12p8km_after": 0.5324831615141459,
+   "details": "swap in 2545 dots (1.0 < d_cat <= 2.0 px); drop 2545 lowest-gain R0 dots"
+  },
+  "model_prediction": {
+   "central": -0.004,
+   "band": [
+    -0.015,
+    -0.004,
+    0.008
+   ],
+   "predicted_change_text": "-0.004 (MODEL; band -0.015..+0.008). Tests near-fault step-overs / splays vs false-positive mask penalty.",
+   "evidence_class": "MODEL"
+  },
+  "report_only": {
+   "parent_hide_and_recover_recall": 0.03842369916921731,
+   "parent_hide_and_recover_ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ],
+   "variant_hide_and_recover_recall": 0.17134892872759072,
+   "variant_hide_and_recover_ci95": [
+    0.16042890403534082,
+    0.18226895341984062
+   ],
+   "parent_surrogate_dti": 0.006709118968955279,
+   "variant_surrogate_dti": 0.0493438600111201,
+   "note": "REPORT-ONLY; local proxy holdout correlates -0.87..+0.54 with live scores and never gates a file"
+  },
+  "gates": {
+   "nan_all_ok": true,
+   "zeros_all_ok": true,
+   "sha256_in_ledger_before_build": false
+  }
+ },
+ {
+  "id": "h33-h33-2-b2-prune-c3p0-20261024-7b101829",
+  "parent": "h33-h33-2-b2",
+  "axis": "PRUNE",
+  "value": "c3p0",
+  "role": "FULL_KERNEL_CLEARANCE",
+  "date": "20261024",
+  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "elapsed_seconds": 9.58,
+  "spec": {
+   "collar_px": 3.0,
+   "role": "FULL_KERNEL_CLEARANCE",
+   "predicted_central": 0.003,
+   "band": [
+    -0.005,
+    0.003,
+    0.012
+   ],
+   "form_note": "h33-h33-2-b2; PRUNE c3p0: collar >3px, prune 2171 ring dots, refill on H19-5, n37654; pred +0.003 (-0.005..+0.012)",
+   "predicted_text": "+0.003 (MODEL; band -0.005..+0.012). Full 300 m kernel clearance eliminates boundary truncation.",
+   "note": "Remove 2171 dots in R0 with 2.0 < d_cat <= 3.0 px, refill 2171 dots onto h19_5 outside 300 m collar; tests whether full kernel clearance eliminates boundary truncation loss."
+  },
+  "form_note": "h33-h33-2-b2; PRUNE c3p0: collar >3px, prune 2171 ring dots, refill on H19-5, n37654; pred +0.003 (-0.005..+0.012)",
+  "files": {
+   "sha8": "7b101829",
+   "nan": {
+    "path": "releases/h33-h33-2-b2-prune-c3p0-20261024-7b101829.tif",
+    "sha256": "7b101829ca5c0c92f91a31a05474da1133e2261fe93e1a6f438f6ee3742f935a",
+    "bytes": 354740
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-prune-c3p0-20261024-7b101829-zeros.tif",
+    "sha256": "15f212a231bde25f6473d19cd04b9fa938a83d4f6be6fbf0ff1bbff7d7716562",
+    "bytes": 218242
+   }
+  },
+  "stats": {
+   "mode": "c3p0",
+   "collar_spec_px": 3.0,
+   "n_dots": 37654,
+   "n_moved": 2171,
+   "n_removed": 2171,
+   "n_added": 2171,
+   "pct_changed": 5.76565570722898,
+   "pct_symmetric_diff": 11.53131141445796,
+   "min_catalogue_distance_px": 3.1622776601683795,
+   "catalogue_mass": 0,
+   "block_cv_5km_before": 0.8988889502600114,
+   "block_cv_5km_after": 0.9252497129927769,
+   "block_cv_12p8km_before": 0.5532233577727139,
+   "block_cv_12p8km_after": 0.569491130703047,
+   "details": "prune 2171 dots (d_cat <= 3.0 px); refill 2171 dots on h19 (d_cat > 3.0 px)"
+  },
+  "model_prediction": {
+   "central": 0.003,
+   "band": [
+    -0.005,
+    0.003,
+    0.012
+   ],
+   "predicted_change_text": "+0.003 (MODEL; band -0.005..+0.012). Full 300 m kernel clearance eliminates boundary truncation.",
+   "evidence_class": "MODEL"
+  },
+  "report_only": {
+   "parent_hide_and_recover_recall": 0.03842369916921731,
+   "parent_hide_and_recover_ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ],
+   "variant_hide_and_recover_recall": 0.0,
+   "variant_hide_and_recover_ci95": [
+    0.0,
+    0.000209925314326218
+   ],
+   "parent_surrogate_dti": 0.006709118968955279,
+   "variant_surrogate_dti": 0.0,
+   "note": "REPORT-ONLY; local proxy holdout correlates -0.87..+0.54 with live scores and never gates a file"
+  },
+  "gates": {
+   "nan_all_ok": true,
+   "zeros_all_ok": true,
+   "sha256_in_ledger_before_build": false
+  }
+ },
+ {
+  "id": "h33-h33-2-b2-prune-c4p0-20261024-d681292b",
+  "parent": "h33-h33-2-b2",
+  "axis": "PRUNE",
+  "value": "c4p0",
+  "role": "SMEAR_ENVELOPE_PURGE",
+  "date": "20261024",
+  "git_sha": "089857a277181abd534d48cb5254690674821ae5",
+  "elapsed_seconds": 9.35,
+  "spec": {
+   "collar_px": 4.0,
+   "role": "SMEAR_ENVELOPE_PURGE",
+   "predicted_central": -0.001,
+   "band": [
+    -0.018,
+    -0.001,
+    0.015
+   ],
+   "form_note": "h33-h33-2-b2; PRUNE c4p0: collar >4px, prune 3825 ring dots, refill on H19-5, n37654; pred -0.001 (-0.018..+0.015)",
+   "predicted_text": "-0.001 (MODEL; band -0.018..+0.015). Wide 400 m collar purges GeoDAWN flight-line interpolation smear.",
+   "note": "Remove 3825 dots in R0 with 2.0 < d_cat <= 4.0 px, refill 3825 dots onto h19_5 outside 400 m collar; tests whether wide clearance purges 400 m flight-line interpolation smear."
+  },
+  "form_note": "h33-h33-2-b2; PRUNE c4p0: collar >4px, prune 3825 ring dots, refill on H19-5, n37654; pred -0.001 (-0.018..+0.015)",
+  "files": {
+   "sha8": "d681292b",
+   "nan": {
+    "path": "releases/h33-h33-2-b2-prune-c4p0-20261024-d681292b.tif",
+    "sha256": "d681292b540073e9c7442b2ea11c1188817f45dc6dbe6edb70ab3f78464b7976",
+    "bytes": 353437
+   },
+   "zeros": {
+    "path": "releases/h33-h33-2-b2-prune-c4p0-20261024-d681292b-zeros.tif",
+    "sha256": "7112c58ebe56e0cb2bc15e8da50cc21fa26a7c0175dc171b0257688ac90f3afb",
+    "bytes": 217242
+   }
+  },
+  "stats": {
+   "mode": "c4p0",
+   "collar_spec_px": 4.0,
+   "n_dots": 37654,
+   "n_moved": 3825,
+   "n_removed": 3825,
+   "n_added": 3825,
+   "pct_changed": 10.158283316513518,
+   "pct_symmetric_diff": 20.316566633027037,
+   "min_catalogue_distance_px": 4.123105625617661,
+   "catalogue_mass": 0,
+   "block_cv_5km_before": 0.8988889502600114,
+   "block_cv_5km_after": 0.9515730648957225,
+   "block_cv_12p8km_before": 0.5532233577727139,
+   "block_cv_12p8km_after": 0.5855017750740569,
+   "details": "prune 3825 dots (d_cat <= 4.0 px); refill 3825 dots on h19 (d_cat > 4.0 px)"
+  },
+  "model_prediction": {
+   "central": -0.001,
+   "band": [
+    -0.018,
+    -0.001,
+    0.015
+   ],
+   "predicted_change_text": "-0.001 (MODEL; band -0.018..+0.015). Wide 400 m collar purges GeoDAWN flight-line interpolation smear.",
+   "evidence_class": "MODEL"
+  },
+  "report_only": {
+   "parent_hide_and_recover_recall": 0.03842369916921731,
+   "parent_hide_and_recover_ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ],
+   "variant_hide_and_recover_recall": 0.0,
+   "variant_hide_and_recover_ci95": [
+    0.0,
+    0.000209925314326218
+   ],
+   "parent_surrogate_dti": 0.006709118968955279,
+   "variant_surrogate_dti": 0.0,
+   "note": "REPORT-ONLY; local proxy holdout correlates -0.87..+0.54 with live scores and never gates a file"
+  },
+  "gates": {
+   "nan_all_ok": true,
+   "zeros_all_ok": true,
+   "sha256_in_ledger_before_build": false
+  }
+ }
+]

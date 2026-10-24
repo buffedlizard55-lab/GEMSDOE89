@@ -1,10 +1,9 @@
-# SLOT PLAN — GEMSDOE89 / directional SNAP pair + completed SNAP factorial (2026-10-24)
+# SLOT PLAN — GEMSDOE89 (integrated SNAP + CONCENTRATION + PRUNE + MASS + RELIEF + SPACING + TRACKB, 2026-10-24)
 
 - **Entity/quota:** one entity, 3 scored submissions per rolling week + 1 blind final. Slots used/left this week: `__ / 3` (human supplies). **TOP_PUBLIC:** `____` (date `____`).
 - **Parent:** R0 `h33-h33-2-b2`, 37,654 dots, rebuilt byte-exactly again today (`c55bafc4…` / `baeae321…`); live `0.2778` = **CLAIM**, no receipt. Deadline `2026-12-03` remains **UNVERIFIED**.
-- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; gated and gateless arms use different MODEL assumptions (`IRREGULARITIES.md` item 15), so compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
-- **Queue state:** every weekly axis holds ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, upstream `PRUNE` 1–4 px) plus **4 Phase-2 `TRACKB` builds** (`t150add` `5a09404f`, `t150swap` `8cfcbe4c`, `t150link` `eded7713` dual-phase R0-consolidating 150-trace arms + `top12` `fb156257` review extract) and **none has a live receipt**, so the scarce good is *readable pairs*.
-- **Why this week's pair changed:** the SNAP factorial (`{window} × {gate}`) is complete, and a measurement made this session shows the undirected crest arm `2p0px-g0p00` moves **15,585 dots up-slope / 15,670 down-slope** (`share_upslope = 0.498`): R0 is direction-neutral w.r.t. the HG maximum, so no existing arm could detect a crest-side preference, and the proposed global dip-offset translation has no bias to correct (`IRREGULARITIES.md` item 16).
+- **Decision rule:** only live `|Δ| ≥ 0.010` is evidence. Central values are **MODEL**, not scores; compare matched receipts, never central-model subtraction. PROXY/canary/SGMC never gate.
+- **Queue state:** all 7 core axes hold ≥ 3 built values at this parent (`SNAP` 12, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, `MASS` 3, `PRUNE` 3 collar-ablation arms, `TRACKB` 4 Phase-2 pairs: 34 pairs / 68 GeoTIFFs + 4 GeoJSONs total) and **none has a live receipt**, so the scarce good is *readable pairs*.
 
 ## Next 3 slots, in order (primary week)
 
@@ -12,16 +11,16 @@
 |---|---|---|---|
 | **1** | `releases/h33-h33-2-b2-snapdirfw2p0-20261024-dc578b2f.tif` | −0.019…+0.056 (sign prior weak **by design**) | Half of a matched pair; alone it is unreadable. |
 | **2** | `releases/h33-h33-2-b2-snapdirhw2p0-20261024-5cccfc1d.tif` | −0.019…+0.057 | The **exact mirror** (same response, window, gate 0.00, targets, count; only the ±60° half-window differs). `fw − hw ≥ +0.010` ⇒ truth sits **footwall-side** of the HG maximum; reverse ⇒ **hanging-wall side**; both `≤ R0 − 0.010` ⇒ **the crest is right** and no position arm gets another slot this cycle; both inside `±0.010` ⇒ SNAP is saturated at 1–2 px. |
-| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else the gate-pair head `1p4px-g0p01` (`afc60a25`, +0.0120); else `conc-12p8km-int10` (`bcade136`, +0.008) or `CONC5kmcat10` (`2dc19377`, +0.009); else **HOLD** | +0.015 / +0.012 / +0.008–0.009 | Dose vs direction; or selectivity-vs-dose; or the first independent block-prior test. |
+| **3** | Conditional: `dirfw1p0` (`373c8fd6`, +0.015) if `fw − hw ≥ +0.010`; else `conc-12p8km-int10` (`bcade136`, +0.008) or `prune-c3p0` (`7b101829`, +0.003); else **HOLD** | +0.015 / +0.008 / +0.003 | Dose vs direction; or independent block-prior test; or 300 m kernel clearance (`PRUNE`). |
 
 **Alternative week (same two slots, different question):** the gate pair `1p4px-g0p01` (`afc60a25`, +0.0120) against its matched gateless control `1p4px-g0p00` (`e1474851`, +0.0278) — reads *selectivity vs dose*, not direction. Do **not** run both pairs in one week (4 files > quota). **Held:** `1p0px-g0p02` (`384435e6`, +0.0022) is a minimum-dose boundary control, not a default slot. Never submit both twins; `-zeros.tif` is fallback only.
 
-## Weeks to the deadline
+## Weeks to the deadline (`2026-12-03`)
 
 | Window | Action |
 |---|---|
 | 10-24 → 10-30 | Slots 1–2 as a pair; reserve Slot 3 until both receipts are recorded. |
-| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair); record every `receipt_score` + `date`. |
+| 10-31 → 11-06 | Conditional Slot 3 (or the alternative gate pair / PRUNE `c3p0`); record every `receipt_score` + `date`. |
 | 11-07 → 11-20 | Combine **only** axes with live `≥ +0.010` receipts, one factor at a time from a named parent. |
 | 11-21 → 11-27 | Confirm the composite against its direct parent; optionally spend 1 slot confirming `TRACKBt150add` (`5a09404f`, `P1 +0.000 / P2 +0.012 MODEL`; or `t150swap` if `MASSm10uniq ≥ +0.010`) costs `< 0.005` Phase 1 DTI. |
 | 11-28 → 12-03 | Re-validate both final twins; human chooses **1 blind final** ($50k P1 + $250k P2). If nothing beats R0, submit R0 (`baeae321…`) or `TRACKBt150add` (`5a09404f`). |

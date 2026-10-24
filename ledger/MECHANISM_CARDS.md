@@ -751,3 +751,44 @@ Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically via `to
 - **Predicted sign and size (`MODEL`):** Phase 1 unexpanded central **−0.003** (`−0.010 … +0.005`); Phase 2 expert-expanded central **+0.009** (`+0.001 … +0.021`).
 - **Falsifier:** Losing to `t150swap` by `>= 0.005` on confirmation or expert audit falsifies `<= 620 m` dot-linking across `h19_5` breaks and restricts Phase 2 traces to unbroken `h19_5` trunks.
 
+---
+
+# Part X — `PRUNE` axis (`c1p0` · `c3p0` · `c4p0`) — session `arena/95b10b60-gemsdoe89` (2026-10-24)
+
+Parent for every card: **R0 = `h33-h33-2-b2`**, rebuilt byte-identically via `tools/rebuild_r0.py` (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit-mass dots; live **0.2778 = CLAIM**).
+
+## Physical and structural premise of the `PRUNE` experiment
+
+1. **The parent lineage's largest single jump came from a collar prune.** In the documented climb (`h19-5` continuous field `0.1922` → thinned `d28` `44,090` dots `0.2600` → `solo-d28` `40,199` dots `0.2708` → prune `d_cat > 2.0 px` `37,654` dots `0.2778` CLAIM), pruning dots within 2 pixels (200 m) of the USGS/INGENIOUS catalogue yielded a massive `+0.0178` DTI jump. This established that the near-catalogue boundary is the most sensitive spatial boundary in the entire challenge.
+2. **Official scoring guidance vs kernel geometry.** Competition organizers confirmed:
+   - Known USGS/INGENIOUS faults are masked pixel-exactly from scoring (https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516).
+   - "New-fault truth can lie within 300 m of known traces" (https://community.drivendata.org/t/where-do-you-draw-the-line/11536).
+   - The triangular kernel has radius $R = 300$ m (3 pixels).
+   - At DTI claimed `0.2778`, a dot earns positive marginal gain if and only if its kernel credit $k > 0.2 \cdot DTI \approx 0.0556$.
+   - For dots in R0 with $2.0 < d_{cat} \le 3.0$ px (`2,171` dots), their 300 m kernel extends across the masked catalogue. Any kernel volume that intersects the masked catalogue boundary produces zero $T$ credit while the dot contributes full mass $S = 1.0$.
+3. **The 100 m – 400 m physical transect.** This session completes the missing PRUNE axis in GEMSDOE89 with three strictly controlled, count-preserving (`n = 37,654`), zero-catalogue-mass variants:
+   - `c1p0` (`85cf176a`): Collar `1.0 px` (100 m). Swaps in the `2,545` dots from `d28` at $1.0 < d_{cat} \le 2.0$ px that R0 discarded, dropping `2,545` lowest unique-credit dots in R0.
+   - `c3p0` (`7b101829`): Collar `3.0 px` (300 m). Prunes all `2,171` dots with $2.0 < d_{cat} \le 3.0$ px in R0, refilling `2,171` dots onto corroborated `h19_5` ridges outside 300 m ($d_{cat} > 3.0$ px, separation $\ge 2.0$ px).
+   - `c4p0` (`d681292b`): Collar `4.0 px` (400 m). Prunes all `3,825` dots with $2.0 < d_{cat} \le 4.0$ px in R0, refilling `3,825` dots onto corroborated `h19_5` ridges outside 400 m ($d_{cat} > 4.0$ px, separation $\ge 2.0$ px) to purge the 400 m GeoDAWN flight-line smear envelope.
+
+## Card PR1 — `c1p0` (`h33-h33-2-b2-prune-c1p0-20261024-85cf176a`) — PROXIMAL SPLAY / STEP-OVER PROBE
+- **Hypothesis:** In active Basin-and-Range extensional systems, breaching faults, synthetic splays, and pull-apart step-overs cluster within 100–200 m (1–2 pixels) of master fault scarps (Faulds et al., 2011). R0's 200 m prune discarded these valid new-fault targets. Swapping back in the `2,545` unpruned dots from `d28` at $1.0 < d_{cat} \le 2.0$ px (while dropping the lowest-credit `2,545` far-field dots) will increase true positive credit $T$ if test truth digitized proximal splays.
+- **Mechanism:** Add `2,545` dots with $1.0 < d_{cat} \le 2.0$ px from `d28`. Drop `2,545` dots from R0 with the smallest unique kernel credit under a flat truth prior (`mass.unique_credit`). Count invariant at `37,654` (`6.76%` changed, symdiff `13.52%`). Catalogue mass = `0`. Minimum catalogue distance = `1.41 px`.
+- **Non-fault mimic:** Colluvial scarp aprons, talus wedges, and range-front erosional gullies create steep topographic scarplets within 100–200 m of master faults that have no seismogenic or fault origin. If evaluation labels mask or omit features within 200 m, these dots incur pure false-positive mass penalty.
+- **Predicted sign and size (`MODEL`):** Central **−0.004**, band **−0.015 … +0.008**. The negative sign reflects the historical penalty of near-catalogue dots; only an aggressive splay-mapping convention in the test labels can produce a positive readout.
+- **Falsifier:** A live receipt change $\Delta \le -0.010$ decisively confirms that public test truth excludes near-catalogue splays within 200 m, solidifying the need for a $\ge 2.0$ px collar.
+
+## Card PR2 — `c3p0` (`h33-h33-2-b2-prune-c3p0-20261024-7b101829`) — FULL 300 M KERNEL CLEARANCE
+- **Hypothesis:** Because the evaluation kernel has radius $R = 300$ m (3 pixels) and known catalogue faults are masked, dots in R0 sitting at $2.0 < d_{cat} \le 3.0$ px (`2,171` dots) lose kernel overlap to the masked boundary. Pruning these `2,171` dots and refilling them on previously under-represented segments of the corroborated `h19_5` fault network outside the 300 m kernel envelope ($d_{cat} > 3.0$ px) eliminates kernel truncation and maximizes effective mass utilization.
+- **Mechanism:** Remove all `2,171` dots in R0 with $2.0 < d_{cat} \le 3.0$ px (`5.77%` of R0). Refill `2,171` dots on `h19_5` outside 300 m ($d_{cat} > 3.0$ px, separation $\ge 2.0$ px) via greedy farthest-point placement (maximizing distance to existing surviving dots). Total count invariant at `37,654`. Catalogue mass = `0`. Minimum catalogue distance = `3.16 px`.
+- **Non-fault mimic:** Relocated dots in the basin interior or pediment may land on non-fault lithologic contacts, volcanic flow margins, or paleoshoreline terraces that produce potential-field gradients without tectonic faulting.
+- **Predicted sign and size (`MODEL`):** Central **+0.003**, band **−0.005 … +0.012**. Positive central expectation due to removal of truncated near-catalogue kernels and reallocation onto uncrowded fault ridges.
+- **Falsifier:** A live receipt change $|\Delta| < 0.010$ indicates that kernel boundary truncation is second-order on public chunks. A drop $\Delta \le -0.010$ falsifies the 300 m clearance hypothesis, indicating that the 200–300 m zone contains valid new faults that outweigh boundary truncation.
+
+## Card PR3 — `c4p0` (`h33-h33-2-b2-prune-c4p0-20261024-d681292b`) — 400 M FLIGHT-LINE SMEAR ENVELOPE PURGE
+- **Hypothesis:** GeoDAWN aeromagnetic and gravity surveys used 400 m flight-line spacing. Potential-field horizontal gradients and tilt derivatives around large-displacement master faults naturally contain interpolation smear and side-lobes extending out to ~400 m (4 pixels). Enforcing a strict 400 m ($d_{cat} > 4.0$ px) exclusion collar strips out all dots whose geophysical ridge expression could be an artifact of flight-line interpolation near known faults.
+- **Mechanism:** Remove all `3,825` dots in R0 with $2.0 < d_{cat} \le 4.0$ px (`10.16%` of R0). Refill `3,825` dots on corroborated `h19_5` ridges outside the 400 m collar ($d_{cat} > 4.0$ px, separation $\ge 2.0$ px) via greedy farthest-point placement. Total count invariant at `37,654`. Catalogue mass = `0`. Minimum catalogue distance = `4.12 px`.
+- **Non-fault mimic:** A 400 m collar removes legitimate synthetic and antithetic faults that form within 300–400 m of major Basin-and-Range master faults, diluting mass into lower-probability regional lineaments.
+- **Predicted sign and size (`MODEL`):** Central **−0.001**, band **−0.018 … +0.015**. Expected to be neutral to slightly negative, testing whether 400 m clearance over-clears real fault structure.
+- **Falsifier:** A live score change $\Delta \ge +0.010$ would demonstrate that 400 m flight-line smear is a primary confounder in R0. A drop $\Delta \le -0.010$ confirms that 400 m collar over-prunes legitimate near-fault structural splays.
+

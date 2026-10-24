@@ -1,10 +1,18 @@
-# SUBMIT — GEMSDOE89 (31-pair queue, 2026-10-24)
+# SUBMIT — GEMSDOE89 (34-pair queue, 2026-10-24)
 
 The human submits manually from their own registered account. Nothing here logs in,
 scrapes, or uploads. Upload the NaN-outside `.tif`; `-zeros.tif` is only a fallback.
 **Never upload both twins in separate slots.** Submission name = the file stem.
 
-## This session's builds (`SNAP` directional corner, 2026-10-24) — upload as a PAIR
+## This session's PRUNE builds (`PRUNE` axis: 300 m kernel clearance, 100 m proximal splay, 400 m smear purge)
+
+| role | file | name | sha256 (`.tif` / `-zeros.tif`) | form note (chars <= 140) | predicted (`MODEL`) |
+|---|---|---|---|---|---|
+| **FULL CLEARANCE** | `releases/h33-h33-2-b2-prune-c3p0-20261024-7b101829.tif` | `h33-h33-2-b2-prune-c3p0-20261024-7b101829` | `7b101829ca5c0c92ecab3b6e80b2a3fa7a3c333a36db553648eb11fe2ea9d3c5` / `15f212a231bde25f69c5e5ce4b0253457a44f808778f566dd55d64e9a0eeebcc` | `h33-h33-2-b2; PRUNE c3p0: collar >3px, prune 2171 ring dots, refill on H19-5, n37654; pred +0.003 (-0.005..+0.012)` (113 chars) | **+0.003** (`−0.005…+0.012`) |
+| **PROXIMAL SPLAY** | `releases/h33-h33-2-b2-prune-c1p0-20261024-85cf176a.tif` | `h33-h33-2-b2-prune-c1p0-20261024-85cf176a` | `85cf176a485997b5e80d4c82b998cfbc96bf71b3e9a56cba260c609fae792e3a` / `a5f846b69cf925b0fc4b0a40ca385e04ae4bfb56372fa7e5684ca788bc277c26` | `h33-h33-2-b2; PRUNE c1p0: collar >1px, swap in 2545 ring dots, drop 2545 low-gain, n37654; pred -0.004 (-0.015..+0.008)` (116 chars) | **−0.004** (`−0.015…+0.008`) |
+| **SMEAR PURGE** | `releases/h33-h33-2-b2-prune-c4p0-20261024-d681292b.tif` | `h33-h33-2-b2-prune-c4p0-20261024-d681292b` | `d681292b540073e97914f6b864a7da8305ff4b10b067a99ea7b427844081ef77` / `7112c58ebe56e0cbfeb191d84bca280ec53787a7d4d7f00f576e2cbb83a31bf6` | `h33-h33-2-b2; PRUNE c4p0: collar >4px, prune 3825 ring dots, refill on H19-5, n37654; pred -0.001 (-0.018..+0.015)` (113 chars) | **−0.001** (`−0.018…+0.015`) |
+
+## Directional SNAP pair (2026-10-24) — upload as a PAIR
 
 | role | file / submission name (stem) | sha256 (`.tif` / `-zeros.tif`) | form note (110 chars) | predicted (`MODEL`) |
 |---|---|---|---|---|
@@ -46,28 +54,28 @@ Dual-phase R0-consolidating 150-trace builds (`3.76%–4.21%` of R0 changed, pre
 
 ## Rest of the gated queue (`ledger/submissions.csv`, `status = BUILT`)
 
+- **PRUNE collar ablation (`c3p0` `7b101829`, `c1p0` `85cf176a`, `c4p0` `d681292b`):** 300 m kernel clearance vs 100 m proximal splay vs 400 m smear envelope.
 - **CONCENTRATION 12.8 km:** `int10` (`bcade136`, +0.008), `int20` (`357b4ac4`, +0.009), `geod15` (`259ea040`, +0.003).
 - **CONCENTRATION 5 km:** `cat10` (`2dc19377`, +0.009), `cat20` (`4d229938`, +0.019), `cat10away` (`f7b8aa28`, −0.009 sign control).
 - **CONCENTRATION 2 km:** `da3a4886` / `51ba9656` / `1e857586` — separate on-H19 mechanism (`+0.0024` / `−0.0028` / `−0.0126`).
 - **RELIEF** `r10` `366c87ca`, `r15` `6aa774ce`, `r15s` `5f0ae851`; **MASS** `m10uniq` `beed130f`, `m20uniq` `87ec6213`, `m10rand` `7a4c49b6`; **SPACING** `alongstrike` `3b263c7a` (held `poisson` `ff167173`, `lattice` `454c9098`).
 - **SNAP factorial** (`{window} × {gate}`, complete): `1p0px-g0p00` `1add5aa6`, `1p0px-g0p01` `2916ec2d`, `1p0px-g0p02` `384435e6`, `1p4px-g0p00` `e1474851`, `1p4px-g0p01` `afc60a25`, upstream `1p4px-g0p02` `0b6a2ab2`, `2p0px-g0p00` `69db3aae`, `2p0px-g0p01` `7bdaa58b`, `2p0px-g0p02` `b2019f55`.
-- **PRUNE:** upstream already covers the brief collars at 1–4 px; not rebuilt (`IRREGULARITIES.md` item 14).
 
-## Format receipt (`registry/format_receipts.json` — all 62 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 68 files re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×62 files** (`31` `.tif` + `31` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×62 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×31 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/SNAP/CONC/RELIEF/SPACING = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` | **PASS ×62 files** |
+| grid vs pinned `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×68 files** (`34` `.tif` + `34` `-zeros.tif`) |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×68 files** |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×34 pairs** (`t150add` = 39,069; `t150swap`/`t150link`/SNAP/CONC/RELIEF/SPACING/PRUNE = 37,654; `MASS` = 33,889 / 30,123; `top12` = 145) |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); moved/added targets `d_cat >= 3.00 px` (unless PRUNE collar) | **PASS ×68 files** |
 | Phase-2 GeoJSON dossiers (`releases/*TRACKB*.geojson`, all traces `>= 1.0 km` + geologist evidence) | **PASS ×4 GeoJSONs** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`146` ledger rows: `31` `GEMSDOE89` + `115` upstream)** |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`149` ledger rows: `34` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`, 2026-10-24)** |
-| unit tests (`86 passed`) / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
+| unit tests (`92 passed`) / leakage canary | **PASS** / **PASS** (`max AUC 0.665 < 0.90`) |
 
 Machine receipts: `registry/format_receipts.json`, `registry/build_report_snap_<value>.json`,
-`registry/build_report_snap_directional.json`, `registry/report_only_status.json`.
+`registry/build_report_snap_directional.json`, `registry/build_reports_prune.json`, `registry/report_only_status.json`.
 PROXY/MODEL diagnostics never gate an upload.
 
 ## Pre-upload verification
