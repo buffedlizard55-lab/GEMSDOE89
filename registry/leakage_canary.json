@@ -1,5 +1,5 @@
 {
- "instrument": "leakage canary (single-feature AUC vs catalogue membership across all 19 bands + scored_h19_5)",
+ "instrument": "leakage canary (single-feature AUC vs catalogue membership; 19 bands + h19_5 + TRACKB corroboration composite)",
  "threshold": 0.9,
  "sample_px": 400000,
  "seed": 11,
@@ -84,8 +84,13 @@
   "scored_h19_5": {
    "auc": 0.48819812778700983,
    "flag": false
+  },
+  "TRACKB_corroboration_composite": {
+   "auc": 0.5431153244896728,
+   "flag": false,
+   "auc_unmasked_artifact": 0.8125
   }
  },
  "verdict": "PASS: no single feature exceeds 0.90",
- "note": "REPORT ONLY unless > 0.90. Checked all 19 competition bands plus scored_h19_5."
+ "note": "REPORT ONLY. Composite AUC is footprint-masked; the raw 0.8125 is a pure data-availability artifact (the finite-band flag alone scores 0.789). Inside the footprint the composite is 0.543, matching the 19-band canary. Known faults are masked in scoring and the composite only re-ranks LEGAL corridor pixels at d_cat>=3, never selecting regions or overriding gates (IRREGULARITIES item 14)."
 }

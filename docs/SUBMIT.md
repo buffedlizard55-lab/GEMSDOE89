@@ -4,6 +4,32 @@ The human submits manually from their own registered account. Nothing in this
 repository logs in, scrapes, or uploads. Upload one file per slot; use the
 NaN-outside `.tif` primary file (`-zeros.tif` is the byte-verified fallback).
 
+## TRACKB (2026-10-24) — Phase-2 evidence play, HELD OUT of the weekly slot queue
+
+`TRACKB` is **not a weekly-slot candidate unless the human decides**. Its primary product is
+a geologist-reviewable trace inventory for Phase 2 ($250k expert label expansion); the three
+rasters are a nested, count-preserving Phase-1 probe of the same prior, offered so the human
+*can* test it. Phase-1 jitter MODEL is a coverage-cost floor (central −0.002 / −0.012 / −0.021);
+`|Δ| < 0.01` = no evidence. Do **not** spend a weekly Phase-1 slot on these by default — see
+`SLOT_PLAN.md`.
+
+**Phase-2 inventory (not an upload):** `releases/h33-h33-2-b2-TRACKB-traces-20261024.geojson`
+(1,520 strike-consistent ≥1 km traces, WGS84, one evidence paragraph each) and
+`evidence/TRACKB_trace_atlas_20261024.md` (top-48 readable atlas).
+
+| role | file (NaN primary) | name = stem | fallback `-zeros.tif` | sha256 (`.tif`) | form note (≤140) | predicted (MODEL) |
+|---|---|---|---|---|---|---|
+| lowest-cost probe | `releases/h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f.tif` | `h33-h33-2-b2-TRACKB-TR10-20261024-32211f1f` | `…-32211f1f-zeros.tif` | `32211f1fa90b…` | `h33-h33-2-b2; TRACKB tr10: 3765 (10%) off-trace -> +-300m of >=1km traces; n=37654; dcat>=3; Phase-2 GeoJSON; pred -0.002` | −0.002 (−0.043…+0.001) |
+| dose | `releases/h33-h33-2-b2-TRACKB-TR20-20261024-5da46626.tif` | `h33-h33-2-b2-TRACKB-TR20-20261024-5da46626` | `…-5da46626-zeros.tif` | `5da466262dc7…` | `…tr20: 7531 (20%)… pred -0.012` | −0.012 (−0.091…−0.005) |
+| high dose / held | `releases/h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5.tif` | `h33-h33-2-b2-TRACKB-TR30-20261024-c8a264b5` | `…-c8a264b5-zeros.tif` | `c8a264b5a616…` | `…tr30: 11296 (30%)… pred -0.021` | −0.021 (−0.137…−0.013) |
+
+**Format receipt (this session, `registry/format_receipts.json` + per-arm `registry/build_report_trackb_*.json`):**
+all 3 `.tif` + 3 `-zeros.tif` re-read from disk after writing → grid `3730×3292`, 100 m,
+EPSG:32611, float32, 1 band; values in [0,1]; unit dots `== 1.0`; NaN / 0 outside footprint
+per twin; **zero catalogue mass**; count preserved `37,654`; added dots `d_cat ≥ 3 px`,
+`r_sep ≥ 2.83 px`; inherited 1,611-collar dots frozen; exact-hash + `(parent,axis,value)`
+dedupe PASS; leakage canary PASS (footprint-masked composite 0.543 < 0.90).
+
 ## This session's builds (`12.8 km` fault-interaction + catalogue-free GPS strain `CONCENTRATION`)
 
 | role | file | name | sha256 (`.tif` / `-zeros.tif`) | form note (123 chars each) | predicted (`MODEL`) |
@@ -49,17 +75,17 @@ NaN-outside `.tif` primary file (`-zeros.tif` is the byte-verified fallback).
 - **SPACING (`alongstrike` `3b263c7a`, held `poisson` `ff167173` / `lattice` `454c9098`):** strand stationing & lateral corridor probes.
 - **SNAP (`1p0px-g0p00` `1add5aa6`):** saturated window point; hold unless two gate-0 receipts both fire.
 
-## Format receipt (`registry/format_receipts.json` — all 42 files re-read from disk)
+## Format receipt (`registry/format_receipts.json` — all 48 files re-read from disk)
 
 | gate | result |
 |---|---|
-| grid vs `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×42 files** (`21` `.tif` + `21` `-zeros.tif`) |
-| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×42 files** |
-| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×21 pairs** |
-| zero catalogue mass (`0` dots on `existing_faults.tif`); all new CONC additions `d_cat >= 3.00 px` | **PASS ×42 files** |
-| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`136` ledger rows: `21` `GEMSDOE89` + `115` upstream)** |
+| grid vs `sample_submission.tif`: `3730×3292`, `100 m`, `EPSG:32611`, `float32`, `1` band | **PASS ×48 files** (`24` `.tif` + `24` `-zeros.tif`) |
+| values in `[0, 1]`; unit dots `== 1.0`; `0` NaN inside footprint; `NaN` / `0.0` outside per twin | **PASS ×48 files** |
+| expected per-ledger dot counts; NaN/zeros twins carry identical masks | **PASS ×24 pairs** |
+| zero catalogue mass (`0` dots on `existing_faults.tif`); all new CONC/TRACKB additions `d_cat >= 3.00 px` | **PASS ×48 files** |
+| exact-hash and repeated `(parent, axis, value)` dedupe; all `form_note <= 140` chars | **PASS (`139` ledger rows: `24` `GEMSDOE89` + `115` upstream)** |
 | R0 recipe rebuild vs both parent SHA-256 pins (`c55bafc4…`, `baeae321…`) | **PASS (`tools/rebuild_r0.py`)** |
-| unit tests / leakage canary | **63 passed** / **PASS** (`max <= 0.5995 < 0.90`) |
+| unit tests / leakage canary | **71 passed** / **PASS** (`max <= 0.5688 < 0.90`; footprint-masked composite 0.543) |
 
 ## Pre-upload verification
 
