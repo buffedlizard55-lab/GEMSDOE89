@@ -1,46 +1,34 @@
-# SLOT PLAN — GEMSDOE89 (integrated after the SNAP-session merge, 2026-10-23)
+# SLOT PLAN — GEMSDOE89 (integrated after CONCENTRATION build, 2026-10-23)
 
-- **Timeline:** 2026-10-23 → **2026-12-03** (`UNVERIFIED` deadline) ≈ 41 days ≈
-  **~18 rolling slots** (1 entity × 3/week) + 1 blind final. Slots used:
-  `__ / 3` (human must supply).
-- **Baseline:** R0 `h33-h33-2-b2` recipe-rebuilt byte-exact (`c55bafc4…` zeros,
-  `baeae321…` nan), **0.2778 = CLAIM** (no receipt here). `TOP_PUBLIC`: `____`.
-- **Rule:** any live change `< 0.01` is **no evidence**; report-only instruments
-  (PROXY/canary/SGMC) never gate and are never called scores.
+- **Timeline:** 2026-10-23 → **2026-12-03** (`UNVERIFIED` deadline; human must confirm) ≈ 41 days ≈ **~18 rolling slots** (`1 entity × 3/week`) + **1 blind final**. Slots used this week: `__ / 3` (human supplies).
+- **Baseline:** Parent R0 `h33-h33-2-b2` rebuilt byte-exact (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit dots), live **0.2778 = CLAIM** (no receipt in this repo). `TOP_PUBLIC`: `____` (date `____`).
+- **Evidence rule:** any live receipt change `< 0.01` is **no evidence**; report-only instruments (`PROXY` / leakage canary / `SGMC`) never gate a file and are never called scores.
 
 ## Next 3 slots, in order
 
-| # | File | Predicted live change | Submit only if | What the result changes |
+| # | File | Predicted live change (`MODEL`) | Submit only if | What the result changes |
 |---|---|---|---|---|
-| **1** | `releases/h33-h33-2-b2-relief-r10-20261023-366c87ca.tif` | **+0.003** MODEL (−0.012…+0.018) | gates green (verified) | Allocation fork. ≥ +0.010 → class allocation transfers → slot 3 = r15. Inside ±0.010 → close RELIEF *and* CONCENTRATION. < −0.010 → placement beats allocation, prioritize SNAP. |
-| **2** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` | **+0.028** MODEL (−0.028…+0.084) | human knowingly accepts the widest band in the repo | Placement fork, independent of slot 1 (position change at fixed count/CV). ≥ +0.010 → snap mechanism real → slot 3 = 1p4px window dose; receipts vs upstream gated arms isolate the *gate*. Inside ±0.010 → gateless dead; test upstream `2p0px-g0p01` (+0.018…+0.044 MODEL, GEMSDOE84) for selection-vs-dose. ≤ −0.010 → retire SNAP + EM-crest story. |
-| **3** | conditional: `…relief-r15…6aa774ce` if slot 1 ≥ **0.2878**; else `…snap1p4px-g0p00…e1474851` if slot 2 ≥ **0.2878**; else `…spacing-alongstrike…3b263c7a` (band −0.003…+0.006) **or HOLD** | +0.004 / +0.028 / +0.002 | the named parent arm scored ≥ +0.010 | Dose-response for whichever fork fired; a null fork makes `alongstrike` the cheapest remaining probe — or hold the slot for a late receipt. |
+| **1** | `releases/h33-h33-2-b2-conc-12p8km-int10-20261023-bcade136.tif` | **+0.008** (`−0.006 … +0.018`; 3-seed strand-holdout `+0.0040`, `+0.0052` over shuffle) | gates green (verified) | **12.8 km structural-concentration fork** (`7.3×` fault-interaction contrast vs `1.4×` in `RELIEF`; keeps `CV_12.8km = 0.5533` inside `0.51–0.59`). `≥ +0.010` (`≥ 0.2878`) → run `int20` dose in Slot 3. `≤ −0.010` (`≤ 0.2678`) → test truth sits in under-mapped basins → run catalogue-free `geod15` in Slot 3. Inside `±0.010` → hold `int20`. |
+| **2** | `releases/h33-h33-2-b2-snap2p0px-g0p00-20261023-69db3aae.tif` | **+0.028** (`−0.028 … +0.084`) | human accepts widest band (alt low-variance probe: `…-relief-r10-…-366c87ca.tif`, `+0.003`) | **Orthogonal local-placement fork** (`1.86 px` EM-crest snap at fixed block counts vs Slot 1's `95.5 px` inter-block transfer). `≥ +0.010` → snap real, run `1p4px-g0p00` or upstream gated `2p0px-g0p01` to price gate vs window. `≤ −0.010` → retire EM-crest SNAP. |
+| **3** | conditional: `…-conc-12p8km-int20-…-357b4ac4.tif` if Slot 1 `≥ 0.2878`; else `…-conc-12p8km-geod15-…-259ea040.tif` if Slot 1 `≤ 0.2678`; else `…-snap1p4px-g0p00-…-e1474851.tif` if Slot 2 `≥ 0.2878`; else `…-relief-r10-…-366c87ca.tif` / `…-MASSm10uniq-…-beed130f.tif` **or HOLD** | `+0.009` / `+0.003` / `+0.028` / `+0.003` / `+0.002` | Week 1 receipts recorded in `ledger/submissions.csv` | Tests `CV_12.8km = 0.656 > 0.59` saturation (`int20`), catalogue-free active-strain prior (`geod15`), or SNAP window dose (`1p4px`); if both Week 1 forks land inside `±0.010`, probes geomorphic `RELIEF r10` / count `MASS m10uniq` or holds quota. |
 
-Same-week: never two same-question files together (no r15+r15s; no two gate-0
-snap windows — the window dose saturates at 80.8→83.1 % moved). Negative-Model
-arms (`SPACING poisson` −0.010, `lattice` −0.007) stay held unless their own
-cards' triggers fire.
+Same-week rule: never submit two files testing the same axis in one week (never `int10 + int20`, `r10 + r15`, or two `g0p00` snap windows together). Negative-`MODEL` arms (`SPACING poisson` `−0.010`, `lattice` `−0.007`, `MASS m10rand` `−0.002`) remain held unless their card triggers fire.
 
-## Weeks to the deadline
+## Weeks to the deadline (`2026-12-03`)
 
-| week | dates | plan |
+| Week | Dates | Plan |
 |---|---|---|
-| 1 | 10-23 → 10-29 | slots 1 + 2; keep 1 spare for late receipts |
-| 2 | 10-30 → 11-05 | slot 3 conditional as above; record every receipt |
-| 3-4 | 11-06 → 11-19 | combine the axes with receipts ≥ +0.010, one factor at a time (expect one axis only) |
-| 5 | 11-20 → 11-26 | confirm winner vs its own parent; freeze final file + fallback |
-| 6 | 11-27 → 12-03 | re-validate format of **both**; one blind final submission |
+| 1 | 10-23 → 10-29 | Submit Slots 1 (`conc-12p8km-int10`) + 2 (`snap2p0px-g0p00`); reserve 1 slot for receipt follow-up |
+| 2 | 10-30 → 11-05 | Execute conditional Slot 3 from Week 1 receipts; probe `MASS m10uniq` or `RELIEF r10` if unprobed |
+| 3–4 | 11-06 → 11-19 | Combine **only** axes with live receipts `≥ +0.010`, one factor at a time (e.g., `CONCENTRATION` + winning local placement/count) |
+| 5 | 11-20 → 11-26 | Confirm composite child vs its direct parent on live receipt; freeze primary + byte-verified fallback |
+| 6 | 11-27 → 12-03 | Re-validate format/hashes of final choice + `-zeros` twin; submit **1 blind final** choice |
 
-## Proposed better axes (mechanism · confounder · falsifier) — not built
+## Proposed better axes (mechanism · confounder · falsifier) — not built this session
 
-| Axis | Mechanism | Confounder / mimic | Falsifier |
+| Axis | Structural mechanism | Non-fault confounder / mimic | Falsifier |
 |---|---|---|---|
-| **DEDUPE** | drop the most *redundant* dots (exact `marginal_gain_remove`), bottom 15-25 %, no refill: the max operator means a neighbour already claims the credit | de-clusters ≈ spacing effect — `SPACING` at matched removal is its control | fails to beat `MASS −10 %` by ≥ 0.005 |
-| **FLOOR** | ~2,000 dots on the flat-slope tercile (33 % of footprint, 0.1 R0 dots/1000 px) at catalogue-proportional spacing | flat ground has no DEM edge — a bet on signal R0's own model declined | score < R0 − 0.005 → coverage gap is correctly empty |
-| **DOSE** | one byte-identical re-submission per month | burns a slot with zero expected gain | receipt differs > 0.005 → CLAIM-anchored deltas across the ledger are invalid |
-| **RELAY-BRIDGE** | en-echelon strand tips (≤12 px, ≤20°) bridged: mass on unmapped relay faults | bridges channel scarps/dike swarms, inflating P without hitting G | receipt ≤ R0, or withheld multi-segment PROXY loses to random tip pairs |
-| **TRACKB-DIP-OFFSET** | range-bounding faults dip 45-60° basinward; shift gravity/mag crest 2-5 px hanging-wall-ward toward the surface trace | sub-vertical faults/volcanic contacts have ~zero dip offset | receipt drops ≥ 0.005 vs R0 |
-| **REPEAT-CALIBRATION** | resubmit exact R0 to convert CLAIM → RECEIPT and bound slot noise | costs 1 of ~18 slots, zero expected gain | receipt differs from 0.2778 by > 0.005 |
-
-Future in-axis values (not new axes): SNAP response-surface variants (DEM-scarp
-vs EM-only vs fused) — only after one snap receipt shows any sign of life.
+| **RELAY-BRIDGE** | Bridge co-linear / en-echelon strand tips (`≤ 12 px`, strike diff `≤ 20°`) across step-over ramps where unmapped breaching faults nucleate (https://www.osti.gov/servlets/purl/1249065) | Links aligned stream-incision scarps, Tertiary dike segments, or shoreline benches, adding mass `P` with zero truth `T` | Live receipt `< R0 + 0.010`, or 25% strand-holdout loses to random tip-pair bridges at matched dot count |
+| **TRACKB-DIP-OFFSET** | Normal range-front faults dip `45°–60°` basinward, shifting subsurface gravity/magnetic horizontal-gradient crests `2–5 px` into the hanging wall relative to the surface scarp | Sub-vertical strike-slip strands, steep caldera walls, and shallow volcanic flow contacts have near-zero dip offset | Live receipt drops `≥ 0.010` vs R0, or loses to `SNAP` symmetric crest alignment |
+| **AZIMUTH-STRESS** | Weight off-`h19_5` candidates by alignment with Great Basin NNE extensional (`010°–035°`) and NW Walker Lane dextral (`315°–335°`) slip-tendency azimuths | Regional glacial/fluvial drainage and tilted volcanic hogbacks share NNE range-parallel strike | Fails to beat strike-agnostic `conc-12p8km-int10` by `≥ 0.005` on strand-holdout `MODEL` or `≥ 0.010` live |
+| **REPEAT-CALIBRATION** | Submit byte-exact rebuilt R0 (`baeae321…`) once to convert `0.2778` from `CLAIM` → `RECEIPT` and anchor every single-axis delta | Burns 1 of ~18 rolling slots with zero expected leaderboard climb | Live receipt differs from `0.2778` by `> 0.005`, invalidating `CLAIM`-anchored deltas across the ledger |

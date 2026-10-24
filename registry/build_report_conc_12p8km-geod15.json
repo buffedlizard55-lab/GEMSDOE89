@@ -1,0 +1,391 @@
+{
+ "id": "h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040",
+ "axis": "CONCENTRATION",
+ "value": "12p8km-geod15",
+ "role": "DISCRIMINATOR",
+ "spec": {
+  "prior": "geodetic",
+  "fraction": 0.15,
+  "role": "DISCRIMINATOR",
+  "pred_central": 0.003,
+  "pred_band": [
+   -0.015,
+   0.021
+  ],
+  "predicted_change_text": "+0.003 (MODEL; band -0.015..+0.021; catalogue-free GPS shear/strain + seismicity 12.8 km block prior; +0.0038 lift over random-block shuffle)",
+  "note": "move 15% (5,648 dots) from lowest-40% to highest-40% active crustal deformation (geod_2ndinv + geod_shearrate + ieq_n100a15) 12.8 km blocks (zero catalogue prior)"
+ },
+ "git_sha": "f0db79fd65dc05740fdc77c667e1478aa5492a31",
+ "parent": "h33-h33-2-b2",
+ "parent_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "parent_nan_sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+ "determinism": "deterministic mergesort + row-major index tie-break (zero RNG)",
+ "block_prior": {
+  "prior_mode": "geodetic",
+  "block_px": 128,
+  "block_km": 12.8,
+  "grid_blocks": [
+   30,
+   26
+  ],
+  "active_blocks": 371,
+  "bands_used": {
+   "4": "geod_2ndinv",
+   "7": "geod_shearrate",
+   "16": "ieq_n100a15"
+  },
+  "uses_catalogue": false
+ },
+ "corroborated_ridge": {
+  "bands_used": {
+   "3": "tmi_hg",
+   "5": "iso_grav_anom_slope",
+   "12": "det_elev",
+   "19": "det_elev_slope"
+  },
+  "formula": "(0.50*linear_concavity(det_elev) + 0.25*linear_concavity(-det_elev_slope) + 0.15*robust_unit(iso_grav_anom_slope) + 0.10*robust_unit(log1p(tmi_hg))) * (0.5 + 0.5*strike_coherence_600m(det_elev))",
+  "mean_in_footprint": 0.034817885607481,
+  "p99_in_footprint": 0.1771705150604248
+ },
+ "lineage_cv_12p8km": {
+  "d28_44090_0p2600_CLAIM": 0.5181,
+  "solo_d28_40199_0p2708_CLAIM": 0.5369,
+  "r0_h33_2_b2_37654_0p2778_CLAIM": 0.5532
+ },
+ "stats": {
+  "block_px": 128,
+  "block_km": 12.8,
+  "quantile_split": [
+   40.0,
+   60.0
+  ],
+  "q_lo_cut": 0.000325707781255754,
+  "q_hi_cut": 0.024890170121511797,
+  "source_blocks": 141,
+  "target_blocks": 158,
+  "interior_blocks_ge50pct_footprint": 318,
+  "fraction_requested": 0.15,
+  "n_dots": 37654,
+  "n_moved": 5648,
+  "n_added": 5648,
+  "n_removed": 5648,
+  "pct_changed": 14.9997,
+  "symmetric_diff_dots": 11296,
+  "pct_symmetric_diff": 29.9995,
+  "source_dots_before": 14102,
+  "source_dots_after": 8454,
+  "target_dots_before": 16699,
+  "target_dots_after": 22347,
+  "added_min_catalogue_clearance_px": 3.0,
+  "collar_lt3px_before": 1611,
+  "collar_lt3px_after": 1611,
+  "added_min_interdot_sep_px": 2.8284271247461903,
+  "nn_median_before_px": 3.0,
+  "nn_median_after_px": 3.1622776601683795,
+  "mean_displacement_px": 1020.8149014107759,
+  "median_displacement_px": 1010.0294550026658,
+  "removed_mean_corrob_ridge": 0.035256270319223404,
+  "added_mean_corrob_ridge": 0.1610383689403534,
+  "parent_mean_corrob_ridge": 0.055644091218709946,
+  "block_cv_12p8km_before": 0.5532,
+  "block_cv_12p8km_after": 0.6355,
+  "block_cv_10km_before": 0.6381,
+  "block_cv_10km_after": 0.7351,
+  "block_cv_15km_before": 0.5162,
+  "block_cv_15km_after": 0.6254,
+  "block_cv_5km_before": 0.8991,
+  "block_cv_5km_after": 0.9467,
+  "block_cv_1km_before": 1.8704,
+  "block_cv_1km_after": 1.84,
+  "relief_tercile_dots": {
+   "before": [
+    7692,
+    15742,
+    14204
+   ],
+   "after": [
+    8234,
+    14261,
+    15096
+   ]
+  }
+ },
+ "model_prediction": {
+  "evidence_class": "MODEL",
+  "central": 0.003,
+  "band": [
+   -0.015,
+   0.021
+  ],
+  "summary": "+0.003 (MODEL; band -0.015..+0.021; catalogue-free GPS shear/strain + seismicity 12.8 km block prior; +0.0038 lift over random-block shuffle)",
+  "no_evidence_threshold": 0.01,
+  "strand_holdout_calibration": {
+   "evidence_class": "MODEL",
+   "protocol": "Withhold 25% of 8-connected catalogue fault strands BEFORE computing d_cat, R0, or the interaction block prior; score DTI strictly on withheld strands. Matched random_block_shuffle uses the identical corrob_ridge operator with shuffled 12.8 km block scores to isolate the km-scale block prior from within-block placement.",
+   "mean_variant_delta_dti": {
+    "12p8km-int10": 0.003998,
+    "12p8km-int20": 0.005058,
+    "12p8km-geod15": -0.000391
+   },
+   "mean_random_block_shuffle_delta_dti": {
+    "frac_0.10": -0.00117,
+    "frac_0.15": -0.004233,
+    "frac_0.20": -0.008587
+   },
+   "pure_block_prior_lift_over_shuffle": {
+    "12p8km-int10": 0.005168,
+    "12p8km-int20": 0.013645,
+    "12p8km-geod15": 0.003842
+   },
+   "seeds": {
+    "seed_20261023": {
+     "withheld_fault_px": 15254,
+     "r0_sim_dots": 39166,
+     "r0_sim_dti": 0.107461,
+     "variant_delta_dti": {
+      "12p8km-int10": 0.004191,
+      "12p8km-int20": 0.004673,
+      "12p8km-geod15": -0.001149
+     },
+     "random_block_shuffle_delta_dti": {
+      "frac_0.10": -0.002087,
+      "frac_0.15": -0.00567,
+      "frac_0.20": -0.009582
+     }
+    },
+    "seed_7": {
+     "withheld_fault_px": 14224,
+     "r0_sim_dots": 39016,
+     "r0_sim_dti": 0.099956,
+     "variant_delta_dti": {
+      "12p8km-int10": 0.002807,
+      "12p8km-int20": 0.002803,
+      "12p8km-geod15": -0.000224
+     },
+     "random_block_shuffle_delta_dti": {
+      "frac_0.10": -0.001778,
+      "frac_0.15": -0.005075,
+      "frac_0.20": -0.009857
+     }
+    },
+    "seed_42": {
+     "withheld_fault_px": 15678,
+     "r0_sim_dots": 39216,
+     "r0_sim_dti": 0.111473,
+     "variant_delta_dti": {
+      "12p8km-int10": 0.004997,
+      "12p8km-int20": 0.007697,
+      "12p8km-geod15": 0.000199
+     },
+     "random_block_shuffle_delta_dti": {
+      "frac_0.10": 0.000355,
+      "frac_0.15": -0.001953,
+      "frac_0.20": -0.006323
+     }
+    }
+   }
+  }
+ },
+ "files": {
+  "nan": "releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif",
+  "zeros": "releases/h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040-zeros.tif",
+  "sha256": "259ea040c818a26add94d1a356b0c75b180292bc8c67bcf2cec5776e047f5e45",
+  "sha256_zeros": "d914868666c45707ccfe570eda343ae3b3774845058c7e02c46cf35f0f3820c3",
+  "sha8": "259ea040"
+ },
+ "gates": {
+  "nan": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "nan_outside_footprint",
+     "ok": true,
+     "detail": "0 finite px outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "259ea040c818a26a"
+    }
+   ]
+  },
+  "zeros": {
+   "ok": true,
+   "results": [
+    {
+     "gate": "readable",
+     "ok": true,
+     "detail": "h33-h33-2-b2-conc-12p8km-geod15-20261023-259ea040-zeros.tif"
+    },
+    {
+     "gate": "grid_contract",
+     "ok": true,
+     "detail": "matches template"
+    },
+    {
+     "gate": "dtype_float32",
+     "ok": true,
+     "detail": "float32"
+    },
+    {
+     "gate": "single_band",
+     "ok": true,
+     "detail": "ndim=2"
+    },
+    {
+     "gate": "shape",
+     "ok": true,
+     "detail": "[3730, 3292]"
+    },
+    {
+     "gate": "crs_epsg32611",
+     "ok": true,
+     "detail": "EPSG:32611"
+    },
+    {
+     "gate": "values_in_0_1",
+     "ok": true,
+     "detail": "0 out-of-range px; min=0.0, max=1.0"
+    },
+    {
+     "gate": "no_nan_anywhere",
+     "ok": true,
+     "detail": "0 NaN px"
+    },
+    {
+     "gate": "no_nan_inside_footprint",
+     "ok": true,
+     "detail": "0 NaN px inside"
+    },
+    {
+     "gate": "zeros_outside_footprint",
+     "ok": true,
+     "detail": "0 outside"
+    },
+    {
+     "gate": "unit_dots",
+     "ok": true,
+     "detail": "37654 dots all == 1.0"
+    },
+    {
+     "gate": "dot_count_matches_mask",
+     "ok": true,
+     "detail": "raster 37654 vs mask 37654"
+    },
+    {
+     "gate": "zero_catalogue_mass",
+     "ok": true,
+     "detail": "0 dots on catalogue pixels"
+    },
+    {
+     "gate": "sha256_not_in_ledger",
+     "ok": true,
+     "detail": "d914868666c45707"
+    }
+   ]
+  },
+  "twins_identical_mask": true,
+  "added_dots_dcat_ge_3px": true,
+  "collar_lt3px_frozen": true,
+  "added_interdot_sep_ge_2p8px": true,
+  "pct_changed_in_1_50": true
+ },
+ "report_only": {
+  "proxy_variant": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_parent": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.03842369916921731,
+   "ci95_halfwidth": 0.005573353171446999,
+   "ci95": [
+    0.032850345997770314,
+    0.04399705234066431
+   ]
+  },
+  "proxy_random_null": {
+   "n_withheld": 18296,
+   "seed": 20261023,
+   "holdout_fraction": 0.3,
+   "recall": 0.0,
+   "ci95_halfwidth": 0.000209925314326218,
+   "ci95": [
+    0.0,
+    0.000209925314326218
+   ]
+  },
+  "surrogate_dti_variant": 0.006709118968955279,
+  "surrogate_dti_parent": 0.006709118968955279,
+  "surrogate_dti_random_null": 0.0,
+  "leakage_canary_max_strength": 0.599478,
+  "leakage_canary_pass": true,
+  "sgmc_control": "SKIPPED \u2014 sgmc_faults_control pin marked UNVERIFIED (IRREGULARITIES item 8); report-only"
+ },
+ "form_note": "R0 h33-h33-2-b2; CONC 12p8km-geod15: move 5648/37654 (15%) low->high GPS-strain 12.8km blocks, CV 0.553->0.635; pred +0.003",
+ "seconds": 5.45
+}

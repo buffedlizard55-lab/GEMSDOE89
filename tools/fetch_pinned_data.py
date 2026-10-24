@@ -3,7 +3,8 @@
 
 Only contacts codeload.github.com (never dropbox.com, never drivendata.org,
 never reads/stores credentials). Streams each (repo, ref) tarball at most once,
-assembles multi-part files, and fails closed on any SHA-256 mismatch.
+assembles multi-part files, copies shared archive members to all declared local
+destinations, and fails closed on any SHA-256 mismatch.
 """
 
 from __future__ import annotations
@@ -16,11 +17,67 @@ import tarfile
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
+from typing import BinaryIO
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from gemsdoe.grid import sha256_file  # noqa: E402
+
+
+def build_wanted_map(entries: list[dict], data_root: Path) -> dict[str, list[Path]]:
+    """Map each archive-relative member path to ALL local destination paths."""
+    wanted: dict[str, list[Path]] = defaultdict(list)
+    for entry in entries:
+        if "parts" in entry:
+            for p in entry["parts"]:
+                wanted[p].append(data_root / f"_part_{entry['id']}_{Path(p).name}")
+        else:
+            wanted[entry["path"]].append(data_root / entry["local"])
+    return wanted
+
+
+def extract_tarball_entries(stream: BinaryIO, entries: list[dict], data_root: Path) -> list[str]:
+    """Stream-extract `entries` from a `.tar.gz` stream into `data_root`.
+
+    Returns sorted missing archive-relative paths (empty list on full success).
+    """
+    wanted = build_wanted_map(entries, data_root)
+    found: set[str] = set()
+    with tarfile.open(fileobj=stream, mode="r|gz") as tf:
+        for member in tf:
+            if not member.isfile():
+                continue
+            rel = member.name.split("/", 1)[1] if "/" in member.name else member.name
+            if rel in wanted:
+                src = tf.extractfile(member)
+                if src is None:
+                    continue
+                dests = wanted[rel]
+                first = dests[0]
+                first.parent.mkdir(parents=True, exist_ok=True)
+                with open(first, "wb") as out_fh:
+                    shutil.copyfileobj(src, out_fh, length=1 << 20)
+                for extra in dests[1:]:
+                    extra.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(first, extra)
+                found.add(rel)
+
+    missing = sorted(set(wanted) - found)
+    if missing:
+        return missing
+
+    for entry in entries:
+        if "parts" in entry:
+            dest = data_root / entry["local"]
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            with open(dest, "wb") as out_fh:
+                for p in entry["parts"]:
+                    part_path = data_root / f"_part_{entry['id']}_{Path(p).name}"
+                    with open(part_path, "rb") as in_fh:
+                        shutil.copyfileobj(in_fh, out_fh, length=1 << 20)
+                    part_path.unlink()
+    return []
 
 
 def main() -> int:
@@ -45,48 +102,15 @@ def main() -> int:
         by_repo_ref[(entry["repo"], entry["ref"])].append(entry)
 
     for (repo, ref), entries in by_repo_ref.items():
-        wanted: dict[str, Path] = {}
-        for entry in entries:
-            if "parts" in entry:
-                for p in entry["parts"]:
-                    wanted[p] = data_root / f"_part_{entry['id']}_{Path(p).name}"
-            else:
-                wanted[entry["path"]] = data_root / entry["local"]
-
+        wanted = build_wanted_map(entries, data_root)
         url = f"https://codeload.github.com/{repo}/tar.gz/{ref}"
         print(f"[fetch] {url} ({len(wanted)} member(s))", flush=True)
         req = urllib.request.Request(url, headers={"User-Agent": "GEMSDOE89-ManifestVerify/1.0"})
-        found: set[str] = set()
         with urllib.request.urlopen(req, timeout=600) as resp:
-            with tarfile.open(fileobj=resp, mode="r|gz") as tf:
-                for member in tf:
-                    if not member.isfile():
-                        continue
-                    rel = member.name.split("/", 1)[1] if "/" in member.name else member.name
-                    if rel in wanted:
-                        src = tf.extractfile(member)
-                        if src is None:
-                            continue
-                        out_path = wanted[rel]
-                        out_path.parent.mkdir(parents=True, exist_ok=True)
-                        with open(out_path, "wb") as out_fh:
-                            shutil.copyfileobj(src, out_fh, length=1 << 20)
-                        found.add(rel)
-
-        missing = set(wanted) - found
+            missing = extract_tarball_entries(resp, entries, data_root)
         if missing:
-            print(f"ERROR: missing archive members from {repo}@{ref}: {sorted(missing)}")
+            print(f"ERROR: missing archive members from {repo}@{ref}: {missing}")
             return 2
-
-        for entry in entries:
-            if "parts" in entry:
-                dest = data_root / entry["local"]
-                with open(dest, "wb") as out_fh:
-                    for p in entry["parts"]:
-                        part_path = data_root / f"_part_{entry['id']}_{Path(p).name}"
-                        with open(part_path, "rb") as in_fh:
-                            shutil.copyfileobj(in_fh, out_fh, length=1 << 20)
-                        part_path.unlink()
 
     all_ok = True
     for entry in manifest["files"]:

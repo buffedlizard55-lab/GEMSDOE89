@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Assemble ledger/submissions.csv from the recovered upstream history + built
-variants in this repository (SPACING + RELIEF + MASS).
+"""Assemble ledger/submissions.csv from the recovered upstream history + all built
+variants in this repository (SPACING + RELIEF + MASS + SNAP + CONCENTRATION).
 
 Upstream rows come from buffedlizard55-lab/GEMSDOE84 ledger/submissions.csv
 (copied verbatim to ledger/upstream_GEMSDOE84.csv). Repeats are collapsed on
@@ -8,8 +8,10 @@ sha256: a repeated upload of identical bytes teaches nothing and is recorded
 once, with a repeat count.
 
 This repository's rows are read from registry/build_reports_spacing.json,
-registry/build_reports.json, and registry/build_mass_reports.json so that the
-ledger never drifts from the files on disk in releases/.
+registry/build_reports.json, registry/build_mass_reports.json,
+registry/build_reports_snap.json, and registry/build_reports_concentration.json,
+while preserving any human-entered receipt_score/date/receipt fields already in
+ledger/submissions.csv so no build script ever clobbers another axis or receipt.
 """
 
 from __future__ import annotations
@@ -251,18 +253,118 @@ def _mass_rows() -> list[dict]:
     ]
 
 
+def _snap_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_reports_snap.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        mp = rep["model_prediction"]
+        lo, mid, hi = mp["band"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["dots_out"],
+                "pct_changed": f"{s['pct_dots_moved']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["nan"]["sha256"],
+                "sha256_zeros": rep["files"]["zeros"]["sha256"],
+                "parent": rep["parent"],
+                "axis": "SNAP",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": f"{lo:+.4f}..{hi:+.4f} (MODEL central {mid:+.4f}; band prices the mimic)",
+                "date": "20261023",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"window {s['max_shift_px']} px, gate 0.00, {s['dots_moved']:,} dots moved, "
+                    f"mean displacement {s['mean_displacement_px']:.3f} px, moved-target min dcat "
+                    f"{s['moved_targets_min_dcat_px']:.2f} px, cv1km "
+                    f"{s['block_cv_1km_before']:.3f}->{s['block_cv_1km_after']:.3f}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
+def _concentration_rows() -> list[dict]:
+    p = ROOT / "registry" / "build_reports_concentration.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        spec = rep["spec"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "CONCENTRATION",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": spec["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-23; 12.8km (128px) blocks; move {s['n_moved']} dots ({s['pct_changed']:.2f}%, "
+                    f"symdiff {s['pct_symmetric_diff']:.2f}%) bot40->top40 {spec['prior']} prior; "
+                    f"count fixed 37,654; dcat_added>=3.00px (collar<3px frozen at 1611); "
+                    f"r_sep>=2.80px; CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f} "
+                    f"(CV5km {s['block_cv_5km_before']:.4f}->{s['block_cv_5km_after']:.4f}); "
+                    f"mean disp {s['mean_displacement_px']:.1f}px"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
+    path = ROOT / "ledger" / "submissions.csv"
+    existing_by_id: dict[str, dict] = {}
+    if path.exists():
+        with open(path, newline="") as fh:
+            for r in csv.DictReader(fh):
+                existing_by_id[r["id"]] = r
+
     with open(UPSTREAM, newline="") as fh:
         upstream = collapse(list(csv.DictReader(fh)))
 
-    new_rows = _spacing_rows() + _relief_rows() + _mass_rows()
-    path = ROOT / "ledger" / "submissions.csv"
+    local_rows = _spacing_rows() + _relief_rows() + _mass_rows() + _snap_rows() + _concentration_rows()
+    for r in local_rows:
+        prev = existing_by_id.get(r["id"])
+        if prev:
+            for human_col in ("status", "receipt", "receipt_score", "date", "score"):
+                if prev.get(human_col) and not r.get(human_col):
+                    r[human_col] = prev[human_col]
+
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
         w.writeheader()
-        for r in new_rows + upstream:
+        for r in local_rows + upstream:
             w.writerow({k: r.get(k, "") for k in FIELDS})
-    print(f"wrote {path}: {len(new_rows)} GEMSDOE89 + {len(upstream)} collapsed upstream rows")
+    print(f"wrote {path}: {len(local_rows)} GEMSDOE89 + {len(upstream)} collapsed upstream rows")
 
 
 if __name__ == "__main__":
