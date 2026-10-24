@@ -542,6 +542,45 @@ def _trackb_rows() -> list[dict]:
     return rows
 
 
+def _bstp_rows() -> list[dict]:
+    """BSTP rows. Added 2026-10-24 (bstp40 session): without a reader here a
+    ledger rebuild would drop the BSTP row while its release files stay on
+    disk (the SNAP failure mode, IRREGULARITIES item 11).  The two sibling
+    variants (bstp40corr e3b6d3d2, bstp40corrE 598993b2) were withdrawn and
+    their TIFs deleted; they intentionally have no ledger row."""
+    p = ROOT / "registry" / "build_report_bstp40.json"
+    if not p.exists():
+        return []
+    rep = json.loads(p.read_text())
+    d = rep["build_diag"]
+    return [{
+        "id": rep["stem"], "site": "GEMSDOE89", "name": rep["stem"],
+        "score": "", "evidence_class": "BUILT (unscored)",
+        "encoding": "nan+zeros", "n_dots": rep["n_dots"],
+        "pct_changed": f"{100.0 * d['n_new'] / d['n_parent']:.2f}",
+        "sha8": rep["sha256_nan"][:8], "sha256": rep["sha256_nan"],
+        "sha256_zeros": rep["sha256_zeros"], "parent": rep["parent"],
+        "axis": "BSTP", "value": rep["value"], "status": "BUILT",
+        "receipt": "N", "receipt_score": "",
+        "predicted_change": ("MODEL only, no central estimate: HOLDOUT-DTI "
+                             "-0.0254 [-0.0296,-0.0210] vs R0-fold "
+                             "(segment-holdout-v1); verdict NEGATIVE, not promoted"),
+        "date": "2026-10-24",
+        "form_note": "gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG",
+        "notes": (
+            "built 2026-10-24; 15062/37654 new-support dots (d_parent>3px, "
+            "d_cat>=3px, 2.8px suppression) ranked by geomean(|grad b15 "
+            "depth_to_base|, |grad b17 cond|, max(b03,b18) HG); retained "
+            "22592 by mass.unique_credit. Canary max AUC 0.521<0.90; dot "
+            "overlap<=3px vs R0 60.0%; segment holdout (911 segs, 39310 px) "
+            "parent 0.0914 cand 0.0660 diff -0.0254 CI excl. 0. Verdict "
+            "NEGATIVE (registry/run_card_bstp40.json); zeros twin is the "
+            "upload-safe encoding (no NaN anywhere)."
+        ),
+        "source": "GEMSDOE89",
+    }]
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -567,6 +606,7 @@ def main():
         + _concentration_2km_rows()
         + _concentration_12p8km_rows()
         + _trackb_rows()
+        + _bstp_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])

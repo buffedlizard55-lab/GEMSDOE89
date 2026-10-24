@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEMSDOE89 — DOE GEMS submission desk</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:960px;margin:0 auto;padding:24px 16px 64px;color:#17202a;line-height:1.55}
+  h1{font-size:1.7rem;margin:.2em 0} h2{margin-top:1.6em;border-bottom:2px solid #e5e8eb;padding-bottom:.2em}
+  .hero{border:3px solid #b8860b;background:#fff8e1;border-radius:10px;padding:20px;margin:16px 0}
+  .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-weight:700;font-size:.85rem;margin:2px 4px 2px 0}
+  .ok{background:#d9f2e3;color:#0b5d2a;border:1px solid #0b5d2a}
+  .warn{background:#fde9d9;color:#8a4b00;border:1px solid #8a4b00}
+  .bad{background:#f9dcdc;color:#7a1010;border:1px solid #7a1010}
+  .dl{display:inline-block;background:#0b5d2a;color:#fff !important;font-weight:700;padding:14px 22px;border-radius:8px;text-decoration:none;margin:10px 8px 10px 0}
+  .dl2{background:#444}
+  code,pre{background:#f2f4f5;border-radius:6px} code{padding:2px 5px} pre{padding:12px;overflow:auto}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem}
+  th,td{border:1px solid #d5dade;padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#eef1f3}
+  .small{font-size:.88rem;color:#455}
+</style>
+</head>
+<body>
+
+<h1>GEMSDOE89 — DOE GEMS (DrivenData #306) submission desk</h1>
+<p class="small">Blind-fault probability rasters for geothermal exploration, northwestern Great Basin.
+Every number on this page is labelled: <b>ORGANIZER-CONFIRMED</b> (receipt) · <b>CLAIM</b> (owner-recorded live score) ·
+<b>HOLDOUT-DTI</b> (local segment holdout) · <b>MODEL</b> (scenario arithmetic, never a score).</p>
+
+<!-- ============================= EXECUTIVE SUMMARY ============================= -->
+<div class="hero">
+<h2 style="margin-top:0">⬇ Executive summary — this session's unique submission file</h2>
+<p>
+  <span class="badge ok">✅ FORMAT-VALIDATED — safe to upload (no [0,1] error)</span>
+  <span class="badge ok">✅ UNIQUE — passes registry overlap/correlation limits</span>
+  <span class="badge bad">⛔ HOLDOUT-NEGATIVE — NOT promoted to a weekly slot</span>
+</p>
+<p><b>Plain-language status.</b> The file below <b>will upload cleanly</b> (the green checks), and it is a genuinely
+new raster unlike any of the 144 ledgered submissions. <b>But it did not beat the parent on the
+spatially-blocked whole-segment holdout</b>, so under this project's rules it is <b>not recommended for a
+weekly slot</b>. Download it only if you deliberately accept that risk with eyes open. The evidence-based
+slot queue is still the SNAP directional pair in <code>SLOT_PLAN.md</code> (see “Rest of the queue” below).</p>
+
+<table>
+<tr><th>Field</th><th>Value (copy exactly)</th></tr>
+<tr><td>Submission name (file stem)</td><td><code>gems89-bstp40-20261024-2e7e8a8f</code></td></tr>
+<tr><td><b>File to submit (primary — zeros encoding, zero NaNs anywhere)</b></td><td><code>gems89-bstp40-20261024-2e7e8a8f-zeros.tif</code></td></tr>
+<tr><td>SHA-256 (zeros, primary)</td><td><code>4b86c16d11f13ff0e65d09e020969fd365b545a504e18ae34f3d7a71479caa33</code></td></tr>
+<tr><td>SHA-256 (NaN twin — do <b>not</b> upload both)</td><td><code>2e7e8a8f52ccf46de43169891c7c4cf6e697cdd694592df1ef6c7cb8abebf596</code></td></tr>
+<tr><td>Note for the submission form (110 ≤ 140 chars)</td><td><code>gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots &gt;3px off-parent; n=37654; HOLDOUT-NEG</code></td></tr>
+<tr><td>Grid</td><td>3730×3292, float32, single band, EPSG:32611, 100&nbsp;m — verified against <code>sample_submission.tif</code> contract</td></tr>
+<tr><td>Values</td><td>37,654 dots exactly 1.0, everything else 0.0; min 0.0 / max 1.0; <b>0 NaN pixels in the zeros file</b></td></tr>
+<tr><td>HOLDOUT-DTI (segment-holdout-v1; 39,310 withheld px, 911 segments)</td><td>parent 0.0914 · candidate 0.0660 · <b>diff −0.0254, 95% CI [−0.0296, −0.0210]</b></td></tr>
+<tr><td>Live score</td><td><b>none — unscored.</b> Parent <code>h33-h33-2-b2</code> = 0.2778 (CLAIM, not a receipt). No projection is a score.</td></tr>
+</table>
+
+<a class="dl" href="downloads/gems89-bstp40-20261024-2e7e8a8f-zeros.tif" download>⬇ Download submission TIF (zeros — upload this one)</a>
+<a class="dl dl2" href="downloads/gems89-bstp40-20261024-2e7e8a8f.tif" download>NaN twin (archive)</a>
+<p class="small">Machine receipts: <code>registry/run_card_bstp40.json</code> · <code>registry/holdout_bstp40.json</code> ·
+<code>registry/build_report_bstp40.json</code> · card: <code>ledger/MECHANISM_CARDS_BSTP.md</code>.</p>
+</div>
+
+<h2>How to make a submission (exactly)</h2>
+<ol>
+<li>Download the <b>zeros</b> TIF above. Verify it: <code>sha256sum gems89-bstp40-20261024-2e7e8a8f-zeros.tif</code> must print <code>4b86c16d…</code>.</li>
+<li>Go to the competition submissions page → <b>New submission</b> (you must be logged in to your own registered account; nothing here uploads for you).</li>
+<li><b>File to submit:</b> choose the downloaded <code>…-zeros.tif</code> (single-band GeoTIFF; CRS/shape/geotransform already match the format).</li>
+<li><b>Note:</b> paste the 110-character note from the table above.</li>
+<li>Submit, then record the resulting <b>receipt score + date</b> in <code>ledger/submissions.csv</code> (row <code>gems89-bstp40-20261024-2e7e8a8f</code>), which converts CLAIM → ORGANIZER-CONFIRMED.</li>
+</ol>
+<p><b>About the “Predicted values must be in range [0, 1]” error.</b> That error is consistent with uploading a
+<i>NaN-outside-footprint</i> twin: NaN is not in [0,1] and fails range checks that don’t special-case it.
+The zeros twin has no NaN anywhere (verified: 0 NaN px; finite min 0.0, max 1.0) and fleet history scores
+the two encodings identically (e.g. GEMSDOE68 zeros/NaN both 0.0437 CLAIM). <b>Always upload the <code>-zeros.tif</code>.</b>
+Never upload both twins — that burns two slots on one dot set.</p>
+
+<h2>What this file is (BSTP lane, 3 experiments, budget exhausted)</h2>
+<p>At fixed mass (37,654 dots) from parent R0 <code>h33-h33-2-b2</code>: keep the top 60% of R0 dots by a
+label-free coverage ranking; refill 40% (15,062 dots) on a <i>new</i> surface that requires three independent
+physical channels to coincide — basement step (|∇ depth-to-basement|, band 15) × conductivity contrast
+(|∇ cond, band 17) × potential-field edge (bands 3/18) — targeting buried basin faults that a surface-mapped
+catalogue misses. New dots sit &gt;3&nbsp;px from every parent dot and ≥3&nbsp;px from the catalogue.
+Non-fault mimics (named in advance): basement lithologic contacts, paleochannel/playa conductivity edges,
+volcanic flow margins.</p>
+<table>
+<tr><th>Check</th><th>Result</th></tr>
+<tr><td>Format gates (grid/CRS/dtype/[0,1]/NaN/catalogue-mass)</td><td><b>PASS</b> both twins, re-read from disk (<code>gemsdoe/validate.py</code> + independent re-read)</td></tr>
+<tr><td>Leakage canary (single-feature AUC vs catalogue; fail &gt; 0.90)</td><td><b>PASS</b> — max 0.521 (bands 15/17/edge/surface: 0.521 / 0.506 / 0.519 / 0.517)</td></tr>
+<tr><td>Uniqueness vs registry (protocol: ρ &lt; 0.90, ≤3&nbsp;px overlap &lt; 70%)</td><td><b>PASS</b> — surface ρ 0.29 vs edge-only; dots within 3&nbsp;px: 60.0% vs R0, worst prior raster 62.4%</td></tr>
+<tr><td>Segment holdout vs parent (promotion gate)</td><td><b>FAIL</b> — −0.0254 [−0.0296, −0.0210]; two sibling variants also negative (−0.0220, −0.0269) and withdrawn. Verdict: <b>negative</b></td></tr>
+<tr><td>Determinism</td><td>Re-run reproduced the file byte-identically (stem SHA-8 <code>2e7e8a8f</code>)</td></tr>
+</table>
+<p class="small">Why a catalogue holdout cannot certify a blind-basin lane — and why it still gates promotion —
+is written up in <code>docs/ANALYSIS.md</code> and <code>IRREGULARITIES.md</code> item 17. Negative results are deliverables.</p>
+
+<h2>Why the parent scores 0.2778 (CLAIM) — short version</h2>
+<p>Byte-verified lineage: corroborated multi-layer ridge <code>h19-5</code> (121,131 px, 0.1922) →
+dot-thinned at 2.8&nbsp;px (44,090 dots, 0.2600) → pruned within 2&nbsp;px of the catalogue
+(37,654 dots, <b>0.2778</b>). The DTI metric charges 0.2 per unit mass but credits each truth pixel once
+(300&nbsp;m triangular kernel, max), so dotted emission at kernel spacing beats continuous ridges ~3× on
+mass efficiency, masked-catalogue dots are pure cost, and a unit dot pays only if truth lies within
+≈283&nbsp;m. Full derivation + fleet table: <code>docs/ANALYSIS.md</code>. Hypothesis ranking (5 candidates):
+<code>docs/HYPOTHESES.md</code>.</p>
+
+<h2>Rest of the queue</h2>
+<p>28 previously built, gated, unscored R0 variants (SNAP 12 incl. the directional pair, CONCENTRATION 9,
+SPACING 3, RELIEF 3, MASS 3, TRACKB Phase-2) remain in <code>releases/</code> with the slot order in
+<code>SLOT_PLAN.md</code> / <code>docs/SUBMIT.md</code>. None has a live receipt; only receipts move the plan.</p>
+
+<h2>Official sources (for manual review)</h2>
+<ul>
+<li>Competition: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData DOE GEMS</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> (human reads TOP_PUBLIC + date; the two figures in circulation, 0.4413 and 0.3195, conflict and are UNVERIFIED here)</li>
+<li>Prize rules PDF: <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR FY26 OSTI 96647</a></li>
+<li>Reference solution: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">drivendataorg/gems-prize-reference-solution</a></li>
+<li>GeoDAWN surveys: <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> · INGENIOUS: <a href="https://gbcge.org/current-projects/ingenious/">GBCGE</a> · GDR: <a href="https://gdr.openei.org/submissions/1391">OpenEI GDR 1391</a></li>
+<li>USGS SGMC (report-only control, public domain): <a href="https://doi.org/10.3133/ds1052">doi:10.3133/ds1052</a> · CRS: <a href="https://epsg.io/32611">EPSG:32611</a> · Metric family: <a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky index</a></li>
+</ul>
+<p class="small">Limitations, stated plainly: no DrivenData credentials in this environment (no automated
+download/upload; all inputs are hash-pinned owner mirrors, integrity-verified but not organizer-authenticated);
+USGS data hosts are outside the sandbox allowlist (SGMC control stays UNVERIFIED); no GPU is needed by any
+tool here, but no live score can be produced locally — only a submitted receipt is a score.
+Charter/core values: <code>PROMPT.md</code>. Repo state: <code>README.md</code>.</p>
+</body>
+</html>

@@ -37,3 +37,12 @@
 | **RELAY-BRIDGE** | Bridge co-linear / en-echelon tips (`≤ 12 px`, strike diff `≤ 20°`) where breaching faults nucleate | Streams and dikes bridge the same tips with no truth credit | Live `< R0 + 0.010`, or strand-holdout loses to random tip pairs |
 | **COVERAGE-NEUTRAL CONC** | Reallocate km-scale mass while holding H19 `ΔT ≈ 0`, separating block prior from centreline retention | Joint optimisation silently changes spacing and local alignment | Fails to beat the matched CONC arm by `≥ 0.005` |
 | **TRACKB-EXTEND / REPEAT-CALIBRATION** | Deliver the remaining qualifying traces for expert review; or submit byte-exact R0 once to convert `0.2778` CLAIM → RECEIPT | Reviewer attention favours long traces; the calibration slot buys no climb | Traces 13–19 no better than length-matched random strands; receipt differs from `0.2778` by `> 0.005` |
+
+## Addendum 2026-10-24 (BSTP session) — queue unchanged
+
+`gems89-bstp40-20261024-2e7e8a8f` (axis `BSTP`, ledger row 29) is **BUILT /
+NEGATIVE**: format- and uniqueness-gated, but HOLDOUT-DTI −0.0254
+[−0.0296, −0.0210] vs the per-fold parent (`segment-holdout-v1`), so it
+takes **no slot** and does not displace the SNAP directional pair above.
+Its two sibling variants were withdrawn (TIFs deleted). Full record:
+`registry/run_card_bstp40.json`, `ledger/MECHANISM_CARDS_BSTP.md`.

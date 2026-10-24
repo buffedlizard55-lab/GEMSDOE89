@@ -1,10 +1,30 @@
+# GEMSDOE89 — DOE GEMS submission desk
+
+> **Charter:** read `PROMPT.md` first every session (mission, parallel-run
+> protocol, *Maximize P(Win)* / *Own the Outcome*). Site: `docs/index.html`
+> (GitHub Pages). Analysis: `docs/ANALYSIS.md` · hypotheses: `docs/HYPOTHESES.md`.
+
+## ⬇ Executive summary — download & submit status (2026-10-24, BSTP session)
+
+| | |
+|---|---|
+| **Unique file this session** | `releases/gems89-bstp40-20261024-2e7e8a8f-zeros.tif` (site copy: `docs/downloads/`) |
+| **Upload it as** | name `gems89-bstp40-20261024-2e7e8a8f`, note `gems89 bstp40: R0 top60% u-credit + 40% basement-step x cond x edge dots >3px off-parent; n=37654; HOLDOUT-NEG` (110/140 chars) |
+| **SHA-256 (zeros / NaN twin)** | `4b86c16d…` / `2e7e8a8f…` (full hashes in `registry/run_card_bstp40.json`) |
+| **✅ Format** | PASS — 3730×3292 float32, EPSG:32611, values {0,1}, **0 NaN anywhere in the zeros file** (the NaN twin is the likely cause of the “Predicted values must be in range [0, 1]” upload error; always upload `-zeros.tif`) |
+| **✅ Unique** | PASS — ≤3 px dot overlap 60.0% vs R0 / 62.4% worst prior raster (< 70%); surface ρ 0.29 (< 0.90); leakage canary max AUC 0.521 (< 0.90) |
+| **⛔ Slot recommendation** | **DO NOT PROMOTE** — HOLDOUT-DTI (segment-holdout-v1, 39,310 withheld px) **−0.0254 [−0.0296, −0.0210]** vs R0-fold; 3/3 experiments negative; verdict **negative** (`registry/run_card_bstp40.json`). Upload only as a deliberate human risk decision; the evidence queue below (`SLOT_PLAN.md`) is unchanged |
+| **Live score** | none (unscored). Parent 0.2778 remains CLAIM; no ORGANIZER-CONFIRMED receipt exists in this ledger |
+
+How-to-submit steps: `docs/index.html` §“How to make a submission” and `docs/SUBMIT.md`.
+
 # CURRENT STATE
 
 - **Parent (recipe-rebuilt, byte-verified 2026-10-24):** `h33-h33-2-b2` — 37,654 unit dots;
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and `baeae3219bba6a19…` (NaN).
   All 10 fetchable manifest pins pass; the SGMC control pin stays UNVERIFIED and report-only.
   Live **0.2778 = CLAIM**; **best receipt: none**.
-- **Built, unscored:** **28 pairs / 56 GeoTIFFs**, all `BUILT` and format/data-gated
+- **Built, unscored:** **29 pairs / 58 GeoTIFFs** (28 prior + this session's `BSTP` pair, verdict negative — see executive summary above), all `BUILT` and format/data-gated
   (`SNAP` 9 here + 3 upstream, `CONCENTRATION` 9, `SPACING` 3, `RELIEF` 3, drop-`MASS` 3,
   `TRACKB` 1 Phase-2 pair). No `(parent, axis, value)` repeat anywhere in the ledger.
 - **This session (2026-10-24) — `SNAP` directional corner** (`ledger/MECHANISM_CARDS.md`
