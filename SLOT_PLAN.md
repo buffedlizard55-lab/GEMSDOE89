@@ -1,7 +1,8 @@
-# SLOT PLAN — GEMSDOE89 (integrated 3-family CONCENTRATION + SNAP/MASS/RELIEF/SPACING, 2026-10-23)
+# SLOT PLAN — GEMSDOE89 (integrated 3-family CONCENTRATION + SNAP/MASS/RELIEF/SPACING, + TRACKB Phase-2 product 2026-10-24)
 
 - **Timeline:** 2026-10-23 → **2026-12-03** (`UNVERIFIED` deadline; human confirms) ≈ 41 days ≈ **~18 rolling slots** (`1 entity × 3/week`) + **1 blind final**. Slots used: `__ / 3` (human supplies).
 - **Baseline:** Parent R0 `h33-h33-2-b2`, byte-exact (`c55bafc4…` zeros, `baeae321…` NaN; `37,654` unit dots), live **0.2778 = CLAIM** (no receipt here). `TOP_PUBLIC`: `____` (date `____`).
+- **TRACKB (2026-10-24, Phase 2 only — never a slot):** `releases/h33-h33-2-b2-TRACKBtop12-20261024-fb156257.geojson` + member-dot raster: 12 strike-consistent traces ≥1 km (41.3 km, 145 dots), evidence paragraphs in `ledger/TRACKB_TRACES.md`, card in `ledger/MECHANISM_CARDS_TRACKB.md`. PRUNE was *not* rebuilt: upstream already holds 1/1.5/2.5/3/4 px arms (IRREGULARITIES item 14).
 - **Evidence rule:** `|Δ| < 0.01` is **no evidence**; report-only instruments (`PROXY` / canary / `SGMC`) never gate a file and are never called scores.
 
 ## Three distinct `CONCENTRATION` families in `releases/` (not pure scale ablations — priors & placements differ)
@@ -37,4 +38,5 @@
 | **RELAY-BRIDGE** | Bridge co-linear / en-echelon strand tips (`≤ 12 px`, strike diff `≤ 20°`) across step-over ramps where breaching faults nucleate (https://www.osti.gov/servlets/purl/1249065) | Bridges aligned stream scarps or dike swarms, adding `P` with zero `T` | Live receipt `< R0 + 0.010`, or 25% strand-holdout loses to random tip pairs |
 | **TRACKB-DIP-OFFSET** | Normal range-front faults dip `45°–60°` basinward, shifting gravity/magnetic HG crests `2–5 px` into the hanging wall relative to surface scarps | Sub-vertical strike-slip faults and volcanic contacts have near-zero dip offset | Live receipt drops `≥ 0.010` vs R0, or loses to symmetric `SNAP` |
 | **COVERAGE-NEUTRAL CONC** | Shift block mass while constraining H19 `ΔT ≈ 0` so km-scale prior gain never trades off centerline retention | Joint optimization simultaneously alters local spacing | Fails to beat `conc-12p8km-int10` / `CONC5kmcat10` by `≥ 0.005` |
+| **TRACKB-EXTEND** | Deliver the remaining 7 qualifying traces + next credit tier for expert review, ordered by total strand credit | Reviewer attention favours long traces; short real strands buried | Confirmation rate of traces 13–19 no better than length-matched random R0 strands |
 | **REPEAT-CALIBRATION** | Submit byte-exact rebuilt R0 (`baeae321…`) once to convert `0.2778` from `CLAIM` → `RECEIPT` | Burns 1 of ~18 slots with zero expected leaderboard climb | Receipt differs from `0.2778` by `> 0.005`, invalidating `CLAIM`-anchored deltas |

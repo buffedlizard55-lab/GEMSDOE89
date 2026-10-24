@@ -4,7 +4,7 @@
   `tools/rebuild_r0.py` matches `c55bafc470054e82…` (zeros) and
   `baeae3219bba6a19…` (NaN); all 10 fetchable manifest pins pass. Live
   **0.2778 = CLAIM**; no receipt is stored here.
-- **Best receipt:** none. All **21** `GEMSDOE89` pairs (**42 `.tif` files**) are
+- **Best receipt:** none. All **22** `GEMSDOE89` pairs (**44 `.tif` files**) are
   `BUILT (unscored)` and pass every format + data gate: 3 each `SNAP` /
   `SPACING` / `RELIEF` / `MASS`, plus **9 `CONCENTRATION`** arms across three
   non-duplicate mechanisms (`12.8 km` interaction + GPS strain, `5 km` raw
@@ -22,7 +22,7 @@
   - **2 km (`20 px`):** `m3765` / `m5648` / `m7531` (held separate H19 mechanism).
 - **Other axes:** `RELIEF` (`r10`/`r15`/`r15s`), `MASS`
   (`m10uniq`/`m10rand`/`m20uniq`), `SPACING` (`alongstrike`/`poisson`/`lattice`),
-  and gateless `SNAP` (`1p0px`/`1p4px`/`2p0px`).
+  and gateless `SNAP` (`1p0px`/`1p4px`/`2p0px`); plus the Phase-2 `TRACKB` `top12` trace product (`fb156257`, GeoJSON + 145-dot raster, **not a slot candidate**). `PRUNE` was not rebuilt — upstream already holds 1/1.5/2.5/3/4 px arms (IRREGULARITIES item 14).
 - **Deadline:** 2026-12-03 (≈6 weeks, ~18 rolling slots) is **UNVERIFIED**;
   automated competition-page access is barred, so the human confirms it.
 
