@@ -581,6 +581,50 @@ def _bstp_rows() -> list[dict]:
     }]
 
 
+def _trackb_150_rows() -> list[dict]:
+    """R0-consolidating 150-trace TRACKB arms (t150add, t150swap, t150link)."""
+    p = ROOT / "registry" / "build_reports_trackb_150.json"
+    if not p.exists():
+        return []
+    rows = []
+    for rep in json.loads(p.read_text()):
+        s = rep["stats"]
+        rows.append(
+            {
+                "id": rep["id"],
+                "site": "GEMSDOE89",
+                "name": rep["id"],
+                "score": "",
+                "evidence_class": "BUILT (unscored)",
+                "encoding": "nan+zeros",
+                "n_dots": s["n_dots"],
+                "pct_changed": f"{s['pct_changed']:.2f}",
+                "sha8": rep["files"]["sha8"],
+                "sha256": rep["files"]["sha256"],
+                "sha256_zeros": rep["files"]["sha256_zeros"],
+                "parent": rep["parent"],
+                "axis": "TRACKB",
+                "value": rep["value"],
+                "status": "BUILT",
+                "receipt": "N",
+                "receipt_score": "",
+                "predicted_change": rep["spec"]["predicted_change_text"],
+                "date": "",
+                "form_note": rep["form_note"],
+                "notes": (
+                    f"built 2026-10-24 (Phase 2 TRACKB); {s['n_traces_emitted']} strike-consistent traces >=1.0km "
+                    f"({s['total_trace_chord_km']:.1f}km chord, {s['n_bridged_traces']} wash-bridged); "
+                    f"add {s['n_added']}/drop {s['n_removed']} ({s['pct_changed']:.2f}%, symdiff {s['pct_symmetric_diff']:.2f}%); "
+                    f"n={s['n_dots']}; dcat_added>=3.00px (collar<3px frozen at 1611); "
+                    f"CV12.8km {s['block_cv_12p8km_before']:.4f}->{s['block_cv_12p8km_after']:.4f}; "
+                    f"GeoJSON={rep['files']['geojson']}"
+                ),
+                "source": "GEMSDOE89",
+            }
+        )
+    return rows
+
+
 def main():
     path = ROOT / "ledger" / "submissions.csv"
     existing_by_id: dict[str, dict] = {}
@@ -607,6 +651,7 @@ def main():
         + _concentration_12p8km_rows()
         + _trackb_rows()
         + _bstp_rows()
+        + _trackb_150_rows()
     )
     for r in new_rows:
         prev = existing_by_id.get(r["id"])
